@@ -1,4 +1,4 @@
-package Logic.CustomExceptions;
+package Data.CustomExceptions;
 
 /**
  *
