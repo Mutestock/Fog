@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carport</title>
     </head>
+    <jsp:include page="/InclusionFiles/NavBar.jsp" />
     <body>
         <h1>Hello</h1>
         <form method = POST>
@@ -153,9 +154,9 @@
             <h3>Email address</h3>
             <input type="text" name="email">
             <h3>Comments for the Order</h3>
-             <input type="text" name="comments">
-             <br>
-             <br>
+            <input type="text" name="comments">
+            <br>
+            <br>
             <button type="submit">Order Carport</button>
         </form>
     </body>
