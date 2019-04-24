@@ -55,11 +55,6 @@
                 <option value="750">750 cm</option>
                 <option value="780">780 cm</option>
             </select>
-            <%
-                if (request.getParameter("angle") != null) {
-                    out.print((String) request.getParameter("angle"));
-                }
-            %>
             <select name="slope"    <%
                 if (request.getParameter("angle") == null) {
                     out.print("disabled");
@@ -101,6 +96,7 @@
 
             </select>
             <select name="shedwidth">
+                <option value="noshed1">No Shed</option>
                 <option value="210">210 cm</option>
                 <option value="240">240 cm</option>
                 <option value="270">270 cm</option>
@@ -121,6 +117,7 @@
                 <option value="720">720 cm</option>
             </select>
             <select name="shedlength">
+                <option value="noshed2">No Shed</option>
                 <option value="150">150 cm</option>
                 <option value="180">180 cm</option>
                 <option value="210">210 cm</option>
@@ -141,25 +138,24 @@
                 <option value="660">660 cm</option>
                 <option value="690">690 cm</option>
             </select> 
-            <button value="angled" formaction="http://localhost:8080/FogProject/CarportDetails.jsp" name="angle" value="true">Angled</button>
-            <button value="not angled" formaction="http://localhost:8080/FogProject/CarportDetails.jsp">Not Angled</button>
+            <button value="angled" formaction="CarportDetails" name="angle" value="true">Angled</button>
+            <button value="not angled" formaction="CarportDetails">Not Angled</button>
             <br>
             <br>
-            <h1></h1>
+            <h3>Name</h3>
             <input type="text" name="name">
-            <h1></h1>
+            <h3>Address</h3>
             <input type="text" name="address">
-            <br>
-            <h1></h1>
+            <h3>Zipcode/City</h3>
             <input type="text" name="zipcodencity">
-            <h1></h1>
+            <h3>Phone Number</h3>
             <input type="text" name="phone">
-            <br>
-            <h1></h1>
+            <h3>Email address</h3>
             <input type="text" name="email">
-            <h1></h1>
-            <input type="text" name="comments   ">
-
+            <h3>Comments for the Order</h3>
+             <input type="text" name="comments">
+             <br>
+             <br>
             <button type="submit">Order Carport</button>
         </form>
     </body>
