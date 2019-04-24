@@ -5,7 +5,7 @@
  */
 package Presentation;
 
-import Presentation.Commands.UnknownCommand;
+import Presentation.Commands.*;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Emil PC
  */
 public abstract class Command {
-    
+
     public abstract void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
 
@@ -25,11 +25,14 @@ public abstract class Command {
         String path = request.getPathInfo().substring(1); // substrings "/" out of the path
 //        String path = request.getParameter("path");
 
-        HashMap<String, Command> actions = new HashMap<String, Command>(){{
-            
-        }};
+        HashMap<String, Command> actions = new HashMap<String, Command>() {
+            {
+                put("example", new ExampleJSP());
+                put("CarportDetails", new CarportDetailsCommand());
+            }
+        };
 
         return actions.getOrDefault(path, new UnknownCommand());
     }
-    
+
 }
