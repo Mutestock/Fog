@@ -22,9 +22,9 @@ public class OfferTest {
     private final Carport carport;
     
     public OfferTest() {
-        Roof roof = new Roof("Plastic", 0);
-        Shed shed = new Shed(190, 200, "Plastic");
-        carport = new Carport(250, 250, 250, roof, shed);
+        Roof roof = new Roof(1, "Plastic", 0);
+        Shed shed = new Shed(1, 190, 200, "Plastic");
+        carport = new Carport(1, 250, 250, 250, roof, shed);
     }
     
     @BeforeClass
@@ -48,7 +48,7 @@ public class OfferTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetSent() {
-        Offer offer = new Offer(null, 1000.0, 200.0, carport);
+        Offer offer = new Offer(1, null, 1000.0, 200.0, carport);
     }
 
     /**
@@ -56,7 +56,7 @@ public class OfferTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetPrice() {
-        Offer offer = new Offer(LocalDateTime.now(), -1.0, 200.0, carport);
+        Offer offer = new Offer(1, LocalDateTime.now(), -1.0, 200.0, carport);
     }
 
     /**
@@ -64,7 +64,7 @@ public class OfferTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetShippingCosts() {
-        Offer offer = new Offer(LocalDateTime.now(), 2000.0, -1.0, carport);
+        Offer offer = new Offer(1, LocalDateTime.now(), 2000.0, -1.0, carport);
     }
     
 }
