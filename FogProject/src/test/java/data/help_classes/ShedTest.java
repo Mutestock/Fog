@@ -35,22 +35,22 @@ public class ShedTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testInitShed01() {
-        Shed failShed01 = new Shed(0, 210, "Plastic");
+        Shed failShed01 = new Shed(1, 0, 210, "Plastic");
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testInitShed02() {
-        Shed failShed02 = new Shed(300, -200, "Plastic");
+        Shed failShed02 = new Shed(1, 300, -200, "Plastic");
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testInitShed03() {
-        Shed failShed03 = new Shed(300, 210, "");
+        Shed failShed03 = new Shed(1, 300, 210, "");
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testInitShed04() {
-        Shed failShed04 = new Shed(300, 210, null);
+        Shed failShed04 = new Shed(1, 300, 210, null);
     }
     
 }

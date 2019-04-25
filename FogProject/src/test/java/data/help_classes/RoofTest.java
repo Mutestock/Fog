@@ -36,25 +36,25 @@ public class RoofTest {
 
     @Test
     public void testInitRoof01() {
-        Roof correctRoof01 = new Roof("Eternittag B6 - Teglrød", 25);
-        Roof correctRoof02 = new Roof("Eternittag B7 - Sort", 0);
+        Roof correctRoof01 = new Roof(1, "Eternittag B6 - Teglrød", 25);
+        Roof correctRoof02 = new Roof(1, "Eternittag B7 - Sort", 0);
         assertEquals(true, correctRoof01.getRaised());
         assertEquals(false, correctRoof02.getRaised());
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testInitRoof02() {
-        Roof wrongRoof01 = new Roof("", 25);
+        Roof wrongRoof01 = new Roof(1, "", 25);
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testInitRoof03() {
-        Roof wrongRoof02 = new Roof(null, 25);
+        Roof wrongRoof02 = new Roof(1, null, 25);
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testInitRoof04() {
-        Roof wrongRoof03 = new Roof("Eternittag B7 - Sort", -22);
+        Roof wrongRoof03 = new Roof(1, "Eternittag B7 - Sort", -22);
     }
     
 }

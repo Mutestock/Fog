@@ -18,9 +18,9 @@ public class RequestTest {
     private final Carport carport;
     
     public RequestTest() {
-        Roof roof = new Roof("Plastic", 0);
-        Shed shed = new Shed(190, 200, "Plastic");
-        carport = new Carport(250, 250, 250, roof, shed);
+        Roof roof = new Roof(1, "Plastic", 0);
+        Shed shed = new Shed(1, 190, 200, "Plastic");
+        carport = new Carport(1, 250, 250, 250, roof, shed);
     }
     
     @BeforeClass
@@ -44,7 +44,7 @@ public class RequestTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetSent() {
-        Request request = new Request(null, "Blablabla", carport);
+        Request request = new Request(1, null, "Blablabla", carport);
     }
 
     /**
@@ -52,7 +52,7 @@ public class RequestTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetComments() {
-        Request request = new Request(LocalDateTime.now(), null, carport);
+        Request request = new Request(1, LocalDateTime.now(), null, carport);
     }
     
 }

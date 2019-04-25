@@ -18,8 +18,8 @@ public class CarportTest {
     private final Roof roof;
 
     public CarportTest() {
-        this.shed = new Shed(210, 240, "Plastic");
-        this.roof = new Roof("Eternittag B6 - Teglrød", 25);
+        this.shed = new Shed(1, 210, 240, "Plastic");
+        this.roof = new Roof(1, "Eternittag B6 - Teglrød", 25);
     }
     
     @BeforeClass
@@ -43,7 +43,7 @@ public class CarportTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetLength() {
-        Carport carport = new Carport(200, 300, 250, roof, shed);
+        Carport carport = new Carport(1, 200, 300, 250, roof, shed);
     }
 
     /**
@@ -51,7 +51,7 @@ public class CarportTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetWidth() {
-        Carport carport = new Carport(300, 0, 250, roof, shed);
+        Carport carport = new Carport(1, 300, 0, 250, roof, shed);
     }
 
     /**
@@ -59,7 +59,7 @@ public class CarportTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetHeight() {
-        Carport carport = new Carport(300, 300, -200, roof, shed);
+        Carport carport = new Carport(1, 300, 300, -200, roof, shed);
     }
 
     /**
@@ -67,7 +67,7 @@ public class CarportTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetRoof() {
-        Carport carport = new Carport(300, 300, 250, null, shed);
+        Carport carport = new Carport(1, 300, 300, 250, null, shed);
     }
     
 }
