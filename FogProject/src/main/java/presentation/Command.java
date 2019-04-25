@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package presentation;
-
-import presentation.commands.UnknownCommand;
-import presentation.commands.CarportDetailsCommand;
+import presentation.Commands.*;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
