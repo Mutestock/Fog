@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carport</title>
     </head>
-    <jsp:include page="/InclusionFiles/NavBar.jsp" />
+    <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
         <h1>Hello</h1>
         <form method = POST>
