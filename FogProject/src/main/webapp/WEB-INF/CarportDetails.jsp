@@ -100,7 +100,7 @@
                     if (!Boolean.parseBoolean(request.getParameter("anglechoice"))) {
                         out.print("disabled");
                     }
-                }else{
+                } else {
                     out.print("disabled");
                 }%>>
                 <option value="15">15 grader</option>
@@ -130,7 +130,7 @@
                     if (!Boolean.parseBoolean(request.getParameter("anglechoice"))) {
                         out.print("disabled");
                     }
-                }else{
+                } else {
                     out.print("disabled");
                 }
 
@@ -163,7 +163,6 @@
                         } else {
                             out.print("disabled");
                         }%>>
-                <option value="noshedw">No Shed</option>
                 <option value="210">210 cm</option>
                 <option value="240">240 cm</option>
                 <option value="270">270 cm</option>
@@ -191,10 +190,9 @@
                     if (!Boolean.parseBoolean(request.getParameter("shedchoice"))) {
                         out.print("disabled");
                     }
-                }else{
+                } else {
                     out.print("disabled");
-                            }%>>
-                <option value="noshedn">No Shed</option>
+                }%>>
                 <option value="150">150 cm</option>
                 <option value="180">180 cm</option>
                 <option value="210">210 cm</option>
@@ -215,6 +213,12 @@
                 <option value="660">660 cm</option>
                 <option value="690">690 cm</option>
             </select> 
+            <select name="walls">
+                <option value="thevoid">Void</option>  
+                <option value="bones">Suspicious Bones</option>
+                <option value="pasta">Spaghetti</option>
+                <option value="oldone">Eldritch Goo</option>
+            </select>
             <br>
             <br>
             <h3>Name</h3>
@@ -231,10 +235,7 @@
             <input type="text" name="comments" required="required">
             <br>
             <br>
-            <%
-
-            %>
-            <button type="submit" >Order Carport</button>
+            <button type="submit" formaction="SendInformation" >Order Carport</button>
         </form>
     </body>
 </html>

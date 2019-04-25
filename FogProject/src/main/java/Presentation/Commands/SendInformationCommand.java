@@ -5,7 +5,7 @@
  */
 package Presentation.Commands;
 
-import Data.help_classes.Roof;
+import Data.help_classes.*;
 import Presentation.Command;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Henning
  */
-public class SendInformation extends Command {
+public class SendInformationCommand extends Command {
 
     /**
      * Basic login functionality, checks the username and password. Prints out
@@ -29,20 +29,27 @@ public class SendInformation extends Command {
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        double width = Double.parseDouble(request.getParameter("width"));
-        double length = Double.parseDouble(request.getParameter("length"));
+        int width = Integer.parseInt(request.getParameter("width"));
+        int length = Integer.parseInt(request.getParameter("length"));
         int slope = 0;
         if (request.getParameter("slope") != null) {
             slope = Integer.parseInt(request.getParameter("slope"));
         }
         String roof = request.getParameter("roof");
-        Roof nRoof = new Roof(roof, slope);
-        
+        Roof nRoof = new Roof(roof, slope); 
+        Shed nShed = null;
+        if(request.getParameter("shedwidth")!= null && request.getParameter("shedlength")!= null ){
+        int swidth = Integer.parseInt(request.getParameter("shedwidth"));
+        int slength = Integer.parseInt(request.getParameter("shedlength"));
+        nShed = new Shed(swidth,slength, request.getParameter("walls"));
+        Carport carport = new Carport(length, width, nRoof, nShed);
+        }
+      
         loadJSP(request, response);
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.html").forward(request, response);
     }
 
 }
