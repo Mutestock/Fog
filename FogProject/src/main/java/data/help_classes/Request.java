@@ -13,8 +13,9 @@ public class Request {
     private final LocalDateTime sent;
     private final String comments;
     private final Carport carport;
+    private final Customer customer;
 
-    public Request(int id, LocalDateTime sent, String comments, Carport carport) {
+    public Request(int id, LocalDateTime sent, String comments, Carport carport, Customer customer) {
         if (sent == null || comments == null || carport == null) {
             throw new IllegalArgumentException();
         }
@@ -22,6 +23,7 @@ public class Request {
         this.sent = sent;
         this.comments = comments;
         this.carport = carport;
+        this.customer = customer;
     }
 
     public LocalDateTime getSent() {
@@ -34,6 +36,10 @@ public class Request {
 
     public Carport getCarport() {
         return carport;
+    }
+    
+    public Customer getCustomer() {
+        return customer;
     }
     
     public int getId() {
