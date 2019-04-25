@@ -9,14 +9,16 @@ import java.time.LocalDateTime;
  */
 public class Request {
 
+    private final int id;
     private final LocalDateTime sent;
     private final String comments;
     private final Carport carport;
 
-    public Request(LocalDateTime sent, String comments, Carport carport) {
+    public Request(int id, LocalDateTime sent, String comments, Carport carport) {
         if (sent == null || comments == null || carport == null) {
             throw new IllegalArgumentException();
         }
+        this.id = id;
         this.sent = sent;
         this.comments = comments;
         this.carport = carport;
@@ -32,5 +34,9 @@ public class Request {
 
     public Carport getCarport() {
         return carport;
+    }
+    
+    public int getId() {
+        return id;
     }
 }

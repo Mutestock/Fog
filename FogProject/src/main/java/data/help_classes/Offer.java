@@ -9,15 +9,17 @@ import java.time.LocalDateTime;
  */
 public class Offer {
 
+    private final int id;
     private final LocalDateTime sent;
     private final double price;
     private final double shipping_costs;
     private final Carport carport;
 
-    public Offer(LocalDateTime sent, double price, double shipping_costs, Carport carport) {
+    public Offer(int id, LocalDateTime sent, double price, double shipping_costs, Carport carport) {
         if (sent == null || price < 0.0 || shipping_costs < 0.0 || carport == null) {
             throw new IllegalArgumentException();
         }
+        this.id = id;
         this.sent = sent;
         this.price = price;
         this.shipping_costs = shipping_costs;
@@ -40,4 +42,7 @@ public class Offer {
         return carport;
     }
 
+    public int getId() {
+        return id;
+    }
 }

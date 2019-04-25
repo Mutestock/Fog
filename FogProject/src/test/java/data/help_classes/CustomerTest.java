@@ -40,19 +40,19 @@ public class CustomerTest {
      */
     @Test
     public void testGetName01() {
-        Customer instance = new Customer("Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
         String expected = instance.getFirstName() + " " + instance.getLastName();
         assertEquals(expected, instance.getFullName());
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testGetName02() {
-        Customer instance = new Customer("", "Haggleman", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
+        Customer instance = new Customer(1, "", "Haggleman", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testGetName03() {
-        Customer instance = new Customer("Derpface", null, "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
+        Customer instance = new Customer(1, "Derpface", null, "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
     }
 
     /**
@@ -60,7 +60,7 @@ public class CustomerTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetAddress() {
-        Customer instance = new Customer("Derpman", "Haggleface", "SwerpStreet22", "2800", "San Simon", "12345678", "derp@snerp.herb");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "SwerpStreet22", "2800", "San Simon", "12345678", "derp@snerp.herb");
     }
 
     /**
@@ -68,7 +68,7 @@ public class CustomerTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetZipcode() {
-        Customer instance = new Customer("Derpman", "Haggleface", "Swerp Street 22", "A45h", "San Simon", "12345678", "derp@snerp.herb");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "A45h", "San Simon", "12345678", "derp@snerp.herb");
     }
 
     /**
@@ -76,7 +76,7 @@ public class CustomerTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetCity() {
-        Customer instance = new Customer("Derpman", "Haggleface", "Swerp Street 22", "2800", "1234", "12345678", "derp@snerp.herb");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "1234", "12345678", "derp@snerp.herb");
     }
 
     /**
@@ -84,7 +84,7 @@ public class CustomerTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetPhone() {
-        Customer instance = new Customer("Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "aaaf6666", "derp@snerp.herb");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "aaaf6666", "derp@snerp.herb");
     }
 
     /**
@@ -92,17 +92,17 @@ public class CustomerTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetEmail01() {
-        Customer instance = new Customer("Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp @snerp.herb");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp @snerp.herb");
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testGetEmail02() {
-        Customer instance = new Customer("Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "@snerp.herb");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "@snerp.herb");
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void testGetEmail03() {
-        Customer instance = new Customer("Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.");
+        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.");
     }
     
 }

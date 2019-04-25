@@ -1,5 +1,5 @@
 
-package Logic;
+package logic;
 
 import data.customExceptions.DataAccessException;
 import data.help_classes.Customer;

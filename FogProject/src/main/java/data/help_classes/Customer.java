@@ -7,6 +7,7 @@ package data.help_classes;
  */
 public class Customer {
 
+    private final int id;
     private final String first_name;
     private final String last_name;
     private final String address;
@@ -15,7 +16,7 @@ public class Customer {
     private final String phone;
     private final String email;
 
-    public Customer(String first_name, String last_name, String address, String zipcode, String city, String phone, String email) {
+    public Customer(int id, String first_name, String last_name, String address, String zipcode, String city, String phone, String email) {
         if (first_name == null || first_name.isEmpty()
                 || last_name == null || last_name.isEmpty()
                 || address == null || !address.matches("[A-z ]+\\s\\d+")
@@ -25,7 +26,7 @@ public class Customer {
                 || email == null || !email.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
             throw new IllegalArgumentException();
         }
-
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.address = address;
@@ -67,4 +68,7 @@ public class Customer {
         return email;
     }
 
+    public int getId() {
+        return id;
+    }
 }

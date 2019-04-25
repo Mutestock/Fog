@@ -1,6 +1,6 @@
 package Data.SQL_Impl;
 
-import Data.help_classes.*;
+import data.help_classes.*;
 
 /**
  *
@@ -13,7 +13,7 @@ public interface DataMapperCustomerInterface {
     
     public void createRequest(Request request, Customer customer);
     
-    public void createCarport(Carport carport, Shed shed, Roof roof);
+    public void createCarport(Carport carport);
     
     public void createRoof(Roof roof);
     

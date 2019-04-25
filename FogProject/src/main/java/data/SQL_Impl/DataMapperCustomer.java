@@ -1,12 +1,8 @@
 package Data.SQL_Impl;
 
-import Data.CustomExceptions.DataAccessException;
-import Data.CustomExceptions.SQLConnectionException;
-import Data.help_classes.Carport;
-import Data.help_classes.Customer;
-import Data.help_classes.Request;
-import Data.help_classes.Roof;
-import Data.help_classes.Shed;
+import data.customExceptions.DataAccessException;
+import data.customExceptions.SQLConnectionException;
+import data.help_classes.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,8 +45,6 @@ public class DataMapperCustomer implements DataMapperCustomerInterface{
     @Override
     public void createRequest(Request request, Customer customer) {
         
-        DataMapperCustomer daoC = new DataMapperCustomer();
-        
         try {
             PreparedStatement preparedStmt;
             DBConnector connector = new DBConnector();
@@ -61,8 +55,8 @@ public class DataMapperCustomer implements DataMapperCustomerInterface{
             
             preparedStmt = c.prepareStatement(query);
             
-            preparedStmt.setInt(1, daoC.readCarportId(request.getCarport()));
-            preparedStmt.setInt(2, daoC.readCustomerId(customer));
+            preparedStmt.setInt(1, request.getCarport().getId());
+            preparedStmt.setInt(2, customer.getId());
             preparedStmt.setObject(3, request.getSent(), java.sql.JDBCType.TIMESTAMP);
             preparedStmt.setString(4, request.getComments());
             
@@ -80,7 +74,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface{
     
 
     @Override
-    public void createCarport(Carport carport, Shed shed, Roof roof) {
+    public void createCarport(Carport carport) {
         
         DataMapperCustomer daoC = new DataMapperCustomer();
         
@@ -96,8 +90,8 @@ public class DataMapperCustomer implements DataMapperCustomerInterface{
             
             preparedStmt.setInt(1, carport.getWidth());
             preparedStmt.setInt(2, carport.getLength());
-            preparedStmt.setInt(3, daoC.readShedId(shed));
-            preparedStmt.setInt(4, daoC.readRoofId(roof));
+            preparedStmt.setInt(3, carport.getShed().getId());
+            preparedStmt.setInt(4, carport.getRoof().getId());
             preparedStmt.execute();
             
             preparedStmt.close();
@@ -150,7 +144,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface{
             
             preparedStmt = c.prepareStatement(query);
             
-            preparedStmt.setString(1, shed.getWall_coverings());
+            preparedStmt.setString(1, shed.getWallCoverings());
             preparedStmt.setInt(2, shed.getWidth());
             preparedStmt.setInt(3, shed.getLength());
             preparedStmt.execute();
@@ -166,7 +160,9 @@ public class DataMapperCustomer implements DataMapperCustomerInterface{
     }
 
     
-    
+    // =======================================================
+    // ==== SHOULD BE CONVERTED TO JUST GETTING EVERYTHING?? ======
+    // ==================================================
     
     @Override
     public int readCustomerId(Customer customer) {
@@ -204,7 +200,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface{
                     = "select `Shed_id` from `Shed` "
                     + "where `Width` = " + shed.getWidth()
                     + "and `Length` = " + shed.getLength()
-                    + "and `Cover` = " + shed.getWall_coverings() + ";";
+                    + "and `Cover` = " + shed.getWallCoverings() + ";";
             preparedStmt = c.prepareStatement(query);
             ResultSet rs = preparedStmt.executeQuery();
             shed_id = rs.getInt("Shed_id");
