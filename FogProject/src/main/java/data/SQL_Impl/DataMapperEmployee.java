@@ -1,9 +1,9 @@
-package Data.SQL_Impl;
+package data.SQL_Impl;
 
-import Data.help_classes.Carport;
-import Data.help_classes.Customer;
-import Data.help_classes.Roof;
-import Data.help_classes.Shed;
+import data.help_classes.Carport;
+import data.help_classes.Customer;
+import data.help_classes.Roof;
+import data.help_classes.Shed;
 
 /**
  *

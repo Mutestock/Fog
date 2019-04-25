@@ -1,6 +1,6 @@
 /*
  */
-package Data.help_classes;
+package data.help_classes;
 
 import java.time.LocalDateTime;
 

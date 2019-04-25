@@ -1,4 +1,4 @@
-package data.customExceptions;
+package data.CustomExceptions;
 
 /**
  *

@@ -2,7 +2,6 @@
  */
 package data.help_classes;
 
-import data.help_classes.Shed;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

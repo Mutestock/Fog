@@ -1,6 +1,6 @@
-package Data.SQL_Impl;
+package data.SQL_Impl;
 
-import Data.help_classes.*;
+import data.help_classes.*;
 
 /**
  *
