@@ -1,9 +1,9 @@
 
 package Logic;
 
-import Data.CustomExceptions.DataAccessException;
-import Data.help_classes.Customer;
-import Data.help_classes.Request;
+import data.customExceptions.DataAccessException;
+import data.help_classes.Customer;
+import data.help_classes.Request;
 
 /**
  * @author Simon Asholt Norup
