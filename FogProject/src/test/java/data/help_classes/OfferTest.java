@@ -20,7 +20,7 @@ public class OfferTest {
     public OfferTest() {
         Roof roof = new Roof(1, "Plastic", 0);
         Shed shed = new Shed(1, 190, 200, "Plastic");
-        carport = new Carport(1, 250, 250, 250, roof, shed);
+        carport = new Carport(1, 250, 250, roof, shed);
     }
     
     @BeforeClass
