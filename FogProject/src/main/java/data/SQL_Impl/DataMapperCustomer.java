@@ -1,7 +1,8 @@
 package Data.SQL_Impl;
 
-import Data.CustomExceptions.DataAccessException;
-import Data.CustomExceptions.SQLConnectionException;
+
+import Data.customExceptions.DataAccessException;
+import Data.customExceptions.SQLConnectionException;
 import Data.help_classes.Carport;
 import Data.help_classes.Customer;
 import Data.help_classes.Request;

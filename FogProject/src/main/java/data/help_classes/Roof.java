@@ -1,6 +1,6 @@
 /*
  */
-package data.help_classes;
+package Data.help_classes;
 
 /**
  * @author Simon Asholt Norup
