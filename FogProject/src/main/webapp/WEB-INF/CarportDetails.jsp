@@ -11,11 +11,46 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carport</title>
     </head>
-    <jsp:include page="/InclusionFiles/NavBar.jsp" />
+    <jsp:include page="/includes/NavBar.jsp" />
     <body>
-        <h1>Hello</h1>
+        <h1>hitler did 9/11</h1>
+        <form> <%boolean withangle;
+            if (request.getParameter("anglechoice") != null) {
+                if (request.getParameter("angle") != null) {
+                    withangle = true;
+                } else if (request.getParameter("noangle") != null) {
+                    withangle = false;
+                } else {
+                    withangle = Boolean.parseBoolean(request.getParameter("anglechoice"));
+                }
+            } else {
+                withangle = false;
+            }
+            boolean withshed;
+            if (request.getParameter("shedchoice") != null) {
+                if (request.getParameter("noshed") != null) {
+                    withshed = false;
+                } else if (request.getParameter("shed") != null) {
+                    withshed = true;
+                } else {
+                    withshed = Boolean.parseBoolean(request.getParameter("shedchoice"));
+                }
+            } else {
+                withshed = false;
+            }
+            %>
+            <input type="Hidden" name="anglechoice" value="<%out.print(withangle);%>">
+            <input type="Hidden" name="shedchoice" value="<%out.print(withshed);%>">
+
+            <button formaction="CarportDetails" name="angle" value="true">Angled</button>
+            <button formaction="CarportDetails" name="noangle" value="true">Not Angled</button>
+            <button name="shed" formaction="CarportDetails" value="true">Shed</button>
+            <button name="noshed" formaction="CarportDetails" value="true" >No Shed</button>
+        </form>
+        <br>
         <form method = POST>
             <select name="width">
+                <option value="choosew">Width cm</option>
                 <option value="240">240 cm</option>
                 <option value="270">270 cm</option>
                 <option value="300">300 cm</option>
@@ -36,6 +71,7 @@
                 <option value="750">750 cm</option>
             </select>
             <select name="length">
+                <option value="choosel">Length cm</option>
                 <option value="240">240 cm</option>
                 <option value="270">270 cm</option>
                 <option value="300">300 cm</option>
@@ -57,7 +93,14 @@
                 <option value="780">780 cm</option>
             </select>
             <select name="slope"    <%
-                if (request.getParameter("angle") == null) {
+                if (request.getParameter("angle") != null) {
+                } else if (request.getParameter("noangle") != null) {
+                    out.print("disabled");
+                } else if (request.getParameter("anglechoice") != null) {
+                    if (!Boolean.parseBoolean(request.getParameter("anglechoice"))) {
+                        out.print("disabled");
+                    }
+                } else {
                     out.print("disabled");
                 }%>>
                 <option value="15">15 grader</option>
@@ -69,16 +112,29 @@
                 <option value="45">45 grader</option>
             </select>
 
-            <select name="flatroof" <%
-                if (request.getParameter("angle") != null) {
+            <select name="roof" <%
+                if (request.getParameter("noangle") != null) {
+                } else if (request.getParameter("angle") != null) {
+                    out.print("disabled");
+                } else if (request.getParameter("anglechoice") != null) {
+                    if (Boolean.parseBoolean(request.getParameter("anglechoice")));
                     out.print("disabled");
                 }%>>
                 <option value="plasttrapezplader">Plasstrapezplader</option>
             </select>
-            <select name="flatroof" <%
-                if (request.getParameter("angle") == null) {
+            <select name="roof" <%
+                if (request.getParameter("angle") != null) {
+                } else if (request.getParameter("noangle") != null) {
                     out.print("disabled");
-                }%>>
+                } else if (request.getParameter("anglechoice") != null) {
+                    if (!Boolean.parseBoolean(request.getParameter("anglechoice"))) {
+                        out.print("disabled");
+                    }
+                } else {
+                    out.print("disabled");
+                }
+
+                    %>>
                 <option value="BetontagstenRød">Betontagsten - Rød</option>
                 <option value="BetontagstenTeglrød">Betontagsten - Teglrød</option>
                 <option value="BetontagstenBrun">Betontagsten - Brun</option>
@@ -96,8 +152,18 @@
                 <option value="EternittagB7Rødflammet">Eternittag B7 - Rødflammet</option>
 
             </select>
-            <select name="shedwidth">
-                <option value="noshed1">No Shed</option>
+            <select name="shedwidth" 
+                    <%  if (request.getParameter("noshed") != null) {
+                            out.print("disabled");
+                        } else if (request.getParameter("shed") != null) {
+                        } else if (request.getParameter("shedchoice") != null) {
+                            if (!Boolean.parseBoolean(request.getParameter("shedchoice"))) {
+                                out.print("disabled");
+                            }
+                        } else {
+                            out.print("disabled");
+                        }%>>
+                <option value="noshedw">No Shed</option>
                 <option value="210">210 cm</option>
                 <option value="240">240 cm</option>
                 <option value="270">270 cm</option>
@@ -117,8 +183,18 @@
                 <option value="690">690 cm</option>
                 <option value="720">720 cm</option>
             </select>
-            <select name="shedlength">
-                <option value="noshed2">No Shed</option>
+            <select name="shedlength" <%
+                if (request.getParameter("noshed") != null) {
+                    out.print("disabled");
+                } else if (request.getParameter("shed") != null) {
+                } else if (request.getParameter("shedchoice") != null) {
+                    if (!Boolean.parseBoolean(request.getParameter("shedchoice"))) {
+                        out.print("disabled");
+                    }
+                } else {
+                    out.print("disabled");
+                }%>>
+                <option value="noshedn">No Shed</option>
                 <option value="150">150 cm</option>
                 <option value="180">180 cm</option>
                 <option value="210">210 cm</option>
@@ -139,25 +215,26 @@
                 <option value="660">660 cm</option>
                 <option value="690">690 cm</option>
             </select> 
-            <button value="angled" formaction="CarportDetails" name="angle" value="true">Angled</button>
-            <button value="not angled" formaction="CarportDetails">Not Angled</button>
             <br>
             <br>
             <h3>Name</h3>
-            <input type="text" name="name">
+            <input type="text" name="name" required="required">
             <h3>Address</h3>
-            <input type="text" name="address">
+            <input type="text" name="address" required="required">
             <h3>Zipcode/City</h3>
-            <input type="text" name="zipcodencity">
+            <input type="text" name="zipcodencity" required="required">
             <h3>Phone Number</h3>
-            <input type="text" name="phone">
+            <input type="text" name="phone" required="required">
             <h3>Email address</h3>
-            <input type="text" name="email">
+            <input type="text" name="email" required="required">
             <h3>Comments for the Order</h3>
-            <input type="text" name="comments">
+            <input type="text" name="comments" required="required">
             <br>
             <br>
-            <button type="submit">Order Carport</button>
+            <%
+
+            %>
+            <button type="submit" >Order Carport</button>
         </form>
     </body>
 </html>

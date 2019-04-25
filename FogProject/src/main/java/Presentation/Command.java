@@ -27,7 +27,7 @@ public abstract class Command {
 
         HashMap<String, Command> actions = new HashMap<String, Command>() {
             {
-                put("example", new ExampleJSP());
+                
                 put("CarportDetails", new CarportDetailsCommand());
             }
         };
