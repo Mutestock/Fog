@@ -5,6 +5,7 @@
  */
 package Presentation.Commands;
 
+import Data.help_classes.Roof;
 import Presentation.Command;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Henning
  */
-public class ExampleJSP extends Command {
+public class SendInformation extends Command {
 
     /**
      * Basic login functionality, checks the username and password. Prints out
@@ -28,14 +29,20 @@ public class ExampleJSP extends Command {
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Entry at ExampleJSPCommand");
-        System.out.println("Entry at ExampleJSPCommand");
-        System.out.println("Entry at ExampleJSPCommand");
-        loadJSP(request, response);    
+        double width = Double.parseDouble(request.getParameter("width"));
+        double length = Double.parseDouble(request.getParameter("length"));
+        int slope = 0;
+        if (request.getParameter("slope") != null) {
+            slope = Integer.parseInt(request.getParameter("slope"));
+        }
+        String roof = request.getParameter("roof");
+        Roof nRoof = new Roof(roof, slope);
+        
+        loadJSP(request, response);
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/exampleJSP.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
     }
 
 }
