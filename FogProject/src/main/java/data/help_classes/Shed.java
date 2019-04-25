@@ -7,14 +7,16 @@ package data.help_classes;
  */
 public class Shed {
 
+    private final int id;
     private final int length;
     private final int width;
     private final String wall_coverings;
 
-    public Shed(int length, int width, String wall_coverings) {
+    public Shed(int id, int length, int width, String wall_coverings) {
         if (length <= 0 || width <= 0 || wall_coverings == null || wall_coverings.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        this.id = id;
         this.length = length;
         this.width = width;
         this.wall_coverings = wall_coverings;
@@ -28,8 +30,11 @@ public class Shed {
         return width;
     }
 
-    public String getWall_coverings() {
+    public String getWallCoverings() {
         return wall_coverings;
     }
 
+    public int getId() {
+        return id;
+    }
 }

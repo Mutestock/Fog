@@ -1,0 +1,48 @@
+/* 
+    Created on : 25-Apr-2019, 11:57:01
+    Author     : Henning
+*/
+
+@charset "UTF-8";
+
+#page{
+    min-width:260px;
+    max-width:930px;
+    margin:0 auto;
+    padding:0 12px;
+}
+
+body{
+    background:#FCFCFC;
+    color:#999;
+    font-size:14px;
+}
+
+a:hover{
+    color:#70AABB;
+}
+
+#entrance-menu{
+    display:block;
+    position:relative;
+    width:100%;
+    height:0;
+    padding-bottom:70%;
+    margin-bottom:12px;
+    /*background-image:url('');*/
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-size:100% auto;
+}
+
+#Head-title
+{
+    min-width: 270;
+    padding: 20%;
+    margin: 0 auto9;
+    nav-right: 20%;
+    position: 20%;
+
+
+}
+

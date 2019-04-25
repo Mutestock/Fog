@@ -5,8 +5,9 @@ package data.customExceptions;
  * e.g. a MySQL database or a JSON text file.
  * It is recommended to pass the cause of the Exception onwards in the system (e.g. a SQLException)
  * so that potential catch-statements in frontend layers can define actions according to exception type.
- * @author Simon Asholt Norup
+ * @author Emil Svensmark
  */
+
 public class DataAccessException extends Exception {
 
     public DataAccessException() {
