@@ -15,7 +15,7 @@ public class Carport {
     private final Shed shed;
 
     public Carport(int id, int length, int width, int height, Roof roof, Shed shed) {
-        if (length <= 0 || width <= 0 || height <= 0 || roof == null || shed == null) {
+        if (length <= 0 || width <= 0 || height <= 0 || roof == null) {
             throw new IllegalArgumentException();
         }
         if (length < shed.getLength() || width < shed.getWidth()) {
