@@ -10,11 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carport</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
-    <body>
-        <h1>Hello</h1>
-        <form method = POST>
+    <body id = entrance-menu>
+        <h1 id=Head-title>Carport Details </h1>
+        <form method = POST id="page">
             <select name="width">
                 <option value="240">240 cm</option>
                 <option value="270">270 cm</option>
