@@ -1,8 +1,14 @@
-package Data.SQL_Impl;
+package data.SQL_Impl;
 
-import data.customExceptions.DataAccessException;
-import data.customExceptions.SQLConnectionException;
-import data.help_classes.*;
+
+import data.CustomExceptions.DataAccessException;
+import data.CustomExceptions.SQLConnectionException;
+import data.help_classes.Carport;
+import data.help_classes.Customer;
+import data.help_classes.Request;
+import data.help_classes.Roof;
+import data.help_classes.Shed;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

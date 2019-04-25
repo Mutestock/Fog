@@ -1,4 +1,4 @@
-package Data.SQL_Impl;
+package data.SQL_Impl;
 
 import data.help_classes.*;
 
