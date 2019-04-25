@@ -2,10 +2,6 @@
  */
 package data.help_classes;
 
-import data.help_classes.Roof;
-import data.help_classes.Carport;
-import data.help_classes.Shed;
-import data.help_classes.Offer;
 import java.time.LocalDateTime;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,7 +20,7 @@ public class OfferTest {
     public OfferTest() {
         Roof roof = new Roof(1, "Plastic", 0);
         Shed shed = new Shed(1, 190, 200, "Plastic");
-        carport = new Carport(1, 250, 250, 250, roof, shed);
+        carport = new Carport(1, 250, 250, roof, shed);
     }
     
     @BeforeClass

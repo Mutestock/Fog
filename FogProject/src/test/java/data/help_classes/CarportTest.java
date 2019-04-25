@@ -2,9 +2,6 @@
  */
 package data.help_classes;
 
-import data.help_classes.Roof;
-import data.help_classes.Carport;
-import data.help_classes.Shed;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -46,7 +43,7 @@ public class CarportTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetLength() {
-        Carport carport = new Carport(1, 200, 300, 250, roof, shed);
+        Carport carport = new Carport(1, 200, 300, roof, shed);
     }
 
     /**
@@ -54,15 +51,7 @@ public class CarportTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetWidth() {
-        Carport carport = new Carport(1, 300, 0, 250, roof, shed);
-    }
-
-    /**
-     * Test of getHeight method, of class Carport.
-     */
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetHeight() {
-        Carport carport = new Carport(1, 300, 300, -200, roof, shed);
+        Carport carport = new Carport(1, 300, 0, roof, shed);
     }
 
     /**
@@ -70,7 +59,7 @@ public class CarportTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetRoof() {
-        Carport carport = new Carport(1, 300, 300, 250, null, shed);
+        Carport carport = new Carport(1, 300, 300, null, shed);
     }
     
 }

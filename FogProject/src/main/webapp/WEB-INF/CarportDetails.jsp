@@ -12,8 +12,13 @@
         <title>Carport</title>
         <link rel="stylesheet" href="style.css">
     </head>
-<<<<<<< HEAD
-    <jsp:include page="/includes/NavBar.jsp" />
+    <jsp:include page="/inclusions/NavBar.jsp" />
+    
+    <!--<body id = entrance-menu>
+        <h1 id=Head-title>Carport Details </h1>
+        <form method = POST id="page">-->
+    <%--<jsp:include page="/includes/NavBar.jsp" />--%>
+    
     <body>
         <h1>hitler did 9/11</h1>
         <form> <%boolean withangle;
@@ -51,12 +56,6 @@
         </form>
         <br>
         <form method = POST>
-=======
-    <jsp:include page="/inclusions/NavBar.jsp" />
-    <body id = entrance-menu>
-        <h1 id=Head-title>Carport Details </h1>
-        <form method = POST id="page">
->>>>>>> 210c175e3920b247c0cdce323ca6cc8c580c2f30
             <select name="width">
                 <option value="choosew">Width cm</option>
                 <option value="240">240 cm</option>
@@ -171,7 +170,7 @@
                         } else {
                             out.print("disabled");
                         }%>>
-                <option value="noshedw">No Shed</option>
+
                 <option value="210">210 cm</option>
                 <option value="240">240 cm</option>
                 <option value="270">270 cm</option>
@@ -202,7 +201,7 @@
                 } else {
                     out.print("disabled");
                 }%>>
-                <option value="noshedn">No Shed</option>
+
                 <option value="150">150 cm</option>
                 <option value="180">180 cm</option>
                 <option value="210">210 cm</option>
@@ -223,6 +222,13 @@
                 <option value="660">660 cm</option>
                 <option value="690">690 cm</option>
             </select> 
+
+            <select name="walls">
+                <option value="thevoid">Void</option>  
+                <option value="bones">Suspicious Bones</option>
+                <option value="pasta">Spaghetti</option>
+                <option value="oldone">Eldritch Goo</option>
+            </select>
             <br>
             <br>
             <h3>Name</h3>
@@ -239,10 +245,8 @@
             <input type="text" name="comments" required="required">
             <br>
             <br>
-            <%
+            <button type="submit" formaction="SendInformation" >Order Carport</button>
 
-            %>
-            <button type="submit" >Order Carport</button>
         </form>
     </body>
 </html>
