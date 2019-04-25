@@ -10,7 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carport</title>
+        <link rel="stylesheet" href="style.css">
     </head>
+<<<<<<< HEAD
     <jsp:include page="/includes/NavBar.jsp" />
     <body>
         <h1>hitler did 9/11</h1>
@@ -49,6 +51,12 @@
         </form>
         <br>
         <form method = POST>
+=======
+    <jsp:include page="/inclusions/NavBar.jsp" />
+    <body id = entrance-menu>
+        <h1 id=Head-title>Carport Details </h1>
+        <form method = POST id="page">
+>>>>>>> 210c175e3920b247c0cdce323ca6cc8c580c2f30
             <select name="width">
                 <option value="choosew">Width cm</option>
                 <option value="240">240 cm</option>
