@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Carport</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="CSS/styleFrontPage.css">
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body id = entrance-menu>
