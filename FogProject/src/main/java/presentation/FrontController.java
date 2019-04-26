@@ -49,6 +49,8 @@ public class FrontController extends HttpServlet {
                 out.println("<h1>error</h1>");
                 out.println("</body>");
                 out.println("</html>");
+                
+                e.printStackTrace();
             }
         }
     }

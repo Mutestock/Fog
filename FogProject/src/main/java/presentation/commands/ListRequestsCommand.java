@@ -23,7 +23,7 @@ public class ListRequestsCommand extends Command {
         try {
             String filter = (String) request.getParameter("filter");
             if (filter == null) {
-                filter = "uncomplete";
+                filter = "incomplete";
             }
             
             LinkedList<Request> requests = PRES_TO_LOGIC.getRequests(filter);

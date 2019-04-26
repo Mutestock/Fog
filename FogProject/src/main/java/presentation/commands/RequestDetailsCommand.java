@@ -1,11 +1,8 @@
-package presentation.Commands;
+package presentation.commands;
 
 import data.customExceptions.DataAccessException;
-import data.help_classes.Customer;
 import data.help_classes.Request;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

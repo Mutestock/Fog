@@ -21,7 +21,7 @@ public class DBConnector {
     //Constants
     private static final String IP = "165.227.148.141"; //;
     private static final String PORT = "3306";
-    public static final String DATABASE = "legoDB";
+    public static final String DATABASE = "carportDB";
     private static final String USERNAME = "CBA_test";
     private static final String PASSWORD = "vilevilethings666";
 
