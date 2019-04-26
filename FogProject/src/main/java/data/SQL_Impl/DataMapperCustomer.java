@@ -131,7 +131,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             Connection c = connector.getConnection();
             String query
                     = "insert into `Roof` (`Type`, `Slope`) "
-                    + "VALUES(?,?)" + ";";
+                    + "VALUES(?,?);";
 
             preparedStmt = c.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -140,11 +140,13 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.executeUpdate();
 
             ResultSet rs = preparedStmt.getGeneratedKeys();
-            rs.next();
-            if (rs == null) {
-                throw new SQLException();
-            }
-            int id = rs.getInt("Roof_id");
+            int id;
+//            if ( rs.next()) {
+//                id = rs.getInt("Roof_id");
+//            } else {
+//                
+//            }
+            id = readRoofId(roof);
             
             preparedStmt.close();
             return id;
@@ -202,87 +204,79 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
     // ==== SHOULD BE CONVERTED TO JUST GETTING EVERYTHING?? ======
     // ==================================================
 //    
-//    @Override
-//    public int readShedId(Shed shed) {
-//        int shed_id = 0;
-//        try {
-//            PreparedStatement preparedStmt;
-//            DBConnector connector = new DBConnector();
-//            Connection c = connector.getConnection();
-//            String query
-//                    = "select `Shed_id` from `Shed` "
-//                    + "where `Width` = " + shed.getWidth()
-//                    + "and `Length` = " + shed.getLength()
-//                    + "and `Cover` = " + shed.getWallCoverings() + ";";
-//            preparedStmt = c.prepareStatement(query);
-//            ResultSet rs = preparedStmt.executeQuery();
-//            shed_id = rs.getInt("Shed_id");
-//            preparedStmt.close();
-//            c.close();
-//        } catch (SQLConnectionException ex) {
-//            ex.printStackTrace();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//        
-//        return shed_id;
-//    }
-//
-//    
-//    @Override
-//    public int readRoofId(Roof roof) {
-//        int roof_id = 0;
-//        try {
-//            PreparedStatement preparedStmt;
-//            DBConnector connector = new DBConnector();
-//            Connection c = connector.getConnection();
+
+    public int readShedId(Shed shed) {
+        int shed_id = 0;
+        try {
+            PreparedStatement preparedStmt;
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
+            String query
+                    = "select `Shed_id` from `Shed` "
+                    + "where `Width` = " + shed.getWidth()
+                    + "and `Length` = " + shed.getLength()
+                    + "and `Cover` = " + shed.getWallCoverings() + ";";
+            preparedStmt = c.prepareStatement(query);
+            ResultSet rs = preparedStmt.executeQuery();
+            shed_id = rs.getInt("Shed_id");
+            preparedStmt.close();
+            c.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return shed_id;
+    }
+
+    
+    public int readRoofId(Roof roof) {
+        int roof_id = 0;
+        try {
+            PreparedStatement preparedStmt;
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
 //            String query
 //                    = "select `Roof_id` from `Roof` "
 //                    + "where `Type` = " + roof.getType()
 //                    + "and `Slope` = " + roof.getSlope() + ";";
-//            preparedStmt = c.prepareStatement(query);
-//            ResultSet rs = preparedStmt.executeQuery();
-//            roof_id = rs.getInt("Roof_id");
-//            preparedStmt.close();
-//            c.close();
-//        } catch (SQLConnectionException ex) {
-//            ex.printStackTrace();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//        
-//        return roof_id;
-//    }
-//    
-//
-//    @Override
-//    public int readCarportId(Carport carport) {
-//        
-//        DataMapperCustomer daoC = new DataMapperCustomer();
-//        
-//        int carport_id = 0;
-//        try {
-//            PreparedStatement preparedStmt;
-//            DBConnector connector = new DBConnector();
-//            Connection c = connector.getConnection();
-//            String query
-//                    = "select `Carport_id` from `Carport` "
-//                    + "where `Width` = " + carport.getWidth()
-//                    + "and `Length` = " + carport.getLength() 
-//                    + "and `Shed_id = " + daoC.readShedId(carport.getShed())
-//                    + "and `Roof_id = " + daoC.readRoofId(carport.getRoof())
-//                    + ";";
-//            preparedStmt = c.prepareStatement(query);
-//            ResultSet rs = preparedStmt.executeQuery();
-//            carport_id = rs.getInt("Carport_id");
-//            preparedStmt.close();
-//            c.close();
-//        } catch (SQLConnectionException ex) {
-//            ex.printStackTrace();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//        
-//        return carport_id;
-//    }
+            String query = "select SCOPE_IDENTITY();";
+            preparedStmt = c.prepareStatement(query);
+            ResultSet rs = preparedStmt.executeQuery();
+            roof_id = rs.getInt("Roof_id");
+            preparedStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return roof_id;
+    }
+    
+
+    public int readCarportId(Carport carport) {
+        
+        DataMapperCustomer daoC = new DataMapperCustomer();
+        
+        int carport_id = 0;
+        try {
+            PreparedStatement preparedStmt;
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
+            String query
+                    = "select `Carport_id` from `Carport` "
+                    + "where `Width` = " + carport.getWidth()
+                    + "and `Length` = " + carport.getLength() 
+                    + "and `Shed_id = " + daoC.readShedId(carport.getShed())
+                    + "and `Roof_id = " + daoC.readRoofId(carport.getRoof())
+                    + ";";
+            preparedStmt = c.prepareStatement(query);
+            ResultSet rs = preparedStmt.executeQuery();
+            carport_id = rs.getInt("Carport_id");
+            preparedStmt.close();
+            c.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return carport_id;
+    }
 }
