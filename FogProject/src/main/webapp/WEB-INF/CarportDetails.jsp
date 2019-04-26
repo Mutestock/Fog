@@ -20,7 +20,7 @@
     <%--<jsp:include page="/includes/NavBar.jsp" />--%>
 
     <body>
-        <h1>hitler did 9/11</h1>
+        <h1>Order a carport</h1>
         <form> <%boolean withangle;
             if (request.getParameter("anglechoice") != null) {
                 if (request.getParameter("angle") != null) {
