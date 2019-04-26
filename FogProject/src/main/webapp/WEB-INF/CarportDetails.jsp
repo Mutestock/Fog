@@ -13,12 +13,12 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
-    
+
     <!--<body id = entrance-menu>
         <h1 id=Head-title>Carport Details </h1>
         <form method = POST id="page">-->
     <%--<jsp:include page="/includes/NavBar.jsp" />--%>
-    
+
     <body>
         <h1>hitler did 9/11</h1>
         <form> <%boolean withangle;
@@ -246,6 +246,7 @@
             <br>
             <br>
             <button type="submit" formaction="SendInformation" >Order Carport</button>
+            <!--   remember to go through front controller - always always always      -->
 
         </form>
     </body>

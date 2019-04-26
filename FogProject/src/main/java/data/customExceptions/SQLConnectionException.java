@@ -1,4 +1,4 @@
-package data.CustomExceptions;
+package data.customExceptions;
 
 import java.sql.SQLException;
 

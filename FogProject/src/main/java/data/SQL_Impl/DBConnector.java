@@ -1,6 +1,6 @@
 package data.SQL_Impl;
 
-import data.CustomExceptions.SQLConnectionException;
+import data.customExceptions.SQLConnectionException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
