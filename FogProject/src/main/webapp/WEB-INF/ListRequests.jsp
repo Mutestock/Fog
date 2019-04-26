@@ -31,21 +31,19 @@
                         <td>  </td>
                     </tr>
                     <%
-                        HashMap<Request, Customer> requests = (HashMap<Request, Customer>) request.getAttribute("requests");
+                        LinkedList<Request> requests = (LinkedList<Request>) request.getAttribute("requests");
 
-                        for (Map.Entry<Request, Customer> entry : requests.entrySet()) {
-                            Request r = entry.getKey();
-                            Customer c = entry.getValue();
+                        for (Request r : requests) {
                     %>
                     <tr>
                         <td><%=r.getSent().toString()%></td>
-                        <td><%=c.getFullName()%></td>
+                        <td><%=r.getCustomer().getFullName()%></td>
 
                         <td> Nej </td>
 
                         <td>
                             <form action="/FogProject/c/RequestDetails" method=POST>
-                                <input type="hidden" name="r_id" value="<%=r.getID()%>"/>
+                                <input type="hidden" name="r_id" value="<%=r.getId()%>"/>
                                 <button type="submit"> Detaljer </button>
                             </form>
                         </td>

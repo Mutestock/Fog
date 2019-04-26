@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `carportDB`.`Carport` (
   `Carport_id` INT NOT NULL AUTO_INCREMENT,
   `Width` INT UNSIGNED NOT NULL,
   `Length` INT UNSIGNED NOT NULL,
-  `Shed_id` INT NOT NULL,
+  `Shed_id` INT NULL,
   `Roof_id` INT NOT NULL,
   PRIMARY KEY (`Carport_id`),
   UNIQUE INDEX `Carport_id_UNIQUE` (`Carport_id` ASC) VISIBLE,

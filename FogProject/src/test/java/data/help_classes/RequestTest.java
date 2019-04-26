@@ -2,10 +2,6 @@
  */
 package data.help_classes;
 
-import data.help_classes.Request;
-import data.help_classes.Roof;
-import data.help_classes.Carport;
-import data.help_classes.Shed;
 import java.time.LocalDateTime;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +21,7 @@ public class RequestTest {
     public RequestTest() {
         Roof roof = new Roof(1, "Plastic", 0);
         Shed shed = new Shed(1, 190, 200, "Plastic");
-        carport = new Carport(1, 250, 250, 250, roof, shed);
+        carport = new Carport(1, 250, 250, roof, shed);
         customer = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
     }
     

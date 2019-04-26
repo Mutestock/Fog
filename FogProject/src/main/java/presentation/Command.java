@@ -5,13 +5,12 @@
  */
 package presentation;
 
+import presentation.commands.*;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import presentation.Commands.ListRequestsCommand;
-import presentation.commands.*;
 
 /**
  *
@@ -28,6 +27,9 @@ public abstract class Command {
 
         HashMap<String, Command> actions = new HashMap<String, Command>() {
             {
+
+                put("SendInformation", new SendInformationCommand());
+
                 put("CarportDetails", new CarportDetailsCommand());
                 put("RequestDetails", new RequestDetailsCommand());
                 put("ListRequests", new ListRequestsCommand());

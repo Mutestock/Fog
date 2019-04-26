@@ -16,7 +16,7 @@ public class Request {
     private final Customer customer;
 
     public Request(int id, LocalDateTime sent, String comments, Carport carport, Customer customer) {
-        if (sent == null || comments == null || carport == null) {
+        if (sent == null || comments == null || carport == null || customer == null) {
             throw new IllegalArgumentException();
         }
         this.id = id;
@@ -45,4 +45,5 @@ public class Request {
     public int getId() {
         return id;
     }
+    
 }
