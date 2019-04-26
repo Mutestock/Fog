@@ -16,7 +16,7 @@ public class Customer {
     private final String phone;
     private final String email;
 
-    public Customer(int id, String first_name, String last_name, String address, String zipcode, String city, String phone, String email) {
+    public Customer(int id, String first_name, String last_name, String address, String zipcode, String city, String phone, String email) throws IllegalArgumentException {
         if (first_name == null || first_name.isEmpty()
                 || last_name == null || last_name.isEmpty()
                 || address == null || !address.matches("[A-z ]+\\s\\d+")

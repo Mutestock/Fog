@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
     
@@ -136,9 +137,13 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
 
             preparedStmt.setString(1, roof.getType());
             preparedStmt.setInt(2, roof.getSlope());
-            preparedStmt.execute();
+            preparedStmt.executeUpdate();
 
             ResultSet rs = preparedStmt.getGeneratedKeys();
+            rs.next();
+            if (rs == null) {
+                throw new SQLException();
+            }
             int id = rs.getInt("Roof_id");
             
             preparedStmt.close();
