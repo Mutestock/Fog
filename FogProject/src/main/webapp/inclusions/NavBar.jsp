@@ -18,16 +18,9 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/FogProject/">Fog</a>
                 </div>
-
-                icon-shopping-cart
-                <!--                <ul class="nav navbar-nav">
-                                    <li class="active"><a href="/Cupcake/c/shopping">Home</a></li>
-                                    <li><a href="/Cupcake/c/possibilities">Menu</a></li>
-                                </ul>
-                -->                
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/FogProject/"><span class="glyphicon glyphicon-shopping-cart"></span> Show cart</a></li>
-                    <!--<li><a href="/Cupcake/SessionExit.jsp"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>-->
+                    <li><a href="/FogProject/c/CarportDetails">Custom Carporte</a></li>
+                    <li><a href="/FogProject/c/ListRequests">Se forespørgsler</a></li>
                 </ul>
             </div>
         </nav>

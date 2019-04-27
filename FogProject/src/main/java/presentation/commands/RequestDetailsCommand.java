@@ -25,7 +25,7 @@ public class RequestDetailsCommand extends Command {
 
             request.setAttribute("request", r);
 
-            request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/RequestDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
             request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);

@@ -67,7 +67,6 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
     @Override
     public Request readRequest(int id) throws DataAccessException {
-        Request request;
         try {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();
@@ -87,7 +86,10 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.setInt(1, id);
             ResultSet rs = preparedStmt.executeQuery();
 
-            request = getRequestFromResultSet(rs);
+            Request request = null;
+            if (rs.next()) {
+                request = getRequestFromResultSet(rs);
+            }
 
             preparedStmt.close();
             return request;
@@ -96,52 +98,37 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         }
     }
 
-    @Override
-    public Customer readCustomer(int id) throws DataAccessException {
-        Customer customer = null;
-        try {
-            PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
-            String query
-                    = "select * from `Customer` "
-                    + "where `Customer_id` = ?;";
-            preparedStmt = c.prepareStatement(query);
-            preparedStmt.setInt(1, customer.getId());
-            ResultSet rs = preparedStmt.executeQuery();
-            while (rs.next()) {
-                String firstName = rs.getString("FirstName");
-                String lastName = rs.getString("LastName");
-                String address = rs.getString("Address");
-                String zipcode = rs.getString("Zipcode");
-                String city = rs.getString("City");
-                String phone = rs.getString("Phone");
-                String email = rs.getString("Email");
-                customer = new Customer(id, firstName, lastName, address, zipcode, city, phone, email);
-            }
-            preparedStmt.close();
-        } catch (SQLConnectionException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return customer;
-    }
-
-    @Override
-    public Carport readCarport(int id) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Roof readRoof(int id) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Shed readShed(int id) throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public Customer readCustomer(int id) throws DataAccessException {
+//        Customer customer = null;
+//        try {
+//            PreparedStatement preparedStmt;
+//            Connection c = DBConnector.getConnection();
+//            String query
+//                    = "select * from `Customer` "
+//                    + "where `Customer_id` = ?;";
+//            preparedStmt = c.prepareStatement(query);
+//            preparedStmt.setInt(1, customer.getId());
+//            ResultSet rs = preparedStmt.executeQuery();
+//            while (rs.next()) {
+//                String firstName = rs.getString("FirstName");
+//                String lastName = rs.getString("LastName");
+//                String address = rs.getString("Address");
+//                String zipcode = rs.getString("Zipcode");
+//                String city = rs.getString("City");
+//                String phone = rs.getString("Phone");
+//                String email = rs.getString("Email");
+//                customer = new Customer(id, firstName, lastName, address, zipcode, city, phone, email);
+//            }
+//            preparedStmt.close();
+//        } catch (SQLConnectionException ex) {
+//            ex.printStackTrace();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        return customer;
+//    }
 
     private Request getRequestFromResultSet(ResultSet rs) throws SQLException {
         Shed shed = null;

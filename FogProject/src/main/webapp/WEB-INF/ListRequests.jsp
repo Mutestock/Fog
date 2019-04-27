@@ -25,6 +25,7 @@
             <div class="panel-body">
                 <table border = "1">
                     <tr>
+                        <td> ID </td>
                         <td> Forespørgsel modtaget </td>
                         <td> Kundenavn </td>
                         <td> Tilbud afsendt </td>
@@ -36,6 +37,7 @@
                         for (Request r : requests) {
                     %>
                     <tr>
+                        <td><%=r.getId()%></td>
                         <td><%=r.getSent().toString()%></td>
                         <td><%=r.getCustomer().getFullName()%></td>
 

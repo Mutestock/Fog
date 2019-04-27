@@ -16,9 +16,4 @@ public interface DataMapperEmployeeInterface {
     public LinkedList<Request> readAllRequests()throws DataAccessException;
     
     public Request readRequest(int id) throws DataAccessException;
-    public Customer readCustomer(int id) throws DataAccessException;
-    public Carport readCarport(int id) throws DataAccessException;
-    public Roof readRoof(int id) throws DataAccessException;
-    public Shed readShed(int id) throws DataAccessException;
-    
 }
