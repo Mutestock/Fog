@@ -88,7 +88,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             ResultSet rs = preparedStmt.executeQuery();
 
             request = getRequestFromResultSet(rs);
-            
+
             preparedStmt.close();
             return request;
         } catch (SQLException ex) {
@@ -144,11 +144,14 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
     }
 
     private Request getRequestFromResultSet(ResultSet rs) throws SQLException {
+        Shed shed = null;
         int shedID = rs.getInt("Shed_id");
         int shedLength = rs.getInt("Shed_length");
         int shedWidth = rs.getInt("Shed_width");
         String shedCover = rs.getString("Shed_cover");
-        Shed shed = new Shed(shedID, shedLength, shedWidth, shedCover);
+        if (shedCover != null) {
+            shed = new Shed(shedID, shedLength, shedWidth, shedCover);
+        }
 
         int roofID = rs.getInt("Roof_id");
         String roofType = rs.getString("Roof_type");
