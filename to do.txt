@@ -1,1 +1,0 @@
-ÆØÅ bliver lavet til om til Ã¦Ã¸Ã¥, når informationen bliver sendt fra JSP-siden over HTTP request til servletten: Der er noget encoding der skal laves om somewhere

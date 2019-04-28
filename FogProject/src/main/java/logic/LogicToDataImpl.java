@@ -5,6 +5,7 @@ import data.SQL_Impl.DataMapperCustomer;
 import data.DataMapperCustomerInterface;
 import data.DataMapperEmployeeInterface;
 import data.SQL_Impl.DataMapperEmployee;
+import data.help_classes.Offer;
 import data.help_classes.Request;
 import java.util.LinkedList;
 
@@ -14,7 +15,7 @@ public class LogicToDataImpl implements LogicToData {
     DataMapperEmployeeInterface employee_dao = new DataMapperEmployee();
 
     @Override
-    public void sendRequest(Request request) throws DataAccessException {
+    public void saveRequest(Request request) throws DataAccessException {
         customer_dao.createRequest(request);
     }
 
@@ -35,6 +36,11 @@ public class LogicToDataImpl implements LogicToData {
     @Override
     public Request getRequest(int id) throws DataAccessException {
         return employee_dao.readRequest(id);
+    }
+
+    @Override
+    public void saveOffer(Offer offer) throws DataAccessException {
+        employee_dao.createOffer(offer);
     }
 
 }

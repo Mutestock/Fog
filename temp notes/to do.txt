@@ -1,0 +1,5 @@
+Add possibility to switch between "all active orders"-mode and "unread orders"-mode
+
+ÆØÅ bliver lavet til om til Ã¦Ã¸Ã¥, når informationen bliver sendt fra JSP-siden over HTTP request til servletten: Der er noget encoding der skal laves om somewhere
+
+CarportDetails.jsp overhaul - gerne med javascript

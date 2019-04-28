@@ -2,7 +2,7 @@
 package logic;
 
 import data.customExceptions.DataAccessException;
-import data.help_classes.Request;
+import data.help_classes.*;
 import java.util.LinkedList;
 
 /**
@@ -19,5 +19,11 @@ public interface PresentationToLogic {
     // methods for getting available widths, lengths, roof types, etc, etc
     
     // method for creating and/or showing SVG file for carport sketch drawing
+    
+    public PartsList getPartsList(Carport carport);
+    
+    public Offer getGeneratedOffer(PartsList parts, Request request);
+    
+    public void sendOffer(Offer offer) throws DataAccessException;
 
 }

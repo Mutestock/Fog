@@ -16,4 +16,6 @@ public interface DataMapperEmployeeInterface {
     public LinkedList<Request> readAllRequests()throws DataAccessException;
     
     public Request readRequest(int id) throws DataAccessException;
+
+    public void createOffer(Offer offer);
 }

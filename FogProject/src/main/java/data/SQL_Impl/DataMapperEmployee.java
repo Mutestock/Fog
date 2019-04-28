@@ -1,11 +1,10 @@
 package data.SQL_Impl;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import data.DataMapperEmployeeInterface;
 import data.customExceptions.DataAccessException;
-import data.customExceptions.SQLConnectionException;
 import data.help_classes.Carport;
 import data.help_classes.Customer;
+import data.help_classes.Offer;
 import data.help_classes.Request;
 import data.help_classes.Roof;
 import data.help_classes.Shed;
@@ -166,6 +165,11 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         Request myReq = new Request(requestID, requestSent, comments, carport, customer);
 
         return myReq;
+    }
+
+    @Override
+    public void createOffer(Offer offer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -13,17 +13,17 @@ public class Offer {
     private final LocalDateTime sent;
     private final double price;
     private final double shipping_costs;
-    private final Carport carport;
+    private final Request request;
 
-    public Offer(int id, LocalDateTime sent, double price, double shipping_costs, Carport carport) {
-        if (sent == null || price < 0.0 || shipping_costs < 0.0 || carport == null) {
+    public Offer(int id, LocalDateTime sent, double price, double shipping_costs, Request request) {
+        if (sent == null || price < 0.0 || shipping_costs < 0.0 || request == null) {
             throw new IllegalArgumentException();
         }
         this.id = id;
         this.sent = sent;
         this.price = price;
         this.shipping_costs = shipping_costs;
-        this.carport = carport;
+        this.request = request;
     }
 
     public LocalDateTime getSent() {
@@ -38,8 +38,8 @@ public class Offer {
         return shipping_costs;
     }
 
-    public Carport getCarport() {
-        return carport;
+    public Request getRequest() {
+        return request;
     }
 
     public int getId() {
