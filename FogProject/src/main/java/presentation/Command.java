@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import presentation.commands.RequestDetailsCommand;
 
 /**
  *
@@ -30,6 +31,8 @@ public abstract class Command {
 
                 //put("SendInformation", new SendInformationCommand());
                 put("CarportDetails", new CarportDetailsCommand());
+                put("RequestDetails", new RequestDetailsCommand());
+                put("ListRequests", new ListRequestsCommand());
             }
         };
         return actions.getOrDefault(path, new UnknownCommand());

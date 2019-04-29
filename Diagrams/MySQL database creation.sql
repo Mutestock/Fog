@@ -5,22 +5,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema CarportDB
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `CarportDB` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema CarportDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `CarportDB` DEFAULT CHARACTER SET utf8 ;
+USE `CarportDB` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Roof`
+-- Table `CarportDB`.`Roof`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Roof` ;
+DROP TABLE IF EXISTS `CarportDB`.`Roof` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Roof` (
+CREATE TABLE IF NOT EXISTS `CarportDB`.`Roof` (
   `Roof_id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NOT NULL,
   `Slope` INT UNSIGNED NOT NULL DEFAULT 0,
@@ -30,11 +30,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Shed`
+-- Table `CarportDB`.`Shed`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Shed` ;
+DROP TABLE IF EXISTS `CarportDB`.`Shed` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Shed` (
+CREATE TABLE IF NOT EXISTS `CarportDB`.`Shed` (
   `Shed_id` INT NOT NULL AUTO_INCREMENT,
   `Cover` VARCHAR(45) NOT NULL,
   `Width` INT UNSIGNED NOT NULL,
@@ -45,11 +45,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Carport`
+-- Table `CarportDB`.`Carport`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Carport` ;
+DROP TABLE IF EXISTS `CarportDB`.`Carport` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Carport` (
+CREATE TABLE IF NOT EXISTS `CarportDB`.`Carport` (
   `Carport_id` INT NOT NULL AUTO_INCREMENT,
   `Width` INT UNSIGNED NOT NULL,
   `Length` INT UNSIGNED NOT NULL,
@@ -61,23 +61,23 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Carport` (
   INDEX `Shed_id_idx` (`Shed_id` ASC) VISIBLE,
   CONSTRAINT `Roof_id_fk`
     FOREIGN KEY (`Roof_id`)
-    REFERENCES `mydb`.`Roof` (`Roof_id`)
+    REFERENCES `CarportDB`.`Roof` (`Roof_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `Shed_id_fk`
     FOREIGN KEY (`Shed_id`)
-    REFERENCES `mydb`.`Shed` (`Shed_id`)
+    REFERENCES `CarportDB`.`Shed` (`Shed_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Customer`
+-- Table `CarportDB`.`Customer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Customer` ;
+DROP TABLE IF EXISTS `CarportDB`.`Customer` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
+CREATE TABLE IF NOT EXISTS `CarportDB`.`Customer` (
   `Customer_id` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
@@ -93,15 +93,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Request`
+-- Table `CarportDB`.`Request`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Request` ;
+DROP TABLE IF EXISTS `CarportDB`.`Request` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Request` (
+CREATE TABLE IF NOT EXISTS `CarportDB`.`Request` (
   `Request_id` INT NOT NULL AUTO_INCREMENT,
   `Carport_id` INT NOT NULL,
   `Customer_id` INT NOT NULL,
-  `Date` DATE NOT NULL,
+  `Date` DATETIME NOT NULL,
   `Comments` TEXT NULL,
   PRIMARY KEY (`Request_id`),
   UNIQUE INDEX `Request_id_UNIQUE` (`Request_id` ASC) VISIBLE,
@@ -109,12 +109,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Request` (
   INDEX `Carport_id_idx` (`Carport_id` ASC) VISIBLE,
   CONSTRAINT `Customer_id_fk`
     FOREIGN KEY (`Customer_id`)
-    REFERENCES `mydb`.`Customer` (`Customer_id`)
+    REFERENCES `CarportDB`.`Customer` (`Customer_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `Carport_id_fk`
     FOREIGN KEY (`Carport_id`)
-    REFERENCES `mydb`.`Carport` (`Carport_id`)
+    REFERENCES `CarportDB`.`Carport` (`Carport_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;

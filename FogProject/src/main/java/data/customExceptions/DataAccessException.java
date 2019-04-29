@@ -1,4 +1,4 @@
-package data.CustomExceptions;
+package data.customExceptions;
 
 /**
  * Exception thrown whenever any exception occurs as a DAO-class attempts to access data from an external source,

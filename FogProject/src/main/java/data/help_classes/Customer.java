@@ -16,12 +16,12 @@ public class Customer {
     private final String phone;
     private final String email;
 
-    public Customer(int id, String first_name, String last_name, String address, String zipcode, String city, String phone, String email) {
-        if (first_name == null || first_name.isEmpty()
-                || last_name == null || last_name.isEmpty()
-                || address == null || !address.matches("[A-z ]+\\s\\d+")
+    public Customer(int id, String first_name, String last_name, String address, String zipcode, String city, String phone, String email) throws IllegalArgumentException {
+        if (first_name == null || !first_name.matches("[A-zÃ¦Ã¸Ã¥]+[A-zÃ¦Ã¸Ã¥ ]*")
+                || last_name == null || !last_name.matches("[A-zÃ¦Ã¸Ã¥]+[A-zÃ¦Ã¸Ã¥ ]*")
+                || address == null || !address.matches("[A-zÃ¦Ã¸Ã¥ ]+\\s\\d+")
                 || zipcode == null || !zipcode.matches("\\d{4}")
-                || city == null || !city.matches("[A-z]+[A-z ]*")
+                || city == null || !city.matches("[A-zÃ¦Ã¸Ã¥]+[A-zÃ¦Ã¸Ã¥ ]*")
                 || phone == null || !phone.matches("\\d{8}")
                 || email == null || !email.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
             throw new IllegalArgumentException();

@@ -1,5 +1,5 @@
 
-package data.CustomExceptions;
+package data.customExceptions;
 
 /**
  *
