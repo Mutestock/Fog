@@ -5,8 +5,7 @@
  */
 package presentation;
 
-import presentation.commands.UnknownCommand;
-import presentation.commands.CarportDetailsCommand;
+import presentation.commands.*;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
@@ -29,13 +28,10 @@ public abstract class Command {
         HashMap<String, Command> actions = new HashMap<String, Command>() {
             {
 
-                put("SendInformation", new SendInformationCommand());
-
+                //put("SendInformation", new SendInformationCommand());
                 put("CarportDetails", new CarportDetailsCommand());
             }
         };
-
         return actions.getOrDefault(path, new UnknownCommand());
     }
-
 }
