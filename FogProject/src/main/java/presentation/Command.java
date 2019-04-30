@@ -5,7 +5,9 @@
  */
 package presentation;
 
-import presentation.commands.*;
+import presentation.commands.SendInformationCommand;
+import presentation.commands.UnknownCommand;
+import presentation.commands.CarportDetailsCommand;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
