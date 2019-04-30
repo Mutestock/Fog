@@ -20,44 +20,47 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/main.css">
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <h2>Følgende forespørgsler venter på at blive behandlet:</h2>
-        
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <table border = "1">
-                    <tr>
-                        <td> ID </td>
-                        <td> Forespørgsel modtaget </td>
-                        <td> Kundenavn </td>
-                        <td> Tilbud afsendt </td>
-                        <td>  </td>
-                    </tr>
-                    <%
-                        LinkedList<Request> requests = (LinkedList<Request>) request.getAttribute("requests");
+        <div style="padding: 20px;">
+            <h2>Følgende forespørgsler venter på at blive behandlet:</h2>
 
-                        for (Request r : requests) {
-                    %>
-                    <tr>
-                        <td><%=r.getId()%></td>
-                        <td><%=r.getSent().toString()%></td>
-                        <td><%=r.getCustomer().getFullName()%></td>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="paddedtable" border = "1">
+                        <tr class="tableheader">
+                            <td> <b>ID</b> </td>
+                            <td> <b>Forespørgsel modtaget</b> </td>
+                            <td> <b>Kundenavn</b> </td>
+                            <td> <b>Tilbud afsendt</b> </td>
+                            <td>  </td>
+                        </tr>
+                        <%
+                            LinkedList<Request> requests = (LinkedList<Request>) request.getAttribute("requests");
 
-                        <td> Nej </td>
+                            for (Request r : requests) {
+                        %>
+                        <tr>
+                            <td><%=r.getId()%></td>
+                            <td><%=r.getSent().toString()%></td>
+                            <td><%=r.getCustomer().getFullName()%></td>
 
-                        <td>
-                            <form action="/FogProject/c/RequestDetails" method=POST>
-                                <input type="hidden" name="r_id" value="<%=r.getId()%>"/>
-                                <button type="submit"> Detaljer </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <%  }%>
-                </table>
-                <br>
-                <button onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
+                            <td> Nej </td>
+
+                            <td>
+                                <form action="/FogProject/c/RequestDetails" method=POST>
+                                    <input type="hidden" name="r_id" value="<%=r.getId()%>"/>
+                                    <button type="submit"> Detaljer </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%  }%>
+                    </table>
+                    <br>
+                    <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
+                </div>
             </div>
         </div>
     </body>

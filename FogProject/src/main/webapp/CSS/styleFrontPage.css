@@ -37,9 +37,9 @@ body{
 
 #Head-title
 {
-    min-width: 270;
+    min-width: 270px;
     padding: 20%;
-    margin: 0 auto9;
+    margin: 0 auto;
     nav-right: 20%;
     position: 20%;
 }

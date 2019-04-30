@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/main.css">
 
         <!-- TOGGLE BUTTONS FROM BOOTSTRAP -->
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -22,16 +23,17 @@
     <jsp:include page="/inclusions/NavBar.jsp" />
 
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
 
-            <h1>Order a carport</h1>
+            <h1>Design din egen carport</h1>
+            <h3>og få et godt tilbud!</h3>
             
             <%
                 if (request.getSession().getAttribute("portError") != null) {
             %>
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
-                Please choose valid options in the dropdown lists.
+                Vælg venligst tilladte valgmuligheder i menuerne.
             </div>
             <%      request.getSession().setAttribute("portError", null);
                 }
@@ -40,16 +42,16 @@
             %>
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
-                Please make sure all personal information contains valid values before submitting
+                Tjek venligst, at alle felterne for personlige oplysninger indeholder tilladte værdier.
             </div>
             <%      request.getSession().setAttribute("custError", null);
                 }
             %>
 
-            <h3>Tag:</h3>
+            <h4>Tag:</h4>
             <input id="roofSwitch" type="checkbox" data-toggle="toggle" data-on="Med rejsning" data-off="Fladt" onchange="switchRoof()">
 
-            <h3>Redskabsskur:</h3>
+            <h4>Redskabsskur:</h4>
             <input id="shedSwitch" type="checkbox" data-toggle="toggle" data-on="Med" data-off="Uden" onchange="switchShed()">
 
             <script type="text/javascript">
@@ -82,7 +84,7 @@
             <br><br>
             <form method = POST>
                 <select name="width" >
-                    <option selected disabled>Choose Width</option>
+                    <option selected disabled>Vælg bredde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
                     <option value="300">300 cm</option>
@@ -103,7 +105,7 @@
                     <option value="750">750 cm</option>
                 </select>
                 <select name="length">
-                    <option selected disabled>Length cm</option>
+                    <option selected disabled>Vælg længde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
                     <option value="300">300 cm</option>
@@ -125,7 +127,7 @@
                     <option value="780">780 cm</option>
                 </select>
                 <select id="roof_slope" name="slope" disabled>
-                    <option selected disabled>Choose Slope</option>
+                    <option selected disabled>Vælg taghældning</option>
                     <option value="15">15 grader</option>
                     <option value="20">20 grader</option>
                     <option value="25">25 grader</option>
@@ -136,11 +138,11 @@
                 </select>
 
                 <select id="flat_roof_type" name="roof">
-                    <option selected disabled>Choose Roof</option>
+                    <option selected disabled>Vælg fladt tag</option>
                     <option value="plasttrapezplader">Plasstrapezplader</option>
                 </select>
                 <select id="raised_roof_type" name="roof" disabled>
-                    <option selected disabled>Choose Sloped Roof</option>
+                    <option selected disabled>Vælg tag med rejsning</option>
                     <option value="BetontagstenRød">Betontagsten - Rød</option>
                     <option value="BetontagstenTeglrød">Betontagsten - Teglrød</option>
                     <option value="BetontagstenBrun">Betontagsten - Brun</option>
@@ -159,7 +161,7 @@
 
                 </select>
                 <select id="shed_width" name="shedwidth" disabled>
-                    <option selected disabled>Choose Shed Width</option>
+                    <option selected disabled>Vælg skurets bredde</option>
                     <option value="210">210 cm</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
@@ -180,7 +182,7 @@
                     <option value="720">720 cm</option>
                 </select>
                 <select id="shed_length" name="shedlength" disabled>
-                    <option selected disabled>Choose Shed Length</option>
+                    <option selected disabled>Vælg skurets længde</option>
                     <option value="150">150 cm</option>
                     <option value="180">180 cm</option>
                     <option value="210">210 cm</option>
@@ -203,7 +205,7 @@
                 </select> 
 
                 <select id="shed_cover" name="walls" disabled>
-                    <option selected disabled>Choose Wall Coverings</option>
+                    <option selected disabled>Vælg skurets vægbeklædning</option>
                     <option value="thevoid">Void</option>  
                     <option value="bones">Suspicious Bones</option>
                     <option value="pasta">Spaghetti</option>
@@ -211,25 +213,25 @@
                 </select>
                 <br>
                 <br>
-                <h3>First Name</h3>
+                <h4>Fornavn</h4>
                 <input type="text" name="firstname" required="required">
-                <h3>Last Name</h3>
+                <h4>Efternavn</h4>
                 <input type="text" name="lastname" required="required">
-                <h3>Address</h3>
+                <h4>Adresse</h4>
                 <input type="text" name="address" required="required">
-                <h3>Zipcode</h3>
+                <h4>Postnummer</h4>
                 <input type="text" name="zipcode" required="required">
-                <h3>City</h3>
+                <h4>By</h4>
                 <input type="text" name="city" required="required">
-                <h3>Phone Number</h3>
+                <h4>Telefon</h4>
                 <input type="text" name="phone" required="required">
-                <h3>Email address</h3>
+                <h4>Email</h4>
                 <input type="text" name="email" required="required">
-                <h3>Comments for the Order</h3>
+                <h4>Kommentarer</h4>
                 <input type="text" name="comments" >
                 <br>
                 <br>
-                <button type="submit" formaction="/FogProject/c/SendInformation" >Order Carport</button>
+                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation" >Send forespørgsel</button>
             </form>
         </div>
     </body>
