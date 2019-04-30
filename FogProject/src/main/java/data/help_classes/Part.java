@@ -7,23 +7,21 @@ package data.help_classes;
 public class Part {
     
     private final String name;
-    private final int unknown;
+    private final int length;
     private final int amount;
     private final String description;
+    private final double buyPrice;
 
-    public Part(String name, int unknown, int amount, String description) {
+    public Part(String name, int length, int amount, String description, double buyPrice) {
         this.name = name;
-        this.unknown = unknown;
+        this.length = length;
         this.amount = amount;
         this.description = description;
+        this.buyPrice = buyPrice;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getUnknown() {
-        return unknown;
     }
 
     public int getAmount() {
@@ -33,5 +31,12 @@ public class Part {
     public String getDescription() {
         return description;
     }
-    
+
+    public int getLength() {
+        return length;
+    }
+
+    public double getBuyPrice() {
+        return buyPrice;
+    }
 }
