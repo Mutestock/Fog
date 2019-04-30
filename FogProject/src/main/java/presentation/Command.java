@@ -29,15 +29,12 @@ public abstract class Command {
         HashMap<String, Command> actions = new HashMap<String, Command>() {
             {
 
-                put("SendInformation", new SendInformationCommand());
-
+                //put("SendInformation", new SendInformationCommand());
                 put("CarportDetails", new CarportDetailsCommand());
                 put("RequestDetails", new RequestDetailsCommand());
                 put("ListRequests", new ListRequestsCommand());
             }
         };
-
         return actions.getOrDefault(path, new UnknownCommand());
     }
-
 }
