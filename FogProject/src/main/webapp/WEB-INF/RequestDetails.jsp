@@ -54,6 +54,8 @@
         <p><%=r.getComments()%></p>
         <br>
         
+        <button onclick="window.location.href = '/FogProject/c/PartsList';">Se Stykliste</button>
+        <br><br>
         <button onclick="window.location.href = '/FogProject/c/ListRequests';">Tilbage</button>
     </body>
 </html>

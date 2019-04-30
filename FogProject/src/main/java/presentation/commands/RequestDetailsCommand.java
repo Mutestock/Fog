@@ -20,9 +20,12 @@ public class RequestDetailsCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Request r = (Request) request.getSession().getAttribute("request");
-            if (r == null) {
-                int id = Integer.parseInt(request.getParameter("r_id"));
+            String idParam = request.getParameter("r_id");
+            Request r;
+            if (idParam == null) {
+                r = (Request) request.getSession().getAttribute("request");
+            } else {
+                int id = Integer.parseInt(idParam);
                 r = PRES_TO_LOGIC.getRequest(id);
                 request.getSession().setAttribute("request", r);
             }

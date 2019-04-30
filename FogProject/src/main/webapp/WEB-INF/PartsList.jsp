@@ -63,10 +63,10 @@
             <div class="panel-body">
                 <table border = "1">
                     <tr>
-                        <td> Vare </td>
-                        <td> Længde </td>
-                        <td> Antal </td>
-                        <td> Beskrivelse </td>
+                        <td> <b>Vare</b> </td>
+                        <td> <b>Længde</b> </td>
+                        <td> <b>Antal</b> </td>
+                        <td> <b>Beskrivelse</b> </td>
                     </tr>
                     <%
                         for (data.help_classes.Part part : currentList) {
@@ -77,12 +77,12 @@
                         <td><%=part.getAmount()%></td>
                         <td><%=part.getDescription()%></td>
                     </tr>
-                    <% }
-                } %>
+                    <% } %>
                 </table>
                 <br>
-                <button onclick="window.location.href = '/FogProject/c/RequestDetails';">Tilbage</button>
             </div>
         </div>
+        <% }%>
+        <button onclick="window.location.href = '/FogProject/c/RequestDetails';">Tilbage</button>
     </body>
 </html>
