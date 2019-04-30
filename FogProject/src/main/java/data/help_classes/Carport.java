@@ -24,7 +24,7 @@ public class Carport {
         }
         this.id = id;
         this.length = length;
-        this.width = width;;
+        this.width = width;
         this.roof = roof;
         this.shed = shed;
     }
