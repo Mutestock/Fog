@@ -70,10 +70,14 @@
                     </tr>
                     <%
                         for (data.help_classes.Part part : currentList) {
+                            boolean hasLength = (part.getLength() > -1);
                     %>
                     <tr>
                         <td><%=part.getName()%></td>
+                        <% if (hasLength) {%>
                         <td><%=part.getLength()%></td>
+                        <% } else {%>
+                        <td> -- </td>
                         <td><%=part.getAmount()%></td>
                         <td><%=part.getDescription()%></td>
                     </tr>
