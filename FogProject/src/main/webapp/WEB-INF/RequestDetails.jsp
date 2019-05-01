@@ -21,8 +21,8 @@
     <body>
         <div style="padding: 20px;">
             <%
-                Offer autoOffer = (Offer) request.getSession().getAttribute("autoOffer");
-                Request r = autoOffer.getRequest();
+                Offer offer = (Offer) request.getSession().getAttribute("offer");
+                Request r = offer.getRequest();
                 Carport carport = r.getCarport();
                 Roof roof = carport.getRoof();
                 Shed shed = carport.getShed();
@@ -56,20 +56,27 @@
             <h3>Kommentarer:</h3>
             <p><%=r.getComments()%></p>
             <br>
-            
+
             <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/PartsList';">Se Stykliste</button>
             <br><br>
 
+            <% if (r.hasReceivedOffer()) {%>
+            <h3>Tilbud afsendt:</h3>
+            <p><%=offer.getSent()%></p>
+            <p><b>Pris:</b> <%=offer.getPrice()%></p>
+            <p><b>Fragtomkostninger:</b> <%=offer.getShippingCosts()%></p>
+            <% } else {%>
             <form method = POST>
                 <h4>Pris:</h4>
-                <input name="price" type="number" step="0.01" min="0" required="required" value="<%=autoOffer.getPrice()%>"> <p style="display: inline-block;">,- DKK</p>
+                <input name="price" type="number" step="0.01" min="0" required="required" value="<%=offer.getPrice()%>"> <p style="display: inline-block;">,- DKK</p>
                 <h4>Fragtomkostninger:</h4>
-                <input name="shippingCosts" type="number" step="0.01" min="0" required="required" value="<%=autoOffer.getShippingCosts()%>"> <p style="display: inline-block;">,- DKK</p>
+                <input name="shippingCosts" type="number" step="0.01" min="0" required="required" value="<%=offer.getShippingCosts()%>"> <p style="display: inline-block;">,- DKK</p>
                 <br><br>
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendOffer">Send det endelige tilbud</button>
             </form>
+            <% }%>
             <br>
-            
+
             <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/ListRequests';">Tilbage</button>
         </div>
     </body>

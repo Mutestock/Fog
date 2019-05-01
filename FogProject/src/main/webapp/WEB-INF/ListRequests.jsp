@@ -41,13 +41,19 @@
                             LinkedList<Request> requests = (LinkedList<Request>) request.getAttribute("requests");
 
                             for (Request r : requests) {
+                                String hasReceivedOffer;
+                                if (r.hasReceivedOffer()) {
+                                    hasReceivedOffer = "Ja";
+                                } else {
+                                    hasReceivedOffer = "Nej";
+                                }
                         %>
                         <tr>
                             <td><%=r.getId()%></td>
                             <td><%=r.getSent().toString()%></td>
                             <td><%=r.getCustomer().getFullName()%></td>
 
-                            <td> Nej </td>
+                            <td><%=hasReceivedOffer%></td>
 
                             <td>
                                 <form action="/FogProject/c/RequestDetails" method=POST>

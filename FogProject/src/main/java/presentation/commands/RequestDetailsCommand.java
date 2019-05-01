@@ -36,15 +36,15 @@ public class RequestDetailsCommand extends Command {
             }
 
             PartsList partsList = (PartsList) request.getSession().getAttribute("partsList");
-            Offer autoOffer = (Offer) request.getSession().getAttribute("autoOffer");
+            Offer offer = (Offer) request.getSession().getAttribute("offer");
             if (partsList == null) {
 //                partsList = PRES_TO_LOGIC.getPartsList(r.getCarport());
                 partsList = getTestList();
                 request.getSession().setAttribute("partsList", partsList);
             }
-            if (autoOffer == null) {
-                autoOffer = PRES_TO_LOGIC.getGeneratedOffer(partsList, r);
-                request.getSession().setAttribute("autoOffer", autoOffer);
+            if (offer == null) {
+                offer = PRES_TO_LOGIC.getOffer(partsList, r);
+                request.getSession().setAttribute("offer", offer);
             }
 
             request.getRequestDispatcher("/WEB-INF/RequestDetails.jsp").forward(request, response);

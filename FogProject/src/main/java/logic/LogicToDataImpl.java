@@ -43,4 +43,9 @@ public class LogicToDataImpl implements LogicToData {
         employee_dao.createOffer(offer);
     }
 
+    @Override
+    public Offer getOffer(int requestID) throws DataAccessException {
+        return employee_dao.readOffer(requestID);
+    }
+
 }

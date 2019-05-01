@@ -20,5 +20,7 @@ public interface LogicToData {
     // methods for getting available widths, lengths, roof types, etc, etc
     
     public void saveOffer(Offer offer) throws DataAccessException;
+    
+    public Offer getOffer(int requestID) throws DataAccessException;
 
 }

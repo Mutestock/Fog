@@ -22,7 +22,7 @@ public interface PresentationToLogic {
     
     public PartsList getPartsList(Carport carport);
     
-    public Offer getGeneratedOffer(PartsList parts, Request request);
+    public Offer getOffer(PartsList parts, Request request) throws DataAccessException;
     
     public void sendOffer(Offer offer) throws DataAccessException;
 
