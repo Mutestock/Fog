@@ -45,7 +45,7 @@
             <br>
 
             <%
-                PartsList partsList = (PartsList) request.getAttribute("partsList");
+                PartsList partsList = (PartsList) request.getSession().getAttribute("partsList");
 
                 LinkedList<data.help_classes.Part> currentList;
                 for (int i = 0; i < 3; i++) {

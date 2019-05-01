@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `carportDB`.`Offer` (
   `Offer_id` INT NOT NULL AUTO_INCREMENT,
   `Price` DOUBLE NOT NULL,
   `Shipping` DOUBLE NOT NULL,
+  `Date` DATETIME NOT NULL,
   `Request_id` INT NOT NULL,
   PRIMARY KEY (`Offer_id`),
   UNIQUE INDEX `Offer_id_UNIQUE` (`Offer_id` ASC) VISIBLE,

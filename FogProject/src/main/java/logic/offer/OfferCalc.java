@@ -16,11 +16,11 @@ public class OfferCalc {
     }
     
     private static double calculatePrice(PartsList parts) {
-        throw new UnsupportedOperationException();
+        return 5.0; // random
     }
     
     private static double calculateShippingCosts(Request request) {
-        throw new UnsupportedOperationException();
+        return 1.5; // random
     }
     
 }

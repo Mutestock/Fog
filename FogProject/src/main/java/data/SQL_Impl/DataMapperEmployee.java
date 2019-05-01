@@ -137,8 +137,27 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
     }
 
     @Override
-    public void createOffer(Offer offer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createOffer(Offer offer) throws DataAccessException {
+        try {
+            PreparedStatement preparedStmt;
+            Connection c = DBConnector.getConnection();
+            String query
+                    = "insert into `Offer` (`Price`, `Shipping`, `Date`, `Request_id`) "
+                    + "VALUES(?,?,?,?)" + ";";
+
+            preparedStmt = c.prepareStatement(query);
+
+            preparedStmt.setDouble(1, offer.getPrice());
+            preparedStmt.setDouble(2, offer.getShippingCosts());
+            preparedStmt.setObject(3, offer.getSent(), java.sql.JDBCType.TIMESTAMP);
+            preparedStmt.setInt(4, offer.getRequest().getId());
+
+            preparedStmt.execute();
+
+            preparedStmt.close();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        }
     }
 
 }
