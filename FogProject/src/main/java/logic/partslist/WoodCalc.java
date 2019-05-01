@@ -19,26 +19,23 @@ public class WoodCalc {
     public static LinkedList<Part> calculateParts(Carport carport){
         LinkedList<Part> parts = new LinkedList();
         
-        //Essential parts.                              danish translation:
-        parts.add(calcPillarAmount(carport));       //Stolpe
-        parts.add(calcRoofSupport(carport));        //Tag støtte
-        parts.add(calcRafterBoard(carport));        //Spær
-        parts.add(calcWoodenBeam2(carport));        //Vandbræt på vindskeder
-        parts.add(calcWoodenBeam4(carport));        //Tagrem
-        parts.add(calcWoodenBeam5(carport));        //Taglægte
+        //Essential parts.                                Danish translation:
+        parts.add(calcPillarAmount(carport));           //Stolpe.
+        parts.add(calcRafterBoardNorm2(carport));       //Rem. carport del.
         
         //Parts for sloped roof
         if (carport.getRoof().getRaised()) {
-            parts.add(calcWoodenBeam1(carport));}   //Vindskeder til carport
+            parts.add(calcRafterBoardSlope(carport));    //Spær, med rejsning.
+        }
+        //Parts for nonsloped roof
+        else { 
+            parts.add(calcRafterBoardNorm1(carport));    //Spær, uden rejsning.
+        }   
         
         //Parts for the shed
         if (carport.getShed() != null) {
-            parts.add(calcWoodenBeam3(carport));}   //Sternbrædder til skur
-        if (carport.getShed() != null) {
-            parts.add(calcShedWalling(carport));}   //Skurets træ beklædning
-        if (carport.getShed() != null) {
-            parts.add(calcShedTransoms(carport));}  //Skurets træ løsholter
-        
+            parts.add(calcRafterBoardNorm3(carport));   //Rem. skur del.
+        }  
         
         return parts;
     }
@@ -54,26 +51,53 @@ public class WoodCalc {
     private static Part calcPillarAmount (Carport carport) {
         int amount = 0;
         
-        //The amount of pillars used for the carport.
+        //The amount of pillars used for the carport based on length.
         if (carport.getLength() > lengthBetweenPillars) {
             amount += 6;
         } else {
             amount += 4;
         }
         
+        //The amount of pillars used for the carport based on width.
+        if (carport.getWidth() > lengthBetweenPillars) {
+            amount += 1 ;
+        }
+        
         //The amount of pillars used for the shed.
         if (carport.getShed() != null) {
             if (carport.getShed().getWidth() > lengthBetweenPillars) {
-                amount += 6;
+                amount += 5;
             } else {
-                amount += 4;
+                amount += 3;
             }
         }
         
         //Plus one is a spare part.
         amount ++;
-        return new Part("Træ Stolpe",(int) Math.ceil(carport.getHeight()+0.9),amount,"Stolpe til brug af tagstøtte", 15.95);
+        return new Part("97x97mm. trykimp. stolpe ",(int) Math.ceil(carport.getHeight()+0.9),amount,"Stolpe nedgraves 90cm i jord.", 15.95);
     }
+    
+    //Returns the amount of rafter boards based on the width of the carport. (Spær) 
+    private static Part calcRafterBoardNorm1 (Carport carport) {
+            return new Part("45x195mm. spærtræ ubh.",carport.getWidth(),(int) Math.ceil(Math.ceil(carport.getLength()/100)*2),"Spær monteres på rem",29.99);
+    }
+    
+    //Returns a part-set, the rafter board, used when the carport roof has a slope. (Spær) 
+    private static Part calcRafterBoardSlope (Carport carport) {
+            return new Part("Færdigskåret byg-selv-spær ",carport.getWidth(),(carport.getLength()/100)+1,"Et byg-selv-sæt til carportens spær. Antallet viser stk-mængde sættet indeholder.",199.99);
+    }   
+    
+    //Returns two strop boards (Rem) 
+    private static Part calcRafterBoardNorm2 (Carport carport) {
+            return new Part("45x195mm. spærtræ ubh. ",carport.getWidth(),2,"Remme monteres i sider, sadles i stolper. Carport del.",29.99);
+    }
+    
+    //Returns one more strop board, used if the carport is with a shed (Rem) 
+    private static Part calcRafterBoardNorm3 (Carport carport) {
+            return new Part("45x195mm. spærtræ ubh. ",carport.getWidth(),1,"Remme monteres i sider, sadles i stolper. Skur del",29.99);
+    }
+    
+     
     
         
     //Calculates the amount of wooden beams used for the roof support.
@@ -120,14 +144,7 @@ public class WoodCalc {
                     "Træ bjælker brugt som tagfodslægter",35.95);
     }
     
-    //Returns a part-set, the rafter board, if the roof is sloped and wooden beams if the roof isn't sloped. (Spær) 
-    private static Part calcRafterBoard (Carport carport) {
-        if (carport.getRoof().getSlope() == 0) {
-            return new Part("Træ Spær Brædder",carport.getWidth(),20,"Træ Brædder til carportens spær",149.99);
-        } else {
-            return new Part("Træ Spær sæt",carport.getWidth(),1,"Et fuldt byg-selv-sæt til carportens spær",199.99);
-        }
-    }
+    
     
    //Returns a part for the shed walling. (Beklædning)
     private static Part calcShedWalling (Carport carport) {
