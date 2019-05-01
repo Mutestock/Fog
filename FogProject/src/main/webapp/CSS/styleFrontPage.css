@@ -75,8 +75,8 @@ header{
 }
 
 nav ul{
-    font-size: 50px;
-    margin-top: 70px;
+    font-size: 20px;
+    margin-top: 50px;
     padding: 0;
     list-style: none;
 }
@@ -103,7 +103,7 @@ nav a::before{
     height: 3px;
     width: 100%;
     background-color: #124A86;
-    margin-top: 70px;
+    margin-top: 24px;
     position: absolute;
     
     width: 0%;
