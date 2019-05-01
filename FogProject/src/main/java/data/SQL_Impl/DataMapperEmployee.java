@@ -34,7 +34,8 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
                     + "left join Customer on Request.Customer_id = Customer.Customer_id "
                     + "left join Carport on Request.Carport_id = Carport.Carport_id "
                     + "left join Roof on Carport.Roof_id = Roof.Roof_id "
-                    + "left join Shed on Carport.Shed_id = Shed.Shed_id;";
+                    + "left join Shed on Carport.Shed_id = Shed.Shed_id "
+                    + "ORDER BY Request_id DESC;";
             preparedStmt = c.prepareStatement(query);
             ResultSet rs = preparedStmt.executeQuery();
 
@@ -96,38 +97,6 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             throw new DataAccessException(ex);
         }
     }
-
-//    @Override
-//    public Customer readCustomer(int id) throws DataAccessException {
-//        Customer customer = null;
-//        try {
-//            PreparedStatement preparedStmt;
-//            Connection c = DBConnector.getConnection();
-//            String query
-//                    = "select * from `Customer` "
-//                    + "where `Customer_id` = ?;";
-//            preparedStmt = c.prepareStatement(query);
-//            preparedStmt.setInt(1, customer.getId());
-//            ResultSet rs = preparedStmt.executeQuery();
-//            while (rs.next()) {
-//                String firstName = rs.getString("FirstName");
-//                String lastName = rs.getString("LastName");
-//                String address = rs.getString("Address");
-//                String zipcode = rs.getString("Zipcode");
-//                String city = rs.getString("City");
-//                String phone = rs.getString("Phone");
-//                String email = rs.getString("Email");
-//                customer = new Customer(id, firstName, lastName, address, zipcode, city, phone, email);
-//            }
-//            preparedStmt.close();
-//        } catch (SQLConnectionException ex) {
-//            ex.printStackTrace();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        return customer;
-//    }
 
     private Request getRequestFromResultSet(ResultSet rs) throws SQLException {
         Shed shed = null;

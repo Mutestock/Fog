@@ -7,12 +7,15 @@ import java.util.LinkedList;
  * @author Simon Asholt Norup
  */
 public class PartsList {
-    
+
     private final LinkedList<Part> woodPackage;
     private final LinkedList<Part> roofPackage;
     private final LinkedList<Part> fittingsAndScrews;
 
     public PartsList(LinkedList<Part> woodPackage, LinkedList<Part> roofPackage, LinkedList<Part> fittingsAndScrews) {
+        if (woodPackage == null || roofPackage == null || fittingsAndScrews == null) {
+            throw new IllegalArgumentException();
+        }
         this.woodPackage = woodPackage;
         this.roofPackage = roofPackage;
         this.fittingsAndScrews = fittingsAndScrews;
@@ -29,5 +32,5 @@ public class PartsList {
     public LinkedList<Part> getFittingsAndScrews() {
         return fittingsAndScrews;
     }
-    
+
 }

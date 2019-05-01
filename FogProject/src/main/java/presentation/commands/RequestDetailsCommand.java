@@ -20,10 +20,15 @@ public class RequestDetailsCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("r_id"));
-            Request r = PRES_TO_LOGIC.getRequest(id);
-
-            request.setAttribute("request", r);
+            String idParam = request.getParameter("r_id");
+            Request r;
+            if (idParam == null) {
+                r = (Request) request.getSession().getAttribute("request");
+            } else {
+                int id = Integer.parseInt(idParam);
+                r = PRES_TO_LOGIC.getRequest(id);
+                request.getSession().setAttribute("request", r);
+            }
 
             request.getRequestDispatcher("/WEB-INF/RequestDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {
