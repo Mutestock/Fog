@@ -34,6 +34,8 @@ You can host the website yourself by defining and locating the target .war folde
 
 Maven is preinstalled in the Netbeans IDE, which is the IDE that was used in the creation of this project. Other IDEs may not.
 
+You'll also need to create your own database connector.
+
 ### Acknowledgements
 
 The github page is currently a redirection to the Javadoc. Ultimately, it was never created for anything else. One could argue, that it should function as a hub for the project with graphics. 
