@@ -29,7 +29,6 @@
                 Customer customer = r.getCustomer();
             %>
             <h1>Overblik</h1>
-            <p><b>Forespørgsel ID:</b> <%=r.getId()%> <b>Afsendt:</b> <%=r.getSent().toString()%></p>
             <br>
 
             <h3>Specifikationer</h3>
