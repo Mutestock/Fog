@@ -1,5 +1,6 @@
 package presentation.commands;
 
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import data.customExceptions.DataAccessException;
 import data.help_classes.Offer;
 import data.help_classes.Part;
@@ -7,9 +8,13 @@ import data.help_classes.PartsList;
 import data.help_classes.Request;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.EmailHandler;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
 import presentation.Command;
@@ -46,6 +51,8 @@ public class RequestDetailsCommand extends Command {
                 offer = PRES_TO_LOGIC.getOffer(partsList, r);
                 request.getSession().setAttribute("offer", offer);
             }
+
+           
 
             request.getRequestDispatcher("/WEB-INF/RequestDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {

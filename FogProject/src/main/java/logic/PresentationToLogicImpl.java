@@ -1,5 +1,6 @@
 package logic;
 
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import data.customExceptions.DataAccessException;
 import data.help_classes.Carport;
 import data.help_classes.Offer;
@@ -7,6 +8,7 @@ import data.help_classes.Part;
 import data.help_classes.PartsList;
 import data.help_classes.Request;
 import java.util.LinkedList;
+import javax.mail.MessagingException;
 import logic.offer.OfferCalc;
 import logic.partslist.FittingsAndScrewsCalc;
 import logic.partslist.RoofCalc;
@@ -52,7 +54,13 @@ public class PresentationToLogicImpl implements PresentationToLogic {
     public void sendOffer(Offer offer) throws DataAccessException {
         LOGIC_TO_DATA.saveOffer(offer);
 
-        // SEND OFFER VIA EMAIL TO CUSTOMER
+        Request r = offer.getRequest();
+        EmailHandler emha = new EmailHandler();
+        try {
+            emha.mailSend(offer);
+        } catch (MessagingException ex) {
+            System.out.println("Shit happened in send email");
+            printStackTrace();
+        }
     }
-
 }
