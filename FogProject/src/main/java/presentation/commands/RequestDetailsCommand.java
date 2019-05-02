@@ -62,7 +62,7 @@ public class RequestDetailsCommand extends Command {
         woodPackage.add(new Part("Gleamderel", 211, 2, "No, cut this down!", 200.0));
         LinkedList<Part> roofPackage = RoofCalc.calculateParts(carport);
         LinkedList<Part> fittingsAndScrews = new LinkedList<>();
-        fittingsAndScrews.add(new Part("Little Black Eyes", -1, 2, "Put em in your mouthhole, mr.", 5.0));
+        fittingsAndScrews.add(new Part("Holy Symbols", 2, "Hear em angels singin'.", 5.0));
         PartsList partsList = new PartsList(woodPackage, roofPackage, fittingsAndScrews);
         return partsList;
     }

@@ -3,7 +3,7 @@ package logic;
 import data.customExceptions.DataAccessException;
 import data.help_classes.*;
 import java.util.LinkedList;
-import logic.offer.OfferCalc;
+import logic.offer.OfferLogic;
 import logic.partslist.*;
 
 public class PresentationToLogicImpl implements PresentationToLogic {
@@ -38,7 +38,7 @@ public class PresentationToLogicImpl implements PresentationToLogic {
         if (request.hasReceivedOffer()) {
             return LOGIC_TO_DATA.getOffer(request.getId());
         } else {
-            return OfferCalc.generateOffer(parts, request);
+            return OfferLogic.generateOffer(parts, request);
         }
     }
 
