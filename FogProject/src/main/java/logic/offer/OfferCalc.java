@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  *
  * @author Simon Asholt Norup
  */
-public class OfferLogic {
+public class OfferCalc {
 
     public static Offer generateOffer(PartsList parts, Request request) {
         double price = calculatePrice(parts);

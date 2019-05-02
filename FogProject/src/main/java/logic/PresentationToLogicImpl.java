@@ -1,9 +1,11 @@
 package logic;
 
+import logic.offer.EmailHandler;
 import data.customExceptions.DataAccessException;
 import data.help_classes.*;
 import java.util.LinkedList;
-import logic.offer.OfferLogic;
+import logic.offer.OfferCalc;
+import javax.mail.MessagingException;
 import logic.partslist.*;
 
 public class PresentationToLogicImpl implements PresentationToLogic {
@@ -38,15 +40,18 @@ public class PresentationToLogicImpl implements PresentationToLogic {
         if (request.hasReceivedOffer()) {
             return LOGIC_TO_DATA.getOffer(request.getId());
         } else {
-            return OfferLogic.generateOffer(parts, request);
+            return OfferCalc.generateOffer(parts, request);
         }
     }
 
     @Override
     public void sendOffer(Offer offer) throws DataAccessException {
         LOGIC_TO_DATA.saveOffer(offer);
-
-        // SEND OFFER VIA EMAIL TO CUSTOMER
+        try {
+            EmailHandler.mailSend(offer);
+        } catch (MessagingException ex) {
+            System.out.println("Shit happened in send email");
+            ex.printStackTrace();
+        }
     }
-
 }
