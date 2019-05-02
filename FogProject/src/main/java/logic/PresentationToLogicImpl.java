@@ -38,7 +38,7 @@ public class PresentationToLogicImpl implements PresentationToLogic {
     public PartsList getPartsList(Carport carport) {
         LinkedList<Part> woodPackage = WoodCalc.calculateParts(carport);
         LinkedList<Part> roofPackage = RoofCalc.calculateParts(carport);
-        LinkedList<Part> fittingsAndScrews = FittingsAndScrewsCalc.calculateParts(carport);
+        LinkedList<Part> fittingsAndScrews = FittingsAndScrewsCalc.calculateParts(carport, woodPackage);
         return new PartsList(woodPackage, roofPackage, fittingsAndScrews);
     }
 
