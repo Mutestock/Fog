@@ -27,8 +27,8 @@ public class PartsListCommand extends Command {
             Request r = (Request) request.getSession().getAttribute("request");
             
             PartsList partsList;
-//            partsList = PRES_TO_LOGIC.getPartsList(r.getCarport());
-            partsList = getTestList();
+            partsList = (PartsList) request.getSession().getAttribute("partsList");
+//            partsList = getTestList();
             
             request.setAttribute("request", r);
             request.setAttribute("partsList", partsList);

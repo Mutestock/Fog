@@ -1,22 +1,15 @@
-
 package logic;
 
+import logic.offer.EmailHandler;
 import data.customExceptions.DataAccessException;
-import data.help_classes.Carport;
-import data.help_classes.Customer;
-import data.help_classes.Offer;
-import data.help_classes.Part;
-import data.help_classes.PartsList;
-import data.help_classes.Request;
+import data.help_classes.*;
 import java.util.LinkedList;
 import logic.offer.OfferCalc;
-import logic.partslist.FittingsAndScrewsCalc;
-import logic.partslist.RoofCalc;
-import logic.partslist.WoodCalc;
-
+import javax.mail.MessagingException;
+import logic.partslist.*;
 
 public class PresentationToLogicImpl implements PresentationToLogic {
-    
+
     private static final LogicToData LOGIC_TO_DATA = new LogicToDataImpl();
 
     @Override
@@ -43,15 +36,22 @@ public class PresentationToLogicImpl implements PresentationToLogic {
     }
 
     @Override
-    public Offer getGeneratedOffer(PartsList parts, Request request) {
-        return OfferCalc.generateOffer(parts, request);
+    public Offer getOffer(PartsList parts, Request request) throws DataAccessException {
+        if (request.hasReceivedOffer()) {
+            return LOGIC_TO_DATA.getOffer(request.getId());
+        } else {
+            return OfferCalc.generateOffer(parts, request);
+        }
     }
 
     @Override
     public void sendOffer(Offer offer) throws DataAccessException {
         LOGIC_TO_DATA.saveOffer(offer);
-        
-        // SEND OFFER VIA EMAIL TO CUSTOMER
+        try {
+            EmailHandler.mailSend(offer);
+        } catch (MessagingException ex) {
+            System.out.println("Shit happened in send email");
+            ex.printStackTrace();
+        }
     }
-
 }

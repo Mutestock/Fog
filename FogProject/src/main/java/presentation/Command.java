@@ -28,6 +28,8 @@ public abstract class Command {
 
         HashMap<String, Command> actions = new HashMap<String, Command>() {
             {
+                put("FrontPage", new RedirectCommand("FrontPage"));
+                put("SendOffer", new SendOfferCommand());
                 put("PartsList", new PartsListCommand());
                 put("SendInformation", new SendInformationCommand());
                 put("CarportDetails", new CarportDetailsCommand());

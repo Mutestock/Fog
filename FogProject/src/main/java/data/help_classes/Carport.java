@@ -37,7 +37,7 @@ public class Carport {
         return width;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
