@@ -2,6 +2,7 @@ package presentation.commands;
 
 import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import data.customExceptions.DataAccessException;
+import data.help_classes.Carport;
 import data.help_classes.Offer;
 import data.help_classes.Part;
 import data.help_classes.PartsList;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.EmailHandler;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
+import logic.partslist.RoofCalc;
 import presentation.Command;
 
 /**
@@ -44,7 +46,7 @@ public class RequestDetailsCommand extends Command {
             Offer offer = (Offer) request.getSession().getAttribute("offer");
             if (partsList == null) {
 //                partsList = PRES_TO_LOGIC.getPartsList(r.getCarport());
-                partsList = getTestList();
+                partsList = getTestList(r.getCarport());
                 request.getSession().setAttribute("partsList", partsList);
             }
             if (offer == null) {
@@ -61,11 +63,11 @@ public class RequestDetailsCommand extends Command {
         }
     }
 
-    private PartsList getTestList() {
+    private PartsList getTestList(Carport carport) {
         LinkedList<Part> woodPackage = new LinkedList<>();
         woodPackage.add(new Part("Eldergleam", 211, 2, "Cut it down!", 100.0));
         woodPackage.add(new Part("Gleamderel", 211, 2, "No, cut this down!", 200.0));
-        LinkedList<Part> roofPackage = new LinkedList<>();
+        LinkedList<Part> roofPackage = RoofCalc.calculateParts(carport);
         LinkedList<Part> fittingsAndScrews = new LinkedList<>();
         fittingsAndScrews.add(new Part("Little Black Eyes", -1, 2, "Put em in your mouthhole, mr.", 5.0));
         PartsList partsList = new PartsList(woodPackage, roofPackage, fittingsAndScrews);
