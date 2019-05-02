@@ -1,16 +1,10 @@
 package logic;
 
 import data.customExceptions.DataAccessException;
-import data.help_classes.Carport;
-import data.help_classes.Offer;
-import data.help_classes.Part;
-import data.help_classes.PartsList;
-import data.help_classes.Request;
+import data.help_classes.*;
 import java.util.LinkedList;
 import logic.offer.OfferCalc;
-import logic.partslist.FittingsAndScrewsCalc;
-import logic.partslist.RoofCalc;
-import logic.partslist.WoodCalc;
+import logic.partslist.*;
 
 public class PresentationToLogicImpl implements PresentationToLogic {
 

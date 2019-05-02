@@ -8,6 +8,7 @@ import data.SQL_Impl.DataMapperEmployee;
 import data.help_classes.Offer;
 import data.help_classes.Request;
 import java.util.LinkedList;
+import logic.LogicToData;
 
 public class LogicToDataImpl implements LogicToData {
 
