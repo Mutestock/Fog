@@ -231,7 +231,7 @@
                 <input type="text" name="comments" >
                 <br>
                 <br>
-                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation" >Send forespørgsel</button>
+                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/ReviewEstimate" >Generer skitsetegning og prisestimat</button>
             </form>
         </div>
     </body>
