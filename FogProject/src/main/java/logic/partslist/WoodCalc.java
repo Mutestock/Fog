@@ -79,7 +79,7 @@ public class WoodCalc {
     
     //Returns the amount of rafter boards based on the width of the carport. (Spær) 
     private static Part calcRafterBoardNorm1 (Carport carport) {
-            return new Part("45x195mm. spærtræ ubh.",carport.getWidth(),(int) Math.ceil(Math.ceil(carport.getLength()/100)*2),"Spær monteres på rem",29.99);
+            return new Part("45x195mm. spærtræ ubh. spær",carport.getWidth(),(int) Math.ceil(Math.ceil(carport.getLength()/100)*2),"Spær monteres på rem",29.99);
     }
     
     //Returns a part-set, the rafter board, used when the carport roof has a slope. (Spær) 
@@ -89,7 +89,7 @@ public class WoodCalc {
     
     //Returns two strop boards (Rem) 
     private static Part calcRafterBoardNorm2 (Carport carport) {
-            return new Part("45x195mm. spærtræ ubh. ",carport.getWidth(),2,"Remme monteres i sider, sadles i stolper. Carport del.",29.99);
+            return new Part("45x195mm. spærtræ ubh. rem",carport.getWidth(),2,"Remme monteres i sider, sadles i stolper. Carport del.",29.99);
     }
     
     //Returns one more strop board, used if the carport is with a shed (Rem) 
