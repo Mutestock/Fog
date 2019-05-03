@@ -1,14 +1,14 @@
 <%-- 
     Document   : CarportDetails
     Created on : 24-04-2019, 10:33:30
-    Author     : Lukas BjÃ¸rnvad
+    Author     : Lukas Bjørnvad
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="Windows-1252"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252">
         <title>Johannes Fog Carporte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -26,14 +26,14 @@
         <div class="mainbody">
 
             <h1>Design din egen carport</h1>
-            <h3>og fÃ¥ et godt tilbud!</h3>
+            <h3>og få et godt tilbud!</h3>
             
             <%
                 if (request.getSession().getAttribute("portError") != null) {
             %>
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
-                VÃ¦lg venligst tilladte valgmuligheder i menuerne.
+                Vælg venligst tilladte valgmuligheder i menuerne.
             </div>
             <%      request.getSession().setAttribute("portError", null);
                 }
@@ -42,7 +42,7 @@
             %>
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
-                Tjek venligst, at alle felterne for personlige oplysninger indeholder tilladte vÃ¦rdier.
+                Tjek venligst, at alle felterne for personlige oplysninger indeholder tilladte værdier.
             </div>
             <%      request.getSession().setAttribute("custError", null);
                 }
@@ -84,7 +84,7 @@
             <br><br>
             <form method = POST>
                 <select name="width" >
-                    <option selected disabled>VÃ¦lg bredde</option>
+                    <option selected disabled>Vælg bredde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
                     <option value="300">300 cm</option>
@@ -105,7 +105,7 @@
                     <option value="750">750 cm</option>
                 </select>
                 <select name="length">
-                    <option selected disabled>VÃ¦lg lÃ¦ngde</option>
+                    <option selected disabled>Vælg længde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
                     <option value="300">300 cm</option>
@@ -127,7 +127,7 @@
                     <option value="780">780 cm</option>
                 </select>
                 <select id="roof_slope" name="slope" disabled>
-                    <option selected disabled>VÃ¦lg taghÃ¦ldning</option>
+                    <option selected disabled>Vælg taghældning</option>
                     <option value="15">15 grader</option>
                     <option value="20">20 grader</option>
                     <option value="25">25 grader</option>
@@ -138,30 +138,30 @@
                 </select>
 
                 <select id="flat_roof_type" name="roof">
-                    <option selected disabled>VÃ¦lg fladt tag</option>
+                    <option selected disabled>Vælg fladt tag</option>
                     <option value="plasttrapezplader">Plasstrapezplader</option>
                 </select>
                 <select id="raised_roof_type" name="roof" disabled>
-                    <option selected disabled>VÃ¦lg tag med rejsning</option>
-                    <option value="BetontagstenRÃ¸d">Betontagsten - RÃ¸d</option>
-                    <option value="BetontagstenTeglrÃ¸d">Betontagsten - TeglrÃ¸d</option>
+                    <option selected disabled>Vælg tag med rejsning</option>
+                    <option value="BetontagstenRød">Betontagsten - Rød</option>
+                    <option value="BetontagstenTeglrød">Betontagsten - Teglrød</option>
                     <option value="BetontagstenBrun">Betontagsten - Brun</option>
                     <option value="BetontagstenSort">Betontagsten - Sort</option>
-                    <option value="EternittagB6GrÃ¥">Eternittag B6 - GrÃ¥</option>
+                    <option value="EternittagB6Grå">Eternittag B6 - Grå</option>
                     <option value="EternittagB6Sort">Eternittag B6 - Sort</option>
                     <option value="EternittagB6Mokkabrun)">Eternittag B6 - Mokka (brun)</option>
-                    <option value="EternittagB6RÃ¸dbrun">Eternittag B6 - RÃ¸dbrun</option>
-                    <option value="EternittagB6TeglrÃ¸d">Eternittag B6 - TeglrÃ¸d</option>
-                    <option value="EternittagB7GrÃ¥">Eternittag B7 - GrÃ¥</option>
+                    <option value="EternittagB6Rødbrun">Eternittag B6 - Rødbrun</option>
+                    <option value="EternittagB6Teglrød">Eternittag B6 - Teglrød</option>
+                    <option value="EternittagB7Grå">Eternittag B7 - Grå</option>
                     <option value="EternittagB7Sort">Eternittag B7 - Sort</option>
                     <option value="EternittagB7Mokka(brun)">Eternittag B7 - Mokka (brun)</option>
-                    <option value="EternittagB7RÃ¸dbrun">Eternittag B7 - RÃ¸dbrun</option>
-                    <option value="EternittagB7TeglrÃ¸d">Eternittag B7 - TeglrÃ¸d</option>
-                    <option value="EternittagB7RÃ¸dflammet">Eternittag B7 - RÃ¸dflammet</option>
+                    <option value="EternittagB7Rødbrun">Eternittag B7 - Rødbrun</option>
+                    <option value="EternittagB7Teglrød">Eternittag B7 - Teglrød</option>
+                    <option value="EternittagB7Rødflammet">Eternittag B7 - Rødflammet</option>
 
                 </select>
                 <select id="shed_width" name="shedwidth" disabled>
-                    <option selected disabled>VÃ¦lg skurets bredde</option>
+                    <option selected disabled>Vælg skurets bredde</option>
                     <option value="210">210 cm</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
@@ -182,7 +182,7 @@
                     <option value="720">720 cm</option>
                 </select>
                 <select id="shed_length" name="shedlength" disabled>
-                    <option selected disabled>VÃ¦lg skurets lÃ¦ngde</option>
+                    <option selected disabled>Vælg skurets længde</option>
                     <option value="150">150 cm</option>
                     <option value="180">180 cm</option>
                     <option value="210">210 cm</option>
@@ -205,7 +205,7 @@
                 </select> 
 
                 <select id="shed_cover" name="walls" disabled>
-                    <option selected disabled>VÃ¦lg skurets vÃ¦gbeklÃ¦dning</option>
+                    <option selected disabled>Vælg skurets vægbeklædning</option>
                     <option value="thevoid">Void</option>  
                     <option value="bones">Suspicious Bones</option>
                     <option value="pasta">Spaghetti</option>
@@ -231,7 +231,7 @@
                 <input type="text" name="comments" >
                 <br>
                 <br>
-                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation" >Send forespÃ¸rgsel</button>
+                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation" >Send forespørgsel</button>
             </form>
         </div>
     </body>
