@@ -81,7 +81,7 @@ public class SendInformationCommand extends Command {
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/FogProject/index.html");
+        response.sendRedirect("/FogProject/index.jsp");
     }
 
 }
