@@ -42,7 +42,7 @@ public class EmailHandler {
         msg.setSentDate(new Date());
         SMTPTransport t
                 = (SMTPTransport) session.getTransport("smtps");
-        t.connect("smtp.gmail.com", "asdfPO21sadeL19@gmail.com", "cakeman596912");
+        t.connect("smtp.gmail.com", EmailUtility.getEmailAddress(), EmailUtility.getPassword());
         t.sendMessage(msg, msg.getAllRecipients());
         System.out.println("Response: " + t.getLastServerResponse());
         t.close();
