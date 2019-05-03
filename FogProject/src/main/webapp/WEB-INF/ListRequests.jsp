@@ -10,11 +10,11 @@
 <%@page import="data.help_classes.Customer"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="data.help_classes.Request"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="Windows-1252"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252">
         <title>Johannes Fog Carporte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -25,14 +25,14 @@
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
         <div style="padding: 20px;">
-            <h2>FÃ¸lgende forespÃ¸rgsler venter pÃ¥ at blive behandlet:</h2>
+            <h2>Følgende forespørgsler venter på at blive behandlet:</h2>
 
             <div class="panel panel-default">
                 <div class="panel-body">
                     <table class="paddedtable" border = "1">
                         <tr class="tableheader">
                             <td> <b>ID</b> </td>
-                            <td> <b>ForespÃ¸rgsel modtaget</b> </td>
+                            <td> <b>Forespørgsel modtaget</b> </td>
                             <td> <b>Kundenavn</b> </td>
                             <td> <b>Tilbud afsendt</b> </td>
                             <td>  </td>
@@ -41,13 +41,19 @@
                             LinkedList<Request> requests = (LinkedList<Request>) request.getAttribute("requests");
 
                             for (Request r : requests) {
+                                String hasReceivedOffer;
+                                if (r.hasReceivedOffer()) {
+                                    hasReceivedOffer = "Ja";
+                                } else {
+                                    hasReceivedOffer = "Nej";
+                                }
                         %>
                         <tr>
                             <td><%=r.getId()%></td>
                             <td><%=r.getSent().toString()%></td>
                             <td><%=r.getCustomer().getFullName()%></td>
 
-                            <td> Nej </td>
+                            <td><%=hasReceivedOffer%></td>
 
                             <td>
                                 <form action="/FogProject/c/RequestDetails" method=POST>

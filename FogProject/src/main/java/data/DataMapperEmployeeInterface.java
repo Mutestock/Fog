@@ -17,5 +17,7 @@ public interface DataMapperEmployeeInterface {
     
     public Request readRequest(int id) throws DataAccessException;
 
-    public void createOffer(Offer offer);
+    public void createOffer(Offer offer) throws DataAccessException;
+
+    public Offer readOffer(int requestID) throws DataAccessException;
 }

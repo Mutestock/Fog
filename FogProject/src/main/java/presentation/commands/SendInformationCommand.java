@@ -36,6 +36,7 @@ public class SendInformationCommand extends Command {
         final PresentationToLogic pToL = new PresentationToLogicImpl();
         try {
             String fname = request.getParameter("firstname");
+           
             String lname = request.getParameter("lastname");
             String address = request.getParameter("address");
             String zipcode = request.getParameter("zipcode");

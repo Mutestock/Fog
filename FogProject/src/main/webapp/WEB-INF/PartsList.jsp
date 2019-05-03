@@ -6,11 +6,11 @@
 
 <%@page import="java.util.LinkedList"%>
 <%@page import="data.help_classes.*"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="Windows-1252"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252">
         <title>Johannes Fog Carporte</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -28,24 +28,24 @@
                 Shed shed = carport.getShed();
             %>
             <h1>Stykliste</h1>
-            <p><b>ForespÃ¸rgsel ID:</b> <%=r.getId()%> <b>Afsendt:</b> <%=r.getSent().toString()%></p>
+            <p><b>Forespørgsel ID:</b> <%=r.getId()%> <b>Afsendt:</b> <%=r.getSent().toString()%></p>
 
             <h3>Specifikationer</h3>
-            <h4><b>MÃ¥l:</b> <%=carport.getLength()%>x<%=carport.getWidth()%>x<%=carport.getHeight()%></h4>
+            <h4><b>Mål:</b> <%=carport.getLength()%>x<%=carport.getWidth()%>x<%=carport.getHeight()%></h4>
             <h4>
                 <% if (roof.getRaised()) {%>
-                <b>Tag med rejsning:</b> <%=roof.getType()%>, <%=roof.getSlope()%> graders hÃ¦ldning
+                <b>Tag med rejsning:</b> <%=roof.getType()%>, <%=roof.getSlope()%> graders hældning
                 <% } else {%>
                 <b>Fladt tag:</b> <%=roof.getType()%>
                 <% } %>
             </h4>
             <% if (shed != null) {%>
-            <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vÃ¦gbeklÃ¦dning af typen <%=shed.getWallCoverings()%></h4>
+            <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
             <% } %>
             <br>
 
             <%
-                PartsList partsList = (PartsList) request.getAttribute("partsList");
+                PartsList partsList = (PartsList) request.getSession().getAttribute("partsList");
 
                 LinkedList<data.help_classes.Part> currentList;
                 for (int i = 0; i < 3; i++) {
@@ -66,7 +66,7 @@
                     <table class="paddedtable" border = "1">
                         <tr class="tableheader">
                             <td> <b>Vare</b> </td>
-                            <td> <b>LÃ¦ngde</b> </td>
+                            <td> <b>Længde</b> </td>
                             <td> <b>Antal</b> </td>
                             <td> <b>Beskrivelse</b> </td>
                         </tr>

@@ -8,6 +8,7 @@ import data.SQL_Impl.DataMapperEmployee;
 import data.help_classes.Offer;
 import data.help_classes.Request;
 import java.util.LinkedList;
+import logic.LogicToData;
 
 public class LogicToDataImpl implements LogicToData {
 
@@ -41,6 +42,11 @@ public class LogicToDataImpl implements LogicToData {
     @Override
     public void saveOffer(Offer offer) throws DataAccessException {
         employee_dao.createOffer(offer);
+    }
+
+    @Override
+    public Offer getOffer(int requestID) throws DataAccessException {
+        return employee_dao.readOffer(requestID);
     }
 
 }

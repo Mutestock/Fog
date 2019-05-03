@@ -25,8 +25,8 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();
             String query
-                    = "select Request_id, Request.`Date`, Request.Comments, "
-                    + "Customer.*, "
+                    = "select Request.Request_id, Request.`Date`, Request.Comments, "
+                    + "Offer.Offer_id, Customer.*, "
                     + "Carport.Carport_id, Carport.`Length` as Carport_length, Carport.`Width` as Carport_width, "
                     + "Roof.Roof_id, Roof.`Type` as Roof_type, Roof.Slope as Roof_slope, "
                     + "Shed.Shed_id, Shed.`Length` as Shed_length, Shed.`Width` as Shed_width, Shed.Cover as Shed_cover "
@@ -35,7 +35,8 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
                     + "left join Carport on Request.Carport_id = Carport.Carport_id "
                     + "left join Roof on Carport.Roof_id = Roof.Roof_id "
                     + "left join Shed on Carport.Shed_id = Shed.Shed_id "
-                    + "ORDER BY Request_id DESC;";
+                    + "left join Offer on Request.Request_id = Offer.Request_id "
+                    + "ORDER BY Request.Request_id DESC;";
             preparedStmt = c.prepareStatement(query);
             ResultSet rs = preparedStmt.executeQuery();
 
@@ -71,8 +72,8 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();
             String query
-                    = "select Request_id, Request.`Date`, Request.Comments, "
-                    + "Customer.*, "
+                    = "select Request.Request_id, Request.`Date`, Request.Comments, "
+                    + "Offer.Offer_id, Customer.*, "
                     + "Carport.Carport_id, Carport.`Length` as Carport_length, Carport.`Width` as Carport_width, "
                     + "Roof.Roof_id, Roof.`Type` as Roof_type, Roof.Slope as Roof_slope, "
                     + "Shed.Shed_id, Shed.`Length` as Shed_length, Shed.`Width` as Shed_width, Shed.Cover as Shed_cover "
@@ -81,7 +82,8 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
                     + "left join Carport on Request.Carport_id = Carport.Carport_id "
                     + "left join Roof on Carport.Roof_id = Roof.Roof_id "
                     + "left join Shed on Carport.Shed_id = Shed.Shed_id "
-                    + "where Request_id = ?;";
+                    + "left join Offer on Request.Request_id = Offer.Request_id "
+                    + "where Request.Request_id = ?;";
             preparedStmt = c.prepareStatement(query);
             preparedStmt.setInt(1, id);
             ResultSet rs = preparedStmt.executeQuery();
@@ -131,14 +133,66 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         int requestID = rs.getInt("Request_id");
         LocalDateTime requestSent = rs.getObject("Date", LocalDateTime.class);
         String comments = rs.getString("Comments");
-        Request myReq = new Request(requestID, requestSent, comments, carport, customer);
+        int offerID = rs.getInt("Offer_id");
+        boolean hasReceivedOffer = offerID != 0;
+        Request myReq = new Request(requestID, requestSent, comments, carport, customer, hasReceivedOffer);
 
         return myReq;
     }
 
     @Override
-    public void createOffer(Offer offer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createOffer(Offer offer) throws DataAccessException {
+        try {
+            PreparedStatement preparedStmt;
+            Connection c = DBConnector.getConnection();
+            String query
+                    = "insert into `Offer` (`Price`, `Shipping`, `Date`, `Request_id`) "
+                    + "VALUES(?,?,?,?)" + ";";
+
+            preparedStmt = c.prepareStatement(query);
+
+            preparedStmt.setDouble(1, offer.getPrice());
+            preparedStmt.setDouble(2, offer.getShippingCosts());
+            preparedStmt.setObject(3, offer.getSent(), java.sql.JDBCType.TIMESTAMP);
+            preparedStmt.setInt(4, offer.getRequest().getId());
+
+            preparedStmt.execute();
+
+            preparedStmt.close();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        }
+    }
+
+    @Override
+    public Offer readOffer(int requestID) throws DataAccessException {
+        Request request = readRequest(requestID);
+        
+        try {
+            PreparedStatement preparedStmt;
+            Connection c = DBConnector.getConnection();
+            String query
+                    = "select Offer_id, Price, Shipping, Offer.`Date` "
+                    + "from Offer left join Request on Offer.Request_id = Request.Request_id "
+                    + "where Request.Request_id = ?;";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setInt(1, requestID);
+            ResultSet rs = preparedStmt.executeQuery();
+
+            Offer offer = null;
+            if (rs.next()) {
+                int offerID = rs.getInt("Offer_id");
+                double price = rs.getDouble("Price");
+                double shippingCosts = rs.getDouble("Shipping");
+                LocalDateTime offerSent = rs.getObject("Date", LocalDateTime.class);
+                offer = new Offer(offerID, offerSent, price, shippingCosts, request);
+            }
+
+            preparedStmt.close();
+            return offer;
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        }
     }
 
 }
