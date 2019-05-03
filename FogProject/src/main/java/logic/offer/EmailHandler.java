@@ -12,12 +12,7 @@ import java.util.*;
 
 public class EmailHandler {
 
-//    public static void main(String[] args) throws Exception {
-//
-//        mailSend("cake", "cake");
-//
-//    }
-    public static void mailSend(Offer offer) throws NoSuchProviderException, MessagingException {
+    public static void sendMail(Offer offer) throws NoSuchProviderException, MessagingException {
         Properties props = System.getProperties();
         props.put("mail.smtps.host", "smtp.gmail.com");
         props.put("mail.smtps.auth", "true");

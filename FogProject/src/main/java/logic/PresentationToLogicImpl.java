@@ -48,7 +48,7 @@ public class PresentationToLogicImpl implements PresentationToLogic {
     public void sendOffer(Offer offer) throws DataAccessException {
         LOGIC_TO_DATA.saveOffer(offer);
         try {
-            EmailHandler.mailSend(offer);
+            EmailHandler.sendMail(offer);
         } catch (MessagingException ex) {
             System.out.println("Shit happened in send email");
             ex.printStackTrace();
