@@ -34,7 +34,7 @@ public class WoodCalc {
         
         //Parts for the shed
         if (carport.getShed() != null) {
-            parts.add(calcRafterBoardNorm3(carport));   //Rem. skur del.
+            parts.add(calcRafterBoardNorm3(carport));    //Rem. skur del.
         }  
         
         return parts;
