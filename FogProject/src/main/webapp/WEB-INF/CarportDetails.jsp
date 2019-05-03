@@ -27,7 +27,7 @@
 
             <h1>Design din egen carport</h1>
             <h3>og få et godt tilbud!</h3>
-            
+
             <%
                 if (request.getSession().getAttribute("portError") != null) {
             %>
@@ -59,9 +59,15 @@
                     var raised = document.getElementById("roofSwitch").checked;
                     if (raised) {
                         document.getElementById("flat_roof_type").selectedIndex = 0;
+                        document.getElementById("roof_slope").style.display = "block";
+                        document.getElementById("raised_roof_type").style.display = "block";
+                        document.getElementById("flat_roof_type").style.display = "none";
                     } else {
                         document.getElementById("roof_slope").selectedIndex = 0;
                         document.getElementById("raised_roof_type").selectedIndex = 0;
+                        document.getElementById("roof_slope").style.display = "none";
+                        document.getElementById("raised_roof_type").style.display = "none";
+                        document.getElementById("flat_roof_type").style.display = "block";
                     }
                     document.getElementById("roof_slope").disabled = (!raised);
                     document.getElementById("flat_roof_type").disabled = (raised);
@@ -74,6 +80,15 @@
                         document.getElementById("shed_width").selectedIndex = 0;
                         document.getElementById("shed_length").selectedIndex = 0;
                         document.getElementById("shed_cover").selectedIndex = 0;
+
+                        document.getElementById("shed_width").style.display = "none";
+                        document.getElementById("shed_length").style.display = "none";
+                        document.getElementById("shed_cover").style.display = "none";
+                    } else
+                    {
+                        document.getElementById("shed_width").style.display = "block";
+                        document.getElementById("shed_length").style.display = "block";
+                        document.getElementById("shed_cover").style.display = "block";
                     }
                     document.getElementById("shed_width").disabled = (!enabled);
                     document.getElementById("shed_length").disabled = (!enabled);
@@ -83,7 +98,7 @@
 
             <br><br>
             <form method = POST>
-                <select name="width" >
+                <select name="width" style="display: block" >
                     <option selected disabled>Vælg bredde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
@@ -104,7 +119,7 @@
                     <option value="720">720 cm</option>
                     <option value="750">750 cm</option>
                 </select>
-                <select name="length">
+                <select name="length" style="display: block">
                     <option selected disabled>Vælg længde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
@@ -126,7 +141,7 @@
                     <option value="750">750 cm</option>
                     <option value="780">780 cm</option>
                 </select>
-                <select id="roof_slope" name="slope" disabled>
+                <select id="roof_slope" name="slope" style="display: none">
                     <option selected disabled>Vælg taghældning</option>
                     <option value="15">15 grader</option>
                     <option value="20">20 grader</option>
@@ -137,11 +152,11 @@
                     <option value="45">45 grader</option>
                 </select>
 
-                <select id="flat_roof_type" name="roof">
+                <select id="flat_roof_type" name="roof" style="display: block">
                     <option selected disabled>Vælg fladt tag</option>
                     <option value="plasttrapezplader">Plasstrapezplader</option>
                 </select>
-                <select id="raised_roof_type" name="roof" disabled>
+                <select id="raised_roof_type" name="roof" style="display: none">
                     <option selected disabled>Vælg tag med rejsning</option>
                     <option value="BetontagstenRød">Betontagsten - Rød</option>
                     <option value="BetontagstenTeglrød">Betontagsten - Teglrød</option>
@@ -160,7 +175,7 @@
                     <option value="EternittagB7Rødflammet">Eternittag B7 - Rødflammet</option>
 
                 </select>
-                <select id="shed_width" name="shedwidth" disabled>
+                <select id="shed_width" name="shedwidth" style="display: none">
                     <option selected disabled>Vælg skurets bredde</option>
                     <option value="210">210 cm</option>
                     <option value="240">240 cm</option>
@@ -181,7 +196,7 @@
                     <option value="690">690 cm</option>
                     <option value="720">720 cm</option>
                 </select>
-                <select id="shed_length" name="shedlength" disabled>
+                <select id="shed_length" name="shedlength" style="display: none">
                     <option selected disabled>Vælg skurets længde</option>
                     <option value="150">150 cm</option>
                     <option value="180">180 cm</option>
@@ -204,7 +219,7 @@
                     <option value="690">690 cm</option>
                 </select> 
 
-                <select id="shed_cover" name="walls" disabled>
+                <select id="shed_cover" name="walls" style="display: none">
                     <option selected disabled>Vælg skurets vægbeklædning</option>
                     <option value="thevoid">Void</option>  
                     <option value="bones">Suspicious Bones</option>
