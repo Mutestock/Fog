@@ -6,6 +6,7 @@ package logic.offer;
  */
 import com.sun.mail.smtp.SMTPTransport;
 import data.help_classes.Offer;
+import java.nio.charset.Charset;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
@@ -24,18 +25,18 @@ public class EmailHandler {
                 InternetAddress.parse(offer.getRequest().getCustomer().getEmail(), false));
         msg.setSubject("We have an offer for you: " + offer.getRequest().getCustomer().getFullName());
         msg.setText(
-                 "Price: " + Double.toString(offer.getPrice()) +"\n"
-                + "Dimensions: "+Integer.toString(offer.getRequest().getCarport().getWidth())
-                + "x"+Integer.toString(offer.getRequest().getCarport().getLength())
-                + "x"+Integer.toString(offer.getRequest().getCarport().getHeight()) + " cm\n"
+                "Price: " + Double.toString(offer.getPrice()) + "\n"
+                + "Dimensions: " + Integer.toString(offer.getRequest().getCarport().getWidth())
+                + "x" + Integer.toString(offer.getRequest().getCarport().getLength())
+                + "x" + Integer.toString(offer.getRequest().getCarport().getHeight()) + " cm\n"
                 + "Customer Name: " + offer.getRequest().getCustomer().getFullName() + "\n"
                 + "Address: " + offer.getRequest().getCustomer().getAddress() + "\n"
                 + "Phone: " + offer.getRequest().getCustomer().getPhone() + "\n"
                 + "Email: " + offer.getRequest().getCustomer().getEmail() + "\n"
-                + "Comments: " + offer.getRequest().getComments()+"\n"
-                + "Time of Approval: " + System.currentTimeMillis()+"\n"
-                + "Price: " + offer.getPrice()+"\n"
-                + "Shipping cost: " +offer.getShippingCosts()+"\n \n \n"
+                + "Comments: " + offer.getRequest().getComments() + "\n"
+                + "Time of Approval: " + System.currentTimeMillis() + "\n"
+                + "Price: " + offer.getPrice() + "\n"
+                + "Shipping cost: " + offer.getShippingCosts() + "\n \n \n"
                 + "Best regards \n Johannes Fog");
         msg.setHeader("Johannes Fog", "Johannes Fog");
         msg.setSentDate(new Date());
@@ -46,4 +47,7 @@ public class EmailHandler {
         System.out.println("Response: " + t.getLastServerResponse());
         t.close();
     }
+
+    
+
 }
