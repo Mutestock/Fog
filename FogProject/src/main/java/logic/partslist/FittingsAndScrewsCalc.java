@@ -34,16 +34,17 @@ public class FittingsAndScrewsCalc {
             boMScrews.add(getUniversalFittingsAngle(boM, true));
             boMScrews.add(getUniversalFittingsAngle(boM, false));
             //boMScrews.add(getScrewsMsc(boM)); // not done yet,  potentialt problem med taglægt siden den bruger taglægte og en anden bruger toplægte
-            boMScrews.add(getScrewsFittingsAngle(boM)); // potentialt problem med taglægt siden den bruger toplægte og en anden bruger taglægte
+            boMScrews.add(getScrewsFittingsAngle(boM, boMScrews)); // potentialt problem med taglægt siden den bruger toplægte og en anden bruger taglægte
             boMScrews.add(getBoardBolts(boM, carport));
             boMScrews.add(getAngledSquarePiece(boMScrews));
-            boMScrews.add(getScrewsRoofLath(boM)); // potentialt problem med taglægt siden den bruger toplægte og en anden bruger taglægte
-            boMScrews.add(getAngledShedCoveringScrews(boM, true));
-            boMScrews.add(getAngledShedCoveringScrews(boM, true));
+//            boMScrews.add(getScrewsRoofLath(boM)); // potentialt problem med taglægt siden den bruger toplægte og en anden bruger taglægte
+
             if (carport.getShed() != null) {
                 boMScrews.add(getDoorHandle()); // can't see a reason to give any parameters
                 boMScrews.add(getDoorFittings()); // can't see a reason to give any parameters
                 boMScrews.add(getAngledFittings(boM));
+                boMScrews.add(getAngledShedCoveringScrews(boM, false));
+                boMScrews.add(getAngledShedCoveringScrews(boM, true));
             }
         }
 
@@ -149,8 +150,8 @@ public class FittingsAndScrewsCalc {
         }
     }
 
-    private static Part getScrewsFittingsAngle(LinkedList<Part> boM) {
-        double amount = (getPart("Fitttings right", boM).getAmount() + getPart("Fitttings left", boM).getAmount()) * 9;
+    private static Part getScrewsFittingsAngle(LinkedList<Part> boM, LinkedList<Part> boMScrews) {
+        double amount = (getPart("Fittings right", boMScrews).getAmount() + getPart("Fittings left", boMScrews).getAmount()) * 9;
         amount += getPart("45x195mm. spærtræ ubh. rem", boM).getAmount() * getPart("Færdigskåret byg-selv-spær ", boM).getAmount();
         return new Part("Screws fittingsAngled", (int) Math.round(amount), "Til montering af universalbeslag	+ toplægte", 199);
     }
@@ -175,11 +176,10 @@ public class FittingsAndScrewsCalc {
         }
     }
 
-    private static Part getScrewsRoofLath(LinkedList<Part> boM) { // lægter mangler at være lavet
-        int amount = getPart("Wooden Beam used as the strop", boM).getAmount() * 6;
-        return new Part("ScrewsRoof Lath", Math.round(amount / 100), "Til montering af yderste beklædning", 189);
-    }
-
+//    private static Part getScrewsRoofLath(LinkedList<Part> boM) { // lægter mangler at være lavet
+//        int amount = getPart("Wooden Beam used as the strop", boM).getAmount() * 6;
+//        return new Part("ScrewsRoof Lath", Math.round(amount / 100), "Til montering af yderste beklædning", 189);
+//    }
     private static Part getPart(String name, LinkedList<Part> boM) {
         for (Part p : boM) {
             if (p.getName().equals(name)) {
