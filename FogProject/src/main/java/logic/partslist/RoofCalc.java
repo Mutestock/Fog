@@ -33,12 +33,30 @@ public class RoofCalc {
     }
 
     private static Part calcTileCount(Carport carport) {
-        //Might change depending on carport width. Hard to say without knowing the proportions of a tile
-        //360*730 = 262800cm^2
-        //262800 / 300 = 876 cm^2 per tile
 
-        int cm2 = (int) Math.ceil((carport.getLength() * carport.getWidth()) / 876);
-        return new Part("B & C Dobbelt -s sort", cm2, "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 50);
+//        step 1: width / 2 = b
+//        step 2: b / cos(A) = c
+//        step 3: c*2 = modified width
+//        step 4: modified width * length / ratio = brick count
+
+//        step 1: 360 / 2 = 180
+//        step 2: 180 / cos(20) = 191,55
+//        step 3: 191 * 2 = 383,10
+//        step 4: 386 * 720 / 300 = 926.4
+
+//        Ratio = 926.4
+
+        int result = 0;
+        double preCasted = 0.0;
+        preCasted = Math.ceil(carport.getWidth() / 2);
+        preCasted = preCasted / Math.cos((double)carport.getRoof().getSlope());
+        preCasted = preCasted*2;
+        preCasted = preCasted * (double)carport.getLength() / 926.4;
+        result = (int) Math.ceil(preCasted);
+        
+
+//        int cm2 = (int) Math.ceil((carport.getLength() * carport.getWidth()) / 876);
+        return new Part("B & C Dobbelt -s sort", result, "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 50);
     }
 
     private static Part calcRidgeTile(Carport carport) {
@@ -55,4 +73,5 @@ public class RoofCalc {
         return new Part("B & C rygstensbeslag", cm, "Til montering af rygsten", 75);
     }
 
+    
 }
