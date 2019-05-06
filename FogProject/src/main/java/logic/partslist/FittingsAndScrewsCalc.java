@@ -15,11 +15,11 @@ public class FittingsAndScrewsCalc {
         int length = carport.getLength();
         LinkedList<Part> boMScrews = new LinkedList<>();
         if (carport.getRoof().getSlope() == 0) {
-            boMScrews.add(getPerforatedBand());
-            boMScrews.add(getRoofingScrews(length, width));
-            boMScrews.add(getUniversalFittings(boM, true));
-            boMScrews.add(getUniversalFittings(boM, false));
-            boMScrews.add(getScrewsWoodbeam2(boM));
+            boMScrews.add(getPerforatedBand()); // hulbånd
+            boMScrews.add(getRoofingScrews(length, width)); // skruer for tagplader
+            boMScrews.add(getUniversalFittings(boM, true)); // beslag for montering af spær på rem
+            boMScrews.add(getUniversalFittings(boM, false)); //  beslag for montering af spær på rem
+            boMScrews.add(getScrewsBeams(boM)); // Stern og vandbræt
             boMScrews.add(getScrewsFittings(boM, boMScrews));
             boMScrews.add(getBoardBolts(boM, carport));
             boMScrews.add(getSquarePiece(boM, carport));
@@ -27,9 +27,9 @@ public class FittingsAndScrewsCalc {
             if (carport.getShed() != null) {
                 boMScrews.add(getDoorHandle()); // can't see a reason to give any parameters
                 boMScrews.add(getDoorFittings()); // can't see a reason to give any parameters
-//                boMScrews.add(getAngledFittings(boM));
-//                boMScrews.add(getCoveringScrews(boM, true));
-//                boMScrews.add(getCoveringScrews(boM, false));
+                boMScrews.add(getAngledFittings(boM));
+                boMScrews.add(getCoveringScrews(boM, true));
+                boMScrews.add(getCoveringScrews(boM, false));
             }
         } else {
             boMScrews.add(getUniversalFittingsAngle(boM, true));
@@ -43,9 +43,9 @@ public class FittingsAndScrewsCalc {
             if (carport.getShed() != null) {
                 boMScrews.add(getDoorHandle()); // can't see a reason to give any parameters
                 boMScrews.add(getDoorFittings()); // can't see a reason to give any parameters
-//                boMScrews.add(getAngledFittings(boM));
-//                boMScrews.add(getAngledShedCoveringScrews(boM, false));
-//                boMScrews.add(getAngledShedCoveringScrews(boM, true));
+                boMScrews.add(getAngledFittings(boM));
+                boMScrews.add(getAngledShedCoveringScrews(boM, false));
+                boMScrews.add(getAngledShedCoveringScrews(boM, true));
             }
         }
 
@@ -71,8 +71,8 @@ public class FittingsAndScrewsCalc {
         }
     }
 
-    private static Part getScrewsWoodbeam2(LinkedList<Part> boM) {
-        double amount = getPart("Fittings Beam", boM).getAmount() * 8;
+    private static Part getScrewsBeams(LinkedList<Part> boM) {
+        double amount = getPart("Træ Bjælke", boM).getAmount() * 8;
         int ramount = (int) Math.ceil(amount / 200);
         return new Part("Screws for attaching of woodbeam2", ramount, "Til montering af stern & vandbrædt", 199);
     }
@@ -121,18 +121,18 @@ public class FittingsAndScrewsCalc {
         double amount = -1;
         int ramount = 0;
         if (outer) {
-            amount = getPart("Træ vægs bjælker", boM).getAmount() * 8 / 300;
+            amount = getPart("19x100 mm. trykimp. Bræt Beklædning", boM).getAmount() * 8 / 300;
             ramount = (int) Math.ceil(amount);
             return new Part("Coverscrews outer", ramount, "Til	montering af yderste beklædning", 149);
         } else {
-            amount = getPart("Træ vægs bjælker", boM).getAmount() * 6 / 300;
+            amount = getPart("19x100 mm. trykimp. Bræt Beklædning", boM).getAmount() * 6 / 300;
             ramount = (int) Math.ceil(amount);
             return new Part("Coverscrews inner", ramount, "Til	montering af inderste beklædning", 129);
         }
     }
 
     private static Part getAngledFittings(LinkedList<Part> boM) {// løsholter
-        int amount = getPart("Træ vægs bjælker", boM).getAmount(); // name should be updated as there is an overlap with something else
+        int amount = getPart("45x95 Reglar ubh. Skur side", boM).getAmount() + getPart("45x95 Reglar ubh. Skur gavle", boM).getAmount(); // name should be updated as there is an overlap with something else
         return new Part("AngledFittings", amount, "Til montering af løsholter i skur", 25);
     }
 
