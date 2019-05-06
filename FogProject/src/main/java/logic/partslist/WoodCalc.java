@@ -11,8 +11,6 @@ import java.util.LinkedList;
 public class WoodCalc {
     
     
-    private static int distanceBetweenRoofBeams = 50;
-    private static int roofBeamsWidth = 50;
     
     
     //Main method for calculating the parts list.
@@ -27,10 +25,18 @@ public class WoodCalc {
         //Parts for sloped roof
         if (carport.getRoof().getRaised()) {
             parts.add(calcRafterBoardSlope(carport));    //Spær, med rejsning.
+            parts.add(calcFasciaBoards1(carport));       //Stern.
+            parts.add(calcFasciaBoards2(carport));       //Stern.
+            parts.add(calcFasciaBoards3(carport));       //Stern.   
+            parts.add(calcFasciaBoards4(carport));       //Stern.
         }
         //Parts for nonsloped roof
         else { 
             parts.add(calcRafterBoardNorm1(carport));    //Spær, uden rejsning.
+            parts.add(calcFasciaBoardsSlope1(carport));  //Sternbrædder til carport del.
+            if (carport.getShed() != null) {
+                parts.add(calcFasciaBoardsSlope2(carport));  //Sternbrædder til skur del.
+            }
         }   
         
         //Parts for the shed
@@ -121,73 +127,36 @@ public class WoodCalc {
             return new Part("19x100 mm. trykimp. Bræt Beklædning",carport.getWidth(),200,"Beklædning af skur 1 på 2",29.99);
     }
     
+    //Returns the amount of fascia-boards used for the carport if there is a slope.
+    private static Part calcFasciaBoardsSlope1 (Carport carport) {
+            return new Part("25x150mm. trykimp. Bræt Carport stern rejsning",600,2,"Sternbrædder til siderne Carport del",29.99);
+    }
+    
+    //Returns the amount of fascia-boards used for the shed if thecarport has a slope.
+    private static Part calcFasciaBoardsSlope2 (Carport carport) {
+            return new Part("25x150mm. trykimp. Bræt Skur stern rejsning",540,1,"Sternbrædder til siderne Skur del (deles)",29.99);
+    }
+    
+    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    private static Part calcFasciaBoards1 (Carport carport) {
+            return new Part("25x200mm. trykimp. Bræt Understern ender",360,4,"Understernbrædder til for & bagende",29.99);
+    }
+    
+    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    private static Part calcFasciaBoards2 (Carport carport) {
+            return new Part("25x200mm. trykimp. Bræt Understern sider",540,4,"Understernbrædder til siderne",29.99);
+    }
+    
+    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    private static Part calcFasciaBoards3 (Carport carport) {
+            return new Part("25x200mm. trykimp. Bræt Overstern ender",360,2,"Oversternbrædder til for & bagende",29.99);
+    }
+    
+    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    private static Part calcFasciaBoards4 (Carport carport) {
+            return new Part("25x200mm. trykimp. Bræt Overstern sider",540,4,"Oversternbrædder til siderne",29.99);
+    }
+    
      
-    
-        
-    //Calculates the amount of wooden beams used for the roof support.
-    private static Part calcRoofSupport (Carport carport) {
-        int amount = 0;
-        //Returns the amount of wooden beams with the width of a beam and
-        //the static distance between each beam divided by the carport length.
-        amount = (int) Math.ceil(((distanceBetweenRoofBeams + roofBeamsWidth) / carport.getLength()) + 1);
-        return new Part("Træ Bjælke",carport.getWidth(),amount,"Træ Bjælke til brug for tag støtten langs bredden",30.95);
-    }
-    
-    //Returns a part if the roof is sloped for the roof barge (Vindskeder).
-    private static Part calcWoodenBeam1 (Carport carport) {
-        if (carport.getRoof().getSlope() > 0) {
-            return new Part("Træ Bjælke",carport.getLength(),2,"Træ bjælker brugt som vindskeder til carport sider",23.50);
-        } else {
-            return null;
-        }
-    }
-    
-    //Returns a part for the fascia board of the carport (Overstern.
-    private static Part calcWoodenBeam2 (Carport carport) {
-            return new Part("Træ Bjælke",carport.getLength(),2,"Træ bjælker brug som carportens overstern",235.95);
-    }
-    
-    //Returns a part for the fascia board of the shed (Stern). 
-    private static Part calcWoodenBeam3 (Carport carport) {
-        if (carport.getShed() == null) {
-            return null;
-        } else {
-            return new Part("Træ Bjælke",carport.getShed().getWidth(),2,"Træ bjælke brugt til carportens stern",129.95);
-        }
-    }
-    
-    //Returns a part for the wooden strop (tagrem).
-    private static Part calcWoodenBeam4 (Carport carport) {
-            return new Part("Træ Bjælke",carport.getWidth(),3,
-                    "Træ bjælke brugt til tagremme i sider",35.95);
-    }
-    
-    //Returns a part for the wooden beams of the roof (taglægte).
-    private static Part calcWoodenBeam5 (Carport carport) {                 //Mængden er konstant pt.
-            return new Part("Træ Bjælke",carport.getLength(),25,
-                    "Træ bjælker brugt som tagfodslægter",35.95);
-    }
-    
-    
-    
-   //Returns a part for the shed walling. (Beklædning)
-    private static Part calcShedWalling (Carport carport) {
-        if (carport.getShed() != null) {
-            return new Part("Træ vægs bjælker",10,((carport.getShed().getLength()+carport.getShed().getWidth())*2)/10,
-                    "Træ bjælker til beklædningen af skuret",3.95);
-        } else {
-            return null;
-        }
-    }
-    
-   //Returns a part for the shed transoms. (Toplægte)
-    private static Part calcShedTransoms (Carport carport) {
-        if (carport.getShed() != null) {                             //length is currently constant
-            return new Part("Træ vægs bjælker",carport.getShed().getWidth(),10,
-                    "Træ bjælker brugt til toplægten",15.95);
-        } else {
-            return null;
-        }
-    }
     
 }
