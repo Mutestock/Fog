@@ -32,12 +32,7 @@
             <artifactId>mail</artifactId>
             <version>1.5.0-b01</version>
         </dependency>
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco</artifactId>
-            <version>0.8.3</version>
-            <type>zip</type>
-        </dependency>
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>

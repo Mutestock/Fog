@@ -22,6 +22,7 @@ public class WoodCalc {
         //Essential parts.                                Danish translation:
         parts.add(calcPillarAmount(carport));           //Stolpe.
         parts.add(calcRafterBoardNorm2(carport));       //Rem. carport del.
+        parts.add(calcHeadboards(carport));             //Gavle.
         
         //Parts for sloped roof
         if (carport.getRoof().getRaised()) {
@@ -35,6 +36,9 @@ public class WoodCalc {
         //Parts for the shed
         if (carport.getShed() != null) {
             parts.add(calcRafterBoardNorm3(carport));    //Rem. skur del.
+            parts.add(calcInterTies1());                 //Løsholter for side.
+            parts.add(calcInterTies2(carport));          //Løsholter for gavle.
+            parts.add(calcWallCovering(carport));        //Beklædning af skur.
         }  
         
         return parts;
@@ -89,12 +93,32 @@ public class WoodCalc {
     
     //Returns two strop boards (Rem) 
     private static Part calcRafterBoardNorm2 (Carport carport) {
-            return new Part("45x195mm. spærtræ ubh. rem",carport.getWidth(),2,"Remme monteres i sider, sadles i stolper. Carport del.",29.99);
+            return new Part("45x195mm. spærtræ ubh. Carport rem",carport.getWidth(),2,"Remme monteres i sider, sadles i stolper. Carport del.",29.99);
     }
     
     //Returns one more strop board, used if the carport is with a shed (Rem) 
     private static Part calcRafterBoardNorm3 (Carport carport) {
-            return new Part("45x195mm. spærtræ ubh. ",carport.getWidth(),1,"Remme monteres i sider, sadles i stolper. Skur del",29.99);
+            return new Part("45x195mm. spærtræ ubh. Skur rem",carport.getWidth(),1,"Remme monteres i sider, sadles i stolper. Skur del",29.99);
+    }
+    
+    //Returns the two boards used for the headboard (Gavle) 
+    private static Part calcHeadboards (Carport carport) {
+            return new Part("45x195mm. spærtræ ubh. Gavle",carport.getLength(),2,"Gavle monteres på remme i enderne.",29.99);
+    }
+    
+    //Returns the amount of inter-ties used for the sides of the shed (Løsholter).
+    private static Part calcInterTies1 () {
+            return new Part("45x95 Reglar ubh. Skur side",240,4,"Løsholter i siderne af skur",29.99);
+    }
+    
+    //Returns the rest of inter-ties used for the the shed (Løsholter).
+    private static Part calcInterTies2 (Carport carport) {
+            return new Part("45x95 Reglar ubh. Skur gavle",carport.getLength(),6,"Løsholter i gavle af skur",29.99);
+    }
+    
+    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    private static Part calcWallCovering (Carport carport) {
+            return new Part("19x100 mm. trykimp. Bræt Beklædning",carport.getWidth(),200,"Beklædning af skur 1 på 2",29.99);
     }
     
      
