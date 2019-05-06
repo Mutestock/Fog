@@ -50,8 +50,8 @@ public class RoofCalc {
         double preCasted = 0.0;
         preCasted = Math.ceil(carport.getWidth() / 2);
         preCasted = preCasted / Math.cos((double)carport.getRoof().getSlope());
-        preCasted = preCasted*2;
         preCasted = preCasted * (double)carport.getLength() / 926.4;
+        preCasted = preCasted*2;
         result = (int) Math.ceil(preCasted);
         
 
