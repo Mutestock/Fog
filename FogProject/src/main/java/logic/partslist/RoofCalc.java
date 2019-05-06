@@ -57,7 +57,7 @@ public class RoofCalc {
         double toDegrees = Math.cos(Math.toRadians((double)carport.getRoof().getSlope()));
         System.out.println("To degrees: " + toDegrees);
         preCasted = 375 / toDegrees;
-        System.out.println("precast + to degrees " + preCasted);
+        //System.out.println("precast + to degrees " + preCasted);
         System.out.println("Degrees: " + Math.cos(Math.toDegrees((double) carport.getRoof().getSlope())));
         preCasted = preCasted * 2;
         System.out.println(preCasted);
@@ -67,7 +67,7 @@ public class RoofCalc {
         result = (int) Math.ceil(preCasted);
 
 //        int cm2 = (int) Math.ceil((carport.getLength() * carport.getWidth()) / 876);
-        return new Part("B & C Dobbelt -s sort", result, "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 50);
+        return new Part("B & C Dobbelt -s sort", result, "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 4.5);
     }
 
     private static Part calcRidgeTile(Carport carport) {

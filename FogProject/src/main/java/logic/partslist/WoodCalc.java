@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Emil 
+ * @author Emil Jógvan Bruun
  */
 public class WoodCalc {
     
@@ -29,6 +29,10 @@ public class WoodCalc {
             parts.add(calcFasciaBoards2(carport));       //Stern.
             parts.add(calcFasciaBoards3(carport));       //Stern.   
             parts.add(calcFasciaBoards4(carport));       //Stern.
+            parts.add(calcWaterBoardSlope(carport));     //Vandbræt til vindskeder.
+            parts.add(calcBarge(carport));               //Vindskeder.
+            parts.add(calcRoofLaths1(carport));          //Taglægte.
+            parts.add(calcRoofLaths2(carport));          //Taglægte til rygsten.
         }
         //Parts for nonsloped roof
         else { 
@@ -37,6 +41,8 @@ public class WoodCalc {
             if (carport.getShed() != null) {
                 parts.add(calcFasciaBoardsSlope2(carport));  //Sternbrædder til skur del.
             }
+            parts.add(calcWaterBoard1(carport));         //Vandbræt til sider.
+            parts.add(calcWaterBoard2(carport));         //Vandbræt til ender.
         }   
         
         //Parts for the shed
@@ -45,6 +51,7 @@ public class WoodCalc {
             parts.add(calcInterTies1());                 //Løsholter for side.
             parts.add(calcInterTies2(carport));          //Løsholter for gavle.
             parts.add(calcWallCovering(carport));        //Beklædning af skur.
+            parts.add(calcLathdoor(carport));            //Lægte til z på dør.
         }  
         
         return parts;
@@ -137,26 +144,59 @@ public class WoodCalc {
             return new Part("25x150mm. trykimp. Bræt Skur stern rejsning",540,1,"Sternbrædder til siderne Skur del (deles)",29.99);
     }
     
-    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    //Returns the amount of boards used for the wall covering used for the the shed (Understern).
     private static Part calcFasciaBoards1 (Carport carport) {
             return new Part("25x200mm. trykimp. Bræt Understern ender",360,4,"Understernbrædder til for & bagende",29.99);
     }
     
-    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    //Returns the amount of boards used for the wall covering used for the the shed (Understern).
     private static Part calcFasciaBoards2 (Carport carport) {
             return new Part("25x200mm. trykimp. Bræt Understern sider",540,4,"Understernbrædder til siderne",29.99);
     }
     
-    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    //Returns the amount of boards used for the wall covering used for the the shed (Overstern).
     private static Part calcFasciaBoards3 (Carport carport) {
             return new Part("25x200mm. trykimp. Bræt Overstern ender",360,2,"Oversternbrædder til for & bagende",29.99);
     }
     
-    //Returns the amount of boards used for the wall covering used for the the shed (Beklædning).
+    //Returns the amount of boards used for the wall covering used for the the shed (Overstern).
     private static Part calcFasciaBoards4 (Carport carport) {
             return new Part("25x200mm. trykimp. Bræt Overstern sider",540,4,"Oversternbrædder til siderne",29.99);
     }
     
-     
+    //Returns the amount of waterboards used for the carport if the roof is sloped. (Vandbræt).
+    private static Part calcWaterBoardSlope (Carport carport) {
+            return new Part("19x100mm. trykimp. Bræt Vandbræt Rejsning",480,2,"Vandbræt på vindskeder",29.99);
+    }
     
+    //Returns the amount of waterboards used for the carport sides. (Vandbræt).
+    private static Part calcWaterBoard1 (Carport carport) {
+            return new Part("19x100mm. trykimp. Bræt Vandbræt Sider",540,4,"Vandbræt på stern i sider",29.99);
+    }
+    
+    //Returns the amount of waterboards used for the carport ends. (Vandbræt).
+    private static Part calcWaterBoard2 (Carport carport) {
+            return new Part("19x100mm. trykimp. Bræt Vandbræt Ender",360,2,"Vandbræt på stern i ender",29.99);
+    }
+    
+    //Returns the amount of barges used for the carport if the roof is sloped. (Vindskeder).
+    private static Part calcBarge (Carport carport) {
+            return new Part("25x150mm. trykimp. Bræt Vindskede",480,2,"Vindskeder på rejsning",29.99);
+    }
+    
+    //Returns the lath for the z of the backside of the shed door. (Lægte).
+    private static Part calcLathdoor (Carport carport) {
+            return new Part("38x73mm. Lægte ubh.",420,1,"Til z på bagside af dør",29.99);
+    }
+            
+    //Returns the amount of roof laths used for the carport if the roof is sloped. (Taglægte).
+    private static Part calcRoofLaths1 (Carport carport) {
+            return new Part("38x73mm. Taglægte T1.",540,21,"Til montering på spær.", 29.99);
+    }
+    
+    //Returns the rest of the amount of roof laths used for the carport if the roof is sloped. (Taglægte).
+    private static Part calcRoofLaths2 (Carport carport) {
+            return new Part("38x73mm. Taglægte T1. Rygsten",540,21,"Toplægte til montering af rygsten.", 29.99);
+    }
+            
 }

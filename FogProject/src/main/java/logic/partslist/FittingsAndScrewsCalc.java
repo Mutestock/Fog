@@ -155,7 +155,7 @@ public class FittingsAndScrewsCalc {
 
     private static Part getScrewsFittingsAngle(LinkedList<Part> boM, LinkedList<Part> boMScrews) {
         double amount = (getPart("Fittings right", boMScrews).getAmount() + getPart("Fittings left", boMScrews).getAmount()) * 9;
-        amount += getPart("45x195mm. spærtræ ubh. rem", boM).getAmount() * getPart("Færdigskåret byg-selv-spær ", boM).getAmount();
+        amount += getPart("45x195mm. spærtræ ubh. Carport rem", boM).getAmount() * getPart("Færdigskåret byg-selv-spær ", boM).getAmount();
         int ramount = (int) Math.ceil(amount / 250);
         return new Part("Screws fittings Angled", ramount, "Til montering af universalbeslag	+ toplægte", 199);
     }
