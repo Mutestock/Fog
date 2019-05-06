@@ -23,12 +23,13 @@ public class FittingsAndScrewsCalc {
             boMScrews.add(getScrewsFittings(boM, boMScrews));
             boMScrews.add(getBoardBolts(boM, carport));
             boMScrews.add(getSquarePiece(boM, carport));
-            boMScrews.add(getCoveringScrews(boM, true));
-            boMScrews.add(getCoveringScrews(boM, false));
+
             if (carport.getShed() != null) {
                 boMScrews.add(getDoorHandle()); // can't see a reason to give any parameters
                 boMScrews.add(getDoorFittings()); // can't see a reason to give any parameters
-                boMScrews.add(getAngledFittings(boM));
+//                boMScrews.add(getAngledFittings(boM));
+//                boMScrews.add(getCoveringScrews(boM, true));
+//                boMScrews.add(getCoveringScrews(boM, false));
             }
         } else {
             boMScrews.add(getUniversalFittingsAngle(boM, true));
@@ -42,9 +43,9 @@ public class FittingsAndScrewsCalc {
             if (carport.getShed() != null) {
                 boMScrews.add(getDoorHandle()); // can't see a reason to give any parameters
                 boMScrews.add(getDoorFittings()); // can't see a reason to give any parameters
-                boMScrews.add(getAngledFittings(boM));
-                boMScrews.add(getAngledShedCoveringScrews(boM, false));
-                boMScrews.add(getAngledShedCoveringScrews(boM, true));
+//                boMScrews.add(getAngledFittings(boM));
+//                boMScrews.add(getAngledShedCoveringScrews(boM, false));
+//                boMScrews.add(getAngledShedCoveringScrews(boM, true));
             }
         }
 
@@ -129,7 +130,7 @@ public class FittingsAndScrewsCalc {
     }
 
     private static Part getAngledFittings(LinkedList<Part> boM) {// løsholter
-        int amount = getPart("Wooden wall beams", boM).getAmount(); // name should be updated as there is an overlap with something else
+        int amount = getPart("Træ vægs bjælker", boM).getAmount(); // name should be updated as there is an overlap with something else
         return new Part("AngledFittings", amount, "Til montering af løsholter i skur", 25);
     }
 
