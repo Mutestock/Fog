@@ -47,8 +47,8 @@ public class SendInformationCommand extends Command {
             Customer cust = new Customer(-1, fname, lname, address, zipcode, city, phone, email);
             int width = Integer.parseInt(request.getParameter("width"));
             int length = Integer.parseInt(request.getParameter("length"));
-            int slope = 0;
-            if (request.getParameter("slope") != null) {
+            int slope = 0;  
+            if (request.getParameter("slope") != null) { 
                 slope = Integer.parseInt(request.getParameter("slope"));
             }
             String roof = request.getParameter("roof");
