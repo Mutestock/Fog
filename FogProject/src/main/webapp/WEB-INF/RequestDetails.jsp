@@ -33,7 +33,7 @@
             <br>
 
             <h3>Specifikationer</h3>
-            <h4><b>Mål:</b> <%=carport.getLength()%>x<%=carport.getWidth()%>x<%=carport.getHeight()%></h4>
+            <h4><b>Mål:</b> <%=carport.getWidth()%>x<%=carport.getLength()%>x<%=carport.getHeight()%></h4>
             <h4>
                 <% if (roof.getRaised()) {%>
                 <b>Tag med rejsning:</b> <%=roof.getType()%>, <%=roof.getSlope()%> graders hældning

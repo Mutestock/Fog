@@ -54,8 +54,7 @@ public class FittingsAndScrewsCalc {
 
     private static Part getRoofingScrews(int length, int width) {
         double screws = ((length / 100) * (width / 100)) * 12;
-        int screwpacks = (int) Math.round(screws / 200);
-
+        int screwpacks = (int) Math.ceil(screws / 200);
         return new Part("Roofing screws", screwpacks, "Skruer til tagplader", 395);
     }
 
@@ -73,15 +72,15 @@ public class FittingsAndScrewsCalc {
     }
 
     private static Part getScrewsWoodbeam2(LinkedList<Part> boM) {
-        int amount = getPart("Fittings Beam", boM).getAmount() * 8;
-        amount = (int) Math.round(amount / 200);
-        return new Part("Screws for attaching of woodbeam2", amount, "Til montering af stern & vandbrædt", 199);
+        double amount = getPart("Fittings Beam", boM).getAmount() * 8;
+        int ramount = (int) Math.ceil(amount / 200);
+        return new Part("Screws for attaching of woodbeam2", ramount, "Til montering af stern & vandbrædt", 199);
     }
 
     private static Part getScrewsFittings(LinkedList<Part> boM, LinkedList<Part> boMScrews) {
         double amount = (getPart("Fitttings right", boMScrews).getAmount() + getPart("Fitttings left", boMScrews).getAmount()) * 9;
         amount += (getPart("Wooden Rafter Board Beams", boM).getAmount() * 0.60) * 2;
-        int ramount = (int) Math.round(amount / 250);
+        int ramount = (int) Math.ceil(amount / 250);
         return new Part("Screws Perforated", ramount, "Til montering af universalbeslag	+ hulbånd", 199);
     }
 
@@ -113,19 +112,22 @@ public class FittingsAndScrewsCalc {
         } else {
             amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1) + 2;
         }
-        int ramount = (int) Math.round(amount);
+        int ramount = (int) Math.ceil(amount);
         return new Part("Square Pieces", ramount, "Til montering af rem på stolper", 10.11);
     }
 
     // Meget groft estimeret, skal nok kigge på den igen
     private static Part getCoveringScrews(LinkedList<Part> boM, boolean outer) {
         double amount = -1;
+        int ramount = 0;
         if (outer) {
             amount = getPart("Træ vægs bjælker", boM).getAmount() * 8 / 300;
-            return new Part("Coverscrews outer", (int) Math.round(amount), "Til	montering af yderste beklædning", 149);
+            ramount = (int) Math.ceil(amount);
+            return new Part("Coverscrews outer", ramount, "Til	montering af yderste beklædning", 149);
         } else {
             amount = getPart("Træ vægs bjælker", boM).getAmount() * 6 / 300;
-            return new Part("Coverscrews inner", (int) Math.round(amount), "Til	montering af inderste beklædning", 129);
+            ramount = (int) Math.ceil(amount);
+            return new Part("Coverscrews inner", ramount, "Til	montering af inderste beklædning", 129);
         }
     }
 
@@ -145,22 +147,24 @@ public class FittingsAndScrewsCalc {
     private static Part getUniversalFittingsAngle(LinkedList<Part> boM, boolean right) {
         Part fittings = getPart("Færdigskåret byg-selv-spær ", boM);
         if (right) {
-            return new Part("Fittings right", fittings.getAmount() * 8, "Til montering af spær på rem", 25);
+            return new Part("Fittings right", fittings.getAmount(), "Til montering af spær på rem", 25);// ' 8
         } else {
-            return new Part("Fittings left", fittings.getAmount() * 8, "Til montering af spær på rem", 25);
+            return new Part("Fittings left", fittings.getAmount(), "Til montering af spær på rem", 25);// ' 8
         }
     }
 
     private static Part getScrewsFittingsAngle(LinkedList<Part> boM, LinkedList<Part> boMScrews) {
         double amount = (getPart("Fittings right", boMScrews).getAmount() + getPart("Fittings left", boMScrews).getAmount()) * 9;
         amount += getPart("45x195mm. spærtræ ubh. rem", boM).getAmount() * getPart("Færdigskåret byg-selv-spær ", boM).getAmount();
-        return new Part("Screws fittingsAngled", (int) Math.round(amount), "Til montering af universalbeslag	+ toplægte", 199);
+        int ramount = (int) Math.ceil(amount / 250);
+        return new Part("Screws fittings Angled", ramount, "Til montering af universalbeslag	+ toplægte", 199);
     }
 
-//    private static Part getScrewsMsc(LinkedList<Part> boM) {
-//      int amount= getPart("Stern", boM).getAmount()+ getPart("VindSkeder", boM).getAmount()+getPart("Vindkryds", boM).getAmount()+getPart("Vandbræt", boM).getAmount();
-//              return new Part();
-//    }
+    private static Part getScrewsMsc(LinkedList<Part> boM) {
+      double amount= getPart("Stern", boM).getAmount()+ getPart("VindSkeder", boM).getAmount()+getPart("Vindkryds", boM).getAmount()+getPart("Vandbræt", boM).getAmount();
+      int ramount = (int) Math.ceil(amount/200);       
+      return new Part("Screws msc", ramount,"Til montering af Stern, vindskeder, vindkryds & vandbræt",199);
+    }
     private static Part getAngledSquarePiece(LinkedList<Part> boM) {
         Part boardBolts = getPart("Board Bolts", boM);
         return new Part("Square Pieces", boardBolts.getAmount(), "Til montering af rem på stolper", 10.11);
@@ -168,19 +172,24 @@ public class FittingsAndScrewsCalc {
 
     private static Part getAngledShedCoveringScrews(LinkedList<Part> boM, boolean outer) {
         double amount = -1;
+        int ramount = 0;
         if (outer) {
             amount = getPart("Træ vægs bjælker", boM).getAmount() * 6 / 200;
-            return new Part("Coverscrews outer", (int) Math.round(amount), "placeholder", 149);
+            ramount = (int) Math.ceil(amount);
+            return new Part("Coverscrews outer", ramount, "placeholder", 149);
         } else {
             amount = getPart("Træ vægs bjælker", boM).getAmount() * 6 / 350;
-            return new Part("Coverscrews inner", (int) Math.round(amount), "placeholder", 129);
+            ramount = (int) Math.ceil(amount);
+            return new Part("Coverscrews inner", ramount, "placeholder", 129);
         }
     }
 
-//    private static Part getScrewsRoofLath(LinkedList<Part> boM) { // lægter mangler at være lavet
-//        int amount = getPart("Wooden Beam used as the strop", boM).getAmount() * 6;
-//        return new Part("ScrewsRoof Lath", Math.round(amount / 100), "Til montering af yderste beklædning", 189);
-//    }
+    private static Part getScrewsRoofLath(LinkedList<Part> boM) { // lægter mangler at være lavet
+        double amount = getPart("Wooden Beam used as the strop", boM).getAmount() * 6;
+        int ramount = (int) Math.ceil(amount / 100);
+        return new Part("ScrewsRoof Lath", ramount, "Til montering af yderste beklædning", 189);
+    }
+
     private static Part getPart(String name, LinkedList<Part> boM) {
         for (Part p : boM) {
             if (p.getName().equals(name)) {
