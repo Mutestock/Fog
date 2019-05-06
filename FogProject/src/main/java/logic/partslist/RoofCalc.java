@@ -56,7 +56,7 @@ public class RoofCalc {
         System.out.println("Cos + to degrees: " + Math.toDegrees(Math.cos(20)));
         double toDegrees = Math.cos(Math.toRadians((double)carport.getRoof().getSlope()));
         System.out.println("To degrees: " + toDegrees);
-        preCasted = 375 / toDegrees;
+        preCasted = preCasted / toDegrees;
         //System.out.println("precast + to degrees " + preCasted);
         System.out.println("Degrees: " + Math.cos(Math.toDegrees((double) carport.getRoof().getSlope())));
         preCasted = preCasted * 2;
