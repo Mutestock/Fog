@@ -23,9 +23,15 @@ public class RoofCalc {
 
     public static LinkedList<Part> calculateParts(Carport carport) {
         LinkedList<Part> parts = new LinkedList();
-        parts.add(calcTileCount(carport));
-        parts.add(calcRidgeTile(carport));
-        parts.add(calcRidgeTileSlot(carport));
+
+        if (carport.getRoof().getRaised() == true) {
+            parts.add(calcTileCount(carport));
+            parts.add(calcRidgeTile(carport));
+            parts.add(calcRidgeTileSlot(carport));
+        } else {
+            parts.add(calcFlatRoofPlates600(carport));
+            parts.add(calcFlatRoofPlates360(carport));
+        }
 
         Part topBattenSlotPart = new Part("B & C Toplægte holder", topBattenSlot, "monteres på toppen af spæret (til toplægte)", 32.0);
         Part roofTileMatPacksPart = new Part("B & C tagstens bindere & nakkekroge", roofTileMatPacks, "til montering af tagsten, alle ydersten + hver anden fastgøres", 69);
