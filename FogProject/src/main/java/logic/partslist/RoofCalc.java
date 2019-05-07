@@ -28,16 +28,18 @@ public class RoofCalc {
             parts.add(calcTileCount(carport));
             parts.add(calcRidgeTile(carport));
             parts.add(calcRidgeTileSlot(carport));
+            Part topBattenSlotPart = new Part("B & C Toplægte holder", topBattenSlot, "monteres på toppen af spæret (til toplægte)", 32.0);
+            Part roofTileMatPacksPart = new Part("B & C tagstens bindere & nakkekroge", roofTileMatPacks, "til montering af tagsten, alle ydersten + hver anden fastgøres", 69);
+
+            parts.add(topBattenSlotPart);
+            parts.add(roofTileMatPacksPart);
+        } else if (calcFlatRoofPlates600(carport).getAmount() == 0) {
+            parts.add(calcFlatRoofPlates360(carport));
         } else {
             parts.add(calcFlatRoofPlates600(carport));
             parts.add(calcFlatRoofPlates360(carport));
+
         }
-
-        Part topBattenSlotPart = new Part("B & C Toplægte holder", topBattenSlot, "monteres på toppen af spæret (til toplægte)", 32.0);
-        Part roofTileMatPacksPart = new Part("B & C tagstens bindere & nakkekroge", roofTileMatPacks, "til montering af tagsten, alle ydersten + hver anden fastgøres", 69);
-
-        parts.add(topBattenSlotPart);
-        parts.add(roofTileMatPacksPart);
 
         return parts;
     }
