@@ -90,7 +90,10 @@ public class WoodCalc {
 
     //Returns the amount of rafter boards based on the width of the carport. (Spær) 
     private static Part calcRafterBoardNorm1(Carport carport) {
-        return new Part("45x195mm. spærtræ ubh. spær", carport.getWidth(), (int) Math.ceil(Math.ceil(carport.getLength() / 100) * 2), "Spær monteres på rem", 29.99);
+        int length = carport.getWidth();
+        double meter_price = 33;
+        double price = meter_price * (length/100);
+        return new Part("45x195mm. spærtræ ubh. spær", length, (int) Math.ceil(Math.ceil(carport.getLength() / 100) * 2), "Spær monteres på rem", price);
     }
 
     //Returns a part-set, the rafter board, used when the carport roof has a slope. (Spær) 
@@ -118,7 +121,10 @@ public class WoodCalc {
 
     //Returns the two boards used for the headboard (Gavle) 
     private static Part calcHeadboards(Carport carport) {
-        return new Part("45x195mm. spærtræ ubh. Gavle", carport.getLength(), 2, "Gavle monteres på remme i enderne.", 29.99);
+        int length = carport.getLength();
+        double meter_price = 33;
+        double price = meter_price * (length/100);
+        return new Part("45x195mm. spærtræ ubh. Gavle", length, 2, "Gavle monteres på remme i enderne.", price);
     }
 
     //Returns the amount of inter-ties used for the sides of the shed (Løsholter).
