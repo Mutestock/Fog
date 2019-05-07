@@ -28,8 +28,8 @@ public class RoofCalc {
             parts.add(calcTileCount(carport));
             parts.add(calcRidgeTile(carport));
             parts.add(calcRidgeTileSlot(carport));
-            Part topBattenSlotPart = new Part("B & C Toplægte holder", topBattenSlot, "monteres på toppen af spæret (til toplægte)", 32.0);
-            Part roofTileMatPacksPart = new Part("B & C tagstens bindere & nakkekroge", roofTileMatPacks, "til montering af tagsten, alle ydersten + hver anden fastgøres", 69);
+            Part topBattenSlotPart = new Part("B & C Toplægte holder", topBattenSlot, "stk", "monteres på toppen af spæret (til toplægte)", 32.0);
+            Part roofTileMatPacksPart = new Part("B & C tagstens bindere & nakkekroge", roofTileMatPacks, "pk.", "til montering af tagsten, alle ydersten + hver anden fastgøres", 69);
 
             parts.add(topBattenSlotPart);
             parts.add(roofTileMatPacksPart);
@@ -63,7 +63,7 @@ public class RoofCalc {
         preCasted = preCasted * 2;
         preCasted = preCasted * (double) carport.getLength() / 939.27;
         result = (int) Math.ceil(preCasted);
-        return new Part("B & C Dobbelt -s sort", result, "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 4.5);
+        return new Part("B & C Dobbelt -s sort", result, "stk", "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 4.5);
     }
 
     private static Part calcRidgeTile(Carport carport) {
@@ -71,13 +71,13 @@ public class RoofCalc {
         //Length 730 / 21 = 34.7 cm
 
         int result = (int) Math.ceil((carport.getLength() / 34.7));
-        return new Part("B & C Rygsten sort", result, "monteres på toplægte med medfølgende beslag se tagstens vejledning", 100);
+        return new Part("B & C Rygsten sort", result, "stk", "monteres på toplægte med medfølgende beslag se tagstens vejledning", 100);
     }
 
     private static Part calcRidgeTileSlot(Carport carport) {
         //Containers for ridgetiles. Same proportions.
         int result = (int) Math.ceil((carport.getLength() / 34.7));
-        return new Part("B & C rygstensbeslag", result, "Til montering af rygsten", 75);
+        return new Part("B & C rygstensbeslag", result, "stk", "Til montering af rygsten", 75);
     }
 
     private static Part calcFlatRoofPlates600(Carport carport) {
@@ -180,14 +180,14 @@ public class RoofCalc {
 
         int result = ((carport.getLength() + 5) / (600 - 20) >= 1)
                 ? (carport.getWidth() / 100) : 0;
-        return new Part("Plastmo Ecolyte blåtonet", result, "109 x 600. tagplader monteres på spær", 95);
+        return new Part("Plastmo Ecolyte blåtonet", result, "stk", "109 x 600. tagplader monteres på spær", 95);
     }
 
     private static Part calcFlatRoofPlates360(Carport carport) {
 
         int calc = ((carport.getLength() + 5) % (600 - 20) != 0 && ((double) carport.getLength() / (360.0 - 20.0) > 0))
                 ? (carport.getWidth() / 100) : 0;
-        return new Part("Plastmo Ecolyte blåtonet", calc, "109 x 360. tagplader monteres på spær", 65);
+        return new Part("Plastmo Ecolyte blåtonet", calc, "stk", "109 x 360. tagplader monteres på spær", 65);
     }
 
 }

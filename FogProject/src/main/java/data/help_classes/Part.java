@@ -11,8 +11,9 @@ public class Part {
     private final int amount;
     private final String description;
     private final double buyPrice;
+    private final String unit;
 
-    public Part(String name, int length, int amount, String description, double buyPrice) {
+    public Part(String name, int length, int amount, String unit, String description, double buyPrice) {
         if (name == null || name.isEmpty()
                 || amount < 0 || buyPrice < 0
                 || description == null) {
@@ -21,12 +22,13 @@ public class Part {
         this.name = name;
         this.length = length;
         this.amount = amount;
+        this.unit = unit;
         this.description = description;
         this.buyPrice = buyPrice;
     }
 
-    public Part(String name, int amount, String description, double buyPrice) {
-        this(name, -1, amount, description, buyPrice);
+    public Part(String name, int amount, String unit, String description, double buyPrice) {
+        this(name, -1, amount, description, unit, buyPrice);
     }
 
     public String getName() {
@@ -45,10 +47,14 @@ public class Part {
         return length;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
     public double getBuyPrice() {
         return buyPrice;
     }
-    
+
     public double getTotalPrice() {
         return buyPrice * amount;
     }
