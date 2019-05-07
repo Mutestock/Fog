@@ -29,6 +29,7 @@ public abstract class Command {
 
         HashMap<String, Command> actions = new HashMap<String, Command>() {
             {
+                put("ReviewEstimate", new ReviewEstimateCommand());
                 put("FrontPage", new RedirectCommand("FrontPage"));
                 put("SendOffer", new SendOfferCommand());
                 put("PartsList", new PartsListCommand());
@@ -39,6 +40,6 @@ public abstract class Command {
             
             }
         };
-        return actions.getOrDefault(path, new UnknownCommand());
+        return actions.getOrDefault(path, new RedirectCommand("PageNotFound"));
     }
 }

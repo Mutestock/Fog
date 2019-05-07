@@ -69,9 +69,6 @@
                         document.getElementById("raised_roof_type").style.display = "none";
                         document.getElementById("flat_roof_type").style.display = "block";
                     }
-                    document.getElementById("roof_slope").disabled = (!raised);
-                    document.getElementById("flat_roof_type").disabled = (raised);
-                    document.getElementById("raised_roof_type").disabled = (!raised);
                 }
 
                 function switchShed() {
@@ -90,9 +87,6 @@
                         document.getElementById("shed_length").style.display = "block";
                         document.getElementById("shed_cover").style.display = "block";
                     }
-                    document.getElementById("shed_width").disabled = (!enabled);
-                    document.getElementById("shed_length").disabled = (!enabled);
-                    document.getElementById("shed_cover").disabled = (!enabled);
                 }
             </script> 
 
@@ -246,7 +240,7 @@
                 <input type="text" name="comments" >
                 <br>
                 <br>
-                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation" >Send forespørgsel</button>
+                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/ReviewEstimate" >Generer skitsetegning og prisestimat</button>
             </form>
         </div>
     </body>

@@ -45,28 +45,12 @@ public class RoofCalc {
 //        Ratio = 926.4
         int result = 0; 
         double preCasted = 0.0;
-        System.out.println("Width: " + carport.getWidth());
-        System.out.println("Length: " + carport.getLength());
-        System.out.println("Height: " + carport.getHeight());
-        preCasted = Math.ceil(carport.getWidth() / 2);
-        System.out.println(preCasted);
-        System.out.println("Slope:  " + carport.getRoof().getSlope());
-        double degrees = Math.toDegrees(carport.getRoof().getSlope());
-        System.out.println("Cos: " + Math.cos(20)); 
-        System.out.println("Cos + to degrees: " + Math.toDegrees(Math.cos(20)));
+        preCasted = carport.getWidth() / 2;
         double toDegrees = Math.cos(Math.toRadians((double)carport.getRoof().getSlope()));
-        System.out.println("To degrees: " + toDegrees);
-        preCasted = 375 / toDegrees;
-        //System.out.println("precast + to degrees " + preCasted);
-        System.out.println("Degrees: " + Math.cos(Math.toDegrees((double) carport.getRoof().getSlope())));
+        preCasted = preCasted / toDegrees;
         preCasted = preCasted * 2;
-        System.out.println(preCasted);
         preCasted = preCasted * (double) carport.getLength() / 939.27;
-        System.out.println(preCasted);
-
         result = (int) Math.ceil(preCasted);
-
-//        int cm2 = (int) Math.ceil((carport.getLength() * carport.getWidth()) / 876);
         return new Part("B & C Dobbelt -s sort", result, "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 4.5);
     }
 

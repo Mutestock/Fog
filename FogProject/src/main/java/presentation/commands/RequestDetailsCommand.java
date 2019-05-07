@@ -1,19 +1,15 @@
 package presentation.commands;
 
 import data.customExceptions.DataAccessException;
-import data.help_classes.Carport;
 import data.help_classes.Offer;
-import data.help_classes.Part;
 import data.help_classes.PartsList;
 import data.help_classes.Request;
 import java.io.IOException;
-import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
-import logic.partslist.RoofCalc;
 import presentation.Command;
 
 /**
