@@ -22,7 +22,6 @@ public class FittingsAndScrewsCalc {
             boMScrews.add(getUniversalFittings(boM, false, carport)); //  beslag for montering af spær på rem
             boMScrews.add(getScrewsBeams(boM, carport)); // Stern og vandbræt
             boMScrews.add(getScrewsFittings(boM, boMScrews));
-
             boMScrews.add(getBoardBolts(boM, carport));
             boMScrews.add(getSquarePiece(boMScrews, carport));
 
