@@ -22,10 +22,10 @@ public class WoodCalc {
         //Parts for sloped roof
         if (carport.getRoof().getRaised()) {
             parts.add(calcRafterBoardSlope(carport));    //Spær, med rejsning.
-            parts.add(calcFasciaBoards1(carport));       //Stern.
-            parts.add(calcFasciaBoards2(carport));       //Stern.
-            parts.add(calcFasciaBoards3(carport));       //Stern.   
-            parts.add(calcFasciaBoards4(carport));       //Stern.
+            parts.add(calcFasciaBoardsSlope1(carport));  //Sternbrædder til carport del.
+            if (carport.getShed() != null) {
+                parts.add(calcFasciaBoardsSlope2(carport));  //Sternbrædder til skur del.
+            }
             parts.add(calcWaterBoardSlope(carport));     //Vandbræt til vindskeder.
             parts.add(calcBarge(carport));               //Vindskeder.
             parts.add(calcRoofLaths1(carport));          //Taglægte.
@@ -33,10 +33,11 @@ public class WoodCalc {
         } //Parts for nonsloped roof
         else {
             parts.add(calcRafterBoardNorm1(carport));    //Spær, uden rejsning.
-            parts.add(calcFasciaBoardsSlope1(carport));  //Sternbrædder til carport del.
-            if (carport.getShed() != null) {
-                parts.add(calcFasciaBoardsSlope2(carport));  //Sternbrædder til skur del.
-            }
+
+            parts.add(calcFasciaBoards1(carport));       //Stern.
+            parts.add(calcFasciaBoards2(carport));       //Stern.
+            parts.add(calcFasciaBoards3(carport));       //Stern.   
+            parts.add(calcFasciaBoards4(carport));       //Stern.
             parts.add(calcWaterBoard1(carport));         //Vandbræt til sider.
             parts.add(calcWaterBoard2(carport));         //Vandbræt til ender.
         }

@@ -61,6 +61,10 @@
             GENERATE SVG IMAGE HERE
             ======================================
             -->
+            
+            <svg>
+            
+            </svg>
 
             <h3>Estimeret Pris:<b><%=offer.getPrice()%>,- DKK</b></h3>
             <p><b>Fragtomkostninger:</b> <%=offer.getShippingCosts()%>,- DKK</p>
