@@ -5,6 +5,10 @@ import data.help_classes.Part;
 import java.util.LinkedList;
 import data.customExceptions.*;
 import data.help_classes.PartsList;
+import data.help_classes.Request;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logic.LogicToDataImpl;
 
 /**
  *
@@ -42,11 +46,11 @@ public class RoofCalc {
 //        step 2: 180 / cos(20) = 191,55
 //        step 3: 191 * 2 = 383,10
 //        step 4: 386 * 730 / 300 = 939.27
-//        Ratio = 926.4
-        int result = 0; 
+//        Ratio = 939.27
+        int result = 0;
         double preCasted = 0.0;
         preCasted = carport.getWidth() / 2;
-        double toDegrees = Math.cos(Math.toRadians((double)carport.getRoof().getSlope()));
+        double toDegrees = Math.cos(Math.toRadians((double) carport.getRoof().getSlope()));
         preCasted = preCasted / toDegrees;
         preCasted = preCasted * 2;
         preCasted = preCasted * (double) carport.getLength() / 939.27;
@@ -58,14 +62,124 @@ public class RoofCalc {
         //Non-dependant on width
         //Length 730 / 21 = 34.7 cm
 
-        int cm = (int) Math.ceil((carport.getLength() / 34.7));
-        return new Part("B & C Rygsten sort", cm, "monteres på toplægte med medfølgende beslag se tagstens vejledning", 100);
+        int result = (int) Math.ceil((carport.getLength() / 34.7));
+        return new Part("B & C Rygsten sort", result, "monteres på toplægte med medfølgende beslag se tagstens vejledning", 100);
     }
 
     private static Part calcRidgeTileSlot(Carport carport) {
         //Containers for ridgetiles. Same proportions.
-        int cm = (int) Math.ceil((carport.getLength() / 34.7));
-        return new Part("B & C rygstensbeslag", cm, "Til montering af rygsten", 75);
+        int result = (int) Math.ceil((carport.getLength() / 34.7));
+        return new Part("B & C rygstensbeslag", result, "Til montering af rygsten", 75);
+    }
+
+    private static Part calcFlatRoofPlates600(Carport carport) {
+        /*Rules:
+        
+        Modulus
+        
+        plates must overlap with atleast 2 waves
+        Long plates will overlap the small ones
+        In length, plates must overlap with atleast 20cm
+        Plate backside must go 5cm over the edge
+        
+        Length Varies:
+        
+        600
+        480
+        360
+        300
+        240
+        
+        estimate desired length variations from measurements
+        
+        Width is always 109
+        
+        example Dimensions:
+        
+        600x780
+        
+        Length:
+        
+        
+        
+        at the current point in time anything over 600 will result in acquiring an extra 360 plate.
+        
+        Width of single plate = 109
+        
+        600 = width of example
+    
+        trial and error on site : 
+        100 cm ~> 2 plates
+        95cm ~> 1 plate
+        98cm ~> 2 plates
+        97cm ~> 1 plate
+        195 cm ~> 3 plates
+        185 cm ~> 2 plates
+        190 cm ~> 2 plates
+        192 -> 2 plates
+        194 / 2 plates = 97 cm
+        
+        WARNING:
+        ===
+        as per the assignment schematics the width of the schematics must be 100cm or over post waves to fill in the 6 plates defined in the example.
+        The ACTUAL size of the is 97cm. This means, that the schematics in the assignment should use 7 plates and not 6.
+        
+        This means that the length of the waves must tbe set to max 4.5cm instead of the actual 6cm
+        
+        Plate size set to 100 to fit with assignment details.
+        
+        Add to report!!!
+        ===
+        
+        WARNING:
+        ====
+        Actual site uses more variations than 109x600 & 109x360
+        
+        
+        ====
+        
+        
+        
+        600cm / 100 = 6 plates
+        
+        
+        194 / 2 = 
+        
+        200 m to 202 m ~> +2 plates
+        
+        1 plate +
+        
+        (Plate - 20) % 
+        
+        
+        
+        9cm overlay per. 
+        2 wave overlay min. 9cm / 2 = 4.5cm per wave 
+       
+        5cm must extrude from the end of the carport roof
+        
+        (780cm+5) / 600cm = 1
+        780 % 100 = 180
+        180 + 20 = 200
+        360 = 1
+        
+        780 
+        
+        
+        
+        
+         */
+
+        int result = ((carport.getLength() + 5) / (600 - 20) >= 1)
+                ? (carport.getWidth() / 100) : 0;
+        return new Part("Plastmo Ecolyte blåtonet", result, "109 x 600. tagplader monteres på spær", 95);
+    }
+
+    private static Part calcFlatRoofPlates360(Carport carport) {
+
+        int calc = ((carport.getLength() + 5) % (600 - 20) != 0 && ((double) carport.getLength() / (360.0 - 20.0) > 0))
+                ? (carport.getWidth() / 100) : 0;
+        return new Part("Plastmo Ecolyte blåtonet", calc, "109 x 360. tagplader monteres på spær", 65);
     }
 
 }
