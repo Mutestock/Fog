@@ -66,6 +66,8 @@
             <p><b>Fragtomkostninger:</b> <%=offer.getShippingCosts()%>,- DKK</p>
 
             <button class="btn btn-primary btn-lg" onclick="window.location.href = '/FogProject/c/SendInformation';">Send forespørgsel</button>
+            <br>
+            <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
         </div>
     </body>
 </html>

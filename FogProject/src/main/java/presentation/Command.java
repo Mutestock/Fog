@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import presentation.commands.ListRequestsCommand;
 import presentation.commands.RequestDetailsCommand;
 
 /**
@@ -29,12 +30,14 @@ public abstract class Command {
         HashMap<String, Command> actions = new HashMap<String, Command>() {
             {
                 put("ReviewEstimate", new ReviewEstimateCommand());
+                put("FrontPage", new RedirectCommand("FrontPage"));
                 put("SendOffer", new SendOfferCommand());
                 put("PartsList", new PartsListCommand());
                 put("SendInformation", new SendInformationCommand());
                 put("CarportDetails", new CarportDetailsCommand());
                 put("RequestDetails", new RequestDetailsCommand());
                 put("ListRequests", new ListRequestsCommand());
+            
             }
         };
         return actions.getOrDefault(path, new UnknownCommand());

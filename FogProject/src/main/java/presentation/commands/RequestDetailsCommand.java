@@ -1,24 +1,15 @@
 package presentation.commands;
 
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import data.customExceptions.DataAccessException;
-import data.help_classes.Carport;
 import data.help_classes.Offer;
-import data.help_classes.Part;
 import data.help_classes.PartsList;
 import data.help_classes.Request;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.offer.EmailHandler;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
-import logic.partslist.RoofCalc;
 import presentation.Command;
 
 /**
@@ -45,8 +36,7 @@ public class RequestDetailsCommand extends Command {
             PartsList partsList = (PartsList) request.getSession().getAttribute("partsList");
             Offer offer = (Offer) request.getSession().getAttribute("offer");
             if (partsList == null) {
-//                partsList = PRES_TO_LOGIC.getPartsList(r.getCarport());
-                partsList = getTestList(r.getCarport());
+                partsList = PRES_TO_LOGIC.getPartsList(r.getCarport());
                 request.getSession().setAttribute("partsList", partsList);
             }
             if (offer == null) {
@@ -61,17 +51,6 @@ public class RequestDetailsCommand extends Command {
             ex.getCause().printStackTrace();
             request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
         }
-    }
-
-    private PartsList getTestList(Carport carport) {
-        LinkedList<Part> woodPackage = new LinkedList<>();
-        woodPackage.add(new Part("Eldergleam", 211, 2, "Cut it down!", 100.0));
-        woodPackage.add(new Part("Gleamderel", 211, 2, "No, cut this down!", 200.0));
-        LinkedList<Part> roofPackage = RoofCalc.calculateParts(carport);
-        LinkedList<Part> fittingsAndScrews = new LinkedList<>();
-        fittingsAndScrews.add(new Part("Holy Symbols", 2, "Hear em angels singin'.", 5.0));
-        PartsList partsList = new PartsList(woodPackage, roofPackage, fittingsAndScrews);
-        return partsList;
     }
 
 }

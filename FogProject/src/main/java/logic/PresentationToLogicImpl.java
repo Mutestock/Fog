@@ -31,7 +31,7 @@ public class PresentationToLogicImpl implements PresentationToLogic {
     public PartsList getPartsList(Carport carport) {
         LinkedList<Part> woodPackage = WoodCalc.calculateParts(carport);
         LinkedList<Part> roofPackage = RoofCalc.calculateParts(carport);
-        LinkedList<Part> fittingsAndScrews = FittingsAndScrewsCalc.calculateParts(carport);
+        LinkedList<Part> fittingsAndScrews = FittingsAndScrewsCalc.calculateParts(carport, woodPackage);
         return new PartsList(woodPackage, roofPackage, fittingsAndScrews);
     }
 
@@ -48,7 +48,7 @@ public class PresentationToLogicImpl implements PresentationToLogic {
     public void sendOffer(Offer offer) throws DataAccessException {
         LOGIC_TO_DATA.saveOffer(offer);
         try {
-            EmailHandler.mailSend(offer);
+            EmailHandler.sendMail(offer);
         } catch (MessagingException ex) {
             System.out.println("Shit happened in send email");
             ex.printStackTrace();

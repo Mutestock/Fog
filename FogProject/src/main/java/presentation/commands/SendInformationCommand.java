@@ -37,6 +37,36 @@ public class SendInformationCommand extends Command {
         try {
             Offer estimate = (Offer) request.getSession().getAttribute("estimate");
             Request req = estimate.getRequest();
+//=======
+//            String fname = request.getParameter("firstname");
+//           
+//            String lname = request.getParameter("lastname");
+//            String address = request.getParameter("address");
+//            String zipcode = request.getParameter("zipcode");
+//            String city = request.getParameter("city");
+//            String phone = request.getParameter("phone");
+//            String email = request.getParameter("email");
+//            String comments = request.getParameter("comments");
+//            Customer cust = new Customer(-1, fname, lname, address, zipcode, city, phone, email);
+//            int width = Integer.parseInt(request.getParameter("width"));
+//            int length = Integer.parseInt(request.getParameter("length"));
+//            int slope = 0;  
+//            if (request.getParameter("slope") != null) { 
+//                slope = Integer.parseInt(request.getParameter("slope"));
+//            }
+//            String roof = request.getParameter("roof");
+//            Roof nRoof = new Roof(-1, roof, slope);
+//            Shed nShed = null;
+//            if (request.getParameter("shedwidth") != null && request.getParameter("shedlength") != null) {
+//                int swidth = Integer.parseInt(request.getParameter("shedwidth"));
+//                int slength = Integer.parseInt(request.getParameter("shedlength"));
+//                nShed = new Shed(-1, slength, swidth, request.getParameter("walls"));
+//            }
+//            Carport carport = new Carport(-1, length, width, nRoof, nShed);
+//
+//            LocalDateTime now = LocalDateTime.now();
+//            Request req = new Request(-1, now, comments, carport, cust);
+//>>>>>>> 21def12f76ea2732e4488c36b7d01bdfdbc59a20
             pToL.sendRequest(req);
 
         } catch (NumberFormatException x) {
@@ -55,7 +85,7 @@ public class SendInformationCommand extends Command {
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/FogProject/index.html");
+        response.sendRedirect("/FogProject/index.jsp");
     }
 
 }
