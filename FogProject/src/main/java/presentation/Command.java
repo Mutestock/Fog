@@ -40,6 +40,6 @@ public abstract class Command {
             
             }
         };
-        return actions.getOrDefault(path, new UnknownCommand());
+        return actions.getOrDefault(path, new RedirectCommand("PageNotFound"));
     }
 }

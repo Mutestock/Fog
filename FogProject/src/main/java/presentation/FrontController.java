@@ -37,21 +37,9 @@ public class FrontController extends HttpServlet {
             Command command = Command.from(request);
             command.execute(request, response);
         } catch (Exception e) {
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet FrontController</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet FrontController at " + request.getContextPath() + "</h1>");
-                out.println("<h1>error</h1>");
-                out.println("</body>");
-                out.println("</html>");
-                
-                e.printStackTrace();
-            }
+            request.setAttribute("error", "A serious bug occurred. Please contact the programmer.");
+            request.getRequestDispatcher("/WEB-INF/Crash.jsp").forward(request, response);
+            e.printStackTrace();
         }
     }
 
