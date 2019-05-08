@@ -20,7 +20,7 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/FogProject/c/CarportDetails">Custom Carporte</a></li>
-                    <li><a href="/FogProject/c/ListRequests">Se forespørgsler</a></li>
+                    <li><a href="/FogProject/c/EmpLogin">Se forespørgsler</a></li>
                 </ul>
             </div>
         </nav>

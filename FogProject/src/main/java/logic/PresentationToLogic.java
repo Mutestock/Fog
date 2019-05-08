@@ -25,5 +25,7 @@ public interface PresentationToLogic {
     public Offer getOffer(PartsList parts, Request request) throws DataAccessException;
     
     public void sendOffer(Offer offer) throws DataAccessException;
+    
+    public User getUser(String username) throws DataAccessException;
 
 }

@@ -37,6 +37,8 @@ public abstract class Command {
                 put("CarportDetails", new CarportDetailsCommand());
                 put("RequestDetails", new RequestDetailsCommand());
                 put("ListRequests", new ListRequestsCommand());
+                put("EmpLogin", new EmpLoginCommand());
+                put("LoginCheck", new LoginCheckCommand());
             
             }
         };
