@@ -4,6 +4,7 @@
     Author     : Simon Asholt Norup
 --%>
 
+<%@page import="logic.SVG.SVGDrawerFromSide"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="logic.SVG.SVGDrawerFromAbove"%>
 <%@page import="data.help_classes.*"%>
@@ -69,10 +70,18 @@
                 <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
                 <% }%>
 
+                
+                <h4>Skitse ovenfra</h4>
                 <%
-                    SVGDrawerFromAbove SVGdrawer = new SVGDrawerFromAbove();
-                    String drawing = SVGdrawer.drawCarportFlatRoof(carport);
-                    out.print(drawing);
+                    SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove();
+                    String above = SVGdrawer1.drawCarportFlatRoof(carport);
+                    out.print(above);
+                %>    
+                <h4>Skitse sidefra</h4>
+                <%
+                    SVGDrawerFromSide SVGdrawer2 = new SVGDrawerFromSide();
+                    String side = SVGdrawer2.drawCarportFlatRoofSide(carport);
+                    out.print(side);
                 %>
 
 
