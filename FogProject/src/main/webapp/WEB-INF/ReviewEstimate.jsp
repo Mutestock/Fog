@@ -62,6 +62,7 @@
             GENERATE SVG IMAGE HERE
             ======================================
             -->
+
             <% 
                 SVGDrawerFromAbove SVGdrawer = new SVGDrawerFromAbove();
                 String drawing = SVGdrawer.drawCarportFlatRoof(carport);
