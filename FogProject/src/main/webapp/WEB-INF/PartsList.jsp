@@ -68,6 +68,7 @@
                             <td> <b>Vare</b> </td>
                             <td> <b>Længde</b> </td>
                             <td> <b>Antal</b> </td>
+                            <td> <b>Enhed</b> </td>
                             <td> <b>Beskrivelse</b> </td>
                         </tr>
                         <%
@@ -82,6 +83,7 @@
                             <td> -- </td>
                             <% }%>
                             <td><%=part.getAmount()%></td>
+                            <td><%=part.getUnit()%></td>
                             <td><%=part.getDescription()%></td>
                         </tr>
                         <% } %>
