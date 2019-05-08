@@ -20,7 +20,7 @@ public class OfferTest {
     public OfferTest() {
         Roof roof = new Roof(1, "Plastic", 0);
         Shed shed = new Shed(1, 190, 200, "Plastic");
-        Carport carport = new Carport(1, 250, 250, roof, shed);
+        Carport carport = new Carport(1, 500, 500, roof, shed);
         Customer customer = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
         request = new Request(1, LocalDateTime.now(), "Blblabla.", carport, customer);
     }
