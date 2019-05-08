@@ -1,5 +1,11 @@
-Add possibility to switch between "all active orders"-mode and "unread orders"-mode
+Skur bredde og længde er byttet om?
 
-ÆØÅ bliver lavet til om til Ã¦Ã¸Ã¥, når informationen bliver sendt fra JSP-siden over HTTP request til servletten: Der er noget encoding der skal laves om somewhere
+Aflangt skur - problemer!
 
-CarportDetails.jsp overhaul - gerne med javascript
+webgl
+
+overskrifter på styklisten
+
+mellemrum mellem dropdowns
+
+der er byttet rundt på enhed og beskrivelse i Roof og Screws styklisterne

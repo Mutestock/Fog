@@ -4,11 +4,8 @@
     Author     : Simon Asholt Norup
 --%>
 
-<<<<<<< HEAD
 <%@page import="java.text.DecimalFormat"%>
-=======
 <%@page import="logic.SVG.SVGDrawerFromAbove"%>
->>>>>>> 9e336ad8d272bf1079f19e55e21a41b399d93a2d
 <%@page import="data.help_classes.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -67,37 +64,22 @@
                     <% } %>
                 </h4>
 
-<<<<<<< HEAD
+
                 <% if (shed != null) {%>
                 <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
                 <% }%>
-=======
-            <!--
-            ======================================
-            GENERATE SVG IMAGE HERE
-            ======================================
-            -->
 
-            <% 
-                SVGDrawerFromAbove SVGdrawer = new SVGDrawerFromAbove();
-                String drawing = SVGdrawer.drawCarportFlatRoof(carport);
-                out.print(drawing);
-            %>
->>>>>>> 9e336ad8d272bf1079f19e55e21a41b399d93a2d
+                <%
+                    SVGDrawerFromAbove SVGdrawer = new SVGDrawerFromAbove();
+                    String drawing = SVGdrawer.drawCarportFlatRoof(carport);
+                    out.print(drawing);
+                %>
+
 
                 <h3>Kommentarer:</h3>
                 <p><%=r.getComments()%></p>
                 <br>
-
-                <!--
-                ======================================
-                GENERATE SVG IMAGE HERE
-                ======================================
-                -->
-
-                <svg>
-
-                </svg>
+                
                 <%
                     DecimalFormat numberFormat = new DecimalFormat("#.00");
                     String num = numberFormat.format((offer.getPrice()));

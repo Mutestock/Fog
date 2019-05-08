@@ -143,6 +143,16 @@ CREATE TABLE IF NOT EXISTS `carportDB`.`Offer` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `carportDB`.`users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS carportDB.`users`;
+
+CREATE TABLE carportDB.`users` (
+  username VARCHAR(45) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  PRIMARY KEY (username));
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
