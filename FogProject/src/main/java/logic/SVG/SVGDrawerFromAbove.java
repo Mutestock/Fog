@@ -6,22 +6,27 @@ import data.help_classes.Shed;
 public class SVGDrawerFromAbove {
 
     // all the following are Carport specific and numbers are therefore measured in cm
-    private static double startX, startY, eaves, widthWithoutEaves, poleWidth, rBoardWidth, maxWidthBeforeExtraSupport;
-    
-    public SVGDrawerFromAbove(){
+    private static double startX, startY, yEaves, leftEaves, rightEaves, maxDistanceBetweenPoles, widthWithoutEaves, poleWidth, rBoardWidth, rBoardMaxDistance, maxWidthBeforeExtraSupport;
+
+    public SVGDrawerFromAbove() {
         startX = 10;
         startY = 10;
-        
-        eaves = 30;
+
+        yEaves = 30;
+        rightEaves = 5;
+
         poleWidth = 7.5;
-        maxWidthBeforeExtraSupport = 300;
+        maxDistanceBetweenPoles = 480;
+        maxWidthBeforeExtraSupport = 500;
         rBoardWidth = 2;
+        rBoardMaxDistance = 20;
     }
 
     public String drawCarportFlatRoof(Carport carport) {
         Shed shed = carport.getShed();
-        
-        widthWithoutEaves = carport.getWidth() - 2 * eaves;
+
+        leftEaves = carport.getLength() * 0.15;
+        widthWithoutEaves = carport.getWidth() - 2 * yEaves;
 
         StringBuilder sb = new StringBuilder();
         sb.append("<svg x=\"10mm\" y=\"10mm\" width=\"500mm\" height=\"500mm\">");
@@ -31,31 +36,36 @@ public class SVGDrawerFromAbove {
         double rBoardDistance = drawRafterBoards(sb, carport);
         drawCarportPoles(sb, carport);
         if (shed != null) {
-            drawShedOutline(sb, carport, rBoardDistance);
-            drawShedPoles(sb, carport, rBoardDistance);
+            drawShedOutline(sb, carport);
         }
         drawCrossLines(sb, carport, rBoardDistance);
 
         sb.append("</svg>");
         return sb.toString();
     }
-    
-    private void drawCarportOutline(StringBuilder sb, Carport carport){
+
+    private void drawCarportOutline(StringBuilder sb, Carport carport) {
         sb.append(rectangle(startX, startY, carport.getWidth(), carport.getLength()));
     }
-    
-    private void drawPoleLinesAlongLength(StringBuilder sb, Carport carport){
-        sb.append(rectangle(startX, startY + eaves, 5.5, carport.getLength()));
-        sb.append(rectangle(startX, startY + carport.getWidth() - eaves - 5.5, 5.5, carport.getLength()));
-    }
-    
-    private double drawRafterBoards(StringBuilder sb, Carport carport){
 
-        double rBoardMaxDistance = 20;
+    private void drawPoleLinesAlongLength(StringBuilder sb, Carport carport) {
+        Shed shed = carport.getShed();
+        double poleLineWidth = 5.5;
+
+        sb.append(rectangle(startX, startY + yEaves, poleLineWidth, carport.getLength()));
+        sb.append(rectangle(startX, startY + carport.getWidth() - yEaves - poleLineWidth, poleLineWidth, carport.getLength()));
+
+        if (shed != null && shed.getWidth() < widthWithoutEaves - 5) { //-5 because it's probably close enough to entire width
+            sb.append(rectangle(startX, startY + yEaves + shed.getWidth() - poleLineWidth, poleLineWidth, carport.getLength()));
+        }
+    }
+
+    private double drawRafterBoards(StringBuilder sb, Carport carport) {
+
         int rBoardAmount = (int) Math.ceil(carport.getLength() / (rBoardMaxDistance + rBoardWidth));
         double rBoardAvailableSpace = carport.getLength() - rBoardWidth * rBoardAmount;
         double rBoardAvgDistance = rBoardAvailableSpace / (rBoardAmount - 1);
-        
+
         double rBoardX = startX;
         for (int i = 0; i < rBoardAmount; i++) {
             sb.append(rectangle(rBoardX, startY, carport.getWidth(), rBoardWidth));
@@ -65,71 +75,89 @@ public class SVGDrawerFromAbove {
         return rBoardAvgDistance;
     }
 
-    private void drawShedOutline(StringBuilder sb, Carport carport, double xEaves) {
+    private void drawShedOutline(StringBuilder sb, Carport carport) {
         Shed shed = carport.getShed();
-        
-        double shedX = startX + carport.getLength() - shed.getLength() - xEaves;
-        double shedY = startY; // WHERE SHOULD WE PLACE THE SHED??? WHERE SHOULD WE PLACE THE SHED??? WHERE SHOULD WE PLACE THE SHED???
-        if (shed.getWidth() > widthWithoutEaves) {
-            double spaceLeftInWidth = carport.getWidth() - shed.getWidth();
-            shedY += spaceLeftInWidth / 2;
-        } else {
-            shedY += eaves;
-        }
+
+        double shedX = startX + carport.getLength() - shed.getLength() - rightEaves;
+        double shedY = startY + yEaves;
         sb.append(rectangle(shedX, shedY, shed.getWidth(), shed.getLength(), 3));
     }
 
     private void drawCarportPoles(StringBuilder sb, Carport carport) {
         Shed shed = carport.getShed();
 
-        double maxDistance = 150;
         double carportLength = carport.getLength();
         if (shed != null) {
             carportLength -= shed.getLength();
         }
-        double availableSpace = carportLength - carportLength * 0.24 - carportLength * 0.185;
-        int polesOnOneSide = (int) Math.ceil(availableSpace / (maxDistance+poleWidth));
+        double availableSpace = carportLength - leftEaves - rightEaves;
+//        int polesOnOneSide = (int) Math.ceil(availableSpace / (maxDistanceBetweenPoles + poleWidth));
+        int polesOnOneSide = 0;
+        if (carport.getLength() - leftEaves - rightEaves > maxDistanceBetweenPoles) {
+            polesOnOneSide += 3;
+        } else {
+            polesOnOneSide += 2;
+        }
         double leftOverSpace = availableSpace - poleWidth * polesOnOneSide;
         double poleAvgDistance = leftOverSpace / (polesOnOneSide - 1);
 
-        double poleX = startX + carportLength * 0.185;
-        for (int i = 0; i < polesOnOneSide; i++) {
-            sb.append(rectangle(poleX, startY + eaves, poleWidth, poleWidth, 2));
-            sb.append(rectangle(poleX, startY + carport.getWidth() - eaves - poleWidth, poleWidth, poleWidth, 2));
+        double poleX = startX + leftEaves;
+        int poleCount = polesOnOneSide;
+        if (shed != null){
+            poleCount--; 
+        }
+        for (int i = 0; i < poleCount; i++) {
+            sb.append(rectangle(poleX, startY + yEaves, poleWidth, poleWidth, 2));
+            sb.append(rectangle(poleX, startY + carport.getWidth() - yEaves - poleWidth, poleWidth, poleWidth, 2));
             poleX += poleWidth;
             poleX += poleAvgDistance;
         }
         
-        if (carport.getWidth() > maxWidthBeforeExtraSupport) {
-            sb.append(rectangle(startX, carport.getWidth()/2, poleWidth, poleWidth, 2));
+        if (shed != null) {
+            drawShedPoles(sb, carport);
+        }
+        if (shed != null && shed.getWidth() < widthWithoutEaves - 5) { //-5 because it's probably close enough to entire width
+            drawExtraPoles(sb, carport, poleCount, poleAvgDistance);
         }
     }
-    
-    private void drawShedPoles(StringBuilder sb, Carport carport, double xEaves) {
+
+    private void drawShedPoles(StringBuilder sb, Carport carport) {
         Shed shed = carport.getShed();
-        
-        double poleX = startX+carport.getLength() - xEaves;
-        double poleY = startY+eaves;
+
+        double poleX = startX + carport.getLength() - rightEaves;
+        double poleY = startY + yEaves;
         sb.append(rectangle(poleX - shed.getLength(), poleY, poleWidth, poleWidth, 2));
         sb.append(rectangle(poleX - poleWidth, poleY, poleWidth, poleWidth, 2));
-        poleY = startY+carport.getWidth()-eaves-poleWidth;
+        poleY = startY + carport.getWidth() - yEaves - poleWidth;
+        sb.append(rectangle(poleX - shed.getLength(), poleY, poleWidth, poleWidth, 2));
+        sb.append(rectangle(poleX - poleWidth, poleY, poleWidth, poleWidth, 2));
+    }
+
+    private void drawExtraPoles(StringBuilder sb, Carport carport, int poleCount, double poleAvgDistance) {
+        Shed shed = carport.getShed();
+
+        double poleX = startX + carport.getLength() - rightEaves;
+        double poleY = startY + yEaves + shed.getWidth() - poleWidth;
+        
         sb.append(rectangle(poleX - shed.getLength(), poleY, poleWidth, poleWidth, 2));
         sb.append(rectangle(poleX - poleWidth, poleY, poleWidth, poleWidth, 2));
         
-        if (carport.getWidth() > maxWidthBeforeExtraSupport){
-            sb.append(rectangle(poleX - shed.getLength(), carport.getWidth()/2, poleWidth, poleWidth, 2));
-            sb.append(rectangle(poleX - poleWidth, carport.getWidth()/2, poleWidth, poleWidth, 2));
+        poleX = startX + leftEaves;
+        for (int i = 0; i < poleCount; i++) {
+            sb.append(rectangle(poleX, poleY, poleWidth, poleWidth, 2));
+            poleX += poleWidth;
+            poleX += poleAvgDistance;
         }
     }
-    
-    private void drawCrossLines(StringBuilder sb, Carport carport, double xEaves) {
+
+    private void drawCrossLines(StringBuilder sb, Carport carport, double rBoardDistance) {
         Shed shed = carport.getShed();
-        
-        double x1 = startX+xEaves+rBoardWidth;
-        double y1 = startY+eaves+poleWidth;
-        double y2 = startY+carport.getWidth()-eaves-poleWidth;
-        double x2 = startX+carport.getLength()-xEaves;
-        if (shed == null){
+
+        double x1 = startX + rBoardDistance + rBoardWidth;
+        double y1 = startY + yEaves + poleWidth;
+        double y2 = startY + carport.getWidth() - yEaves - poleWidth;
+        double x2 = startX + carport.getLength() - rightEaves;
+        if (shed == null) {
             sb.append(line(x1, y1, x2, y2, 1.5));
             sb.append(line(x1, y2, x2, y1, 1.5));
         } else {
@@ -138,11 +166,10 @@ public class SVGDrawerFromAbove {
             sb.append(line(x1, y2, x2, y1, 1.5));
         }
     }
-    
-    // ==============================================
-    // ==============================================
-    // ==============================================
 
+    // ==============================================
+    // ==============================================
+    // ==============================================
     private String rectangle(double x, double y, double width, double length) {
         return rectangle(x, y, width, length, 1);
     }
@@ -155,7 +182,7 @@ public class SVGDrawerFromAbove {
         String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill: none\"/>";
         return text;
     }
-    
+
     private String line(double x1, double y1, double x2, double y2, double thickness) {
         x1 = cmToDrawUnits(x1);
         y1 = cmToDrawUnits(y1);
@@ -166,6 +193,6 @@ public class SVGDrawerFromAbove {
     }
 
     private double cmToDrawUnits(double cm) {
-        return cm * 0.3; // measure: 1 cm in real life = 0,2 mm on paper
+        return cm * 0.25; // measure: 1 cm in real life = 0,2 mm on paper
     }
 }
