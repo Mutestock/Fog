@@ -36,7 +36,23 @@ public class SendInformationCommand extends Command {
         final PresentationToLogic pToL = new PresentationToLogicImpl();
         try {
             Offer estimate = (Offer) request.getSession().getAttribute("estimate");
+            String fname = request.getParameter("firstname");
+            String lname = request.getParameter("lastname");
+            String address = request.getParameter("address");
+            String zipcode = request.getParameter("zipcode");
+            String city = request.getParameter("city");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            
+            System.out.println(fname);
+            System.out.println(fname);
+            System.out.println(fname);
+            System.out.println(fname);
+            
+            Customer cust = new Customer(-1, fname, lname, address, zipcode, city, phone, email);
+            System.out.println("Customer: " + cust);
             Request req = estimate.getRequest();
+            req.setCustomer(cust);
 //=======
 //            String fname = request.getParameter("firstname");
 //           

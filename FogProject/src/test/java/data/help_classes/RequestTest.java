@@ -47,7 +47,7 @@ public class RequestTest {
     @Test (expected = IllegalArgumentException.class)
     public void testGetSent() {
         Request request = new Request(1, null, "Blablabla", carport, customer);
-    }
+    }  
 
     /**
      * Test of getComments method, of class Request.

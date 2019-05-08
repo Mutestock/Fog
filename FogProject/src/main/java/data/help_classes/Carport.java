@@ -14,7 +14,6 @@ public class Carport {
     private final Roof roof;
     private final Shed shed;
 
-
     public Carport(int id, int length, int width, Roof roof, Shed shed) {
         if (length <= 0 || width <= 0 || roof == null) {
             throw new IllegalArgumentException();
@@ -52,4 +51,10 @@ public class Carport {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Carport{" + "id=" + id + ", length=" + length + ", width=" + width + ", height=" + height + ", roof=" + roof + ", shed=" + shed + '}';
+    }
+
 }

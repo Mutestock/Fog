@@ -16,7 +16,7 @@ public class Offer {
     private final Request request;
 
     public Offer(int id, LocalDateTime sent, double price, double shipping_costs, Request request) {
-        if (sent == null || price < 0.0 || shipping_costs < 0.0 || request == null) {
+        if (sent == null || price < 0.0 || request == null) {
             throw new IllegalArgumentException();
         }
         this.id = id;

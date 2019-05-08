@@ -4,6 +4,7 @@ package logic;
 import data.customExceptions.DataAccessException;
 import data.help_classes.Offer;
 import data.help_classes.Request;
+import data.help_classes.User;
 import java.util.LinkedList;
 
 /**
@@ -22,5 +23,7 @@ public interface LogicToData {
     public void saveOffer(Offer offer) throws DataAccessException;
     
     public Offer getOffer(int requestID) throws DataAccessException;
+    
+    public User getUser(String username) throws DataAccessException;
 
 }

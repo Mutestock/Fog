@@ -54,4 +54,9 @@ public class PresentationToLogicImpl implements PresentationToLogic {
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public User getUser(String username) throws DataAccessException{
+        return LOGIC_TO_DATA.getUser(username);
+    }
 }

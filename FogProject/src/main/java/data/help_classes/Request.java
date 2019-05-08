@@ -13,11 +13,11 @@ public class Request {
     private final LocalDateTime sent;
     private final String comments;
     private final Carport carport;
-    private final Customer customer;
+    private Customer customer;
     private final boolean hasReceivedOffer;
-    
+
     public Request(int id, LocalDateTime sent, String comments, Carport carport, Customer customer, boolean hasReceivedOffer) {
-        if (sent == null || comments == null || carport == null || customer == null) {
+        if (sent == null || carport == null || comments == null) {
             throw new IllegalArgumentException();
         }
         this.id = id;
@@ -32,6 +32,10 @@ public class Request {
         this(id, sent, comments, carport, customer, false);
     }
 
+    public Request(int id, LocalDateTime sent, String comments, Carport carport) {
+        this(id, sent, comments, carport, null, false);
+    }
+
     public LocalDateTime getSent() {
         return sent;
     }
@@ -43,11 +47,15 @@ public class Request {
     public Carport getCarport() {
         return carport;
     }
-    
+
     public Customer getCustomer() {
         return customer;
     }
     
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public int getId() {
         return id;
     }
@@ -55,5 +63,5 @@ public class Request {
     public boolean hasReceivedOffer() {
         return hasReceivedOffer;
     }
-    
+
 }

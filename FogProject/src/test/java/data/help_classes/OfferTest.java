@@ -60,9 +60,9 @@ public class OfferTest {
     /**
      * Test of getShipping_costs method, of class Offer.
      */
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetShippingCosts() {
-        Offer offer = new Offer(1, LocalDateTime.now(), 2000.0, -1.0, request);
-    }
+//    @Test (expected = IllegalArgumentException.class)
+//    public void testGetShippingCosts() {
+//        Offer offer = new Offer(1, LocalDateTime.now(), 2000.0, -1.0, request);
+//    }
     
 }
