@@ -26,7 +26,7 @@
                 <nav>
                     <ul>
                         <li><a href="/FogProject/c/CarportDetails"> Bestil Carport </a></li>
-                        <li><a href="/FogProject/c/ListRequests"> Admin </a></li>
+                        <li><a href="/FogProject/c/EmpLogin"> Admin </a></li>
                     </ul>
                 </nav>
         

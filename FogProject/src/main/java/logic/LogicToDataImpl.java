@@ -4,16 +4,22 @@ import data.customExceptions.DataAccessException;
 import data.SQL_Impl.DataMapperCustomer;
 import data.DataMapperCustomerInterface;
 import data.DataMapperEmployeeInterface;
+import data.DataMapperUserInterface;
 import data.SQL_Impl.DataMapperEmployee;
+import data.SQL_Impl.DataMapperUser;
 import data.help_classes.Offer;
 import data.help_classes.Request;
+import data.help_classes.User;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logic.LogicToData;
 
 public class LogicToDataImpl implements LogicToData {
 
     DataMapperCustomerInterface customer_dao = new DataMapperCustomer();
     DataMapperEmployeeInterface employee_dao = new DataMapperEmployee();
+    DataMapperUserInterface user_dao = new DataMapperUser();
 
     @Override
     public void saveRequest(Request request) throws DataAccessException {
@@ -47,6 +53,11 @@ public class LogicToDataImpl implements LogicToData {
     @Override
     public Offer getOffer(int requestID) throws DataAccessException {
         return employee_dao.readOffer(requestID);
+    }
+
+    @Override
+    public User getUser(String username) throws DataAccessException {
+        return user_dao.getUser(username);
     }
 
 }

@@ -98,7 +98,7 @@ public class FittingsAndScrewsCalc {
 // algoritmen  mangler også at tage højde for en masse små ting
     private static Part getBoardBolts(LinkedList<Part> boM, Carport carport) {
         double amount = -1;
-        if (carport.getWidth() > 500) {
+        if (carport.getWidth() < 500) {
             if (carport.getShed() == null) {
                 amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1) * 2; // fjerner 1 fordi der altid skal være en for meget
             } else {
@@ -106,11 +106,16 @@ public class FittingsAndScrewsCalc {
             }
         } else {
             if (carport.getShed() == null) {
-                amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1) * 0.66 * 2;
+                amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1)  * 2;
             } else {
-                amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1) * 0.66 * 2 + 4; //  needs further development
-            }
+                if(carport.getShed().getWidth()< carport.getWidth()-60){
+                    amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1) * 2 + 4;   
+            }else{
+                    amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1)*0.8 * 2 + 4;  
+                    }
         }
+      
+    }  
         int ramount = (int) Math.round(amount);
         return new Part("bræddebolt 10 x 120 mm.", ramount,"stk", "Til montering af rem på stolper", 38.33);
     }
