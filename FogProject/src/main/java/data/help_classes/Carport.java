@@ -10,7 +10,7 @@ public class Carport {
     private final int id;
     private final int length;
     private final int width;
-    private final int height = 305;
+    private final int height = 210;
     private final Roof roof;
     private final Shed shed;
 

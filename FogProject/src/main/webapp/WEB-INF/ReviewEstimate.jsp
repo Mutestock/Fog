@@ -4,6 +4,7 @@
     Author     : Simon Asholt Norup
 --%>
 
+<%@page import="logic.SVG.SVGDrawerFromAbove"%>
 <%@page import="data.help_classes.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,10 +62,12 @@
             GENERATE SVG IMAGE HERE
             ======================================
             -->
-            
-            <svg>
-            
-            </svg>
+
+            <% 
+                SVGDrawerFromAbove SVGdrawer = new SVGDrawerFromAbove();
+                String drawing = SVGdrawer.drawCarportFlatRoof(carport);
+                out.print(drawing);
+            %>
 
             <h3>Estimeret Pris:<b><%=offer.getPrice()%>,- DKK</b></h3>
             <p><b>Fragtomkostninger:</b> <%=offer.getShippingCosts()%>,- DKK</p>
