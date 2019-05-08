@@ -27,9 +27,9 @@ public class Customer {
             throw new IllegalArgumentException();
         } 
         int zip_i = Integer.parseInt(zipcode);
-        if (zip_i < 0 || (zip_i >= 3700 && zip_i < 4000)) { // cannot deliver to Bornholm, Færøerne or Grønland
-            throw new IllegalArgumentException();
-        }
+//        if (zip_i < 0 || (zip_i >= 3700 && zip_i < 4000)) { // cannot deliver to Bornholm, Færøerne or Grønland
+//            throw new IllegalArgumentException();
+//        }
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;

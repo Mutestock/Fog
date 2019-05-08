@@ -44,14 +44,7 @@
             <% if (shed != null) {%>
             <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
             <% }%>
-            <br>
-
-            <h3>Kundeoplysninger:</h3>
-            <p><b>Navn:</b> <%=customer.getFullName()%></p>
-            <p><b>Adresse:</b> <%=customer.getAddress()%>, <%=customer.getZipcode()%> <%=customer.getCity()%></p>
-            <p><b>Telefon:</b> <%=customer.getPhone()%></p>
-            <p><b>Mail:</b> <%=customer.getEmail()%></p>
-            <br>
+           
 
             <h3>Kommentarer:</h3>
             <p><%=r.getComments()%></p>
@@ -73,6 +66,10 @@
                 <input name="shippingCosts" type="number" step="0.01" min="0" required="required" value="<%=offer.getShippingCosts()%>"> <p style="display: inline-block;">,- DKK</p>
                 <br><br>
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendOffer">Send det endelige tilbud</button>
+
+
+               
+
             </form>
             <% }%>
             <br>

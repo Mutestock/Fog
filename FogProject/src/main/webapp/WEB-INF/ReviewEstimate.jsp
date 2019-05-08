@@ -4,6 +4,7 @@
     Author     : Simon Asholt Norup
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="data.help_classes.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,58 +21,79 @@
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
         <div style="padding: 20px;">
-            <%
-                Offer offer = (Offer) request.getSession().getAttribute("estimate");
-                Request r = offer.getRequest();
-                Carport carport = r.getCarport();
-                Roof roof = carport.getRoof();
-                Shed shed = carport.getShed();
-                Customer customer = r.getCustomer();
-            %>
-            <h1>Overblik</h1>
-            <br>
+            <form>
 
-            <h3>Specifikationer</h3>
-            <h4><b>Mål:</b> <%=carport.getLength()%>x<%=carport.getWidth()%>x<%=carport.getHeight()%></h4>
-            <h4>
-                <% if (roof.getRaised()) {%>
-                <b>Tag med rejsning:</b> <%=roof.getType()%>, <%=roof.getSlope()%> graders hældning
-                <% } else {%>
-                <b>Fladt tag:</b> <%=roof.getType()%>
-                <% } %>
-            </h4>
-            <% if (shed != null) {%>
-            <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
-            <% }%>
-            <br>
+                <%
+                    Offer offer = (Offer) request.getSession().getAttribute("estimate");
+                    Request r = offer.getRequest();
+                    Carport carport = r.getCarport();
+                    Roof roof = carport.getRoof();
+                    Shed shed = carport.getShed();
+                    Customer customer = r.getCustomer();
+                %>
+                <h1>Overblik</h1>
+                <div  style="display: inline-block; float:right">
 
-            <h3>Kundeoplysninger:</h3>
-            <p><b>Navn:</b> <%=customer.getFullName()%></p>
-            <p><b>Adresse:</b> <%=customer.getAddress()%>, <%=customer.getZipcode()%> <%=customer.getCity()%></p>
-            <p><b>Telefon:</b> <%=customer.getPhone()%></p>
-            <p><b>Mail:</b> <%=customer.getEmail()%></p>
-            <br>
+                    <h4>Fornavn</h4>
+                    <input type="text" name="firstname" required="required">
+                    <h4>Efternavn</h4>
+                    <input type="text" name="lastname" required="required">
+                    <h4>Adresse</h4>
+                    <input type="text" name="address" required="required">
+                    <h4>Postnummer</h4>
+                    <input type="text" name="zipcode" required="required">
+                    <h4>By</h4>
+                    <input type="text" name="city" required="required">
+                    <h4>Telefon</h4>
+                    <input type="text" name="phone" required="required">
+                    <h4>Email</h4>
+                    <input type="text" name="email" required="required">
+                    <h4>Kommentarer</h4>
+                    <input type="text" name="comments" >
+                </div>  
+                <br>
 
-            <h3>Kommentarer:</h3>
-            <p><%=r.getComments()%></p>
-            <br>
+                <h3>Specifikationer</h3>
+                <h4><b>Mål:</b> <%=carport.getLength()%>x<%=carport.getWidth()%>x<%=carport.getHeight()%></h4>
+                <h4>
+                    <% if (roof.getRaised()) {%>
+                    <b>Tag med rejsning:</b> <%=roof.getType()%>, <%=roof.getSlope()%> graders hældning
+                    <% } else {%>
+                    <b>Fladt tag:</b> <%=roof.getType()%>
+                    <% } %>
+                </h4>
 
-            <!--
-            ======================================
-            GENERATE SVG IMAGE HERE
-            ======================================
-            -->
-            
-            <svg>
-            
-            </svg>
+                <% if (shed != null) {%>
+                <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
+                <% }%>
 
-            <h3>Estimeret Pris:<b><%=offer.getPrice()%>,- DKK</b></h3>
-            <p><b>Fragtomkostninger:</b> <%=offer.getShippingCosts()%>,- DKK</p>
+                <h3>Kommentarer:</h3>
+                <p><%=r.getComments()%></p>
+                <br>
 
-            <button class="btn btn-primary btn-lg" onclick="window.location.href = '/FogProject/c/SendInformation';">Send forespørgsel</button>
-            <br><br>
-            <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
+                <!--
+                ======================================
+                GENERATE SVG IMAGE HERE
+                ======================================
+                -->
+
+                <svg>
+
+                </svg>
+                <%
+                    DecimalFormat numberFormat = new DecimalFormat("#.00");
+                    String num = numberFormat.format((offer.getPrice()));
+                %>
+
+                <h3>Estimeret Pris:<b><%=num%>,- DKK</b></h3>
+
+
+
+                <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation">Send forespørgsel</button>
+                <br><br>
+                <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
+
+            </form>
         </div>
     </body>
 </html>

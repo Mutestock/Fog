@@ -222,24 +222,7 @@
                 </select>
                 <br>
                 <br>
-                <h4>Fornavn</h4>
-                <input type="text" name="firstname" required="required">
-                <h4>Efternavn</h4>
-                <input type="text" name="lastname" required="required">
-                <h4>Adresse</h4>
-                <input type="text" name="address" required="required">
-                <h4>Postnummer</h4>
-                <input type="text" name="zipcode" required="required">
-                <h4>By</h4>
-                <input type="text" name="city" required="required">
-                <h4>Telefon</h4>
-                <input type="text" name="phone" required="required">
-                <h4>Email</h4>
-                <input type="text" name="email" required="required">
-                <h4>Kommentarer</h4>
-                <input type="text" name="comments" >
-                <br>
-                <br>
+               
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/ReviewEstimate" >Generer skitsetegning og prisestimat</button>
             </form>
         </div>
