@@ -63,7 +63,7 @@ public class WoodCalc {
         int amount = 0;
 
         //The amount of pillars used for the carport based on length.
-        if (carport.getLength() > lengthBetweenPillars) {
+        if ((carport.getLength() - (5+(carport.getLength()*0.2))) > lengthBetweenPillars) {
             amount += 6;
         } else {
             amount += 4;
@@ -79,7 +79,19 @@ public class WoodCalc {
             } else {
                 amount += 3;
             }
+            
+            //If the shed has a smaller width than the carport, 3 more poles are needed
+            if (carport.getShed().getWidth() < carport.getWidth()-60) {
+                amount += 3;
+                //4 if the carport is long enough
+                if (carport.getLength() - (5+(carport.getLength()*0.2)) > lengthBetweenPillars) {
+                    amount ++;
+                }
+            }
+            
         }
+        
+        
         //Plus one is a spare part.
         amount++;
 

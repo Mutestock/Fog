@@ -172,10 +172,6 @@ public class RoofCalc {
         360 = 1
         
         780 
-        
-        
-        
-        
          */
 
         int result = ((carport.getLength() + 5) / (600 - 20) >= 1)

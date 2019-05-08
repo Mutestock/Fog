@@ -19,7 +19,7 @@ public class Carport {
         if (length <= 0 || width <= 0 || roof == null) {
             throw new IllegalArgumentException();
         }
-        if (shed != null && (length < shed.getLength() || width < shed.getWidth())) {
+        if (shed != null && (length < shed.getLength() || (width-60) < shed.getWidth())) {
             throw new IllegalArgumentException();
         }
         this.id = id;
