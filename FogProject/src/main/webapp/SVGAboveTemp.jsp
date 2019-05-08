@@ -12,8 +12,8 @@
     SVGDrawerFromAbove SVGdrawer = new SVGDrawerFromAbove();
 
     Roof roof = new Roof(1, "Plastic", 0);
-    Shed shed = new Shed(1, 900, 10, "Plastic");
-    Carport carport = new Carport(1, 1000, 70, roof, shed);
+    Shed shed = new Shed(1, 100, 300, "Plastic");
+    Carport carport = new Carport(1, 500, 360, roof, shed);
     String drawing = SVGdrawer.drawCarportFlatRoof(carport);
 %>
 
