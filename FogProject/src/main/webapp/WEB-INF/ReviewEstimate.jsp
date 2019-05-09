@@ -34,24 +34,20 @@
                     Customer customer = r.getCustomer();
                 %>
                 <h1>Overblik</h1>
+                
                 <div  style="display: inline-block; float:right">
-
-                    <h4>Fornavn</h4>
-                    <input type="text" name="firstname" required="required">
-                    <h4>Efternavn</h4>
-                    <input type="text" name="lastname" required="required">
-                    <h4>Adresse</h4>
-                    <input type="text" name="address" required="required">
-                    <h4>Postnummer</h4>
-                    <input type="text" name="zipcode" required="required">
-                    <h4>By</h4>
-                    <input type="text" name="city" required="required">
-                    <h4>Telefon</h4>
-                    <input type="text" name="phone" required="required">
-                    <h4>Email</h4>
-                    <input type="text" name="email" required="required">
-                    <h4>Kommentarer</h4>
-                    <input type="text" name="comments" >
+                    <h4>Skitse ovenfra</h4>
+                    <%
+                        SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove(carport);
+                        String above = SVGdrawer1.drawCarport();
+                        out.print(above);
+                    %>    
+                    <h4>Skitse sidefra</h4>
+                    <%
+                        SVGDrawerFromSide SVGdrawer2 = new SVGDrawerFromSide();
+                        String side = SVGdrawer2.drawCarportFlatRoofSide(carport);
+                        out.print(side);
+                    %>
                 </div>  
                 <br>
 
@@ -65,28 +61,23 @@
                     <% } %>
                 </h4>
 
-
                 <% if (shed != null) {%>
-                <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
+                <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, <br>Vægbeklædning af typen: <i><%=shed.getWallCoverings()%></i></h4>
                 <% }%>
+                <br>
 
-                
-                <h4>Skitse ovenfra</h4>
-                <%
-                    SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove(carport);
-                    String above = SVGdrawer1.drawCarport();
-                    out.print(above);
-                %>    
-                <h4>Skitse sidefra</h4>
-                <%
-                    SVGDrawerFromSide SVGdrawer2 = new SVGDrawerFromSide();
-                    String side = SVGdrawer2.drawCarportFlatRoofSide(carport);
-                    out.print(side);
-                %>
-
-
-                <h3>Kommentarer:</h3>
-                <p><%=r.getComments()%></p>
+                <h3>Personlige oplysninger:</h3>
+                <input placeholder="Fornavn" type="text" name="firstname" required="required"><br>
+                <input placeholder="Efternavn" type="text" name="lastname" required="required"><br>
+                <br>
+                <input placeholder="Adresse" type="text" name="address" required="required"><br>
+                <input placeholder="Postnummer" type="text" name="zipcode" required="required"><br>
+                <input placeholder="By" type="text" name="city" required="required"><br>
+                <br>
+                <input placeholder="Telefon" type="text" name="phone" required="required"><br>
+                <input placeholder="Email" type="text" name="email" required="required"><br>
+                <br>
+                <textarea placeholder="Eventuelle kommentarer" name="comments" cols="40" rows="5"></textarea><br>
                 <br>
                 
                 <%
@@ -95,7 +86,6 @@
                 %>
 
                 <h3>Estimeret Pris:<b><%=num%>,- DKK</b></h3>
-
 
 
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation">Send forespørgsel</button>
