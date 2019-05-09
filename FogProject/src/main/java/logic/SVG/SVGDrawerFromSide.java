@@ -97,16 +97,16 @@ public class SVGDrawerFromSide {
             double shedPole = carport.getLength()-rightEaves-shed.getLength();
             double firstPole = startX+leftEaves;
             sb.append(rectangle(shedPole, startY+22, carport.getHeight()-22, poleWidth));
-            if (shedPole-firstPole > maxDistanceBetweenPoles){
+            /*if (shedPole-firstPole > maxDistanceBetweenPoles){
                 sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22, carport.getHeight()-22, poleWidth));
-            }
+            }*/
         }
         else{
             double lastPole = carport.getLength()-rightEaves;
             double firstPole = startX+leftEaves;
-            if (lastPole-firstPole > maxDistanceBetweenPoles){
+            /*if (lastPole-firstPole > maxDistanceBetweenPoles){
                 sb.append(rectangle(((startX+leftEaves+lastPole)/2), startY+22, carport.getHeight()-22, poleWidth));
-            }
+            }*/
         }
     }
     
@@ -119,16 +119,16 @@ public class SVGDrawerFromSide {
             double shedPole = carport.getLength()-rightEaves-shed.getLength();
             double firstPole = startX+leftEaves;
             sb.append(rectangle(shedPole, startY+22+height+2, carport.getHeight()-22, poleWidth));
-            if (shedPole-firstPole > maxDistanceBetweenPoles){
+            /*if (shedPole-firstPole > maxDistanceBetweenPoles){
                 sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22+height, carport.getHeight()-22, poleWidth));
-            }
+            }*/
         }
         else{
             double lastPole = carport.getLength()-rightEaves;
             double firstPole = startX+leftEaves;
-            if (lastPole-firstPole > maxDistanceBetweenPoles){
+            /*if (lastPole-firstPole > maxDistanceBetweenPoles){
                 sb.append(rectangle(((startX+leftEaves+lastPole)/2), startY+22+height+2, carport.getHeight()-22, poleWidth));
-            }
+            }*/
         }
     }
     
