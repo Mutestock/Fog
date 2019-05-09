@@ -21,6 +21,6 @@ public class EmpLoginCommand extends Command{
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
     }
 }
