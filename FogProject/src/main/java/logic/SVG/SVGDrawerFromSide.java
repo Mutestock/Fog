@@ -1,6 +1,7 @@
 package logic.SVG;
 
 import data.help_classes.Carport;
+import data.help_classes.Roof;
 import data.help_classes.Shed;
 
 /**
@@ -33,8 +34,9 @@ public class SVGDrawerFromSide {
         widthWithoutEaves = carport.getWidth() - 2 * yEaves;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\"100mm\" height=\"80mm\">");
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width="+carport.getWidth()+"height=\"2mm\">");
 
+       
         drawCarportPoles(sb, carport);
         drawCarportRoof(sb, carport);
         drawCarportLengthLine(sb, carport);
@@ -52,8 +54,18 @@ public class SVGDrawerFromSide {
     }
     
     private void drawCarportRoof(StringBuilder sb, Carport carport) {
-        sb.append(rectangle(startX, startY, 9, carport.getLength()));
         sb.append(rectangle(startX, startY+13, 9, carport.getLength()));
+        /*if (carport.getRoof().getRaised()) {
+            Roof roof = carport.getRoof();
+            double angleOfRoof = 90-roof.getSlope();
+            double bigA = carport.getWidth()/2;
+            double roofHeight = Math.sin(Math.toRadians(roof.getSlope()))*(bigA/Math.sin(Math.toRadians((angleOfRoof))));
+            System.out.println(roofHeight);
+            sb.append(rectangle(startX, startY,roofHeight, carport.getLength()));
+        }
+        else {*/
+            sb.append(rectangle(startX, startY, 9, carport.getLength()));
+        //}
     }
     
     private void drawCarportPoles(StringBuilder sb, Carport carport) {

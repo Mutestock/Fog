@@ -29,7 +29,7 @@ public class SVGDrawerFromAbove {
         widthWithoutEaves = carport.getWidth() - 2 * yEaves;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\"100mm\" height="+carport.getWidth()+">");
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width="+carport.getLength()+" height="+carport.getWidth()+">");
 
         drawCarportOutline(sb, carport);
         drawPoleLinesAlongLength(sb, carport);
