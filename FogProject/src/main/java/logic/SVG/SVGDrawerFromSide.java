@@ -33,7 +33,7 @@ public class SVGDrawerFromSide {
         widthWithoutEaves = carport.getWidth() - 2 * yEaves;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\"100mm\" height=\"80mm\">");
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\""+(cmToDrawUnits(carport.getLength())+5)+"mm\" height=\""+(cmToDrawUnits(carport.getHeight())+15)+"mm\">");
 
         drawCarportPoles(sb, carport);
         drawCarportRoof(sb, carport);
