@@ -47,8 +47,8 @@
            
 
             <h3>Kommentarer:</h3>
-            <p><%=r.getComments()%></p>
-            <br>
+            <textarea cols="50" rows="5" readonly><%=r.getComments()%></textarea>
+            <br><br>
 
             <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/PartsList';">Se Stykliste</button>
             <br><br>

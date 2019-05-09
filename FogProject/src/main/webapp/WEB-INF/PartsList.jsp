@@ -95,7 +95,7 @@
                 </div>
             </div>
             <% }%>
-            <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/ListRequests';">Tilbage</button>
+            <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/RequestDetails';">Tilbage</button>
         </div>
     </body>
 </html>
