@@ -56,7 +56,7 @@ public class SVGDrawerFromAbove {
             drawCrossLines(sb, rBoardDistance);
         }
         drawCarportPoles(sb);
-        
+
         drawMeasurements(sb);
         sb.append("</svg>");
         return sb.toString();
@@ -69,11 +69,11 @@ public class SVGDrawerFromAbove {
         double battenAvgDistance = battenAvailableSpace / (battenAmount - 1);
 
         double battenY = startY;
-        sb.append(rectangle(startX + poleLineWidth, battenY+carport.getWidth()/2-poleLineWidth/2, poleLineWidth, carport.getLength() - poleLineWidth * 2));
-        
+        sb.append(rectangle(startX + poleLineWidth, battenY + carport.getWidth() / 2 - poleLineWidth / 2, poleLineWidth, carport.getLength() - poleLineWidth * 2));
+
         for (int i = 0; i < battenAmount; i++) {
             sb.append(rectangle(startX + poleLineWidth, battenY, battenWidth, carport.getLength() - poleLineWidth * 2));
-            sb.append(rectangle(startX + poleLineWidth, battenY+carport.getWidth()/2+distanceToCenter, battenWidth, carport.getLength() - poleLineWidth * 2));
+            sb.append(rectangle(startX + poleLineWidth, battenY + carport.getWidth() / 2 + distanceToCenter, battenWidth, carport.getLength() - poleLineWidth * 2));
             battenY += battenWidth;
             battenY += battenAvgDistance;
         }
@@ -151,7 +151,7 @@ public class SVGDrawerFromAbove {
         } else {
             polesOnOneSide += 2;
         }
-        
+
         double leftOverSpace = availableSpace - poleWidth * polesOnOneSide;
         double poleAvgDistance = leftOverSpace / (polesOnOneSide - 1);
 
@@ -229,18 +229,24 @@ public class SVGDrawerFromAbove {
         sb.append(line(x1, y1, x2, y2, 1.5));
         sb.append(line(x1, y2, x2, y1, 1.5));
     }
-    
-    private void drawMeasurements(StringBuilder sb){
+
+    private void drawMeasurements(StringBuilder sb) {
         Shed shed = carport.getShed();
-        // shed length
-        sb.append(line(startX+carport.getLength()-shed.getLength()-rightEaves, startY+carport.getWidth()+10.0,startX+carport.getLength()-rightEaves,startY+carport.getWidth()+10.0, 2));
-        sb.append(text(startX+carport.getLength()-shed.getLength()/2-rightEaves-25, startY+carport.getWidth()+30, ""+shed.getLength()));
-        // shed width
-        sb.append(line(startX+carport.getLength()+10, startY+yEaves, startX+carport.getLength()+10, startY+yEaves+shed.getWidth(), 2));
-        sb.append(text(startX+carport.getLength()+20, startY+yEaves+shed.getWidth()/2, ""+shed.getWidth()));
-        // carport width
-        sb.append(line(startX+carport.getLength()+90, startY, startX+carport.getLength()+90, startY+carport.getWidth(), 2));
-        sb.append(text(startX+carport.getLength()+100, startY+carport.getWidth()/2, ""+carport.getWidth()));
+        if (shed != null) {
+            // shed length
+            sb.append(line(startX + carport.getLength() - shed.getLength() - rightEaves, startY + carport.getWidth() + 10.0, startX + carport.getLength() - rightEaves, startY + carport.getWidth() + 10.0, 2));
+            sb.append(text(startX + carport.getLength() - shed.getLength() / 2 - rightEaves - 25, startY + carport.getWidth() + 30, "" + shed.getLength()));
+            // shed width
+            sb.append(line(startX + carport.getLength() + 10, startY + yEaves, startX + carport.getLength() + 10, startY + yEaves + shed.getWidth(), 2));
+            sb.append(text(startX + carport.getLength() + 20, startY + yEaves + shed.getWidth() / 2, "" + shed.getWidth()));
+            // carport width
+            sb.append(line(startX + carport.getLength() + 90, startY, startX + carport.getLength() + 90, startY + carport.getWidth(), 2));
+            sb.append(text(startX + carport.getLength() + 100, startY + carport.getWidth() / 2, "" + carport.getWidth()));
+        } else {
+            // carport width
+            sb.append(line(startX + carport.getLength() + 10, startY, startX + carport.getLength() + 10, startY + carport.getWidth(), 2));
+            sb.append(text(startX + carport.getLength() + 20, startY + carport.getWidth() / 2, "" + carport.getWidth()));
+        }
     }
 
     // ==============================================
@@ -253,13 +259,13 @@ public class SVGDrawerFromAbove {
     private String rectangle(double x, double y, double width, double length, double thickness) {
         return rectangle(x, y, width, length, thickness, "rgb(255,255,255)");
     }
-    
+
     private String rectangle(double x, double y, double width, double length, double thickness, String color) {
         x = cmToDrawUnits(x);
         y = cmToDrawUnits(y);
         width = cmToDrawUnits(width);
         length = cmToDrawUnits(length);
-        String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill:"+color+"\"/>";
+        String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill:" + color + "\"/>";
         return text;
     }
 
@@ -271,11 +277,11 @@ public class SVGDrawerFromAbove {
         String text = "<line stroke-dasharray=\"5, 5\" x1=\"" + x1 + "mm\" y1=\"" + y1 + "mm\" x2=\"" + x2 + "mm\" y2=\"" + y2 + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill: none\"/>";
         return text;
     }
-    
-    private String text(double x, double y, String measurement){
+
+    private String text(double x, double y, String measurement) {
         x = cmToDrawUnits(x);
         y = cmToDrawUnits(y);
-        return "<text x=\""+ x +"mm\" y=\""+ y +"mm\" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + measurement + " cm" + "</text>";
+        return "<text x=\"" + x + "mm\" y=\"" + y + "mm\" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + measurement + " cm" + "</text>";
     }
 
     private double cmToDrawUnits(double cm) {

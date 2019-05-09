@@ -67,15 +67,15 @@
                 <br>
 
                 <h3>Personlige oplysninger:</h3>
-                <input placeholder="Fornavn" type="text" name="firstname" required="required"><br>
-                <input placeholder="Efternavn" type="text" name="lastname" required="required"><br>
+                <input placeholder="Fornavn" type="text" name="firstname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Efternavn" type="text" name="lastname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
                 <br>
-                <input placeholder="Adresse" type="text" name="address" required="required"><br>
-                <input placeholder="Postnummer" type="text" name="zipcode" required="required"><br>
-                <input placeholder="By" type="text" name="city" required="required"><br>
+                <input placeholder="Adresse" type="text" name="address" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]+\\s\\d+"><br>
+                <input placeholder="Postnummer" type="text" name="zipcode" required="required" pattern="\\d{4}"><br>
+                <input placeholder="By" type="text" name="city" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
                 <br>
-                <input placeholder="Telefon" type="text" name="phone" required="required"><br>
-                <input placeholder="Email" type="text" name="email" required="required"><br>
+                <input placeholder="Telefon" type="text" name="phone" required="required" pattern="\\d{8}"><br>
+                <input placeholder="Email" type="text" name="email" required="required" pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"><br>
                 <br>
                 <textarea placeholder="Eventuelle kommentarer" name="comments" cols="40" rows="5"></textarea><br>
                 <br>
