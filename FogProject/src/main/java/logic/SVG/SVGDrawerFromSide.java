@@ -34,38 +34,45 @@ public class SVGDrawerFromSide {
         widthWithoutEaves = carport.getWidth() - 2 * yEaves;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width="+carport.getWidth()+"height=\"2mm\">");
-
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\""+(cmToDrawUnits(carport.getLength())+5)+"mm\" height=\""+(cmToDrawUnits(carport.getHeight())+15)+"mm\">");
        
-        drawCarportPoles(sb, carport);
-        drawCarportRoof(sb, carport);
-        drawCarportLengthLine(sb, carport);
-        if (carport.getShed() != null) {
-            drawShedCoverings(sb, carport);
-        }
         
+        if (carport.getRoof().getRaised()) {
+            Roof roof = carport.getRoof();
+            double angleOfRoof = 90-roof.getSlope();
+            double bigA = carport.getWidth()/2;
+            double roofHeight = Math.sin(Math.toRadians(roof.getSlope()))*(bigA/Math.sin(Math.toRadians((angleOfRoof))));
+            drawCarportRaisedRoof(sb, carport, roofHeight);
+        } else {
+            drawCarportPoles(sb, carport);
+            drawCarportFlatRoof(sb, carport);
+            drawCarportLengthLine(sb, carport);
+            if (carport.getShed() != null) {
+                drawShedCoverings(sb, carport);
+            }
+        }
         sb.append("</svg>");
         return sb.toString();
     }
     
     
-    private void drawCarportOutline(StringBuilder sb, Carport carport) {
-        sb.append(rectangle(startX, startY, carport.getHeight(), carport.getLength()));
+    private void drawCarportFlatRoof(StringBuilder sb, Carport carport) {
+        sb.append(rectangle(startX, startY+13, 9, carport.getLength()));
+        sb.append(rectangle(startX, startY, 9, carport.getLength()));
     }
     
-    private void drawCarportRoof(StringBuilder sb, Carport carport) {
-        sb.append(rectangle(startX, startY+13, 9, carport.getLength()));
-        /*if (carport.getRoof().getRaised()) {
-            Roof roof = carport.getRoof();
-            double angleOfRoof = 90-roof.getSlope();
-            double bigA = carport.getWidth()/2;
-            double roofHeight = Math.sin(Math.toRadians(roof.getSlope()))*(bigA/Math.sin(Math.toRadians((angleOfRoof))));
-            System.out.println(roofHeight);
-            sb.append(rectangle(startX, startY,roofHeight, carport.getLength()));
+    private void drawCarportRaisedRoof(StringBuilder sb, Carport carport, double roofHeight) {
+        sb.append(rectangle(startX, startY+roofHeight+poleWidth, 9, carport.getLength()));
+        sb.append(rectangle(startX, startY, 9, carport.getLength()));
+        
+        double shedPole = carport.getLength()-rightEaves-carport.getLength();
+        double amount = Math.floor((carport.getLength()-rightEaves-carport.getLength()-poleWidth)/(poleWidth+0)+1);
+        double distance = (carport.getLength()-rightEaves-carport.getLength() - amount*poleWidth) / (amount-1);
+        
+        for (double i = startX+rightEaves; i < carport.getLength(); i = i + poleWidth + distance) {
+            sb.append(rectangle(i+shedPole+2, startY+poleWidth, roofHeight, poleWidth));
         }
-        else {*/
-            sb.append(rectangle(startX, startY, 9, carport.getLength()));
-        //}
+        
     }
     
     private void drawCarportPoles(StringBuilder sb, Carport carport) {

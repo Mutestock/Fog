@@ -29,8 +29,8 @@ public class SVGDrawerFromAbove {
         widthWithoutEaves = carport.getWidth() - 2 * yEaves;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width="+carport.getLength()+" height="+carport.getWidth()+">");
-
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\""+(cmToDrawUnits(carport.getLength())+5)+"mm\" height=\""+(cmToDrawUnits(carport.getWidth())+5)+"mm\">");
+        
         drawCarportOutline(sb, carport);
         drawPoleLinesAlongLength(sb, carport);
         double rBoardDistance = drawRafterBoards(sb, carport);
@@ -85,15 +85,14 @@ public class SVGDrawerFromAbove {
 
     private void drawCarportPoles(StringBuilder sb, Carport carport) {
         Shed shed = carport.getShed();
-
-        double carportLength = carport.getLength();
+        
+        double availableSpace = carport.getLength() - leftEaves - rightEaves;
         if (shed != null) {
-            carportLength -= shed.getLength();
+            availableSpace -= shed.getLength();
         }
-        double availableSpace = carportLength - leftEaves - rightEaves;
 //        int polesOnOneSide = (int) Math.ceil(availableSpace / (maxDistanceBetweenPoles + poleWidth));
         int polesOnOneSide = 0;
-        if (carport.getLength() - leftEaves - rightEaves > maxDistanceBetweenPoles) {
+        if (availableSpace - leftEaves - rightEaves > maxDistanceBetweenPoles) {
             polesOnOneSide += 3;
         } else {
             polesOnOneSide += 2;
@@ -131,6 +130,13 @@ public class SVGDrawerFromAbove {
         poleY = startY + carport.getWidth() - yEaves - poleWidth;
         sb.append(rectangle(poleX - shed.getLength(), poleY, poleWidth, poleWidth, 2));
         sb.append(rectangle(poleX - poleWidth, poleY, poleWidth, poleWidth, 2));
+        
+        if (shed != null && shed.getLength() > maxDistanceBetweenPoles){
+            poleX = startX+carport.getLength()-rightEaves-shed.getLength()/2-poleWidth/2;
+            sb.append(rectangle(poleX, poleY, poleWidth, poleWidth, 2));
+            poleY = startY + yEaves;
+            sb.append(rectangle(poleX, poleY, poleWidth, poleWidth, 2));
+        }
     }
 
     private void drawExtraPoles(StringBuilder sb, Carport carport, int poleCount, double poleAvgDistance) {
@@ -141,6 +147,11 @@ public class SVGDrawerFromAbove {
         
         sb.append(rectangle(poleX - shed.getLength(), poleY, poleWidth, poleWidth, 2));
         sb.append(rectangle(poleX - poleWidth, poleY, poleWidth, poleWidth, 2));
+        
+        if (shed != null && shed.getLength() > maxDistanceBetweenPoles){
+            poleX -= shed.getLength()/2-poleWidth/2;
+            sb.append(rectangle(poleX, poleY, poleWidth, poleWidth, 2));
+        }
         
         poleX = startX + leftEaves;
         for (int i = 0; i < poleCount; i++) {
