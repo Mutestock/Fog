@@ -73,8 +73,8 @@
                 
                 <h4>Skitse ovenfra</h4>
                 <%
-                    SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove();
-                    String above = SVGdrawer1.drawCarportFlatRoof(carport);
+                    SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove(carport);
+                    String above = SVGdrawer1.drawCarport();
                     out.print(above);
                 %>    
                 <h4>Skitse sidefra</h4>
