@@ -120,7 +120,7 @@ public class SVGDrawerFromSide {
             double firstPole = startX+leftEaves;
             sb.append(rectangle(shedPole, startY+22+height+2, carport.getHeight()-22, poleWidth));
             if (shedPole-firstPole > maxDistanceBetweenPoles){
-                sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22, carport.getHeight()-22, poleWidth));
+                sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22+height, carport.getHeight()-22, poleWidth));
             }
         }
         else{
@@ -142,8 +142,6 @@ public class SVGDrawerFromSide {
         sb.append(line(startX, startY+carport.getHeight()+15+height,carport.getLength()+10,startY+carport.getHeight()+15+height,2));
         sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+height+20)+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
-        System.out.println(carport.getHeight() + "THIS IS THE CARPORT HEIGHT");
-        System.out.println(height + "THIS IS THE ROOF HEIGHT");
     }
     
     private void drawShedCoverings(StringBuilder sb, Carport carport) {
@@ -168,14 +166,9 @@ public class SVGDrawerFromSide {
         }
     }
     
-    
-    
     private String rectangle(double x, double y, double width, double length) {
         return rectangle(x, y, width, length, 1);
     }
-
-    
-    
     
     private String rectangle(double x, double y, double width, double length, double thickness) {
         x = cmToDrawUnits(x);
