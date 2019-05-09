@@ -43,6 +43,10 @@ public class SVGDrawerFromSide {
             double bigA = carport.getWidth()/2;
             double roofHeight = Math.sin(Math.toRadians(roof.getSlope()))*(bigA/Math.sin(Math.toRadians((angleOfRoof))));
             drawCarportRaisedRoof(sb, carport, roofHeight);
+            drawCarportPoles(sb, carport, roofHeight);
+            if (carport.getShed() != null) {
+                drawShedCoverings(sb, carport, roofHeight);
+            }
         } else {
             drawCarportPoles(sb, carport);
             drawCarportFlatRoof(sb, carport);
@@ -62,6 +66,8 @@ public class SVGDrawerFromSide {
     }
     
     private void drawCarportRaisedRoof(StringBuilder sb, Carport carport, double roofHeight) {
+        sb.append(rectangle(startX, startY+poleWidth, roofHeight+10, poleWidth));
+        sb.append(rectangle(carport.getLength(), startY+poleWidth, roofHeight+10, poleWidth));
         sb.append(rectangle(startX, startY+roofHeight+poleWidth, 9, carport.getLength()));
         sb.append(rectangle(startX, startY, 9, carport.getLength()));
         
@@ -72,6 +78,8 @@ public class SVGDrawerFromSide {
         for (double i = startX+rightEaves; i < carport.getLength(); i = i + poleWidth + distance) {
             sb.append(rectangle(i+shedPole+2, startY+poleWidth, roofHeight, poleWidth));
         }
+        
+        sb.append(rectangle(startX+5, startY+roofHeight+poleWidth+poleWidth, 9, carport.getLength()-5));
         
     }
     
@@ -97,9 +105,37 @@ public class SVGDrawerFromSide {
         }
     }
     
+    private void drawCarportPoles(StringBuilder sb, Carport carport, double height) {
+        sb.append(rectangle(startX+leftEaves, startY+22+height+2, carport.getHeight()-22, poleWidth));
+        sb.append(rectangle(carport.getLength()-rightEaves, startY+22+height+2, carport.getHeight()-22, poleWidth));
+        
+        if (carport.getShed() != null) {
+            Shed shed = carport.getShed();
+            double shedPole = carport.getLength()-rightEaves-shed.getLength();
+            double firstPole = startX+leftEaves;
+            sb.append(rectangle(shedPole, startY+22+height+2, carport.getHeight()-22, poleWidth));
+            if (shedPole-firstPole > maxDistanceBetweenPoles){
+                sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22, carport.getHeight()-22, poleWidth));
+            }
+        }
+        else{
+            double lastPole = carport.getLength()-rightEaves;
+            double firstPole = startX+leftEaves;
+            if (lastPole-firstPole > maxDistanceBetweenPoles){
+                sb.append(rectangle(((startX+leftEaves+lastPole)/2), startY+22+height+2, carport.getHeight()-22, poleWidth));
+            }
+        }
+    }
+    
     private void drawCarportLengthLine(StringBuilder sb, Carport carport) {
         sb.append(line(startX, startY+carport.getHeight()+5,carport.getLength()+10,startY+carport.getHeight()+5,2));
         sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ 230 +" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
+                + " cm" + "</text>");
+    }
+    
+    private void drawCarportLengthLine(StringBuilder sb, Carport carport, double height) {
+        sb.append(line(startX, startY+carport.getHeight()+5,carport.getLength()+10,startY+carport.getHeight()+5,2));
+        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ 230 + height+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
     }
     
@@ -111,6 +147,17 @@ public class SVGDrawerFromSide {
         
         for (double i = 0; i < (carport.getLength()-rightEaves)-(carport.getLength()-rightEaves-shed.getLength()); i = i + poleWidth + distance) {
             sb.append(rectangle(i+shedPole+2, startY+27, carport.getHeight()-28, poleWidth));
+        }
+    }
+    
+    private void drawShedCoverings(StringBuilder sb, Carport carport, double height) {
+        Shed shed = carport.getShed();
+        double shedPole = carport.getLength()-rightEaves-shed.getLength();
+        double amount = Math.floor((carport.getLength()-rightEaves-shed.getLength()-poleWidth)/(poleWidth+0)+1);
+        double distance = (carport.getLength()-rightEaves-shed.getLength() - amount*poleWidth) / (amount-1);
+        
+        for (double i = 0; i < (carport.getLength()-rightEaves)-(carport.getLength()-rightEaves-shed.getLength()); i = i + poleWidth + distance) {
+            sb.append(rectangle(i+shedPole+2, startY+27+height+2, carport.getHeight()-28, poleWidth));
         }
     }
     
@@ -142,7 +189,7 @@ public class SVGDrawerFromSide {
     }
 
     private double cmToDrawUnits(double cm) {
-        return cm * 0.25; // measure: 1 cm in real life = 0,2 mm on paper
+        return cm * 0.25; // measure: 1 cm in real life = 0,25 mm on paper
     }
     
 }

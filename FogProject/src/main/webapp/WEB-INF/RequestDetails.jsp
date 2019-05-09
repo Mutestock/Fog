@@ -4,6 +4,7 @@
     Author     : Simon Asholt Norup
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="data.help_classes.*"%>
 <%@page contentType="text/html" pageEncoding="Windows-1252"%>
 <!DOCTYPE html>
@@ -29,7 +30,10 @@
                 Customer customer = r.getCustomer();
             %>
             <h1>Overblik</h1>
-            <p><b>Forespørgsel ID:</b> <%=r.getId()%> <b>Afsendt:</b> <%=r.getSent().toString()%></p>
+            <% String dateConv = (r.getSent().toString());
+                String received = dateConv.replace("T", " ");
+            %>
+            <p><b>Forespørgsel ID:</b> <%=r.getId()%> <b>Afsendt:</b> <%=received%></p>
             <br>
 
             <h3>Specifikationer</h3>
@@ -44,20 +48,28 @@
             <% if (shed != null) {%>
             <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
             <% }%>
-           
+
 
             <h3>Kommentarer:</h3>
-            <p><%=r.getComments()%></p>
-            <br>
+            <textarea cols="50" rows="5" readonly><%=r.getComments()%></textarea>
+            <br><br>
 
             <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/PartsList';">Se Stykliste</button>
             <br><br>
 
             <% if (r.hasReceivedOffer()) {%>
             <h3>Tilbud afsendt:</h3>
-            <p><%=offer.getSent()%></p>
-            <p><b>Pris:</b> <%=offer.getPrice()%></p>
-            <p><b>Fragtomkostninger:</b> <%=offer.getShippingCosts()%></p>
+            <% dateConv = (offer.getSent().toString());
+                String sent = dateConv.replace("T", " ");
+            %>
+            <p><%=sent%></p>
+            <%
+                DecimalFormat numberFormat = new DecimalFormat("#.00");
+                String price = numberFormat.format((offer.getPrice()));
+                String shippingCosts = numberFormat.format((offer.getShippingCosts()));
+            %>
+            <p><b>Pris:</b> <%=price%>,- DKK</p>
+            <p><b>Fragtomkostninger:</b> <%=shippingCosts%>,- DKK</p>
             <% } else {%>
             <form method = POST>
                 <h4>Pris:</h4>
@@ -68,7 +80,7 @@
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendOffer">Send det endelige tilbud</button>
 
 
-               
+
 
             </form>
             <% }%>

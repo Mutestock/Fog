@@ -18,18 +18,20 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <h1>Log ind</h1>
-        <form method="POST" action="/FogProject/c/LoginCheck">
-            <input name="username" type="text" value="username">
-            <input name="password" type="password" value="password">
-            <input type="submit" value="Log Ind">
-        </form>
-                <%
-            String errormessage = (String) request.getAttribute("errormessage");
-            if (errormessage == null || errormessage.isEmpty()) {
-                errormessage = "";
-            }
-            out.println(errormessage);
-        %>
+        <div style="padding: 20px;">
+            <h1>Log ind som admin:</h1>
+            <form method="POST" action="/FogProject/c/LoginCheck">
+                <input name="username" type="text" placeholder="Brugernavn">
+                <input name="password" type="password" placeholder="Password">
+                <input type="submit" value="Log Ind">
+            </form>
+            <%
+                String errormessage = (String) request.getAttribute("errormessage");
+                if (errormessage == null || errormessage.isEmpty()) {
+                    errormessage = "";
+                }
+                out.println(errormessage);
+            %>
+        </div>
     </body>
 </html>

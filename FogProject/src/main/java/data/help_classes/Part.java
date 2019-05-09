@@ -28,7 +28,7 @@ public class Part {
     }
 
     public Part(String name, int amount, String unit, String description, double buyPrice) {
-        this(name, -1, amount, description, unit, buyPrice);
+        this(name, -1, amount, unit, description, buyPrice);
     }
 
     public String getName() {

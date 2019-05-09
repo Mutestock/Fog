@@ -13,7 +13,7 @@ public class Offer {
     private final LocalDateTime sent;
     private final double price;
     private final double shipping_costs;
-    private final Request request;
+    private Request request;
 
     public Offer(int id, LocalDateTime sent, double price, double shipping_costs, Request request) {
         if (sent == null || price < 0.0 || request == null) {
@@ -40,6 +40,10 @@ public class Offer {
 
     public Request getRequest() {
         return request;
+    }
+    
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
     public int getId() {

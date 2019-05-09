@@ -44,8 +44,6 @@ public class RequestDetailsCommand extends Command {
                 request.getSession().setAttribute("offer", offer);
             }
 
-           
-
             request.getRequestDispatcher("/WEB-INF/RequestDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
