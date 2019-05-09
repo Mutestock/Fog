@@ -52,12 +52,15 @@
                     switch (i) {
                         case 0:
                             currentList = partsList.getWoodPackage();
+                            out.print("<h3>Træ:</h3>");
                             break;
                         case 1:
                             currentList = partsList.getRoofPackage();
+                            out.print("<h3>Tagpakken:</h3>");
                             break;
                         default:
                             currentList = partsList.getFittingsAndScrews();
+                            out.print("<h3>Beslag og skruer:</h3>");
                             break;
                     }
             %>
@@ -92,7 +95,7 @@
                 </div>
             </div>
             <% }%>
-            <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/RequestDetails';">Tilbage</button>
+            <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/ListRequests';">Tilbage</button>
         </div>
     </body>
 </html>
