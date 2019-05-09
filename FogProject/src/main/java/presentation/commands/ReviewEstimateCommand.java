@@ -36,7 +36,7 @@ public class ReviewEstimateCommand extends Command {
             if (request.getParameter("shedwidth") != null && request.getParameter("shedlength") != null) {
                 int swidth = Integer.parseInt(request.getParameter("shedwidth"));
                 int slength = Integer.parseInt(request.getParameter("shedlength"));
-                nShed = new Shed(-1, swidth, slength, request.getParameter("walls"));
+                nShed = new Shed(-1,  slength , swidth, request.getParameter("walls"));
             }
 //            System.out.println(nShed.getLength());
             Carport carport = new Carport(-1, length, width, nRoof, nShed);

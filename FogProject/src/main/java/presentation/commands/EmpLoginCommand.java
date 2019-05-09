@@ -16,7 +16,7 @@ public class EmpLoginCommand extends Command{
         if(request.getSession().getAttribute("user") != null){
             response.sendRedirect("ListRequests");
         }else{
-           request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
+           loadJSP(request, response);
         }
     }
 
