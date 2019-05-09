@@ -29,24 +29,29 @@ public class SVGDrawerFromSide {
     
     public String drawCarportFlatRoofSide(Carport carport) {
         Shed shed = carport.getShed();
-
+        double roofHeight = 0;
+        
         leftEaves = carport.getLength() * 0.15;
         widthWithoutEaves = carport.getWidth() - 2 * yEaves;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\""+(cmToDrawUnits(carport.getLength())+5)+"mm\" height=\""+(cmToDrawUnits(carport.getHeight())+15)+"mm\">");
-       
-        
         if (carport.getRoof().getRaised()) {
             Roof roof = carport.getRoof();
             double angleOfRoof = 90-roof.getSlope();
             double bigA = carport.getWidth()/2;
-            double roofHeight = Math.sin(Math.toRadians(roof.getSlope()))*(bigA/Math.sin(Math.toRadians((angleOfRoof))));
+            roofHeight = Math.sin(Math.toRadians(roof.getSlope()))*(bigA/Math.sin(Math.toRadians((angleOfRoof))));
+        }
+        
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\""+(cmToDrawUnits(carport.getLength())+5)+"mm\" height=\""+(cmToDrawUnits(carport.getHeight())+100+roofHeight)+"mm\">");
+       
+        
+        if (carport.getRoof().getRaised()) {
             drawCarportRaisedRoof(sb, carport, roofHeight);
             drawCarportPoles(sb, carport, roofHeight);
             if (carport.getShed() != null) {
                 drawShedCoverings(sb, carport, roofHeight);
             }
+            drawCarportLengthLine(sb, carport, roofHeight);
         } else {
             drawCarportPoles(sb, carport);
             drawCarportFlatRoof(sb, carport);
@@ -134,9 +139,11 @@ public class SVGDrawerFromSide {
     }
     
     private void drawCarportLengthLine(StringBuilder sb, Carport carport, double height) {
-        sb.append(line(startX, startY+carport.getHeight()+5,carport.getLength()+10,startY+carport.getHeight()+5,2));
-        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ 230 + height+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
+        sb.append(line(startX, startY+carport.getHeight()+15+height,carport.getLength()+10,startY+carport.getHeight()+15+height,2));
+        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+height+20)+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
+        System.out.println(carport.getHeight() + "THIS IS THE CARPORT HEIGHT");
+        System.out.println(height + "THIS IS THE ROOF HEIGHT");
     }
     
     private void drawShedCoverings(StringBuilder sb, Carport carport) {
