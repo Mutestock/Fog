@@ -40,7 +40,7 @@ public class SVGDrawerFromAbove {
         Shed shed = carport.getShed();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\"" + (cmToDrawUnits(carport.getLength()) + 5) + "mm\" height=\"" + (cmToDrawUnits(carport.getWidth()) + 5) + "mm\">");
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\"" + (cmToDrawUnits(carport.getLength()) + 50) + "mm\" height=\"" + (cmToDrawUnits(carport.getWidth()) + 15) + "mm\">");
 
         drawFlatRoofOutline(sb); // will be overdrawn by later methods, if raised roof
         if (shed != null) {
@@ -231,7 +231,16 @@ public class SVGDrawerFromAbove {
     }
     
     private void drawMeasurements(StringBuilder sb){
-        
+        Shed shed = carport.getShed();
+        // shed length
+        sb.append(line(startX+carport.getLength()-shed.getLength()-rightEaves, startY+carport.getWidth()+10.0,startX+carport.getLength()-rightEaves,startY+carport.getWidth()+10.0, 2));
+        sb.append(text(startX+carport.getLength()-shed.getLength()/2-rightEaves-25, startY+carport.getWidth()+30, ""+shed.getLength()));
+        // shed width
+        sb.append(line(startX+carport.getLength()+10, startY+yEaves, startX+carport.getLength()+10, startY+yEaves+shed.getWidth(), 2));
+        sb.append(text(startX+carport.getLength()+20, startY+yEaves+shed.getWidth()/2, ""+shed.getWidth()));
+        // carport width
+        sb.append(line(startX+carport.getLength()+90, startY, startX+carport.getLength()+90, startY+carport.getWidth(), 2));
+        sb.append(text(startX+carport.getLength()+100, startY+carport.getWidth()/2, ""+carport.getWidth()));
     }
 
     // ==============================================
@@ -262,8 +271,14 @@ public class SVGDrawerFromAbove {
         String text = "<line stroke-dasharray=\"5, 5\" x1=\"" + x1 + "mm\" y1=\"" + y1 + "mm\" x2=\"" + x2 + "mm\" y2=\"" + y2 + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill: none\"/>";
         return text;
     }
+    
+    private String text(double x, double y, String measurement){
+        x = cmToDrawUnits(x);
+        y = cmToDrawUnits(y);
+        return "<text x=\""+ x +"mm\" y=\""+ y +"mm\" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + measurement + " cm" + "</text>";
+    }
 
     private double cmToDrawUnits(double cm) {
-        return cm * 0.25; // measure: 1 cm in real life = 0,2 mm on paper
+        return cm * 0.25; // measure: 1 cm in real life = 0,25 mm on paper
     }
 }

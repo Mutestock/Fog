@@ -123,7 +123,7 @@ public class SVGDrawerFromSide {
     }
 
     private double cmToDrawUnits(double cm) {
-        return cm * 0.25; // measure: 1 cm in real life = 0,2 mm on paper
+        return cm * 0.25; // measure: 1 cm in real life = 0,25 mm on paper
     }
     
 }
