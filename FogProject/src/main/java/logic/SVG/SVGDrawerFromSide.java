@@ -111,13 +111,13 @@ public class SVGDrawerFromSide {
     
     private void drawCarportLengthLine(StringBuilder sb, Carport carport) {
         sb.append(line(startX, startY+carport.getHeight()+5,carport.getLength()+10,startY+carport.getHeight()+5,2));
-        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ 230 +" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
+        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+25) +" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
     }
     
     private void drawCarportLengthLine(StringBuilder sb, Carport carport, double height) {
         sb.append(line(startX, startY+carport.getHeight()+15+height,carport.getLength()+10,startY+carport.getHeight()+15+height,2));
-        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+height+20)+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
+        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+height+25)+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
     }
     
