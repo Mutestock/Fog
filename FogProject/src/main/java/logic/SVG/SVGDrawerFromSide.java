@@ -25,11 +25,9 @@ public class SVGDrawerFromSide {
     
     
     public String drawCarportFlatRoofSide(Carport carport) {
-        Shed shed = carport.getShed();
         double roofHeight = 0;
         
         leftEaves = carport.getLength() * 0.15;
-        widthWithoutEaves = carport.getWidth() - 2 * yEaves;
         if (carport.getRoof().getRaised()) {
             Roof roof = carport.getRoof();
             double angleOfRoof = 90-roof.getSlope();
