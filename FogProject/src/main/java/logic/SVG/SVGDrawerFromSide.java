@@ -89,46 +89,28 @@ public class SVGDrawerFromSide {
     }
     
     private void drawCarportPoles(StringBuilder sb, Carport carport) {
-        sb.append(rectangle(startX+leftEaves, startY+22, carport.getHeight()-22, poleWidth));
-        sb.append(rectangle(carport.getLength()-rightEaves, startY+22, carport.getHeight()-22, poleWidth));
+        sb.append(rectangle(startX+leftEaves, startY+22, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
+        sb.append(rectangle(carport.getLength()-rightEaves, startY+22, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
         
         if (carport.getShed() != null) {
             Shed shed = carport.getShed();
             double shedPole = carport.getLength()-rightEaves-shed.getLength();
-            double firstPole = startX+leftEaves;
-            sb.append(rectangle(shedPole, startY+22, carport.getHeight()-22, poleWidth));
-            /*if (shedPole-firstPole > maxDistanceBetweenPoles){
-                sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22, carport.getHeight()-22, poleWidth));
-            }*/
-        }
-        else{
-            double lastPole = carport.getLength()-rightEaves;
-            double firstPole = startX+leftEaves;
-            /*if (lastPole-firstPole > maxDistanceBetweenPoles){
-                sb.append(rectangle(((startX+leftEaves+lastPole)/2), startY+22, carport.getHeight()-22, poleWidth));
-            }*/
+            sb.append(rectangle(shedPole, startY+22, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
         }
     }
     
     private void drawCarportPoles(StringBuilder sb, Carport carport, double height) {
-        sb.append(rectangle(startX+leftEaves, startY+22+height+2, carport.getHeight()-22, poleWidth));
-        sb.append(rectangle(carport.getLength()-rightEaves, startY+22+height+2, carport.getHeight()-22, poleWidth));
+        sb.append(rectangle(startX+leftEaves, startY+22+height+2, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
+        sb.append(rectangle(carport.getLength()-rightEaves, startY+22+height+2, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
         
         if (carport.getShed() != null) {
             Shed shed = carport.getShed();
             double shedPole = carport.getLength()-rightEaves-shed.getLength();
-            double firstPole = startX+leftEaves;
-            sb.append(rectangle(shedPole, startY+22+height+2, carport.getHeight()-22, poleWidth));
-            /*if (shedPole-firstPole > maxDistanceBetweenPoles){
-                sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22+height, carport.getHeight()-22, poleWidth));
-            }*/
-        }
-        else{
-            double lastPole = carport.getLength()-rightEaves;
-            double firstPole = startX+leftEaves;
-            /*if (lastPole-firstPole > maxDistanceBetweenPoles){
-                sb.append(rectangle(((startX+leftEaves+lastPole)/2), startY+22+height+2, carport.getHeight()-22, poleWidth));
-            }*/
+            sb.append(rectangle(shedPole, startY+22+height+2, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
+            if (shed.getLength() > maxDistanceBetweenPoles){
+                double half = shed.getLength()/2;
+                sb.append(rectangle((((carport.getLength()+startX)-rightEaves)-half)-poleWidth, startY+24+height, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
+            }
         }
     }
     
@@ -176,6 +158,24 @@ public class SVGDrawerFromSide {
         width = cmToDrawUnits(width);
         length = cmToDrawUnits(length);
         String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill: none\"/>";
+        return text;
+    }
+    
+    private String rectangle(double x, double y, double width, double length, String color) {
+        x = cmToDrawUnits(x);
+        y = cmToDrawUnits(y);
+        width = cmToDrawUnits(width);
+        length = cmToDrawUnits(length);
+        String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\"; fill:" + color + "\"/>";
+        return text;
+    }
+    
+    private String rectangle(double x, double y, double width, double length, double thickness, String color) {
+        x = cmToDrawUnits(x);
+        y = cmToDrawUnits(y);
+        width = cmToDrawUnits(width);
+        length = cmToDrawUnits(length);
+        String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill:" + color + "\"/>";
         return text;
     }
 
