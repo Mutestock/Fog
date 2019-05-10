@@ -6,6 +6,9 @@ package data.help_classes;
  * @author Simon Asholt Norup
  */
 public class Carport {
+    
+    private static final double widthEaves = 60;
+    private static final double backEaves = 5;
 
     private final int id;
     private final int length;
@@ -18,7 +21,12 @@ public class Carport {
         if (length <= 0 || width <= 0 || roof == null) {
             throw new IllegalArgumentException();
         }
+<<<<<<< HEAD
         if (shed != null && (length < shed.getLength() || (width-60) < shed.getWidth())) {
+=======
+        final double frontEaves = length*0.15;
+        if (shed != null && (length-backEaves-frontEaves < shed.getLength() || width-widthEaves < shed.getWidth())) {
+>>>>>>> c4e25b0095c19b1720fffbf8f5c140d2849d6000
             throw new IllegalArgumentException();
         }
         this.id = id;

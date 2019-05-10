@@ -81,18 +81,46 @@
                         document.getElementById("shed_width").style.display = "none";
                         document.getElementById("shed_length").style.display = "none";
                         document.getElementById("shed_cover").style.display = "none";
-                    } else
+                    } else if (updateAvailableSheds())
                     {
                         document.getElementById("shed_width").style.display = "block";
                         document.getElementById("shed_length").style.display = "block";
                         document.getElementById("shed_cover").style.display = "block";
                     }
                 }
+
+                function updateAvailableSheds() {
+                    var widthDropdown = document.getElementById("carport_width");
+                    var width = widthDropdown.options[widthDropdown.selectedIndex].value;
+                    var lengthDropdown = document.getElementById("carport_length");
+                    var length = lengthDropdown.options[lengthDropdown.selectedIndex].value;
+
+                    if (width === "Vælg bredde" || length === "Vælg længde") {
+                        return false;
+                    }
+                    var backEaves = 5;
+                    var widthEaves = 60;
+                    var frontEaves = length*0.15;
+                    
+                    var shedWidthDropdown = document.getElementById("shed_width");
+                    for (i = 1; i < shedWidthDropdown.options.length; i++) {
+                        var shedWidth = shedWidthDropdown.options[i].value;
+                        var disable = (width-widthEaves < shedWidth);
+                        shedWidthDropdown.options[i].disabled = disable;
+                    }
+                    var shedLengthDropdown = document.getElementById("shed_length");
+                    for (i = 1; i < shedLengthDropdown.options.length; i++) {
+                        var shedLength = shedLengthDropdown.options[i].value;
+                        var disable = (length-backEaves-frontEaves < shedLength);
+                        shedLengthDropdown.options[i].disabled = disable;
+                    }
+                    return true;
+                }
             </script> 
 
             <br><br>
             <form method = POST>
-                <select name="width" style="display: block" >
+                <select id="carport_width" name="width" style="display: block" onchange="switchShed();">
                     <option selected disabled>Vælg bredde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
@@ -113,7 +141,8 @@
                     <option value="720">720 cm</option>
                     <option value="750">750 cm</option>
                 </select>
-                <select name="length" style="display: block">
+
+                <select id="carport_length" name="length" style="display: block" onchange="switchShed();">
                     <option selected disabled>Vælg længde</option>
                     <option value="240">240 cm</option>
                     <option value="270">270 cm</option>
@@ -135,6 +164,8 @@
                     <option value="750">750 cm</option>
                     <option value="780">780 cm</option>
                 </select>
+                <br>
+
                 <select id="roof_slope" name="slope" style="display: none">
                     <option selected disabled>Vælg taghældning</option>
                     <option value="15">15 grader</option>
@@ -150,6 +181,7 @@
                     <option selected disabled>Vælg fladt tag</option>
                     <option value="plasttrapezplader">Plasstrapezplader</option>
                 </select>
+
                 <select id="raised_roof_type" name="roof" style="display: none">
                     <option selected disabled>Vælg tag med rejsning</option>
                     <option value="BetontagstenRød">Betontagsten - Rød</option>
@@ -167,8 +199,8 @@
                     <option value="EternittagB7Rødbrun">Eternittag B7 - Rødbrun</option>
                     <option value="EternittagB7Teglrød">Eternittag B7 - Teglrød</option>
                     <option value="EternittagB7Rødflammet">Eternittag B7 - Rødflammet</option>
-
                 </select>
+                <br>
                 <select id="shed_width" name="shedwidth" style="display: none">
                     <option selected disabled>Vælg skurets bredde</option>
                     <option value="210">210 cm</option>
@@ -190,6 +222,7 @@
                     <option value="690">690 cm</option>
                     <option value="720">720 cm</option>
                 </select>
+
                 <select id="shed_length" name="shedlength" style="display: none">
                     <option selected disabled>Vælg skurets længde</option>
                     <option value="150">150 cm</option>
@@ -215,14 +248,14 @@
 
                 <select id="shed_cover" name="walls" style="display: none">
                     <option selected disabled>Vælg skurets vægbeklædning</option>
-                    <option value="thevoid">Void</option>  
-                    <option value="bones">Suspicious Bones</option>
-                    <option value="pasta">Spaghetti</option>
-                    <option value="oldone">Eldritch Goo</option>
+                    <option value="thevoid">Trykimprægneret træ</option>  
+                    <option value="bones">Skumpaneler</option>
+                    <option value="pasta">Eternitplader</option>
+                    <option value="oldone">Fibercement</option>
                 </select>
                 <br>
                 <br>
-               
+
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/ReviewEstimate" >Generer skitsetegning og prisestimat</button>
             </form>
         </div>

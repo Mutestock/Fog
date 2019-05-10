@@ -32,7 +32,7 @@ public abstract class Command {
                 put("ReviewEstimate", new ReviewEstimateCommand());
                 put("FrontPage", new RedirectCommand("FrontPage"));
                 put("SendOffer", new SendOfferCommand());
-                put("PartsList", new PartsListCommand());
+                put("PartsList", new RedirectCommand("PartsList"));
                 put("SendInformation", new SendInformationCommand());
                 put("CarportDetails", new CarportDetailsCommand());
                 put("RequestDetails", new RequestDetailsCommand());

@@ -20,8 +20,13 @@ public class RequestTest {
     
     public RequestTest() {
         Roof roof = new Roof(1, "Plastic", 0);
+<<<<<<< HEAD
         Shed shed = new Shed(1, 190, 160, "Plastic");
         carport = new Carport(1, 250, 250, roof, shed);
+=======
+        Shed shed = new Shed(1, 190, 190, "Plastic");
+        carport = new Carport(1, 500, 250, roof, shed);
+>>>>>>> c4e25b0095c19b1720fffbf8f5c140d2849d6000
         customer = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
     }
     

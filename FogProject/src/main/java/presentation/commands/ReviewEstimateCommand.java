@@ -36,7 +36,7 @@ public class ReviewEstimateCommand extends Command {
             if (request.getParameter("shedwidth") != null && request.getParameter("shedlength") != null) {
                 int swidth = Integer.parseInt(request.getParameter("shedwidth"));
                 int slength = Integer.parseInt(request.getParameter("shedlength"));
-                nShed = new Shed(-1, swidth, slength, request.getParameter("walls"));
+                nShed = new Shed(-1,  slength , swidth, request.getParameter("walls"));
             }
 //            System.out.println(nShed.getLength());
             Carport carport = new Carport(-1, length, width, nRoof, nShed);
@@ -59,14 +59,8 @@ public class ReviewEstimateCommand extends Command {
                 System.out.println("I am null for some reason");
                 System.out.println("I am null for some reason");
             }
-
-            String comments = request.getParameter("comments");
-            if (comments == null)
-            {
-                comments = "";
-            }
-            System.out.println(comments);
-            Request req = new Request(-1, LocalDateTime.now(), comments, carport);
+            
+            Request req = new Request(-1, LocalDateTime.now(), "", carport);
 
             PartsList partsList = pToL.getPartsList(carport);
             Offer estimate = pToL.getOffer(partsList, req);
