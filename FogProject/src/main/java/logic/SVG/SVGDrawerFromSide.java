@@ -10,7 +10,7 @@ import data.help_classes.Shed;
  */
 public class SVGDrawerFromSide {
     
-    private static double startX, startY, yEaves, leftEaves, rightEaves, maxDistanceBetweenPoles, widthWithoutEaves, poleWidth, rBoardWidth, rBoardMaxDistance, maxWidthBeforeExtraSupport;
+    private static double startX, startY, yEaves, leftEaves, rightEaves, maxDistanceBetweenPoles, poleWidth;
 
     
     public SVGDrawerFromSide() {
@@ -21,9 +21,6 @@ public class SVGDrawerFromSide {
 
         poleWidth = 7.5;
         maxDistanceBetweenPoles = 480;
-        maxWidthBeforeExtraSupport = 500;
-        rBoardWidth = 2;
-        rBoardMaxDistance = 20;
     }
     
     
@@ -158,15 +155,6 @@ public class SVGDrawerFromSide {
         width = cmToDrawUnits(width);
         length = cmToDrawUnits(length);
         String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill: none\"/>";
-        return text;
-    }
-    
-    private String rectangle(double x, double y, double width, double length, String color) {
-        x = cmToDrawUnits(x);
-        y = cmToDrawUnits(y);
-        width = cmToDrawUnits(width);
-        length = cmToDrawUnits(length);
-        String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\"; fill:" + color + "\"/>";
         return text;
     }
     
