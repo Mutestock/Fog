@@ -4,6 +4,8 @@
     Author     : Simon Asholt Norup
 --%>
 
+<%@page import="logic.SVG.SVGDrawerFromSide"%>
+<%@page import="logic.SVG.SVGDrawerFromAbove"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="data.help_classes.*"%>
 <%@page contentType="text/html" pageEncoding="Windows-1252"%>
@@ -16,7 +18,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <!--<link rel="stylesheet" type="text/css" href="../CSS/main.css">-->
+        <link rel="stylesheet" type="text/css" href="../CSS/main.css">
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
@@ -30,6 +32,22 @@
                 Customer customer = r.getCustomer();
             %>
             <h1>Overblik</h1>
+
+            <div  style="display: inline-block; float:right">
+                <h4>Skitse ovenfra</h4>
+                <%
+                    SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove(carport);
+                    String above = SVGdrawer1.drawCarport();
+                    out.print(above);
+                %>    
+                <h4>Skitse sidefra</h4>
+                <%
+                    SVGDrawerFromSide SVGdrawer2 = new SVGDrawerFromSide();
+                    String side = SVGdrawer2.drawCarportFlatRoofSide(carport);
+                    out.print(side);
+                %>
+            </div> 
+            
             <% String dateConv = (r.getSent().toString());
                 String received = dateConv.replace("T", " ");
             %>
@@ -51,7 +69,7 @@
 
 
             <h3>Kommentarer:</h3>
-            <textarea cols="50" rows="5" readonly><%=r.getComments()%></textarea>
+            <textarea cols="50" rows="5" readonly style="resize: none;"><%=r.getComments()%></textarea>
             <br><br>
 
             <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/PartsList';">Se Stykliste</button>
@@ -73,7 +91,7 @@
             <% } else {%>
             <form method = POST>
                 <h4>Pris:</h4>
-                <input name="price" type="number" step="0.01" min="0" required="required" value="<%=offer.getPrice()%>"> <p style="display: inline-block;">,- DKK</p>
+                <input name="price" type="number" step=".01" min="0" required="required" value="<%=offer.getPrice()%>"> <p style="display: inline-block;">,- DKK</p>
                 <h4>Fragtomkostninger:</h4>
                 <input name="shippingCosts" type="number" step="0.01" min="0" required="required" value="<%=offer.getShippingCosts()%>"> <p style="display: inline-block;">,- DKK</p>
                 <br><br>

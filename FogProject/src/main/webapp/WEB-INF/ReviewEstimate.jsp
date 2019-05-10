@@ -77,7 +77,7 @@
                 <input placeholder="Telefon" type="text" name="phone" required="required" pattern="\d{8}"><br>
                 <input placeholder="Email" type="email" name="email" required="required"><br>
                 <br>
-                <textarea placeholder="Eventuelle kommentarer" name="comments" cols="40" rows="5"></textarea><br>
+                <textarea placeholder="Eventuelle kommentarer" name="comments" cols="40" rows="5" style="resize: none;"></textarea><br>
                 <br>
                 
                 <%

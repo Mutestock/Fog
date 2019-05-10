@@ -248,10 +248,10 @@
 
                 <select id="shed_cover" name="walls" style="display: none">
                     <option selected disabled>Vælg skurets vægbeklædning</option>
-                    <option value="thevoid">Trykimprægneret træ</option>  
-                    <option value="bones">Skumpaneler</option>
-                    <option value="pasta">Eternitplader</option>
-                    <option value="oldone">Fibercement</option>
+                    <option value="Trykimprægneret træ">Trykimprægneret træ</option>  
+                    <option value="Skumpaneler">Skumpaneler</option>
+                    <option value="Eternitplader">Eternitplader</option>
+                    <option value="Fibercement">Fibercement</option>
                 </select>
                 <br>
                 <br>
