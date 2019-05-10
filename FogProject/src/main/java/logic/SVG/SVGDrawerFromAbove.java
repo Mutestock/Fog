@@ -204,8 +204,9 @@ public class SVGDrawerFromAbove {
         sb.append(rectangle(poleX - poleWidth, poleY, poleWidth, poleWidth, 3, "rgb(200,200,200)"));
 
         if (shed.getLength() > maxDistanceBetweenPoles) {
-            poleX -= shed.getLength() / 2 - poleWidth / 2;
-            sb.append(rectangle(poleX, poleY, poleWidth, poleWidth, 3));
+            poleX -= shed.getLength() / 2;
+            poleX -= poleWidth / 2;
+            sb.append(rectangle(poleX, poleY, poleWidth, poleWidth, 3, "rgb(200,200,200)"));
         }
 
         poleX = startX + leftEavesToPole;

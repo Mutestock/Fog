@@ -1,11 +1,18 @@
-Skur bredde og længde er byttet om?
+//STORE OPGAVER
 
-Aflangt skur - problemer!
+- Optimering/forbedring af algoritmer (+ensretning af Calc og SVG)
 
-webgl
+- JavaDocs!
 
-overskrifter på styklisten
+- Man skal kunne ændre på indholdet af alle dropdown menus.
 
-mellemrum mellem dropdowns
+- Man skal kunne ændre på alle algoritmernes parametre (fx afstand mellem stolper, eller de forskellige eaves)
 
-der er byttet rundt på enhed og beskrivelse i Roof og Screws styklisterne
+==============================
+//MINDRE OPGAVER
+
+==============================
+
+//STRETCH GOALS//
+
+- webgl
