@@ -64,7 +64,7 @@
                 <% } %>
             </h4>
             <% if (shed != null) {%>
-            <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
+            <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, <br>Vægbeklædning af typen <i><%=shed.getWallCoverings()%></i></h4>
             <% }%>
 
 
