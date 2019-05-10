@@ -59,14 +59,8 @@ public class ReviewEstimateCommand extends Command {
                 System.out.println("I am null for some reason");
                 System.out.println("I am null for some reason");
             }
-
-            String comments = request.getParameter("comments");
-            if (comments == null)
-            {
-                comments = "";
-            }
-            System.out.println(comments);
-            Request req = new Request(-1, LocalDateTime.now(), comments, carport);
+            
+            Request req = new Request(-1, LocalDateTime.now(), "", carport);
 
             PartsList partsList = pToL.getPartsList(carport);
             Offer estimate = pToL.getOffer(partsList, req);

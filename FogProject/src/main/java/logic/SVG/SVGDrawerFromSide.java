@@ -1,6 +1,7 @@
 package logic.SVG;
 
 import data.help_classes.Carport;
+import data.help_classes.Roof;
 import data.help_classes.Shed;
 
 /**
@@ -28,32 +29,63 @@ public class SVGDrawerFromSide {
     
     public String drawCarportFlatRoofSide(Carport carport) {
         Shed shed = carport.getShed();
-
+        double roofHeight = 0;
+        
         leftEaves = carport.getLength() * 0.15;
         widthWithoutEaves = carport.getWidth() - 2 * yEaves;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\""+(cmToDrawUnits(carport.getLength())+5)+"mm\" height=\""+(cmToDrawUnits(carport.getHeight())+15)+"mm\">");
-
-        drawCarportPoles(sb, carport);
-        drawCarportRoof(sb, carport);
-        drawCarportLengthLine(sb, carport);
-        if (carport.getShed() != null) {
-            drawShedCoverings(sb, carport);
+        if (carport.getRoof().getRaised()) {
+            Roof roof = carport.getRoof();
+            double angleOfRoof = 90-roof.getSlope();
+            double bigA = carport.getWidth()/2;
+            roofHeight = Math.sin(Math.toRadians(roof.getSlope()))*(bigA/Math.sin(Math.toRadians((angleOfRoof))));
         }
         
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("<svg x=\"10mm\" y=\"10mm\" width=\""+(cmToDrawUnits(carport.getLength())+5)+"mm\" height=\""+(cmToDrawUnits(carport.getHeight())+100+roofHeight)+"mm\">");
+       
+        
+        if (carport.getRoof().getRaised()) {
+            drawCarportRaisedRoof(sb, carport, roofHeight);
+            drawCarportPoles(sb, carport, roofHeight);
+            if (carport.getShed() != null) {
+                drawShedCoverings(sb, carport, roofHeight);
+            }
+            drawCarportLengthLine(sb, carport, roofHeight);
+        } else {
+            drawCarportPoles(sb, carport);
+            drawCarportFlatRoof(sb, carport);
+            drawCarportLengthLine(sb, carport);
+            if (carport.getShed() != null) {
+                drawShedCoverings(sb, carport);
+            }
+        }
         sb.append("</svg>");
         return sb.toString();
     }
     
     
-    private void drawCarportOutline(StringBuilder sb, Carport carport) {
-        sb.append(rectangle(startX, startY, carport.getHeight(), carport.getLength()));
+    private void drawCarportFlatRoof(StringBuilder sb, Carport carport) {
+        sb.append(rectangle(startX, startY+13, 9, carport.getLength()));
+        sb.append(rectangle(startX, startY, 9, carport.getLength()));
     }
     
-    private void drawCarportRoof(StringBuilder sb, Carport carport) {
+    private void drawCarportRaisedRoof(StringBuilder sb, Carport carport, double roofHeight) {
+        sb.append(rectangle(startX, startY+poleWidth, roofHeight+10, poleWidth));
+        sb.append(rectangle(carport.getLength(), startY+poleWidth, roofHeight+10, poleWidth));
+        sb.append(rectangle(startX, startY+roofHeight+poleWidth, 9, carport.getLength()));
         sb.append(rectangle(startX, startY, 9, carport.getLength()));
-        sb.append(rectangle(startX, startY+13, 9, carport.getLength()));
+        
+        double shedPole = carport.getLength()-rightEaves-carport.getLength();
+        double amount = Math.floor((carport.getLength()-rightEaves-carport.getLength()-poleWidth)/(poleWidth+0)+1);
+        double distance = (carport.getLength()-rightEaves-carport.getLength() - amount*poleWidth) / (amount-1);
+        
+        for (double i = startX+rightEaves; i < carport.getLength(); i = i + poleWidth + distance) {
+            sb.append(rectangle(i+shedPole+2, startY+poleWidth, roofHeight, poleWidth));
+        }
+        
+        sb.append(rectangle(startX+5, startY+roofHeight+poleWidth+poleWidth, 9, carport.getLength()-5));
+        
     }
     
     private void drawCarportPoles(StringBuilder sb, Carport carport) {
@@ -65,22 +97,50 @@ public class SVGDrawerFromSide {
             double shedPole = carport.getLength()-rightEaves-shed.getLength();
             double firstPole = startX+leftEaves;
             sb.append(rectangle(shedPole, startY+22, carport.getHeight()-22, poleWidth));
-            if (shedPole-firstPole > maxDistanceBetweenPoles){
+            /*if (shedPole-firstPole > maxDistanceBetweenPoles){
                 sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22, carport.getHeight()-22, poleWidth));
-            }
+            }*/
         }
         else{
             double lastPole = carport.getLength()-rightEaves;
             double firstPole = startX+leftEaves;
-            if (lastPole-firstPole > maxDistanceBetweenPoles){
+            /*if (lastPole-firstPole > maxDistanceBetweenPoles){
                 sb.append(rectangle(((startX+leftEaves+lastPole)/2), startY+22, carport.getHeight()-22, poleWidth));
-            }
+            }*/
+        }
+    }
+    
+    private void drawCarportPoles(StringBuilder sb, Carport carport, double height) {
+        sb.append(rectangle(startX+leftEaves, startY+22+height+2, carport.getHeight()-22, poleWidth));
+        sb.append(rectangle(carport.getLength()-rightEaves, startY+22+height+2, carport.getHeight()-22, poleWidth));
+        
+        if (carport.getShed() != null) {
+            Shed shed = carport.getShed();
+            double shedPole = carport.getLength()-rightEaves-shed.getLength();
+            double firstPole = startX+leftEaves;
+            sb.append(rectangle(shedPole, startY+22+height+2, carport.getHeight()-22, poleWidth));
+            /*if (shedPole-firstPole > maxDistanceBetweenPoles){
+                sb.append(rectangle(((startX+leftEaves+shedPole)/2), startY+22+height, carport.getHeight()-22, poleWidth));
+            }*/
+        }
+        else{
+            double lastPole = carport.getLength()-rightEaves;
+            double firstPole = startX+leftEaves;
+            /*if (lastPole-firstPole > maxDistanceBetweenPoles){
+                sb.append(rectangle(((startX+leftEaves+lastPole)/2), startY+22+height+2, carport.getHeight()-22, poleWidth));
+            }*/
         }
     }
     
     private void drawCarportLengthLine(StringBuilder sb, Carport carport) {
         sb.append(line(startX, startY+carport.getHeight()+5,carport.getLength()+10,startY+carport.getHeight()+5,2));
         sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ 230 +" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
+                + " cm" + "</text>");
+    }
+    
+    private void drawCarportLengthLine(StringBuilder sb, Carport carport, double height) {
+        sb.append(line(startX, startY+carport.getHeight()+15+height,carport.getLength()+10,startY+carport.getHeight()+15+height,2));
+        sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+height+20)+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
     }
     
@@ -95,14 +155,20 @@ public class SVGDrawerFromSide {
         }
     }
     
-    
+    private void drawShedCoverings(StringBuilder sb, Carport carport, double height) {
+        Shed shed = carport.getShed();
+        double shedPole = carport.getLength()-rightEaves-shed.getLength();
+        double amount = Math.floor((carport.getLength()-rightEaves-shed.getLength()-poleWidth)/(poleWidth+0)+1);
+        double distance = (carport.getLength()-rightEaves-shed.getLength() - amount*poleWidth) / (amount-1);
+        
+        for (double i = 0; i < (carport.getLength()-rightEaves)-(carport.getLength()-rightEaves-shed.getLength()); i = i + poleWidth + distance) {
+            sb.append(rectangle(i+shedPole+2, startY+27+height+2, carport.getHeight()-28, poleWidth));
+        }
+    }
     
     private String rectangle(double x, double y, double width, double length) {
         return rectangle(x, y, width, length, 1);
     }
-
-    
-    
     
     private String rectangle(double x, double y, double width, double length, double thickness) {
         x = cmToDrawUnits(x);
@@ -123,7 +189,7 @@ public class SVGDrawerFromSide {
     }
 
     private double cmToDrawUnits(double cm) {
-        return cm * 0.25; // measure: 1 cm in real life = 0,2 mm on paper
+        return cm * 0.25; // measure: 1 cm in real life = 0,25 mm on paper
     }
     
 }

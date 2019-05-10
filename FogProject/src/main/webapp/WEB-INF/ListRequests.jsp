@@ -51,12 +51,11 @@
                         <tr>
                             
                             <% String dateConv = (r.getSent().toString());
-                            
-                            String split = dateConv.replace("T", " ");
+                            String received = dateConv.replace("T", " ");
                             %>
                             
                             <td><%=r.getId()%></td>
-                            <td><%=split%></td>
+                            <td><%=received%></td>
                             <td><%=r.getCustomer().getFullName()%></td>
                             <td><%=hasReceivedOffer%></td>
 
