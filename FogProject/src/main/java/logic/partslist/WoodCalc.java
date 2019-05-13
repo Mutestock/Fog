@@ -21,43 +21,40 @@ public class WoodCalc {
     public static LinkedList<Part> calculateParts(Carport carport) {
         LinkedList<Part> parts = new LinkedList();
 
-        //Essential parts.                                Danish translation:
-        parts.add(calcPillarAmount(carport));           //Stolpe.
-        parts.add(calcRafterBoardNorm2(carport));       //Rem. carport del.
-        parts.add(calcHeadboards(carport));             //Gavle.
+        //Essential parts.                                      Danish translation:
+        parts.add(calcPillarAmount(carport));                   //Stolpe.
+        parts.add(calcRafterBoardNorm2(carport));               //Rem. carport del.
+        parts.add(calcHeadboards(carport));                     //Gavle.
 
         //Parts for sloped roof
         if (carport.getRoof().getRaised()) {
-            parts.add(calcRafterBoardSlope(carport));    //Spær, med rejsning.
-            parts.add(calcFasciaBoardsSlope1(carport));  //Sternbrædder til carport del.
+            parts.add(calcRafterBoardSlope(carport));           //Spær, med rejsning.
+            parts.add(calcFasciaBoardsSlope1(carport));         //Sternbrædder til carport del.
             if (carport.getShed() != null) {
-                parts.add(calcFasciaBoardsSlope2(carport));  //Sternbrædder til skur del.
-            }
-            parts.add(calcWaterBoardSlope(carport));     //Vandbræt til vindskeder.
-            parts.add(calcBarge(carport));               //Vindskeder.
-            parts.add(calcRoofLaths1(carport));          //Taglægte.
-            parts.add(calcRoofLaths2(carport));          //Taglægte til rygsten.
+                parts.add(calcFasciaBoardsSlope2(carport));}    //Sternbrædder til skur del.
+            parts.add(calcWaterBoardSlope(carport));            //Vandbræt til vindskeder.
+            parts.add(calcBarge(carport));                      //Vindskeder.
+            parts.add(calcRoofLaths1(carport));                 //Taglægte.
+            parts.add(calcRoofLaths2(carport));                 //Taglægte til rygsten.
         } //Parts for nonsloped roof
         else {
-            parts.add(calcRafterBoardNorm1(carport));    //Spær, uden rejsning.
-
-            parts.add(calcFasciaBoards1(carport));       //Stern.
-            parts.add(calcFasciaBoards2(carport));       //Stern.
-            parts.add(calcFasciaBoards3(carport));       //Stern.   
-            parts.add(calcFasciaBoards4(carport));       //Stern.
-            parts.add(calcWaterBoard1(carport));         //Vandbræt til sider.
-            parts.add(calcWaterBoard2(carport));         //Vandbræt til ender.
+            parts.add(calcRafterBoardNorm1(carport));           //Spær, uden rejsning.
+            parts.add(calcFasciaBoards1(carport));              //Stern.
+            parts.add(calcFasciaBoards2(carport));              //Stern.
+            parts.add(calcFasciaBoards3(carport));              //Stern.   
+            parts.add(calcFasciaBoards4(carport));              //Stern.
+            parts.add(calcWaterBoard1(carport));                //Vandbræt til sider.
+            parts.add(calcWaterBoard2(carport));                //Vandbræt til ender.
         }
 
         //Parts for the shed
         if (carport.getShed() != null) {
-            parts.add(calcRafterBoardNorm3(carport));    //Rem. skur del.
-            parts.add(calcInterTies1());                 //Løsholter for side.
-            parts.add(calcInterTies2(carport));          //Løsholter for gavle.
-            parts.add(calcWallCovering(carport));        //Beklædning af skur.
-            parts.add(calcLathdoor(carport));            //Lægte til z på dør.
+            parts.add(calcRafterBoardNorm3(carport));           //Rem. skur del.
+            parts.add(calcInterTies1());                        //Løsholter for side.
+            parts.add(calcInterTies2(carport));                 //Løsholter for gavle.
+            parts.add(calcWallCovering(carport));               //Beklædning af skur.
+            parts.add(calcLathdoor(carport));                   //Lægte til z på dør.
         }
-
         return parts;
     }
 
