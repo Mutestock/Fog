@@ -48,12 +48,6 @@ public class SendInformationCommand extends Command {
             {
                 comments = "";
             }
-            System.out.println(comments);
-            
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
             
             Customer cust = new Customer(-1, fname, lname, address, zipcode, city, phone, email);
             System.out.println("Customer: " + cust);

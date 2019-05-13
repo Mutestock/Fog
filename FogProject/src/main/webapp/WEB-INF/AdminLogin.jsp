@@ -27,9 +27,6 @@
             </form>
             <%
                 String error = (String) request.getAttribute("errormessage");
-                System.out.println(error);
-                System.out.println(error);
-                System.out.println(error);
                 String errormessage = "";
 
                 if (error == null) {
