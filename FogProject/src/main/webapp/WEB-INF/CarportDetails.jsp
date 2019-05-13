@@ -4,6 +4,7 @@
     Author     : Lukas Bjørnvad
 --%>
 
+<%@page import="data.customExceptions.DataAccessException"%>
 <%@page contentType="text/html" pageEncoding="Windows-1252"%>
 <!DOCTYPE html>
 <html>
@@ -26,27 +27,25 @@
         <div class="mainbody">
 
             <h1>Design din egen carport</h1>
-            <h3>og få et godt tilbud!</h3>
+            <h3>og få et godt tilbud!</h3> 
 
             <%
-                if (request.getSession().getAttribute("portError") != null) {
-            %>
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
-                Vælg venligst tilladte valgmuligheder i menuerne.
-            </div>
-            <%      request.getSession().setAttribute("portError", null);
-                }
-
-                if (request.getSession().getAttribute("custError") != null) {
-            %>
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
-                Tjek venligst, at alle felterne for personlige oplysninger indeholder tilladte værdier.
-            </div>
-            <%      request.getSession().setAttribute("custError", null);
+                String error = (String) request.getAttribute("errormessage");
+                String errormessage = "";
+                if (error != null) {
+                    switch (error) { 
+                        case "IllegalArgumentException":
+                            errormessage = "Tjek venligst, at alle felterne for personlige oplysninger indeholder tilladte værdier.";
+                            break;
+                        case "DataAccessException":
+                            errormessage = "Der skete en alvorlig fejl i databasen. Kontakt venligst support.";
+                            break;
+                    }
                 }
             %>
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display = 'none';"><%=errormessage%></span>
+            </div>
 
             <h4>Tag:</h4>
             <input id="roofSwitch" type="checkbox" data-toggle="toggle" data-on="Med rejsning" data-off="Fladt" onchange="switchRoof()">
@@ -100,18 +99,18 @@
                     }
                     var backEaves = 5;
                     var widthEaves = 60;
-                    var frontEaves = length*0.15;
-                    
+                    var frontEaves = length * 0.15;
+
                     var shedWidthDropdown = document.getElementById("shed_width");
                     for (i = 1; i < shedWidthDropdown.options.length; i++) {
                         var shedWidth = shedWidthDropdown.options[i].value;
-                        var disable = (width-widthEaves < shedWidth);
+                        var disable = (width - widthEaves < shedWidth);
                         shedWidthDropdown.options[i].disabled = disable;
                     }
                     var shedLengthDropdown = document.getElementById("shed_length");
                     for (i = 1; i < shedLengthDropdown.options.length; i++) {
                         var shedLength = shedLengthDropdown.options[i].value;
-                        var disable = (length-backEaves-frontEaves < shedLength);
+                        var disable = (length - backEaves - frontEaves < shedLength);
                         shedLengthDropdown.options[i].disabled = disable;
                     }
                     return true;
