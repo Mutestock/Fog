@@ -1,10 +1,13 @@
 package presentation.commands;
 
 import data.customExceptions.DataAccessException;
+import data.customExceptions.EmptySessionException;
 import data.help_classes.Offer;
 import data.help_classes.PartsList;
 import data.help_classes.Request;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +25,11 @@ public class RequestDetailsCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+
+            if (request.getSession().getAttribute("user") == null) {
+                throw new EmptySessionException("Attempt at admin access without admin on session");
+            }
+
             String idParam = request.getParameter("r_id");
             Request r;
             if (idParam == null) {
@@ -48,7 +56,10 @@ public class RequestDetailsCommand extends Command {
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
             request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+        } catch (EmptySessionException ex) {
+            ex.printStackTrace();
+            request.setAttribute("errormessage", "EmptySession");
+            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
         }
     }
-
 }

@@ -26,8 +26,19 @@
                 <input type="submit" value="Log Ind">
             </form>
             <%
-                String errormessage = (String) request.getAttribute("errormessage");
-                if (errormessage == null || errormessage.isEmpty()) {
+                String error = (String) request.getAttribute("errormessage");
+                System.out.println(error);
+                System.out.println(error);
+                System.out.println(error);
+                String errormessage = "";
+
+                if (error == null) {
+                    errormessage = "";
+                } else if (error.equals("WrongCredentials")) {
+                    errormessage = "<p style=\"color:red\">Incorrect credentials</p>";
+                } else if (error.equals("EmptySession")) {
+                    errormessage = "<p style=\"color:red\">Please log in</p>";
+                } else {
                     errormessage = "";
                 }
                 out.println(errormessage);
