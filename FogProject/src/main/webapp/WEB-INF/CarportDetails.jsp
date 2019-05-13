@@ -33,7 +33,7 @@
                 String error = (String) request.getAttribute("errormessage");
                 String errormessage = "";
                 if (error != null) {
-                    switch (error) { 
+                    switch (error) {
                         case "IllegalArgumentException":
                             errormessage = "Tjek venligst, at alle felterne for personlige oplysninger indeholder tilladte værdier.";
                             break;
@@ -80,6 +80,7 @@
                         document.getElementById("shed_width").style.display = "none";
                         document.getElementById("shed_length").style.display = "none";
                         document.getElementById("shed_cover").style.display = "none";
+
                     } else if (updateAvailableSheds())
                     {
                         document.getElementById("shed_width").style.display = "block";
@@ -257,6 +258,21 @@
 
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/ReviewEstimate" >Generer skitsetegning og prisestimat</button>
             </form>
+
+
+            <%
+                String errorK = (String) request.getAttribute("errormessage");
+                String errormessageK = "";
+
+                if (errorK == null) {
+                    errormessageK = "";
+                } else if (errorK.equals("InvalidInput")) {
+                    errormessageK = "<p style=\"color:red\">Vælg alle de nødvendige egenskaber</p>";
+                } else {
+                    errormessageK = "";
+                }
+                out.println(errormessageK);
+            %>
         </div>
     </body>
 </html>
