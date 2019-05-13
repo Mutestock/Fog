@@ -1,9 +1,12 @@
 package presentation.commands;
 
 import data.customExceptions.DataAccessException;
+import data.customExceptions.EmptySessionException;
 import data.help_classes.Request;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +18,7 @@ import presentation.Command;
  * @author Simon Asholt Norup
  */
 public class ListRequestsCommand extends Command {
-    
+
     private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
 
     @Override
@@ -25,14 +28,24 @@ public class ListRequestsCommand extends Command {
             if (filter == null) {
                 filter = "incomplete";
             }
-            
+
             LinkedList<Request> requests = PRES_TO_LOGIC.getRequests(filter);
             request.setAttribute("requests", requests);
+
             
+            
+            if (request.getSession().getAttribute("user") != null) {
+                request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);
+            } else {
+                throw new EmptySessionException("Attempt at admin access without admin on session");
+            }
+
             request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
             request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+        } catch (EmptySessionException ex) {
+            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
         }
     }
 
