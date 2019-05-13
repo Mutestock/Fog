@@ -40,34 +40,15 @@ public class ReviewEstimateCommand extends Command {
             }
 //            System.out.println(nShed.getLength());
             Carport carport = new Carport(-1, length, width, nRoof, nShed);
-            System.out.println("We're in review estimate btw");
-            System.out.println("We're in review estimate btw");
-            System.out.println("We're in review estimate btw");
-            System.out.println("We're in review estimate btw");
-            System.out.println("We're in review estimate btw");
-            
-            System.out.println("Carport: " + carport.getId() + carport.getLength() + carport.getWidth() + carport.getRoof() + carport.getShed());
-            System.out.println("Carport: " + carport.getId() + carport.getLength() + carport.getWidth() + carport.getRoof() + carport.getShed());
-            System.out.println("Carport: " + carport.getId() + carport.getLength() + carport.getWidth() + carport.getRoof() + carport.getShed());
-            System.out.println("Carport: " + carport.getId() + carport.getLength() + carport.getWidth() + carport.getRoof() + carport.getShed());
-            System.out.println("Carport: " + carport.getId() + carport.getLength() + carport.getWidth() + carport.getRoof() + carport.getShed());
             
             if(carport == null)
             {
-                System.out.println("I am null for some reason");
-                System.out.println("I am null for some reason");
-                System.out.println("I am null for some reason");
-                System.out.println("I am null for some reason");
             }
             
             Request req = new Request(-1, LocalDateTime.now(), "", carport);
 
             PartsList partsList = pToL.getPartsList(carport);
             Offer estimate = pToL.getOffer(partsList, req);
-            System.out.println("Price: " + estimate.getPrice());
-            System.out.println("Price: " + estimate.getPrice());
-            System.out.println("Price: " + estimate.getPrice());
-            System.out.println("Price: " + estimate.getPrice());
             request.getSession().setAttribute("estimate", estimate);
 
             request.getRequestDispatcher("/WEB-INF/ReviewEstimate.jsp").forward(request, response);
