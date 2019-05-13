@@ -5,13 +5,11 @@ import data.customExceptions.InvalidSymbolException;
 import data.help_classes.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
-import logic.partslist.RoofCalc;
 import presentation.Command;
 
 /**

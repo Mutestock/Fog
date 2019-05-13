@@ -21,12 +21,7 @@ public class ListRequestsCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String filter = (String) request.getParameter("filter");
-            if (filter == null) {
-                filter = "incomplete";
-            }
-            
-            LinkedList<Request> requests = PRES_TO_LOGIC.getRequests(filter);
+            LinkedList<Request> requests = PRES_TO_LOGIC.getRequests("all");
             request.setAttribute("requests", requests);
             
             request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);

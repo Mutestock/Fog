@@ -10,7 +10,7 @@ import data.help_classes.Shed;
  */
 public class SVGDrawerFromSide {
     
-    private static double startX, startY, yEaves, leftEaves, rightEaves, maxDistanceBetweenPoles, poleWidth;
+    private static double startX, startY, leftEaves, rightEaves, maxDistanceBetweenPoles, poleWidth;
 
     
     public SVGDrawerFromSide() {
@@ -148,12 +148,7 @@ public class SVGDrawerFromSide {
     }
     
     private String rectangle(double x, double y, double width, double length, double thickness) {
-        x = cmToDrawUnits(x);
-        y = cmToDrawUnits(y);
-        width = cmToDrawUnits(width);
-        length = cmToDrawUnits(length);
-        String text = "<rect x=\"" + x + "mm\" y=\"" + y + "mm\" height=\"" + width + "mm\" width=\"" + length + "mm\" style=\"stroke:#000000; stroke-width: " + thickness + "; fill: none\"/>";
-        return text;
+        return rectangle(x, y, width, length, thickness, "none");
     }
     
     private String rectangle(double x, double y, double width, double length, double thickness, String color) {

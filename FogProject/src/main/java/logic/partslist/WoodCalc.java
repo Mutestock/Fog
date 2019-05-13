@@ -56,7 +56,7 @@ public class WoodCalc {
 
     //Help methods for the main method to calculate amount of specific parts.
     //Calculates the amount of wooden pillars needed for the carport.
-    private static int lengthBetweenPillars = 480;
+    private static final int lengthBetweenPillars = 480;
 
     //lengthBetweenPillars describes the longest allowed distance between each pillar.
     private static Part calcPillarAmount(Carport carport) {

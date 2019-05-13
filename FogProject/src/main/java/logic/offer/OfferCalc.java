@@ -46,19 +46,6 @@ public class OfferCalc {
                     throw new AssertionError();
             }
         }
-//        int zipcode = 0;
-//        System.out.println("ENTERED CALCSHIp");
-//        System.out.println("ENTERED CALCSHIp");
-//        System.out.println("ENTERED CALCSHIp");
-//        try {
-//            zipcode = Integer.parseInt(request.getCustomer().getZipcode());
-//        } catch (Exception e) {
-//            System.out.println("Entered Exception");
-//            System.out.println("Entered Exception");
-//            System.out.println("Entered Exception");
-//            return -1;
-//        }
-
         // Bliver altid leveret fredag
     }
 

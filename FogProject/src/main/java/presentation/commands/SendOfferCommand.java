@@ -2,7 +2,6 @@ package presentation.commands;
 
 import data.customExceptions.DataAccessException;
 import data.help_classes.Offer;
-import data.help_classes.PartsList;
 import data.help_classes.Request;
 import java.io.IOException;
 import java.time.LocalDateTime;

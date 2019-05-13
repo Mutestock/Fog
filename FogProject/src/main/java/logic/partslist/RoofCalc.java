@@ -3,12 +3,6 @@ package logic.partslist;
 import data.help_classes.Carport;
 import data.help_classes.Part;
 import java.util.LinkedList;
-import data.customExceptions.*;
-import data.help_classes.PartsList;
-import data.help_classes.Request;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import logic.LogicToDataImpl;
 
 /**
  *
@@ -18,8 +12,8 @@ public class RoofCalc {
 
     //Considered as constant values.
     //Please find correct terminology
-    private static int topBattenSlot = 8;
-    private static int roofTileMatPacks = 2;
+    private static final int topBattenSlot = 8;
+    private static final int roofTileMatPacks = 2;
 
     public static LinkedList<Part> calculateParts(Carport carport) {
         LinkedList<Part> parts = new LinkedList();
