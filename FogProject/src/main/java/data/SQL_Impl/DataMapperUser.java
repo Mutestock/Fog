@@ -41,12 +41,12 @@ public class DataMapperUser implements DataMapperUserInterface {
             Connection c = DBConnector.getConnection();
             User user = null;
             String query
-                    = "SELECT * from `users` WHERE `username`= '?' ;";
+                    = "SELECT * FROM `users` WHERE `username`= ?;";
 
             preparedStmt = c.prepareStatement(query);
             preparedStmt.setString(1, username);
             
-            ResultSet rs = preparedStmt.executeQuery(query);
+            ResultSet rs = preparedStmt.executeQuery();
             String password = "";
             username = "";
             while (rs.next()) {
