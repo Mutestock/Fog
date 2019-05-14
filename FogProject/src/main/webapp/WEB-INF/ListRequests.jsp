@@ -49,11 +49,11 @@
                                 }
                         %>
                         <tr>
-                            
+
                             <% String dateConv = (r.getSent().toString());
-                            String received = dateConv.replace("T", " ");
+                                String received = dateConv.replace("T", " ");
                             %>
-                            
+
                             <td><%=r.getId()%></td>
                             <td><%=received%></td>
                             <td><%=r.getCustomer().getFullName()%></td>
@@ -72,6 +72,21 @@
                     <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
                 </div>
             </div>
+            <%
+                String error = (String) request.getAttribute("errormessage");
+                String errormessage = "";
+
+                if (error == null) {
+                    errormessage = "";
+                } else if (error.equals("WrongCredentials")) {
+                    errormessage = "<p style=\"color:red\">Incorrect credentials</p>";
+                } else if (error.equals("WrongCredentials")) {
+                    errormessage = "<p style=\"color:red\">Incorrect credentials</p>";
+                } else {
+                    errormessage = "";
+                }
+                out.println(errormessage);
+            %>
         </div>
     </body>
 </html>

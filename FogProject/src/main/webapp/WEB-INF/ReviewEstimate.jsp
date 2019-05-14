@@ -31,7 +31,6 @@
                     Carport carport = r.getCarport();
                     Roof roof = carport.getRoof();
                     Shed shed = carport.getShed();
-                    Customer customer = r.getCustomer();
                 %>
                 <h1>Overblik</h1>
 
@@ -65,17 +64,17 @@
                 <br>
 
                 <h3>Personlige oplysninger:</h3>
-                <input placeholder="Fornavn" type="text" name="firstname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
-                <input placeholder="Efternavn" type="text" name="lastname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Fornavn" maxlength="50" type="text" name="firstname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Efternavn" maxlength="50" type="text" name="lastname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
                 <br>
-                <input placeholder="Adresse" type="text" name="address" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]+\s\d+"><br>
-                <input placeholder="Postnummer" type="text" name="zipcode" required="required" pattern="\d{4}"><br>
-                <input placeholder="By" type="text" name="city" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Adresse" maxlength="100" type="text" name="address" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]+\s\d+"><br>
+                <input placeholder="Postnummer" maxlength="4" type="text" name="zipcode" required="required" pattern="\d{4}"><br>
+                <input placeholder="By" type="text" maxlength="50"  name="city" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
                 <br>
-                <input placeholder="Telefon" type="text" name="phone" required="required" pattern="\d{8}"><br>
-                <input placeholder="Email" type="email" name="email" required="required"><br>
+                <input placeholder="Telefon" maxlength="8" type="text" name="phone" required="required" pattern="\d{8}"><br>
+                <input placeholder="Email" maxlength="200" type="email" name="email" required="required"><br>
                 <br>
-                <textarea placeholder="Eventuelle kommentarer" name="comments" cols="40" rows="5" style="resize: none;"></textarea><br>
+                <textarea placeholder="Eventuelle kommentarer" maxlength="200" name="comments" cols="40" rows="5" style="resize: none;"></textarea><br>
                 <br>
 
                 <%
@@ -89,7 +88,6 @@
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation">Send forespørgsel</button>
                 <br><br>
                 <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
-
             </form>
         </div>
     </body>

@@ -26,10 +26,10 @@ public class SendInformationCommand extends Command {
      * Basic login functionality, checks the username and password. Prints out
      * errormessages if either username or password is wrong.
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request s
+     * @param response s
+     * @throws ServletException s
+     * @throws IOException s
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,12 +48,6 @@ public class SendInformationCommand extends Command {
             {
                 comments = "";
             }
-            System.out.println(comments);
-            
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
             
             Customer cust = new Customer(-1, fname, lname, address, zipcode, city, phone, email);
             System.out.println("Customer: " + cust);
