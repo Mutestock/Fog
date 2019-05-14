@@ -2,6 +2,7 @@ package presentation.commands;
 
 import data.customExceptions.DataAccessException;
 import data.customExceptions.EmptySessionException;
+import data.customExceptions.NoRequestOnSessionException;
 import data.help_classes.Offer;
 import data.help_classes.PartsList;
 import data.help_classes.Request;
@@ -37,6 +38,9 @@ public class RequestDetailsCommand extends Command {
             Request r;
             if (idParam == null) {
                 r = (Request) request.getSession().getAttribute("request");
+                if (r == null) {
+                    throw new NoRequestOnSessionException();
+                }
             } else {
                 request.getSession().invalidate();
                 request.getSession().setAttribute("user", user);
@@ -44,7 +48,7 @@ public class RequestDetailsCommand extends Command {
                 r = PRES_TO_LOGIC.getRequest(id);
                 request.getSession().setAttribute("request", r);
             }
-            
+
             String SVGdrawingAbove = PRES_TO_LOGIC.getSVGDrawing(r.getCarport(), "above");
             String SVGdrawingSide = PRES_TO_LOGIC.getSVGDrawing(r.getCarport(), "side");
             request.setAttribute("SVGabove", SVGdrawingAbove);
@@ -64,11 +68,15 @@ public class RequestDetailsCommand extends Command {
             request.getRequestDispatcher("/WEB-INF/RequestDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
-            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("Crash").forward(request, response);
         } catch (EmptySessionException ex) {
             ex.printStackTrace();
             request.setAttribute("errormessage", "EmptySession");
-            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
+            request.getRequestDispatcher("EmpLogin").forward(request, response);
+        } catch (NoRequestOnSessionException ex) {
+            ex.printStackTrace();
+            request.setAttribute("errormessage", "RequestNull");
+            request.getRequestDispatcher("ListRequests").forward(request, response);
         }
     }
 }

@@ -27,11 +27,6 @@ public class ListRequestsCommand extends Command {
 
             LinkedList<Request> requests = PRES_TO_LOGIC.getRequests("all");
             request.setAttribute("requests", requests);
-
-            
-            System.out.println("User listRequests: " + (request.getSession().getAttribute("user")));
-            System.out.println("User listRequests: " + (request.getSession().getAttribute("user")));
-            System.out.println("User listRequests: " + (request.getSession().getAttribute("user")));
             
             if (request.getSession().getAttribute("user") == null) {
                 throw new EmptySessionException("Attempt at admin access in listRequests without admin on session");
@@ -40,11 +35,11 @@ public class ListRequestsCommand extends Command {
             request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
-            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("Crash").forward(request, response);
         } catch (EmptySessionException ex) {
             ex.printStackTrace();
             request.setAttribute("errormessage", "EmptySession");
-            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
+            request.getRequestDispatcher("EmpLogin").forward(request, response);
         }
     }
 }

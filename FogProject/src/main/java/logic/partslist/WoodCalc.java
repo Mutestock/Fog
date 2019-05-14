@@ -55,10 +55,14 @@ public class WoodCalc {
             parts.add(calcWallCovering(carport));               //Beklædning af skur.
             parts.add(calcLathdoor(carport));                   //Lægte til z på dør.
         }
+           
         return parts;
+        
+    
+        
     }
 
-    
+   
     
     private static final int lengthBetweenPillars = 480;
     //lengthBetweenPillars describes the longest allowed distance between each pillar.
