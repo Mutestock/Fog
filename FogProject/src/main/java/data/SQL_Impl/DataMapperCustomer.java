@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
@@ -185,5 +186,10 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         } catch (SQLException ex) {
             throw new DataAccessException(ex.getMessage());
         }
+    }
+
+    @Override
+    public LinkedList<String> readAvailableOptions(String type) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
