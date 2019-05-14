@@ -35,7 +35,7 @@ public class FrontController extends HttpServlet {
         try {
             Command command = Command.from(request);
             command.execute(request, response);
-        } catch (IOException | ServletException e) {
+        } catch (IOException | ServletException  | NullPointerException e ) {
             request.getRequestDispatcher("/WEB-INF/Crash.jsp").forward(request, response);
             System.out.println(e.getMessage());
         }

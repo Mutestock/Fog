@@ -46,12 +46,14 @@
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display = 'none';"><%=errormessage%></span>
             </div>
+            
+            <form method = POST>
 
             <h4>Tag:</h4>
-            <input id="roofSwitch" type="checkbox" data-toggle="toggle" data-on="Med rejsning" data-off="Fladt" onchange="switchRoof()">
+            <input id="roofSwitch" name="isRaised" type="checkbox" data-toggle="toggle" data-on="Med rejsning" data-off="Fladt" onchange="switchRoof()">
 
             <h4>Redskabsskur:</h4>
-            <input id="shedSwitch" type="checkbox" data-toggle="toggle" data-on="Med" data-off="Uden" onchange="switchShed()">
+            <input id="shedSwitch" name="hasShed" type="checkbox" data-toggle="toggle" data-on="Med" data-off="Uden" onchange="switchShed()">
 
             <script type="text/javascript">
                 function switchRoof() {
@@ -119,7 +121,7 @@
             </script> 
 
             <br><br>
-            <form method = POST>
+            
                 <select id="carport_width" name="width" style="display: block" onchange="switchShed();">
                     <option selected disabled>Vælg bredde</option>
                     <option value="240">240 cm</option>

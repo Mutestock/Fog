@@ -33,7 +33,7 @@ public class SendOfferCommand extends Command {
             request.getRequestDispatcher("/c/ListRequests").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
-            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("Crash").forward(request, response);
         }
     }
 
