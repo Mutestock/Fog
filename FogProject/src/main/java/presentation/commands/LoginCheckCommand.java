@@ -41,7 +41,6 @@ public class LoginCheckCommand extends Command {
                 loadJSP(request, response);
             }
         } catch (WrongCredentialsException ex) {
-            ex.printStackTrace();
             request.setAttribute("errormessage", "WrongCredentials");
             loadJSP(request, response);
         } catch (Exception e) {
