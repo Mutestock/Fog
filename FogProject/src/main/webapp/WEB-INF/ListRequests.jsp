@@ -24,7 +24,7 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
             <h2>Følgende forespørgsler venter på at blive behandlet:</h2>
 
             <div class="panel panel-default">
