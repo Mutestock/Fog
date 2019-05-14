@@ -28,8 +28,13 @@ public class ListRequestsCommand extends Command {
             LinkedList<Request> requests = PRES_TO_LOGIC.getRequests("all");
             request.setAttribute("requests", requests);
 
+            
+            System.out.println("User listRequests: " + (request.getSession().getAttribute("user")));
+            System.out.println("User listRequests: " + (request.getSession().getAttribute("user")));
+            System.out.println("User listRequests: " + (request.getSession().getAttribute("user")));
+            
             if (request.getSession().getAttribute("user") == null) {
-                throw new EmptySessionException("Attempt at admin access without admin on session");
+                throw new EmptySessionException("Attempt at admin access in listRequests without admin on session");
             }
 
             request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);
