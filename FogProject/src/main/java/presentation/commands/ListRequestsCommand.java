@@ -27,19 +27,19 @@ public class ListRequestsCommand extends Command {
 
             LinkedList<Request> requests = PRES_TO_LOGIC.getRequests("all");
             request.setAttribute("requests", requests);
-
+            
             if (request.getSession().getAttribute("user") == null) {
-                throw new EmptySessionException("Attempt at admin access without admin on session");
+                throw new EmptySessionException("Attempt at admin access in listRequests without admin on session");
             }
 
             request.getRequestDispatcher("/WEB-INF/ListRequests.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
-            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("Crash").forward(request, response);
         } catch (EmptySessionException ex) {
             ex.printStackTrace();
             request.setAttribute("errormessage", "EmptySession");
-            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
+            request.getRequestDispatcher("EmpLogin").forward(request, response);
         }
     }
 }

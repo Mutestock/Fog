@@ -24,8 +24,8 @@
                         <%
                             if (request.getSession().getAttribute("user") != null) {
                         %>
-                    <li><a href=<%  session.invalidate(); %>><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-                    <% }%>
+                    <li><a href=/FogProject/c/SessionExit><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                        <% }%>  
                 </ul>
             </div>
         </nav>

@@ -55,14 +55,19 @@ public class WoodCalc {
             parts.add(calcWallCovering(carport));               //Beklædning af skur.
             parts.add(calcLathdoor(carport));                   //Lægte til z på dør.
         }
+           
         return parts;
+        
+    
+        
     }
 
-    
+   
     
     private static final int lengthBetweenPillars = 480;
     //lengthBetweenPillars describes the longest allowed distance between each pillar.
     /**
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns an amount of wooden piller parts based on the length of the carport and the shed if there is one.
      */
@@ -108,7 +113,7 @@ public class WoodCalc {
     
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @return the amount of rafter boards based on the width of the carport. (Spær i danish) 
      */
@@ -121,7 +126,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @return Returns a part-set, the rafter board, used when the carport roof has a slope. (Spær in danish)
      */
@@ -133,7 +138,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @return //Returns two strop boards (Rem in danish)
      */
@@ -146,6 +151,7 @@ public class WoodCalc {
 
     
     /**
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns one more strop board, used if the carport is with a shed (Rem in danish) 
      */
@@ -158,7 +164,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the two boards used for the headboard (Gavle in danish) 
      */
@@ -171,7 +177,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @returns the amount of inter-ties used for the sides of the shed (Løsholter in danish).
      */
     private static Part calcInterTies1() {
@@ -183,7 +189,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the rest of inter-ties used for the the shed (Løsholter in danish).
      */
@@ -196,7 +202,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of boards used for the wall covering used for the the shed (Skur beklædning in danish).
      */
@@ -209,7 +215,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of fascia-boards used for the carport if there is a slope (Sternbrædder in danish).
      */
@@ -222,7 +228,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of fascia-boards used for the shed if thecarport has a slope (Sternbrædder in danish).
      */
@@ -235,7 +241,7 @@ public class WoodCalc {
 
 
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of boards used for the wall covering used for the the shed (Understern in danish).
      */
@@ -248,7 +254,7 @@ public class WoodCalc {
 
 
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of boards used for the wall covering used for the the shed (Understern in danish).
      */
@@ -261,7 +267,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of boards used for the wall covering used for the the shed (Overstern in danish).
      */
@@ -274,7 +280,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of boards used for the wall covering used for the the shed (Overstern in danish).
      */
@@ -285,9 +291,9 @@ public class WoodCalc {
         return new Part("25x125mm. trykimp. Bræt Overstern sider", length, 4, "stk", "Oversternbrædder til siderne", price);
     }
     
-
+ 
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of waterboards used for the carport if the roof is sloped. (Vandbræt in danish).
      */
@@ -300,7 +306,7 @@ public class WoodCalc {
     
 
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of waterboards used for the carport sides. (Vandbræt in danish).
      */
@@ -313,7 +319,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of waterboards used for the carport ends. (Vandbræt in danish).
      */
@@ -326,7 +332,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of barges used for the carport if the roof is sloped. (Vindskeder in danish).
      */
@@ -339,7 +345,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the lath for the z of the backside of the shed door. (Lægte in danish).
      */
@@ -352,7 +358,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the amount of roof laths used for the carport if the roof is sloped. (Taglægte in danish).
      */
@@ -365,7 +371,7 @@ public class WoodCalc {
 
     
     /**
-     * 
+     * Help method used to calculate some of the parts needed for the carport (wooden parts).
      * @param carport predefined carport object with length and width.
      * @returns the rest of the amount of roof laths used for the carport if the roof is sloped. (Taglægte in danish).
      */

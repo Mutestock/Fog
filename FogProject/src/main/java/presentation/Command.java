@@ -40,6 +40,7 @@ public abstract class Command {
                 put("EmpLogin", new EmpLoginCommand());
                 put("LoginCheck", new LoginCheckCommand());
                 put("Crash", new RedirectCommand("Crash"));
+                put("SessionExit", new RedirectCommand("SessionExit"));
             }
         };
         return actions.getOrDefault(path, new RedirectCommand("PageNotFound"));

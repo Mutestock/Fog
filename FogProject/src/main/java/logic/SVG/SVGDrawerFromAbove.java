@@ -5,6 +5,7 @@ import data.help_classes.Shed;
 
 public class SVGDrawerFromAbove {
 
+    
     // all the following are Carport specific and numbers are therefore measured in cm
     private static double startX, startY,
             yEaves, leftEavesToPole, leftEaves, rightEaves, widthWithoutEaves,
@@ -13,6 +14,11 @@ public class SVGDrawerFromAbove {
             battenMaxDistance, battenWidth;
     private final Carport carport;
 
+    
+    /**
+     * 
+     * @param carport predefined carport object with length and width.
+     */
     public SVGDrawerFromAbove(Carport carport) {
         this.carport = carport;
         startX = 10;
@@ -34,6 +40,11 @@ public class SVGDrawerFromAbove {
         battenMaxDistance = 30;
     }
 
+    
+    /**
+     * 
+     * @return HTML svg code in form of a string based on the carport specifications.
+     */
     public String drawCarport() {
         Shed shed = carport.getShed();
 
@@ -60,6 +71,12 @@ public class SVGDrawerFromAbove {
         return sb.toString();
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawRaisedRoofBattens(StringBuilder sb) {
         double distanceToCenter = 10;
         int battenAmount = (int) Math.ceil((carport.getWidth() / 2 - distanceToCenter) / (battenMaxDistance + battenWidth));
@@ -77,6 +94,12 @@ public class SVGDrawerFromAbove {
         }
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawRaisedRoofEnds(StringBuilder sb) {
         double pieceLength = carport.getWidth() / 2;
         sb.append(rectangle(0, 0, pieceLength, poleLineWidth));
@@ -85,10 +108,22 @@ public class SVGDrawerFromAbove {
         sb.append(rectangle(carport.getLength() - poleLineWidth, pieceLength, pieceLength, poleLineWidth));
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawFlatRoofOutline(StringBuilder sb) {
         sb.append(rectangle(0, 0, carport.getWidth(), carport.getLength()));
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawPoleLinesAlongLength(StringBuilder sb) {
         Shed shed = carport.getShed();
 
@@ -108,6 +143,12 @@ public class SVGDrawerFromAbove {
         }
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private double drawRafterBoards(StringBuilder sb) {
 
         int rBoardAmount = (int) Math.ceil(carport.getLength() / (rBoardMaxDistance + rBoardWidth));
@@ -127,6 +168,12 @@ public class SVGDrawerFromAbove {
         return rBoardAvgDistance;
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawShedOutline(StringBuilder sb) {
         Shed shed = carport.getShed();
 
@@ -135,6 +182,12 @@ public class SVGDrawerFromAbove {
         sb.append(rectangle(shedX, shedY, shed.getWidth(), shed.getLength(), 5, "rgb(250,250,250)"));
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawCarportPoles(StringBuilder sb) {
         Shed shed = carport.getShed();
 
@@ -173,6 +226,12 @@ public class SVGDrawerFromAbove {
         }
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawShedPoles(StringBuilder sb) {
         Shed shed = carport.getShed();
 
@@ -192,6 +251,14 @@ public class SVGDrawerFromAbove {
         }
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * @param poleCount
+     * @param poleAvgDistance 
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawExtraPoles(StringBuilder sb, int poleCount, double poleAvgDistance) {
         Shed shed = carport.getShed();
 
@@ -215,6 +282,13 @@ public class SVGDrawerFromAbove {
         }
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * @param rBoardDistance 
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawCrossLines(StringBuilder sb, double rBoardDistance) {
         Shed shed = carport.getShed();
 
@@ -229,6 +303,12 @@ public class SVGDrawerFromAbove {
         sb.append(line(x1, y2, x2, y1, 1.5));
     }
 
+    
+    /**
+     * 
+     * @param sb main string for the final HTML SVG code.
+     * Appends the HTML code used for ** to the main string.
+     */
     private void drawMeasurements(StringBuilder sb) {
         Shed shed = carport.getShed();
         if (shed != null) {
@@ -248,17 +328,44 @@ public class SVGDrawerFromAbove {
         }
     }
 
-    // ==============================================
-    // ==============================================
-    // ==============================================
+
+    /**
+     * 
+     * @param x x coordinate for the rectangle.
+     * @param y y coordinate for the rectangle.
+     * @param width width of the rectangle.
+     * @param length length of the rectangle.
+     * @return a rectangle SVG code with the specifications.
+     */
     private String rectangle(double x, double y, double width, double length) {
         return rectangle(x, y, width, length, 1);
     }
 
+    
+    /**
+     * 
+     * @param x x coordinate for the rectangle.
+     * @param y y coordinate for the rectangle.
+     * @param width width of the rectangle.
+     * @param length length of the rectangle.
+     * @param thickness thickness of the outline of the rectangle.
+     * @return a rectangle SVG code with the specifications.
+     */
     private String rectangle(double x, double y, double width, double length, double thickness) {
         return rectangle(x, y, width, length, thickness, "rgb(255,255,255)");
     }
 
+    
+    /**
+     * 
+     * @param x x coordinate for the rectangle.
+     * @param y y coordinate for the rectangle.
+     * @param width width of the rectangle.
+     * @param length length of the rectangle.
+     * @param thickness thickness of the outline of the rectangle.
+     * @param color color of the outline of the rectangle.
+     * @return a rectangle SVG code with the specifications.
+     */
     private String rectangle(double x, double y, double width, double length, double thickness, String color) {
         x = cmToDrawUnits(x+startX);
         y = cmToDrawUnits(y+startY);
@@ -268,6 +375,16 @@ public class SVGDrawerFromAbove {
         return text;
     }
 
+    
+    /**
+     * 
+     * @param x1 x coordinate for the start of the line.
+     * @param y1 y coordinate for the start of the line.
+     * @param x2 x coordinate for the end of the line.
+     * @param y2 y coordinate for the end of the line.
+     * @param thickness thickness of the outline of the line.
+     * @return a line SVG code with the specifications.
+     */
     private String line(double x1, double y1, double x2, double y2, double thickness) {
         x1 = cmToDrawUnits(x1+startX);
         y1 = cmToDrawUnits(y1+startY);
@@ -277,12 +394,26 @@ public class SVGDrawerFromAbove {
         return text;
     }
 
+    
+    /**
+     * 
+     * @param x x coordinate for the start of the text.
+     * @param y y coordinate for the start of the text.
+     * @param measurement size of the text.
+     * @return text SVG code with the specifications.
+     */
     private String text(double x, double y, String measurement) {
         x = cmToDrawUnits(x+startX);
         y = cmToDrawUnits(y+startY);
         return "<text x=\"" + x + "mm\" y=\"" + y + "mm\" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + measurement + " cm" + "</text>";
     }
 
+    
+    /**
+     * 
+     * @param cm basic unit length used throughout the program.
+     * @return converts the units to 0,25 mm on paper.
+     */
     private double cmToDrawUnits(double cm) {
         return cm * 0.25; // measure: 1 cm in real life = 0,25 mm on paper
     }

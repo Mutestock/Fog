@@ -24,10 +24,16 @@ public class ReviewEstimateCommand extends Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final PresentationToLogic pToL = new PresentationToLogicImpl();
         try {
-            if (request.getParameter("width") == null || request.getParameter("length") == null || request.getParameter("roof") == null) {
-                throw new InvalidInputException("Width, length or roof were not assigned a value");
-            }
+            if (request.getParameter("width") == null
+                    || request.getParameter("length") == null
+                    || request.getParameter("roof") == null
+                    || request.getParameter("isRaised").equals("on") && request.getParameter("slope") == null
+                    || request.getParameter("hasShed").equals("on") && request.getParameter("shedlength") == null
+                    || request.getParameter("hasShed").equals("on") && request.getParameter("shedwidth") == null
+                    || request.getParameter("hasShed").equals("on") && request.getParameter("walls") == null) {
 
+                throw new InvalidInputException("Mssing Values in ReviewEstimate");
+            }
             int width = Integer.parseInt(request.getParameter("width"));
             int length = Integer.parseInt(request.getParameter("length"));
             int slope = 0;
@@ -36,7 +42,7 @@ public class ReviewEstimateCommand extends Command {
             }
 
             String roof = request.getParameter("roof");
-            
+
             Roof nRoof = new Roof(-1, roof, slope);
             Shed nShed = null;
             if (request.getParameter("shedwidth") != null && request.getParameter("shedlength") != null) {
@@ -47,7 +53,7 @@ public class ReviewEstimateCommand extends Command {
             Carport carport = new Carport(-1, length, width, nRoof, nShed);
 
             Request req = new Request(-1, LocalDateTime.now(), "", carport);
-            
+
             String SVGdrawingAbove = pToL.getSVGDrawing(carport, "above");
             String SVGdrawingSide = pToL.getSVGDrawing(carport, "side");
             request.setAttribute("SVGabove", SVGdrawingAbove);
