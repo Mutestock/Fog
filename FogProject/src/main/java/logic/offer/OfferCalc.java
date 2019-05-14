@@ -9,12 +9,25 @@ import java.time.LocalDateTime;
  */
 public class OfferCalc {
 
+    
+    /**
+     * 
+     * @param parts LinkedList of part objects.
+     * @param request request object used to get needed objects.
+     * @return offer object based on the specifications.
+     */
     public static Offer generateOffer(PartsList parts, Request request) {
         double price = calculatePrice(parts);
         double shippingcosts = calculateShippingCosts(request);
         return new Offer(-1, LocalDateTime.now(), price, shippingcosts, request);
     }
 
+    
+    /**
+     * 
+     * @param parts LinkedList of part objects.
+     * @return the total price of the LinkedList of part objects.
+     */
     private static double calculatePrice(PartsList parts) {
         double price = 0;
         for (Part part : parts.getWoodPackage()) {
@@ -29,6 +42,12 @@ public class OfferCalc {
         return price;
     }
 
+    
+    /**
+     * 
+     * @param request request object used to get customer zipcode.
+     * @return a static price based on the customer zipcode.
+     */
     private static double calculateShippingCosts(Request request) {
         if (request.getCustomer() == null) {
             return - 1;
@@ -49,6 +68,12 @@ public class OfferCalc {
         // Bliver altid leveret fredag
     }
 
+    
+    /**
+     * 
+     * @param zipcode zipcode of the customer.
+     * @return location based on the given zipcode.
+     */
     private static Location getLocation(int zipcode) {
         if (zipcode >= 0 && zipcode < 3700) {
             return Location.SJAELLAND;
