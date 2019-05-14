@@ -34,12 +34,12 @@ public abstract class Command {
                 put("SendOffer", new SendOfferCommand());
                 put("PartsList", new RedirectCommand("PartsList"));
                 put("SendInformation", new SendInformationCommand());
-                put("CarportDetails", new RedirectCommand("CarportDetails"));
+                put("CarportDetails", new CarportDetailsCommand());
                 put("RequestDetails", new RequestDetailsCommand());
                 put("ListRequests", new ListRequestsCommand());
                 put("EmpLogin", new EmpLoginCommand());
                 put("LoginCheck", new LoginCheckCommand());
-            
+                put("Crash", new RedirectCommand("Crash"));
             }
         };
         return actions.getOrDefault(path, new RedirectCommand("PageNotFound"));

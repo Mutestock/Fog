@@ -10,7 +10,7 @@ import java.util.LinkedList;
  */
 public interface DataMapperCustomerInterface {
     
-    public LinkedList<String> readAvailableOptions(String type);
+    public LinkedList<String> readAvailableOptions(String type) throws DataAccessException;
     
     public void createRequest(Request request) throws DataAccessException;
     
