@@ -39,6 +39,7 @@ public abstract class Command {
                 put("ListRequests", new ListRequestsCommand());
                 put("EmpLogin", new EmpLoginCommand());
                 put("LoginCheck", new LoginCheckCommand());
+                put("SessionExit", new RedirectCommand("SessionExit"));
             
             }
         };
