@@ -18,7 +18,7 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
             <h1>Log ind som admin:</h1>
             <form method="POST" action="/FogProject/c/LoginCheck">
                 <input name="username" type="text" placeholder="Brugernavn">

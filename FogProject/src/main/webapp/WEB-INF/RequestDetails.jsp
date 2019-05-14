@@ -22,7 +22,7 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
             <%
                 Offer offer = (Offer) request.getSession().getAttribute("offer");
                 Request r = offer.getRequest();
