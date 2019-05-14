@@ -56,6 +56,7 @@ public class CarportDetailsCommand extends Command {
             request.setAttribute("shedWidths", shedWidths);
             request.setAttribute("shedCoverings", PRES_TO_LOGIC.getAvailableOptions("shedCovering"));
             
+            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
         } catch (DataAccessException ex){
             request.setAttribute("errormessage", "DataAccess");
             request.getRequestDispatcher("Crash").forward(request, response);
