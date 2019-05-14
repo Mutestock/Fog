@@ -34,16 +34,14 @@
             <h1>Overblik</h1>
 
             <div  style="display: inline-block; float:right">
-                <h4>Skitse ovenfra</h4>
+                <h4>Skitse fra oven</h4>
                 <%
-                    SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove(carport);
-                    String above = SVGdrawer1.drawCarport();
+                    String above = (String) request.getAttribute("SVGabove");
                     out.print(above);
                 %>    
-                <h4>Skitse sidefra</h4>
+                <h4>Skitse fra siden</h4>
                 <%
-                    SVGDrawerFromSide SVGdrawer2 = new SVGDrawerFromSide();
-                    String side = SVGdrawer2.drawCarportFlatRoofSide(carport);
+                    String side = (String) request.getAttribute("SVGside");
                     out.print(side);
                 %>
             </div> 

@@ -34,18 +34,16 @@
                     Customer customer = r.getCustomer();
                 %>
                 <h1>Overblik</h1>
-                
+
                 <div  style="display: inline-block; float:right">
-                    <h4>Skitse ovenfra</h4>
+                    <h4>Skitse fra oven</h4>
                     <%
-                        SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove(carport);
-                        String above = SVGdrawer1.drawCarport();
+                        String above = (String) request.getAttribute("SVGabove");
                         out.print(above);
                     %>    
-                    <h4>Skitse sidefra</h4>
+                    <h4>Skitse fra siden</h4>
                     <%
-                        SVGDrawerFromSide SVGdrawer2 = new SVGDrawerFromSide();
-                        String side = SVGdrawer2.drawCarportFlatRoofSide(carport);
+                        String side = (String) request.getAttribute("SVGside");
                         out.print(side);
                     %>
                 </div>  
@@ -63,7 +61,7 @@
 
                 <% if (shed != null) {%>
                 <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, <br>Vægbeklædning af typen: <i><%=shed.getWallCoverings()%></i></h4>
-                <% }%>
+                    <% }%>
                 <br>
 
                 <h3>Personlige oplysninger:</h3>
@@ -79,7 +77,7 @@
                 <br>
                 <textarea placeholder="Eventuelle kommentarer" name="comments" cols="40" rows="5" style="resize: none;"></textarea><br>
                 <br>
-                
+
                 <%
                     DecimalFormat numberFormat = new DecimalFormat("#.00");
                     String num = numberFormat.format((offer.getPrice()));

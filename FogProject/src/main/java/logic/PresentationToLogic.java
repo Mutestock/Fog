@@ -18,7 +18,7 @@ public interface PresentationToLogic {
     
     // methods for getting available widths, lengths, roof types, etc, etc
     
-    // method for creating and/or showing SVG file for carport sketch drawing
+    public String getSVGDrawing(Carport carport, String angle);
     
     public PartsList getPartsList(Carport carport);
     

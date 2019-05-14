@@ -11,23 +11,25 @@ import data.help_classes.Shed;
 public class SVGDrawerFromSide {
     
     private static double startX, startY, leftEaves, rightEaves, maxDistanceBetweenPoles, poleWidth;
+    private final Carport carport;
 
     
-    public SVGDrawerFromSide() {
+    public SVGDrawerFromSide(Carport carport) {
+        this.carport = carport;
         startX = 10;
         startY = 10;
        
         rightEaves = 5;
+        leftEaves = carport.getLength() * 0.15;
 
         poleWidth = 7.5;
         maxDistanceBetweenPoles = 480;
     }
     
     
-    public String drawCarportFlatRoofSide(Carport carport) {
+    public String drawCarport() {
         double roofHeight = 0;
         
-        leftEaves = carport.getLength() * 0.15;
         if (carport.getRoof().getRaised()) {
             Roof roof = carport.getRoof();
             double angleOfRoof = 90-roof.getSlope();
@@ -41,18 +43,18 @@ public class SVGDrawerFromSide {
        
         
         if (carport.getRoof().getRaised()) {
-            drawCarportRaisedRoof(sb, carport, roofHeight);
-            drawCarportPoles(sb, carport, roofHeight);
+            drawCarportRaisedRoof(sb, roofHeight);
+            drawCarportPoles(sb, roofHeight);
             if (carport.getShed() != null) {
-                drawShedCoverings(sb, carport, roofHeight);
+                drawShedCoverings(sb, roofHeight);
             }
-            drawCarportLengthLine(sb, carport, roofHeight);
+            drawCarportLengthLine(sb, roofHeight);
         } else {
-            drawCarportPoles(sb, carport);
-            drawCarportFlatRoof(sb, carport);
-            drawCarportLengthLine(sb, carport);
+            drawCarportPoles(sb);
+            drawCarportFlatRoof(sb);
+            drawCarportLengthLine(sb);
             if (carport.getShed() != null) {
-                drawShedCoverings(sb, carport);
+                drawShedCoverings(sb);
             }
         }
         sb.append("</svg>");
@@ -60,12 +62,12 @@ public class SVGDrawerFromSide {
     }
     
     
-    private void drawCarportFlatRoof(StringBuilder sb, Carport carport) {
+    private void drawCarportFlatRoof(StringBuilder sb) {
         sb.append(rectangle(startX, startY+13, 9, carport.getLength()));
         sb.append(rectangle(startX, startY, 9, carport.getLength()));
     }
     
-    private void drawCarportRaisedRoof(StringBuilder sb, Carport carport, double roofHeight) {
+    private void drawCarportRaisedRoof(StringBuilder sb, double roofHeight) {
         sb.append(rectangle(startX, startY+poleWidth, roofHeight+10, poleWidth));
         sb.append(rectangle(carport.getLength(), startY+poleWidth, roofHeight+10, poleWidth));
         sb.append(rectangle(startX, startY+roofHeight+poleWidth, 9, carport.getLength()));
@@ -83,7 +85,7 @@ public class SVGDrawerFromSide {
         
     }
     
-    private void drawCarportPoles(StringBuilder sb, Carport carport) {
+    private void drawCarportPoles(StringBuilder sb) {
         sb.append(rectangle(startX+leftEaves, startY+22, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
         sb.append(rectangle(carport.getLength()-rightEaves, startY+22, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
         
@@ -94,7 +96,7 @@ public class SVGDrawerFromSide {
         }
     }
     
-    private void drawCarportPoles(StringBuilder sb, Carport carport, double height) {
+    private void drawCarportPoles(StringBuilder sb, double height) {
         sb.append(rectangle(startX+leftEaves, startY+22+height+2, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
         sb.append(rectangle(carport.getLength()-rightEaves, startY+22+height+2, carport.getHeight()-22, poleWidth,1.5, "rgb(200,200,200)"));
         
@@ -109,19 +111,19 @@ public class SVGDrawerFromSide {
         }
     }
     
-    private void drawCarportLengthLine(StringBuilder sb, Carport carport) {
+    private void drawCarportLengthLine(StringBuilder sb) {
         sb.append(line(startX, startY+carport.getHeight()+5,carport.getLength()+10,startY+carport.getHeight()+5,2));
         sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+25) +" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
     }
     
-    private void drawCarportLengthLine(StringBuilder sb, Carport carport, double height) {
+    private void drawCarportLengthLine(StringBuilder sb, double height) {
         sb.append(line(startX, startY+carport.getHeight()+15+height,carport.getLength()+10,startY+carport.getHeight()+15+height,2));
         sb.append("<text x="+ ((carport.getLength()/2)-10) +" y="+ (carport.getHeight()+height+25)+" font-family=\"Verdana\" font-size=\"15\" fill=\"black\">" + carport.getLength() 
                 + " cm" + "</text>");
     }
     
-    private void drawShedCoverings(StringBuilder sb, Carport carport) {
+    private void drawShedCoverings(StringBuilder sb) {
         Shed shed = carport.getShed();
         double shedPole = carport.getLength()-rightEaves-shed.getLength();
         double amount = Math.floor((carport.getLength()-rightEaves-shed.getLength()-poleWidth)/(poleWidth+0)+1);
@@ -132,7 +134,7 @@ public class SVGDrawerFromSide {
         }
     }
     
-    private void drawShedCoverings(StringBuilder sb, Carport carport, double height) {
+    private void drawShedCoverings(StringBuilder sb, double height) {
         Shed shed = carport.getShed();
         double shedPole = carport.getLength()-rightEaves-shed.getLength();
         double amount = Math.floor((carport.getLength()-rightEaves-shed.getLength()-poleWidth)/(poleWidth+0)+1);

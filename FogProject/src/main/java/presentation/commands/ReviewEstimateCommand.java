@@ -40,6 +40,11 @@ public class ReviewEstimateCommand extends Command {
             Carport carport = new Carport(-1, length, width, nRoof, nShed);
             
             Request req = new Request(-1, LocalDateTime.now(), "", carport);
+            
+            String SVGdrawingAbove = pToL.getSVGDrawing(carport, "above");
+            String SVGdrawingSide = pToL.getSVGDrawing(carport, "side");
+            request.setAttribute("SVGabove", SVGdrawingAbove);
+            request.setAttribute("SVGside", SVGdrawingSide);
 
             PartsList partsList = pToL.getPartsList(carport);
             Offer estimate = pToL.getOffer(partsList, req);

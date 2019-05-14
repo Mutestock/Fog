@@ -32,6 +32,11 @@ public class RequestDetailsCommand extends Command {
                 r = PRES_TO_LOGIC.getRequest(id);
                 request.getSession().setAttribute("request", r);
             }
+            
+            String SVGdrawingAbove = PRES_TO_LOGIC.getSVGDrawing(r.getCarport(), "above");
+            String SVGdrawingSide = PRES_TO_LOGIC.getSVGDrawing(r.getCarport(), "side");
+            request.setAttribute("SVGabove", SVGdrawingAbove);
+            request.setAttribute("SVGside", SVGdrawingSide);
 
             PartsList partsList = (PartsList) request.getSession().getAttribute("partsList");
             Offer offer = (Offer) request.getSession().getAttribute("offer");
