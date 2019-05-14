@@ -12,40 +12,100 @@ public class RoofCalc {
 
     //Considered as constant values.
     //Please find correct terminology
-    private static final int topBattenSlot = 8;
-    private static final int roofTileMatPacks = 2;
+    private static final int topBattenSlotAmount = 8;
+    private static final int roofTileMatPacksAmount = 2;
     private static final double ridgeTileRatio = 34.7;
     private static final double tileRatio = 939.27;
     private static final double minimumPlateExtrusion = 5.0;
     private static final double minimumPlateLengthOverlap = 20;
     private static final int plateWidth = 100;
-    
-    
 
+    private static final double priceStandardTile = 10;
+    private static final double priceRidgeTile = 50;
+    private static final double priceRidgeTileSlot = 40;
+    private static final double pricePlate600 = 100;
+    private static final double pricePlate360 = 75;
+    private static final double priceTopBatten = 50;
+    private static final double priceMatPack = 100;
+
+    private static final String descriptionTopBatten = "monteres på toppen af spæret (til toplægte)";
+    private static final String descriptionMatPack = "til montering af tagsten, alle ydersten + hver anden fastgøres";
+    private static final String descriptionStandardTile = "monteres på taglægter 6 rækker af 24 sten på hver side af taget";
+    private static final String descriptionRidgeTileSlot = "Til montering af rygsten";
+    private static final String descriptionRidgeTile = "monteres på toplægte med medfølgende beslag se tagstens vejledning";
+    private static final String descriptionPlate600 = "109 x 600. tagplader monteres på spær";
+    private static final String descriptionPlate360 = "109 x 360. tagplader monteres på spær";
+
+    private static final String nameTopBatten = "B & C Toplægte holder";
+    private static final String nameMatPack = "B & C tagstens bindere & nakkekroge";
+    private static final String nameStandardTile = "B & C Dobbelt -s sort";
+    private static final String nameRidgeTile = "B & C Rygsten sort";
+    private static final String nameRidgeTileSlot = "B & C rygstensbeslag";
+    private static final String namePlate600 = "Plastmo Ecolyte blåtonet";
+    private static final String namePlate360 = "Plastmo Ecolyte blåtonet";
+
+    private static final String unitTopBatten = "stk";
+    private static final String unitMatPack = "pk";
+    private static final String unitStandardTile = "stk";
+    private static final String unitRidgeTile = "stk";
+    private static final String unitRidgeTileSlot = "stk";
+    private static final String unitPlate600 = "stk";
+    private static final String unitPlate360 = "stk";
+
+    /**
+     *
+     * Main calculator for roof part list generation. To understand parts refer
+     * to:
+     * {@link data.help_classes.Part#Part(String, int, int, String, String, double) Part Constructor}
+     *
+     * Utilises several methods in order to function correctly:
+     *
+     * {@link #calcTileCount(carport, double) calcTileCount}
+     * {@link #calcRidgeTile(carport, double) calcRidgeTile}
+     * {@link #calcRidgeTileSlot(carport, double) calcRidgeTileSlot}
+     * {@link #calcFlatRoofPlates600(carport, double, double, int) calcFlatRoofPlates600}
+     * {@link #calcFlatRoofPlates360(carport, double, double, int) calcFlatRoofPlates360}
+     *
+     * Additional parts without the need for calculation are included inside the
+     * method. These are pre-defined and added whenever the user picks a roof:
+     *
+     * Top batten Package of various materials (MatPack)
+     *
+     * Part descriptions, units and prices are currently locked Refer to
+     * constants to change the outcome.
+     *
+     * @param carport
+     * @return LinkedList<part>
+     */
     public static LinkedList<Part> calculateParts(Carport carport) {
         LinkedList<Part> parts = new LinkedList();
 
         if (carport.getRoof().getRaised() == true) {
-            parts.add(calcTileCount(carport , tileRatio));
-            parts.add(calcRidgeTile(carport, ridgeTileRatio));
-            parts.add(calcRidgeTileSlot(carport, ridgeTileRatio));
-            Part topBattenSlotPart = new Part("B & C Toplægte holder", topBattenSlot, "stk", "monteres på toppen af spæret (til toplægte)", 32.0);
-            Part roofTileMatPacksPart = new Part("B & C tagstens bindere & nakkekroge", roofTileMatPacks, "pk.", "til montering af tagsten, alle ydersten + hver anden fastgøres", 69);
+            parts.add(calcTileCount(carport));
+            parts.add(calcRidgeTile(carport));
+            parts.add(calcRidgeTileSlot(carport));
+            Part topBattenSlotPart = new Part(nameTopBatten, topBattenSlotAmount, unitTopBatten, descriptionTopBatten, priceTopBatten);
+            Part roofTileMatPacksPart = new Part(nameMatPack, roofTileMatPacksAmount, unitMatPack, descriptionMatPack, priceMatPack);
 
             parts.add(topBattenSlotPart);
             parts.add(roofTileMatPacksPart);
-        } else if (calcFlatRoofPlates600(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth).getAmount() == 0) {
-            parts.add(calcFlatRoofPlates360(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth));
+        } else if (calcFlatRoofPlates600(carport).getAmount() == 0) {
+            parts.add(calcFlatRoofPlates360(carport));
         } else {
-            parts.add(calcFlatRoofPlates600(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth));
-            parts.add(calcFlatRoofPlates360(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth));
+            parts.add(calcFlatRoofPlates600(carport));
+            parts.add(calcFlatRoofPlates360(carport));
 
         }
 
         return parts;
     }
 
-    private static Part calcTileCount(Carport carport, double tileRatio) {
+    /**
+     *
+     * @param carport
+     * @return
+     */
+    private static Part calcTileCount(Carport carport) {
 
 //        step 1: width / 2 = b
 //        step 2: b / cos(A) = c
@@ -64,24 +124,39 @@ public class RoofCalc {
         preCasted = preCasted * 2;
         preCasted = preCasted * (double) carport.getLength() / tileRatio;
         result = (int) Math.ceil(preCasted);
-        return new Part("B & C Dobbelt -s sort", result, "stk", "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 4.5);
+        return new Part(nameStandardTile, result, unitStandardTile, descriptionStandardTile, priceStandardTile);
     }
 
-    private static Part calcRidgeTile(Carport carport, double ridgeTileRatio) {
+    /**
+     *
+     * @param carport
+     * @return
+     */
+    private static Part calcRidgeTile(Carport carport) {
         //Non-dependant on width
         //Length 730 / 21 = 34.7 cm
 
-        int result = (int) Math.ceil((carport.getLength() / 34.7));
-        return new Part("B & C Rygsten sort", result, "stk", "monteres på toplægte med medfølgende beslag se tagstens vejledning", 100);
+        int result = (int) Math.ceil((carport.getLength() / ridgeTileRatio));
+        return new Part(nameRidgeTile, result, unitRidgeTile, descriptionRidgeTile, priceRidgeTile);
     }
 
-    private static Part calcRidgeTileSlot(Carport carport, double ridgeTileRatio) {
+    /**
+     *
+     * @param carport
+     * @return
+     */
+    private static Part calcRidgeTileSlot(Carport carport) {
         //Containers for ridgetiles. Same proportions.
         int result = (int) Math.ceil((carport.getLength() / ridgeTileRatio));
-        return new Part("B & C rygstensbeslag", result, "stk", "Til montering af rygsten", 75);
+        return new Part(nameRidgeTileSlot, result, unitRidgeTileSlot, descriptionRidgeTileSlot, priceRidgeTileSlot);
     }
 
-    private static Part calcFlatRoofPlates600(Carport carport, double minimumPlateExtrusion, double minimumPlateLengthOverlap, int plateWidth) {
+    /**
+     *
+     * @param carport
+     * @return
+     */
+    private static Part calcFlatRoofPlates600(Carport carport) {
         /*Rules:
         
         Modulus
@@ -177,15 +252,20 @@ public class RoofCalc {
 
         int result = ((carport.getLength() + minimumPlateExtrusion) / (600 - minimumPlateLengthOverlap) >= 1)
                 ? (carport.getWidth() / plateWidth) : 0;
-        return new Part("Plastmo Ecolyte blåtonet", result, "stk", "109 x 600. tagplader monteres på spær", 95);
+        return new Part(namePlate600, result, unitPlate600, descriptionPlate600, pricePlate600);
     }
 
-    private static Part calcFlatRoofPlates360(Carport carport, double minimumPlateExtrusion, double minimumPlateLengthOverlap, int plateWidth) {
+    /**
+     *
+     * @param carport
+     * @return
+     */
+    private static Part calcFlatRoofPlates360(Carport carport) {
 
-        int calc = ((carport.getLength() + minimumPlateExtrusion) % (600 - minimumPlateLengthOverlap) != 0 &&
-                ((double) carport.getLength() / (360.0 - minimumPlateLengthOverlap) > 0))
+        int calc = ((carport.getLength() + minimumPlateExtrusion) % (600 - minimumPlateLengthOverlap) != 0
+                && ((double) carport.getLength() / (360.0 - minimumPlateLengthOverlap) > 0))
                 ? (carport.getWidth() / plateWidth) : 0;
-        return new Part("Plastmo Ecolyte blåtonet", calc, "stk", "109 x 360. tagplader monteres på spær", 65);
+        return new Part(namePlate360, calc, unitPlate360, descriptionPlate360, pricePlate360);
     }
 
 }
