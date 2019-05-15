@@ -2,14 +2,12 @@
 
 - Optimering/forbedring af algoritmer (+ensretning af Calc og SVG)
 
-- JavaDocs!
-
-- Man skal kunne ændre på indholdet af alle dropdown menus.
-
-- Man skal kunne ændre på alle algoritmernes parametre (fx afstand mellem stolper, eller de forskellige eaves)
+- Skal man kunne ændre på alle algoritmernes parametre? (fx afstand mellem stolper, eller de forskellige eaves)
 
 ==============================
 //MINDRE OPGAVER
+
+- tilføj takke-JSP efter bestilling
 
 ==============================
 

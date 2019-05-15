@@ -11,9 +11,6 @@ import data.help_classes.Offer;
 import data.help_classes.Request;
 import data.help_classes.User;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import logic.LogicToData;
 
 public class LogicToDataImpl implements LogicToData {
 
@@ -29,12 +26,8 @@ public class LogicToDataImpl implements LogicToData {
     @Override
     public LinkedList<Request> getRequests(String filter) throws DataAccessException {
         switch (filter) {
-            case "incomplete":
-                return employee_dao.readRequestsIncomplete();
-            case "complete":
-                return employee_dao.readRequestsComplete();
-            case "unread":
-                return employee_dao.readRequestsUnread();
+//            case "unread":
+//                return employee_dao.readRequestsUnread();
             default:
                 return employee_dao.readAllRequests();
         }

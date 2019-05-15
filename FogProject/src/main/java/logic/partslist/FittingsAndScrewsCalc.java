@@ -97,7 +97,7 @@ public class FittingsAndScrewsCalc {
 // Meget groft estimeret, skal nok kigge på den igen
 // algoritmen  mangler også at tage højde for en masse små ting
     private static Part getBoardBolts(LinkedList<Part> boM, Carport carport) {
-        double amount = -1;
+        double amount;
         if (carport.getWidth() < 500) {
             if (carport.getShed() == null) {
                 amount = (getPart("97x97mm. trykimp. stolpe ", boM).getAmount() - 1) * 2; // fjerner 1 fordi der altid skal være en for meget
@@ -121,7 +121,7 @@ public class FittingsAndScrewsCalc {
     }
 
     private static Part getSquarePiece(LinkedList<Part> boM, Carport carport) {
-        double amount = -1;
+        double amount;
         if (carport.getShed() == null) {
             amount = (getPart("bræddebolt 10 x 120 mm.", boM).getAmount() - 1); // fjerner 1 fordi der altid skal være en for meget
         } else {
@@ -133,8 +133,8 @@ public class FittingsAndScrewsCalc {
 
     // Meget groft estimeret, skal nok kigge på den igen
     private static Part getCoveringScrews(LinkedList<Part> boM, boolean outer) {
-        double amount = -1;
-        int ramount = 0;
+        double amount;
+        int ramount;
         if (outer) {
             amount = getPart("19x100 mm. trykimp. Bræt Beklædning", boM).getAmount() * 8 / 400;
             ramount = (int) Math.ceil(amount);
@@ -193,8 +193,8 @@ public class FittingsAndScrewsCalc {
     }
 
     private static Part getAngledShedCoveringScrews(LinkedList<Part> boM, boolean outer) {
-        double amount = -1;
-        int ramount = 0;
+        double amount;
+        int ramount;
         if (outer) {
             amount = getPart("19x100 mm. trykimp. Bræt Beklædning", boM).getAmount() * 6 / 200;
             ramount = (int) Math.ceil(amount);

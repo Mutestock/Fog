@@ -21,16 +21,16 @@ public class DataMapperUser implements DataMapperUserInterface {
             Connection c = DBConnector.getConnection();
             String query
                     = "insert into `users` (`username`, `password`) "
-                    + "VALUES(?,?)" + ";";
-
+                    + "VALUES(?,?);";
             preparedStmt = c.prepareStatement(query);
 
             preparedStmt.setString(1, user.getUsername());
             preparedStmt.setString(2, user.getPassword());
             preparedStmt.execute();
+            
             preparedStmt.close();
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -41,10 +41,12 @@ public class DataMapperUser implements DataMapperUserInterface {
             Connection c = DBConnector.getConnection();
             User user = null;
             String query
-                    = "SELECT * from `users` WHERE `username`= '" + username + "' ;";
+                    = "SELECT * FROM `users` WHERE `username`= ?;";
 
             preparedStmt = c.prepareStatement(query);
-            ResultSet rs = preparedStmt.executeQuery(query);
+            preparedStmt.setString(1, username);
+            
+            ResultSet rs = preparedStmt.executeQuery();
             String password = "";
             username = "";
             while (rs.next()) {
@@ -54,11 +56,11 @@ public class DataMapperUser implements DataMapperUserInterface {
             if (username != null && !username.isEmpty()) {
                 user = new User(username, password);
             }
+            
             preparedStmt.close();
-            c.close();
             return user;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 

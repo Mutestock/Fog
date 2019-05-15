@@ -1,4 +1,5 @@
 package data.SQL_Impl;
+
 import data.DataMapperEmployeeInterface;
 import data.customExceptions.DataAccessException;
 import data.help_classes.Carport;
@@ -15,10 +16,9 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class DataMapperEmployee implements DataMapperEmployeeInterface {
-
-    // reads ALL requests right now -- shall be edited and split into the different request readers in another user story, probably
+    
     @Override
-    public LinkedList<Request> readRequestsIncomplete() throws DataAccessException {
+    public LinkedList<Request> readAllRequests() throws DataAccessException {
         LinkedList<Request> requests = new LinkedList<>();
         try {
             PreparedStatement preparedStmt;
@@ -46,23 +46,8 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.close();
             return requests;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
-    }
-
-    @Override
-    public LinkedList<Request> readRequestsComplete() throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public LinkedList<Request> readRequestsUnread() throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public LinkedList<Request> readAllRequests() throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -95,7 +80,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.close();
             return request;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -159,7 +144,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
             preparedStmt.close();
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -190,7 +175,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.close();
             return offer;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 

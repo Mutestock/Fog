@@ -6,6 +6,8 @@ import data.help_classes.*;
 import java.util.LinkedList;
 import logic.offer.OfferCalc;
 import javax.mail.MessagingException;
+import logic.SVG.SVGDrawerFromAbove;
+import logic.SVG.SVGDrawerFromSide;
 import logic.partslist.*;
 
 public class PresentationToLogicImpl implements PresentationToLogic {
@@ -56,7 +58,21 @@ public class PresentationToLogicImpl implements PresentationToLogic {
     }
 
     @Override
-    public User getUser(String username) throws DataAccessException{
+    public User getUser(String username) throws DataAccessException {
         return LOGIC_TO_DATA.getUser(username);
+    }
+
+    @Override
+    public String getSVGDrawing(Carport carport, String angle) {
+        switch (angle) {
+            case "above":
+                SVGDrawerFromAbove SVGdrawerAbove = new SVGDrawerFromAbove(carport);
+                return SVGdrawerAbove.drawCarport();
+            case "side":
+                SVGDrawerFromSide SVGdrawerSide = new SVGDrawerFromSide(carport);
+                return SVGdrawerSide.drawCarport();
+            default:
+                throw new AssertionError();
+        }
     }
 }

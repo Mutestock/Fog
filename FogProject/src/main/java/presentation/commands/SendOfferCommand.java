@@ -2,7 +2,6 @@ package presentation.commands;
 
 import data.customExceptions.DataAccessException;
 import data.help_classes.Offer;
-import data.help_classes.PartsList;
 import data.help_classes.Request;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -34,7 +33,7 @@ public class SendOfferCommand extends Command {
             request.getRequestDispatcher("/c/ListRequests").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
-            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("Crash").forward(request, response);
         }
     }
 

@@ -9,11 +9,11 @@ public class Carport {
     
     private static final double widthEaves = 60;
     private static final double backEaves = 5;
+    private static final int height = 210;
 
     private final int id;
     private final int length;
     private final int width;
-    private final int height = 210;
     private final Roof roof;
     private final Shed shed;
 

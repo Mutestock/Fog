@@ -24,7 +24,7 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
             <h2>Følgende forespørgsler venter på at blive behandlet:</h2>
 
             <div class="panel panel-default">
@@ -49,11 +49,11 @@
                                 }
                         %>
                         <tr>
-                            
+
                             <% String dateConv = (r.getSent().toString());
-                            String received = dateConv.replace("T", " ");
+                                String received = dateConv.replace("T", " ");
                             %>
-                            
+
                             <td><%=r.getId()%></td>
                             <td><%=received%></td>
                             <td><%=r.getCustomer().getFullName()%></td>
@@ -69,9 +69,24 @@
                         <%  }%>
                     </table>
                     <br>
-                    <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
+                    <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/FrontPage';">Tilbage</button>
                 </div>
             </div>
+            <%
+                String error = (String) request.getAttribute("errormessage");
+                String errormessage = "";
+
+                if (error == null) {
+                    errormessage = "";
+                } else if (error.equals("RequestNull")) {
+                    errormessage = "<p style=\"color:red\">Vælg forespørgsel</p>";
+                } else if (error.equals("WrongCredentials")) {
+                    errormessage = "<p style=\"color:red\">Incorrect credentials</p>";
+                } else {
+                    errormessage = "";
+                }
+                out.println(errormessage);
+            %>
         </div>
     </body>
 </html>
