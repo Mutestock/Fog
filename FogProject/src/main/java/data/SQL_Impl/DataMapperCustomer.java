@@ -10,9 +10,9 @@ import java.sql.SQLException;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
-<<<<<<< HEAD
     DBConnector dBC;
 
+    
     public DataMapperCustomer(boolean test) {
         if (test) {
             dBC = new TestDBConnector();
@@ -20,19 +20,18 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             dBC = new DBConnector();
         }
     }
+    
 
     public DataMapperCustomer() {
         dBC = new DBConnector();
     }
 
-=======
     
     /**
      * Inserts request object values to database.
      * @param request object (not http class object) with carport and customer information.
      * @throws DataAccessException when access to database fails.
      */
->>>>>>> f96708df4d60eabc24562e7975db3ff6203bc844
     @Override
     public void createRequest(Request request) throws DataAccessException {
 
