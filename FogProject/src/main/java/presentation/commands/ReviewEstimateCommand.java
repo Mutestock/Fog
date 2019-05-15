@@ -22,16 +22,19 @@ public class ReviewEstimateCommand extends Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
+            String paramRoof = request.getParameter("roof");
+            String isRaised = request.getParameter("isRaised");
+            String hasShed = request.getParameter("hasShed");
+
             final PresentationToLogic pToL = new PresentationToLogicImpl();
             if (request.getParameter("width") == null
                     || request.getParameter("length") == null
-                    || request.getParameter("roof") == null
-                    || request.getParameter("isRaised").equals("on") && request.getParameter("slope") == null
-                    || request.getParameter("hasShed").equals("on") && request.getParameter("shedlength") == null
-                    || request.getParameter("hasShed").equals("on") && request.getParameter("shedwidth") == null
-                    || request.getParameter("hasShed").equals("on") && request.getParameter("walls") == null) {
+                    || paramRoof == null
+                    || "on".equals(isRaised) && request.getParameter("slope") == null
+                    || "on".equals(hasShed) && request.getParameter("shedlength") == null
+                    || "on".equals(hasShed) && request.getParameter("shedwidth") == null
+                    || "on".equals(hasShed) && request.getParameter("walls") == null) {
 
                 throw new InvalidInputException("Missing Values in ReviewEstimate");
             }
