@@ -20,6 +20,8 @@ public interface LogicToData {
     
     public LinkedList<String> getAvailableOptions(String type) throws DataAccessException;
     
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException;
+    
     public void saveOffer(Offer offer) throws DataAccessException;
     
     public Offer getOffer(int requestID) throws DataAccessException;

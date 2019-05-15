@@ -1,4 +1,3 @@
-
 package presentation.commands;
 
 import data.customExceptions.DataAccessException;
@@ -15,38 +14,18 @@ import presentation.Command;
  * @author Simon Asholt Norup
  */
 public class CarportDetailsCommand extends Command {
-    
+
     private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            LinkedList<Integer> lengths = new LinkedList<>();
-            for (String s : PRES_TO_LOGIC.getAvailableOptions("length")){
-                Integer length = Integer.parseInt(s);
-                lengths.add(length);
-            }
-            LinkedList<Integer> widths = new LinkedList<>();
-            for (String s : PRES_TO_LOGIC.getAvailableOptions("width")){
-                Integer width = Integer.parseInt(s);
-                widths.add(width);
-            }
-            LinkedList<Integer> roofSlopes = new LinkedList<>();
-            for (String s : PRES_TO_LOGIC.getAvailableOptions("roofSlope")){
-                Integer roofSlope = Integer.parseInt(s);
-                roofSlopes.add(roofSlope);
-            }
-            LinkedList<Integer> shedLengths = new LinkedList<>();
-            for (String s : PRES_TO_LOGIC.getAvailableOptions("shedLength")){
-                Integer shedLength = Integer.parseInt(s);
-                shedLengths.add(shedLength);
-            }
-            LinkedList<Integer> shedWidths = new LinkedList<>();
-            for (String s : PRES_TO_LOGIC.getAvailableOptions("shedWidth")){
-                Integer shedWidth = Integer.parseInt(s);
-                shedWidths.add(shedWidth);
-            }
-            
+            LinkedList<Integer> lengths = getAvailableIntegers("length");
+            LinkedList<Integer> widths = getAvailableIntegers("width");
+            LinkedList<Integer> roofSlopes = getAvailableIntegers("roofSlope");
+            LinkedList<Integer> shedLengths = getAvailableIntegers("shedLength");
+            LinkedList<Integer> shedWidths = getAvailableIntegers("shedWidth");
+
             request.setAttribute("lengths", lengths);
             request.setAttribute("widths", widths);
             request.setAttribute("roofsFlat", PRES_TO_LOGIC.getAvailableOptions("roofFlat"));
@@ -55,15 +34,29 @@ public class CarportDetailsCommand extends Command {
             request.setAttribute("shedLengths", shedLengths);
             request.setAttribute("shedWidths", shedWidths);
             request.setAttribute("shedCoverings", PRES_TO_LOGIC.getAvailableOptions("shedCovering"));
-            
-            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
-        } catch (DataAccessException ex){
+
+            String origin = request.getParameter("origin");
+            if (origin == null) {
+                request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
+            } else if (origin.equals("employee")){
+                request.getRequestDispatcher("/WEB-INF/CarportDetailsChange.jsp").forward(request, response);
+            }
+        } catch (DataAccessException ex) {
             request.setAttribute("errormessage", "DataAccess");
             request.getRequestDispatcher("Crash").forward(request, response);
         } catch (NumberFormatException ex) {
             request.setAttribute("errormessage", "NumberFormat");
             request.getRequestDispatcher("Crash").forward(request, response);
         }
+    }
+
+    private LinkedList<Integer> getAvailableIntegers(String type) throws DataAccessException, NumberFormatException {
+        LinkedList<Integer> list = new LinkedList<>();
+        for (String s : PRES_TO_LOGIC.getAvailableOptions(type)) {
+            Integer i = Integer.parseInt(s);
+            list.add(i);
+        }
+        return list;
     }
 
 }

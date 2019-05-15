@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class DataMapperEmployee implements DataMapperEmployeeInterface {
-    
+
     @Override
     public LinkedList<Request> readAllRequests() throws DataAccessException {
         LinkedList<Request> requests = new LinkedList<>();
@@ -151,7 +151,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
     @Override
     public Offer readOffer(int requestID) throws DataAccessException {
         Request request = readRequest(requestID);
-        
+
         try {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();
@@ -174,6 +174,38 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
             preparedStmt.close();
             return offer;
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void updateAvailableOptions(LinkedList<String> options, String type) throws DataAccessException {
+        try {
+            PreparedStatement preparedStmt;
+            Connection c = DBConnector.getConnection();
+
+            String query
+                    = "DELETE FROM AvailableOptions "
+                    + "WHERE `Type` = ?";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setString(1, type);
+            preparedStmt.execute();
+            preparedStmt.close();
+
+            query
+                    = "INSERT INTO AvailableOptions (`Type`, `Value`) "
+                    + "VALUES (?, ?)";
+            preparedStmt = c.prepareStatement(query);
+
+            for (String option : options) {
+                preparedStmt.setString(1, option);
+                preparedStmt.setString(2, type);
+                preparedStmt.addBatch();
+            }
+            preparedStmt.executeBatch();
+
+            preparedStmt.close();
         } catch (SQLException ex) {
             throw new DataAccessException(ex.getMessage());
         }

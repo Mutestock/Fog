@@ -69,6 +69,11 @@
                         <%  }%>
                     </table>
                     <br>
+                    <form action="/FogProject/c/CarportDetails" method=POST>
+                        <input type="hidden" name="origin" value="employee"/>
+                        <button class="btn btn-primary" type="submit"> Opdater mulige specifikationer </button>
+                    </form>
+                    <br>
                     <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
                 </div>
             </div>

@@ -18,6 +18,8 @@ public interface PresentationToLogic {
     
     public LinkedList<String> getAvailableOptions(String type) throws DataAccessException;
     
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException;
+    
     public String getSVGDrawing(Carport carport, String angle);
     
     public PartsList getPartsList(Carport carport);

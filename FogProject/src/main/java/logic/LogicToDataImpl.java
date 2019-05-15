@@ -58,4 +58,9 @@ public class LogicToDataImpl implements LogicToData {
         return customer_dao.readAvailableOptions(type);
     }
 
+    @Override
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException {
+        employee_dao.updateAvailableOptions(options, type);
+    }
+
 }
