@@ -16,6 +16,21 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class DataMapperEmployee implements DataMapperEmployeeInterface {
+
+    DBConnector dBC;
+
+    public DataMapperEmployee(boolean test) {
+        if (test) {
+            dBC = new TestDBConnector();
+        } else {
+            dBC = new DBConnector();
+        }
+    }
+
+    public DataMapperEmployee() {
+        dBC = new DBConnector();
+    }
+
     
     
     /**
@@ -28,7 +43,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         LinkedList<Request> requests = new LinkedList<>();
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "select Request.Request_id, Request.`Date`, Request.Comments, "
                     + "Offer.Offer_id, Customer.*, "
@@ -184,7 +199,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
     @Override
     public Offer readOffer(int requestID) throws DataAccessException {
         Request request = readRequest(requestID);
-        
+
         try {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();

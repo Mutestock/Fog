@@ -10,12 +10,29 @@ import java.sql.SQLException;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
+<<<<<<< HEAD
+    DBConnector dBC;
+
+    public DataMapperCustomer(boolean test) {
+        if (test) {
+            dBC = new TestDBConnector();
+        } else {
+            dBC = new DBConnector();
+        }
+    }
+
+    public DataMapperCustomer() {
+        dBC = new DBConnector();
+    }
+
+=======
     
     /**
      * Inserts request object values to database.
      * @param request object (not http class object) with carport and customer information.
      * @throws DataAccessException when access to database fails.
      */
+>>>>>>> f96708df4d60eabc24562e7975db3ff6203bc844
     @Override
     public void createRequest(Request request) throws DataAccessException {
 
@@ -227,7 +244,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
                     + "where `Email` = ?;";
             preparedStmt = c.prepareStatement(query);
             preparedStmt.setString(1, customer.getEmail());
-            
+
             ResultSet rs = preparedStmt.executeQuery();
             customerID = rs.getInt("Customer_id");
             preparedStmt.close();
