@@ -34,6 +34,7 @@ public abstract class Command {
         ACTIONS.put("EmpLogin", new EmpLoginCommand());
         ACTIONS.put("LoginCheck", new LoginCheckCommand());
         ACTIONS.put("SessionExit", new RedirectCommand("SessionExit"));
+        ACTIONS.put("ThankYou", new RedirectCommand("ThankYouOrder"));
     }
 
     public abstract void execute(HttpServletRequest request, HttpServletResponse response)
