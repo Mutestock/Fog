@@ -17,7 +17,7 @@ public class DataMapperUserTest {
     private User user;
 
     public DataMapperUserTest() {
-        user = new User("theuser", "password");
+        user = new User("theuser", "thepassword");
     }
 
     @BeforeClass
@@ -57,8 +57,9 @@ public class DataMapperUserTest {
         DataMapperUser instance = new DataMapperUser();
         instance.addUser(user);
         User expResult = user;
-        User result = instance.getUser(username);
-        assertEquals(expResult, result);
+        User result = instance.getUser(user.getUsername());
+        assertEquals(expResult.getPassword(), result.getPassword());
+        instance.deleteUser(user);
     }
 
 }

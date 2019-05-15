@@ -1,9 +1,12 @@
 package data.SQL_Impl;
 
 import data.help_classes.Carport;
+import data.help_classes.Customer;
+import data.help_classes.Offer;
 import data.help_classes.Request;
 import data.help_classes.Roof;
 import data.help_classes.Shed;
+import java.time.LocalDateTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,8 +19,21 @@ import static org.junit.Assert.*;
  * @author Lukas Bjørnvad
  */
 public class DataMapperCustomerTest {
-
+    private LocalDateTime time;
+    private Roof roof;
+    private Shed shed;
+    private Carport carport;
+    private Request request;
+    private Customer customer;
+    private Offer offer;
     public DataMapperCustomerTest() {
+        this.time = LocalDateTime.now();
+        this.roof = new Roof(-1,"plasttrapezplader",0);
+        this.shed = new Shed(-1,270,270,"bones");
+        this.carport = new Carport(-1,420,420,roof,shed);
+        this.customer = new Customer(-1,"Lars","Larsen","Ostevej 21","4588","Byen","45781245","email@email.com");
+        this.request = new Request(-1,time,"cheesedipper",carport,customer);
+        //this.offer = new Offer(-1, time, 9999, 1111, request);
     }
     
     @BeforeClass
@@ -40,58 +56,17 @@ public class DataMapperCustomerTest {
      * Test of createRequest method, of class DataMapperCustomer.
      */
     @Test
-    public void testCreateRequest() throws Exception {
+    public void testCreateRequest() {
+        try{
         System.out.println("createRequest");
-        Request request = null;
-        DataMapperCustomer instance = new DataMapperCustomer();
+        Request request = this.request;
+        DataMapperCustomer instance = new DataMapperCustomer(true);
         instance.createRequest(request);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of readShedId method, of class DataMapperCustomer.
-     */
-    @Test
-    public void testReadShedId() {
-        System.out.println("readShedId");
-        Shed shed = null;
-        DataMapperCustomer instance = new DataMapperCustomer();
-        int expResult = 0;
-        int result = instance.readShedId(shed);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of readRoofId method, of class DataMapperCustomer.
-     */
-    @Test
-    public void testReadRoofId() {
-        System.out.println("readRoofId");
-        Roof roof = null;
-        DataMapperCustomer instance = new DataMapperCustomer();
-        int expResult = 0;
-        int result = instance.readRoofId(roof);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of readCarportId method, of class DataMapperCustomer.
-     */
-    @Test
-    public void testReadCarportId() {
-        System.out.println("readCarportId");
-        Carport carport = null;
-        DataMapperCustomer instance = new DataMapperCustomer();
-        int expResult = 0;
-        int result = instance.readCarportId(carport);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertTrue(true);
+        }catch(Exception ex){
+            fail("Something went wrong");
+        }
     }
     
 }

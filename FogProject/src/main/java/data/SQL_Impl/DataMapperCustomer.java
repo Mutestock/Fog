@@ -10,6 +10,20 @@ import java.sql.SQLException;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
+    DBConnector dBC;
+
+    public DataMapperCustomer(boolean test) {
+        if (test) {
+            dBC = new TestDBConnector();
+        } else {
+            dBC = new DBConnector();
+        }
+    }
+
+    public DataMapperCustomer() {
+        dBC = new DBConnector();
+    }
+
     @Override
     public void createRequest(Request request) throws DataAccessException {
 
@@ -177,7 +191,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
                     + "where `Email` = ?;";
             preparedStmt = c.prepareStatement(query);
             preparedStmt.setString(1, customer.getEmail());
-            
+
             ResultSet rs = preparedStmt.executeQuery();
             customerID = rs.getInt("Customer_id");
             preparedStmt.close();
