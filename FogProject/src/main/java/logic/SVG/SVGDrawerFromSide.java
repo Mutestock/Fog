@@ -10,7 +10,7 @@ import data.help_classes.Shed;
  */
 public class SVGDrawerFromSide {
     
-    private static double startX, startY, yEaves, leftEaves, rightEaves, maxDistanceBetweenPoles, poleWidth;
+    private static double startX, startY, leftEaves, rightEaves, maxDistanceBetweenPoles, poleWidth;
 
     
     public SVGDrawerFromSide() {
