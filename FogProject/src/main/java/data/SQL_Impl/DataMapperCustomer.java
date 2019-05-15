@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
+
     private DBConnector dBC;
 
     public DataMapperCustomer(boolean test) throws DataAccessException {
@@ -22,13 +23,18 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             }
         } catch (SQLConnectionException ex) {
             throw new DataAccessException();
+
+
+  
         }
 
     }
+    
 
     public DataMapperCustomer() throws DataAccessException {
         this(false);
     }
+
 
     /**
      * Inserts request object values to database.

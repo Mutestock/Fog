@@ -1,8 +1,8 @@
 package data.help_classes;
 
 /**
- *
- * @author Lukas Bjørnvad
+ * Entity class of an user.
+ * Holds all nessescary information of an user.
  */
 public class User {
     String username;

@@ -21,6 +21,10 @@ import presentation.commands.RequestDetailsCommand;
 public abstract class Command {
 
     private static final HashMap<String, Command> ACTIONS;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 245bccb5d32e2bfb3879e73873c914e665daf2e1
     static {
         ACTIONS = new HashMap<>();
         ACTIONS.put("ReviewEstimate", new ReviewEstimateCommand());
@@ -34,7 +38,10 @@ public abstract class Command {
         ACTIONS.put("EmpLogin", new EmpLoginCommand());
         ACTIONS.put("LoginCheck", new LoginCheckCommand());
         ACTIONS.put("SessionExit", new RedirectCommand("SessionExit"));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 245bccb5d32e2bfb3879e73873c914e665daf2e1
     }
 
     public abstract void execute(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +51,10 @@ public abstract class Command {
         String path = request.getPathInfo().substring(1); // substrings "/" out of the path
 //        String path = request.getParameter("path");
 
+<<<<<<< HEAD
         
+=======
+>>>>>>> 245bccb5d32e2bfb3879e73873c914e665daf2e1
         return ACTIONS.getOrDefault(path, new RedirectCommand("PageNotFound"));
     }
 }

@@ -1,9 +1,8 @@
-/*
- */
 package data.help_classes;
 
 /**
- * @author Simon Asholt Norup
+ * Entity class of a carport. 
+ * Holds all values needed to simulate a real carport.
  */
 public class Carport {
     
@@ -17,6 +16,17 @@ public class Carport {
     private final Roof roof;
     private final Shed shed;
 
+    
+    /**
+     * The constructor checks if the arguments is legal.
+     * If they are not, IllegalArgumentException is thrown.
+     * @param id the unique int value of the carport.
+     * @param length int value of the length.
+     * @param width int value of the width.
+     * @param roof object of the roof (seperated from the carport).
+     * @param shed object of the shed (seperated from the carport).
+     * Seperated* in a way that in the database there is used a many to many relation.
+     */
     public Carport(int id, int length, int width, Roof roof, Shed shed) {
         if (length <= 0 || width <= 0 || roof == null) {
             throw new IllegalArgumentException();
