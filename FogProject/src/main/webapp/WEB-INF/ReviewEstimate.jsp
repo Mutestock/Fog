@@ -65,7 +65,7 @@
 
                 <h3>Personlige oplysninger:</h3>
                 <input placeholder="Fornavn" maxlength="50" type="text" name="firstname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
-                <input placeholder="Efternavn" maxlength="50" type="text" name="lastname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Efternavn" type="text" name="lastname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
                 <br>
                 <input placeholder="Adresse" maxlength="100" type="text" name="address" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]+\s\d+"><br>
                 <input placeholder="Postnummer" maxlength="4" type="text" name="zipcode" required="required" pattern="\d{4}"><br>
