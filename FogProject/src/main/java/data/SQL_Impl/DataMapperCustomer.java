@@ -23,9 +23,6 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             }
         } catch (SQLConnectionException ex) {
             throw new DataAccessException();
-
-
-  
         }
 
     }
