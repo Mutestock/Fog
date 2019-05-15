@@ -8,12 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Lukas Bjørnvad
- */
+
 public class DataMapperUser implements DataMapperUserInterface {
 
+    
+    /**
+     * Inserts user object information to database.
+     * @param user object with user information.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public void addUser(User user) throws DataAccessException {
         try {
@@ -34,6 +37,13 @@ public class DataMapperUser implements DataMapperUserInterface {
         }
     }
 
+    
+    /**
+     * Return user object with user information based on username.
+     * @param username object value from the user class.
+     * @return user object based on username.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public User getUser(String username) throws DataAccessException {
         try {
