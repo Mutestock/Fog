@@ -20,6 +20,23 @@ import presentation.commands.RequestDetailsCommand;
  */
 public abstract class Command {
 
+    private static final HashMap<String, Command> ACTIONS;
+    static {
+        ACTIONS = new HashMap<>();
+        ACTIONS.put("ReviewEstimate", new ReviewEstimateCommand());
+        ACTIONS.put("FrontPage", new RedirectCommand("FrontPage"));
+        ACTIONS.put("SendOffer", new SendOfferCommand());
+        ACTIONS.put("PartsList", new RedirectCommand("PartsList"));
+        ACTIONS.put("SendInformation", new SendInformationCommand());
+        ACTIONS.put("CarportDetails", new RedirectCommand("CarportDetails"));
+        ACTIONS.put("RequestDetails", new RequestDetailsCommand());
+        ACTIONS.put("ListRequests", new ListRequestsCommand());
+        ACTIONS.put("EmpLogin", new EmpLoginCommand());
+        ACTIONS.put("LoginCheck", new LoginCheckCommand());
+        ACTIONS.put("SessionExit", new RedirectCommand("SessionExit"));
+
+    }
+
     public abstract void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
 
@@ -27,22 +44,7 @@ public abstract class Command {
         String path = request.getPathInfo().substring(1); // substrings "/" out of the path
 //        String path = request.getParameter("path");
 
-        HashMap<String, Command> actions = new HashMap<String, Command>() {
-            {
-                put("ReviewEstimate", new ReviewEstimateCommand());
-                put("FrontPage", new RedirectCommand("FrontPage"));
-                put("SendOffer", new SendOfferCommand());
-                put("PartsList", new RedirectCommand("PartsList"));
-                put("SendInformation", new SendInformationCommand());
-                put("CarportDetails", new RedirectCommand("CarportDetails"));
-                put("RequestDetails", new RequestDetailsCommand());
-                put("ListRequests", new ListRequestsCommand());
-                put("EmpLogin", new EmpLoginCommand());
-                put("LoginCheck", new LoginCheckCommand());
-                put("SessionExit", new RedirectCommand("SessionExit"));
-            
-            }
-        };
-        return actions.getOrDefault(path, new RedirectCommand("PageNotFound"));
+        
+        return ACTIONS.getOrDefault(path, new RedirectCommand("PageNotFound"));
     }
 }

@@ -17,16 +17,15 @@ import presentation.Command;
  * @author Simon Asholt Norup
  */
 public class SendOfferCommand extends Command {
-    
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
             double price = Double.parseDouble(request.getParameter("price"));
             double shippingCosts = Double.parseDouble(request.getParameter("shippingCosts"));
             Request r = (Request) request.getSession().getAttribute("request");
-            
+
             Offer offer = new Offer(-1, LocalDateTime.now(), price, shippingCosts, r);
             PRES_TO_LOGIC.sendOffer(offer);
 

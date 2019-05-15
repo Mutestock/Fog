@@ -61,10 +61,10 @@ public class DataMapperCustomerTest {
         System.out.println("createRequest");
         Request request = this.request;
         DataMapperCustomer instance = new DataMapperCustomer(true);
-        instance.createRequest(request);
-        
+        instance.createRequest(request);        
         assertTrue(true);
         }catch(Exception ex){
+            ex.printStackTrace();
             fail("Something went wrong");
         }
     }

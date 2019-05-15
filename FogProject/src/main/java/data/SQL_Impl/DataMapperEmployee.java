@@ -2,6 +2,7 @@ package data.SQL_Impl;
 
 import data.DataMapperEmployeeInterface;
 import data.customExceptions.DataAccessException;
+import data.customExceptions.SQLConnectionException;
 import data.help_classes.Carport;
 import data.help_classes.Customer;
 import data.help_classes.Offer;
@@ -17,18 +18,23 @@ import java.util.LinkedList;
 
 public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
-    DBConnector dBC;
+        private DBConnector dBC;
 
-    public DataMapperEmployee(boolean test) {
-        if (test) {
-            dBC = new TestDBConnector();
-        } else {
-            dBC = new DBConnector();
+    public DataMapperEmployee(boolean test) throws DataAccessException{
+        try{
+            if(test){
+                dBC = new DBConnector(true);
+            }else{
+                dBC = new DBConnector();  
+            }
+        }catch(SQLConnectionException ex){
+            throw new DataAccessException();
         }
+        
     }
 
-    public DataMapperEmployee() {
-        dBC = new DBConnector();
+    public DataMapperEmployee() throws DataAccessException {
+      this(false);
     }
 
     

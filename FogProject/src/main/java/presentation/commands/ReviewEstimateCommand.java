@@ -22,8 +22,9 @@ public class ReviewEstimateCommand extends Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final PresentationToLogic pToL = new PresentationToLogicImpl();
+
         try {
+            final PresentationToLogic pToL = new PresentationToLogicImpl();
             if (request.getParameter("width") == null
                     || request.getParameter("length") == null
                     || request.getParameter("roof") == null
@@ -32,7 +33,7 @@ public class ReviewEstimateCommand extends Command {
                     || request.getParameter("hasShed").equals("on") && request.getParameter("shedwidth") == null
                     || request.getParameter("hasShed").equals("on") && request.getParameter("walls") == null) {
 
-                throw new InvalidInputException("Mssing Values in ReviewEstimate");
+                throw new InvalidInputException("Missing Values in ReviewEstimate");
             }
             int width = Integer.parseInt(request.getParameter("width"));
             int length = Integer.parseInt(request.getParameter("length"));

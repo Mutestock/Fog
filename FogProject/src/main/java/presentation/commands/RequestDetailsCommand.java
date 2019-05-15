@@ -22,12 +22,10 @@ import presentation.Command;
  */
 public class RequestDetailsCommand extends Command {
 
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-
+            final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
             User user = (User) request.getSession().getAttribute("user");
 
             if (request.getSession().getAttribute("user") == null) {
