@@ -10,6 +10,12 @@ import java.sql.SQLException;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
+    
+    /**
+     * Inserts request object values to database.
+     * @param request object (not http class object) with carport and customer information.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public void createRequest(Request request) throws DataAccessException {
 
@@ -26,8 +32,15 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         createRequest(request, carportID, customerID);
     }
 
+    
+    /**
+     * Inserts request object values to database.
+     * @param request request object (not http class object) with carport and customer information.
+     * @param carportID used to save the carport information from the database.
+     * @param customerID used to save the customer information from the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private void createRequest(Request request, int carportID, int customerID) throws DataAccessException {
-
         try {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();
@@ -50,6 +63,13 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         }
     }
 
+    
+    /**
+     * Inserts customer object values to database.
+     * @param customer object with customer information.
+     * @return the customer id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createCustomer(Customer customer) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
@@ -84,6 +104,15 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         }
     }
 
+    
+    /**
+     * Inserts carport object values to database.
+     * @param carport object with carport information.
+     * @param roofID used to get roof information from database.
+     * @param shedID used to get shed information from database.
+     * @return the carport id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createCarport(Carport carport, int roofID, int shedID) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
@@ -115,6 +144,13 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         }
     }
 
+    
+    /**
+     * Inserts roof object values to database.
+     * @param roof object with roof information.
+     * @return the roof id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createRoof(Roof roof) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
@@ -141,6 +177,13 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         }
     }
 
+    
+    /**
+     * Inserts shed object values to database.
+     * @param shed object with roof information.
+     * @return the shed id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createShed(Shed shed) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
@@ -167,6 +210,13 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         }
     }
 
+    
+    /**
+     * Gets the ID of a customer from the database based on a customer object.
+     * @param customer object with customer information.
+     * @return the customer id when the customer is found in the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int readCustomerID(Customer customer) throws DataAccessException {
         int customerID;
         try {
@@ -186,4 +236,5 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             throw new DataAccessException(ex.getMessage());
         }
     }
+    
 }

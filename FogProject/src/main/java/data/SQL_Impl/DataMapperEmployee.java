@@ -17,6 +17,12 @@ import java.util.LinkedList;
 
 public class DataMapperEmployee implements DataMapperEmployeeInterface {
     
+    
+    /**
+     * Used to return a LinkedList with all request objects saved in database.
+     * @return a LinkedList object with all request objects found in database.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public LinkedList<Request> readAllRequests() throws DataAccessException {
         LinkedList<Request> requests = new LinkedList<>();
@@ -50,6 +56,13 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         }
     }
 
+    
+    /**
+     * Reads specific request based on request id.
+     * @param id request id parameter.
+     * @return the specific request which matches the id.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public Request readRequest(int id) throws DataAccessException {
         try {
@@ -84,6 +97,13 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         }
     }
 
+    
+    /**
+     * Returns a request object based on an SQL result set.
+     * @param rs result set from database.
+     * @return request object with values of the result set.
+     * @throws SQLException the exception that is thrown when SQL Server returns a warning or error.
+     */
     private Request getRequestFromResultSet(ResultSet rs) throws SQLException {
         Shed shed = null;
         int shedID = rs.getInt("Shed_id");
@@ -124,6 +144,12 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         return myReq;
     }
 
+    
+    /**
+     * Inserts offer object values to database.
+     * @param offer object with offer information.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public void createOffer(Offer offer) throws DataAccessException {
         try {
@@ -148,6 +174,13 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         }
     }
 
+    
+    /**
+     * Returns offer object based on a request id.
+     * @param requestID offer id which is an unique integer.
+     * @return offer object based on the id given as parameter.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public Offer readOffer(int requestID) throws DataAccessException {
         Request request = readRequest(requestID);
