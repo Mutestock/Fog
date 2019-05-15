@@ -21,10 +21,6 @@ import presentation.commands.RequestDetailsCommand;
 public abstract class Command {
 
     private static final HashMap<String, Command> ACTIONS;
-<<<<<<< HEAD
-
-=======
->>>>>>> estimateFix
     static {
         ACTIONS = new HashMap<>();
         ACTIONS.put("ReviewEstimate", new ReviewEstimateCommand());
@@ -38,10 +34,6 @@ public abstract class Command {
         ACTIONS.put("EmpLogin", new EmpLoginCommand());
         ACTIONS.put("LoginCheck", new LoginCheckCommand());
         ACTIONS.put("SessionExit", new RedirectCommand("SessionExit"));
-<<<<<<< HEAD
-
-=======
->>>>>>> estimateFix
     }
 
     public abstract void execute(HttpServletRequest request, HttpServletResponse response)
