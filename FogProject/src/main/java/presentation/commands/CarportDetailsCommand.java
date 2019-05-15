@@ -15,11 +15,13 @@ import presentation.Command;
  */
 public class CarportDetailsCommand extends Command {
 
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
+    private static PresentationToLogic PRES_TO_LOGIC;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            PRES_TO_LOGIC = new PresentationToLogicImpl();
+            
             LinkedList<Integer> lengths = getAvailableIntegers("length");
             LinkedList<Integer> widths = getAvailableIntegers("width");
             LinkedList<Integer> roofSlopes = getAvailableIntegers("roofSlope");

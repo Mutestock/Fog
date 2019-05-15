@@ -17,8 +17,6 @@ import presentation.Command;
  */
 public class LoginCheckCommand extends Command {
 
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,6 +24,7 @@ public class LoginCheckCommand extends Command {
         String password = request.getParameter("password");
 
         try {
+            final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
             if (username != null && password != null) {
                 User user = PRES_TO_LOGIC.getUser(username);
 
@@ -47,6 +46,7 @@ public class LoginCheckCommand extends Command {
             e.printStackTrace();
         }
     }
+
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
     }

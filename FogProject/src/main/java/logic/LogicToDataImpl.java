@@ -14,9 +14,16 @@ import java.util.LinkedList;
 
 public class LogicToDataImpl implements LogicToData {
 
-    DataMapperCustomerInterface customer_dao = new DataMapperCustomer();
-    DataMapperEmployeeInterface employee_dao = new DataMapperEmployee();
-    DataMapperUserInterface user_dao = new DataMapperUser();
+    DataMapperCustomerInterface customer_dao;
+    DataMapperEmployeeInterface employee_dao;
+    DataMapperUserInterface user_dao;
+
+    public LogicToDataImpl() throws DataAccessException {
+
+        customer_dao = new DataMapperCustomer();
+        employee_dao = new DataMapperEmployee();
+        user_dao = new DataMapperUser();
+    }
 
     @Override
     public void saveRequest(Request request) throws DataAccessException {

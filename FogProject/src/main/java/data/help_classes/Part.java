@@ -1,8 +1,8 @@
 package data.help_classes;
 
 /**
- *
- * @author Simon Asholt Norup
+ * Entity class of a part.
+ * Holds all nessescary information of a part.
  */
 public class Part {
 
@@ -13,9 +13,21 @@ public class Part {
     private final double buyPrice;
     private final String unit;
 
+    
+    /**
+     * The constructor checks if the arguments is legal.
+     * If they are not, IllegalArgumentException is thrown.
+     * @param name string for the name of the part.
+     * @param length integer of the length of the part.
+     * @param amount an integer of the amount of the part.
+     * @param unit which unit the amount is calculated in.
+     * @param description a string that describes the part.
+     * @param buyPrice integer of the price of the part.
+     */
     public Part(String name, int length, int amount, String unit, String description, double buyPrice) {
         if (name == null || name.isEmpty()
-                || amount < 0 || buyPrice < 0
+                || amount < 0 
+                || buyPrice < 0
                 || description == null) {
             throw new IllegalArgumentException();
         }

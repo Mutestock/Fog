@@ -1,10 +1,7 @@
 package presentation.commands;
 
 import data.customExceptions.DataAccessException;
-import data.help_classes.Offer;
-import data.help_classes.Request;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +15,11 @@ import presentation.Command;
  */
 public class UpdateOptionsCommand extends Command {
 
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
+            
             String optionText = request.getParameter("options");
             String type = request.getParameter("type");
 

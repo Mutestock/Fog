@@ -9,53 +9,116 @@ import java.util.LinkedList;
  * @author Henning
  */
 public class RoofCalc {
-
-    //Considered as constant values.
-    //Please find correct terminology
-    private static final int topBattenSlot = 8;
-    private static final int roofTileMatPacks = 2;
+    
+    private static final int topBattenSlotAmount = 8;
+    private static final int roofTileMatPacksAmount = 2;
     private static final double ridgeTileRatio = 34.7;
     private static final double tileRatio = 939.27;
     private static final double minimumPlateExtrusion = 5.0;
     private static final double minimumPlateLengthOverlap = 20;
-    private static final int plateWidth = 100;
-    
-    
+    private static final double plateWidth = 109;
+    private static final double plateWaveLength = 4.5;
 
+    private static final double priceStandardTile = 10;
+    private static final double priceRidgeTile = 50;
+    private static final double priceRidgeTileSlot = 40;
+    private static final double pricePlate600 = 100;
+    private static final double pricePlate360 = 75;
+    private static final double priceTopBatten = 50;
+    private static final double priceMatPack = 100;
+
+    private static final String descriptionTopBatten = "monteres på toppen af spæret (til toplægte)";
+    private static final String descriptionMatPack = "til montering af tagsten, alle ydersten + hver anden fastgøres";
+    private static final String descriptionStandardTile = "monteres på taglægter 6 rækker af 24 sten på hver side af taget";
+    private static final String descriptionRidgeTileSlot = "Til montering af rygsten";
+    private static final String descriptionRidgeTile = "monteres på toplægte med medfølgende beslag se tagstens vejledning";
+    private static final String descriptionPlate600 = "109 x 600. tagplader monteres på spær";
+    private static final String descriptionPlate360 = "109 x 360. tagplader monteres på spær";
+
+    private static final String nameTopBatten = "B & C Toplægte holder";
+    private static final String nameMatPack = "B & C tagstens bindere & nakkekroge";
+    private static final String nameStandardTile = "B & C Dobbelt -s sort";
+    private static final String nameRidgeTile = "B & C Rygsten sort";
+    private static final String nameRidgeTileSlot = "B & C rygstensbeslag";
+    private static final String namePlate600 = "Plastmo Ecolyte blåtonet";
+    private static final String namePlate360 = "Plastmo Ecolyte blåtonet";
+
+    private static final String unitTopBatten = "stk";
+    private static final String unitMatPack = "pk";
+    private static final String unitStandardTile = "stk";
+    private static final String unitRidgeTile = "stk";
+    private static final String unitRidgeTileSlot = "stk";
+    private static final String unitPlate600 = "stk";
+    private static final String unitPlate360 = "stk";
+
+    /**
+     *
+     * Main calculator for roof part list generation. To understand parts refer
+     * to:
+     * {@link data.help_classes.Part#Part(String, int, int, String, String, double) Part Constructor}
+     *
+     * Refer to field constants to change the outcome. Utilises several methods
+     * in order to function correctly:
+     *
+     * {@link #calcTileCount(carport) calcTileCount}
+     * {@link #calcRidgeTile(carport) calcRidgeTile}
+     * {@link #calcRidgeTileSlot(carport) calcRidgeTileSlot}
+     * {@link #calcFlatRoofPlates600(carport) calcFlatRoofPlates600}
+     * {@link #calcFlatRoofPlates360(carport) calcFlatRoofPlates360}
+     *
+     * Additional parts without the need for calculation are included inside the
+     * method. These are pre-defined and added whenever the user picks a roof:
+     *
+     * Top batten Package of various materials (MatPack)
+     *
+     * To understand ratios:
+     *
+     * Standard tile count is calculated using the following formula:
+     *
+     * width / 2 = b b / cos(A) = c c* 2 = modified width modified width *
+     * length / ratio = brick count
+     *
+     * Ridge tile count and ridge tile slot count: Length / ratio = brick count
+     *
+     * Plates are chosen by preference, meaning that if there's enough space for
+     * a 600 plate, then it will be chosen. Otherwise a 360 plate will be placed
+     * and assigned to be cut off. The last plate must extrude 5cm in order to
+     * fulfil the requirements. There's a minimum overlap of 20cm between
+     * plates. There must be a minimum of 2 waves on each overlap. To comply
+     * with given schematics, the default wavelength has been set to 4.5 cm,
+     * since the standard length of a plasmo plate is 109cm in all scenarios.
+     * Note that using the plasmo roof generator, the estimated amount of plates
+     * needed will be higher than the given schematics.
+     *
+     * All these values can be changed in constant fields.
+     * 
+     * @param carport
+     * @return LinkedList<part>
+     */
     public static LinkedList<Part> calculateParts(Carport carport) {
         LinkedList<Part> parts = new LinkedList();
 
         if (carport.getRoof().getRaised() == true) {
-            parts.add(calcTileCount(carport , tileRatio));
-            parts.add(calcRidgeTile(carport, ridgeTileRatio));
-            parts.add(calcRidgeTileSlot(carport, ridgeTileRatio));
-            Part topBattenSlotPart = new Part("B & C Toplægte holder", topBattenSlot, "stk", "monteres på toppen af spæret (til toplægte)", 32.0);
-            Part roofTileMatPacksPart = new Part("B & C tagstens bindere & nakkekroge", roofTileMatPacks, "pk.", "til montering af tagsten, alle ydersten + hver anden fastgøres", 69);
+            parts.add(calcTileCount(carport));
+            parts.add(calcRidgeTile(carport));
+            parts.add(calcRidgeTileSlot(carport));
+            Part topBattenSlotPart = new Part(nameTopBatten, topBattenSlotAmount, unitTopBatten, descriptionTopBatten, priceTopBatten);
+            Part roofTileMatPacksPart = new Part(nameMatPack, roofTileMatPacksAmount, unitMatPack, descriptionMatPack, priceMatPack);
 
             parts.add(topBattenSlotPart);
             parts.add(roofTileMatPacksPart);
-        } else if (calcFlatRoofPlates600(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth).getAmount() == 0) {
-            parts.add(calcFlatRoofPlates360(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth));
+        } else if (calcFlatRoofPlates600(carport).getAmount() == 0) {
+            parts.add(calcFlatRoofPlates360(carport));
         } else {
-            parts.add(calcFlatRoofPlates600(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth));
-            parts.add(calcFlatRoofPlates360(carport, minimumPlateExtrusion, minimumPlateLengthOverlap, plateWidth));
+            parts.add(calcFlatRoofPlates600(carport));
+            parts.add(calcFlatRoofPlates360(carport));
 
         }
 
         return parts;
     }
 
-    private static Part calcTileCount(Carport carport, double tileRatio) {
-
-//        step 1: width / 2 = b
-//        step 2: b / cos(A) = c
-//        step 3: c*2 = modified width
-//        step 4: modified width * length / ratio = brick count
-//        step 1: 360 / 2 = 180
-//        step 2: 180 / cos(20) = 191,55
-//        step 3: 191 * 2 = 383,10
-//        step 4: 386 * 730 / 300 = 939.27
-//        Ratio = 939.27
+    private static Part calcTileCount(Carport carport) {
         int result = 0;
         double preCasted = 0.0;
         preCasted = carport.getWidth() / 2;
@@ -64,128 +127,29 @@ public class RoofCalc {
         preCasted = preCasted * 2;
         preCasted = preCasted * (double) carport.getLength() / tileRatio;
         result = (int) Math.ceil(preCasted);
-        return new Part("B & C Dobbelt -s sort", result, "stk", "monteres på taglægter 6 rækker af 24 sten på hver side af taget", 4.5);
+        return new Part(nameStandardTile, result, unitStandardTile, descriptionStandardTile, priceStandardTile);
     }
 
-    private static Part calcRidgeTile(Carport carport, double ridgeTileRatio) {
-        //Non-dependant on width
-        //Length 730 / 21 = 34.7 cm
-
-        int result = (int) Math.ceil((carport.getLength() / 34.7));
-        return new Part("B & C Rygsten sort", result, "stk", "monteres på toplægte med medfølgende beslag se tagstens vejledning", 100);
-    }
-
-    private static Part calcRidgeTileSlot(Carport carport, double ridgeTileRatio) {
-        //Containers for ridgetiles. Same proportions.
+    private static Part calcRidgeTile(Carport carport) {
         int result = (int) Math.ceil((carport.getLength() / ridgeTileRatio));
-        return new Part("B & C rygstensbeslag", result, "stk", "Til montering af rygsten", 75);
+        return new Part(nameRidgeTile, result, unitRidgeTile, descriptionRidgeTile, priceRidgeTile);
     }
 
-    private static Part calcFlatRoofPlates600(Carport carport, double minimumPlateExtrusion, double minimumPlateLengthOverlap, int plateWidth) {
-        /*Rules:
-        
-        Modulus
-        
-        plates must overlap with atleast 2 waves
-        Long plates will overlap the small ones
-        In length, plates must overlap with atleast 20cm
-        Plate backside must go 5cm over the edge
-        
-        Length Varies:
-        
-        600
-        480
-        360
-        300
-        240
-        
-        estimate desired length variations from measurements
-        
-        Width is always 109
-        
-        example Dimensions:
-        
-        600x780
-        
-        Length:
-        
-        
-        
-        at the current point in time anything over 600 will result in acquiring an extra 360 plate.
-        
-        Width of single plate = 109
-        
-        600 = width of example
-    
-        trial and error on site : 
-        100 cm ~> 2 plates
-        95cm ~> 1 plate
-        98cm ~> 2 plates
-        97cm ~> 1 plate
-        195 cm ~> 3 plates
-        185 cm ~> 2 plates
-        190 cm ~> 2 plates
-        192 -> 2 plates
-        194 / 2 plates = 97 cm
-        
-        WARNING:
-        ===
-        as per the assignment schematics the width of the schematics must be 100cm or over post waves to fill in the 6 plates defined in the example.
-        The ACTUAL size of the is 97cm. This means, that the schematics in the assignment should use 7 plates and not 6.
-        
-        This means that the length of the waves must tbe set to max 4.5cm instead of the actual 6cm
-        
-        Plate size set to 100 to fit with assignment details.
-        
-        Add to report!!!
-        ===
-        
-        WARNING:
-        ====
-        Actual site uses more variations than 109x600 & 109x360
-        
-        
-        ====
-        
-        
-        
-        600cm / 100 = 6 plates
-        
-        
-        194 / 2 = 
-        
-        200 m to 202 m ~> +2 plates
-        
-        1 plate +
-        
-        (Plate - 20) % 
-        
-        
-        
-        9cm overlay per. 
-        2 wave overlay min. 9cm / 2 = 4.5cm per wave 
-       
-        5cm must extrude from the end of the carport roof
-        
-        (780cm+5) / 600cm = 1
-        780 % 100 = 180
-        180 + 20 = 200
-        360 = 1
-        
-        780 
-         */
+    private static Part calcRidgeTileSlot(Carport carport) {
+        int result = (int) Math.ceil((carport.getLength() / ridgeTileRatio));
+        return new Part(nameRidgeTileSlot, result, unitRidgeTileSlot, descriptionRidgeTileSlot, priceRidgeTileSlot);
+    }
 
+    private static Part calcFlatRoofPlates600(Carport carport) {
         int result = ((carport.getLength() + minimumPlateExtrusion) / (600 - minimumPlateLengthOverlap) >= 1)
-                ? (carport.getWidth() / plateWidth) : 0;
-        return new Part("Plastmo Ecolyte blåtonet", result, "stk", "109 x 600. tagplader monteres på spær", 95);
+                ? (carport.getWidth() / (int) Math.ceil(plateWidth - (2 * plateWaveLength))) : 0;
+        return new Part(namePlate600, result, unitPlate600, descriptionPlate600, pricePlate600);
     }
 
-    private static Part calcFlatRoofPlates360(Carport carport, double minimumPlateExtrusion, double minimumPlateLengthOverlap, int plateWidth) {
-
-        int calc = ((carport.getLength() + minimumPlateExtrusion) % (600 - minimumPlateLengthOverlap) != 0 &&
-                ((double) carport.getLength() / (360.0 - minimumPlateLengthOverlap) > 0))
-                ? (carport.getWidth() / plateWidth) : 0;
-        return new Part("Plastmo Ecolyte blåtonet", calc, "stk", "109 x 360. tagplader monteres på spær", 65);
+    private static Part calcFlatRoofPlates360(Carport carport) {
+        int calc = ((carport.getLength() + minimumPlateExtrusion) % (600 - minimumPlateLengthOverlap) != 0
+                && ((double) carport.getLength() / (360.0 - minimumPlateLengthOverlap) > 0))
+                ? (carport.getWidth() / (int) Math.ceil(plateWidth - (2 * plateWaveLength))) : 0;
+        return new Part(namePlate360, calc, unitPlate360, descriptionPlate360, pricePlate360);
     }
-
 }

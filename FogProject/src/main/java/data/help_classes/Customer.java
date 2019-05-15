@@ -1,11 +1,10 @@
-/*
- */
 package data.help_classes;
 
 import data.customExceptions.InvalidSymbolException;
 
 /**
- * @author Simon Asholt Norup
+ * Entity class of a customer.
+ * Holds all nessescary information of a customer.
  */
 public class Customer {
 
@@ -18,6 +17,30 @@ public class Customer {
     private final String phone;
     private final String email;
 
+    
+    /**
+     * The constructor checks if the arguments is legal.
+     * If they are not, IllegalArgumentException is thrown.
+     * @param id unique integer value which each customer has.
+     * @param first_name If contains other chars than usual name letters/symbol
+     * or if the string is empty, IAE is thrown.
+     * 
+     * @param last_name If contains other chars than usual name letters/symbol
+     * or if the string is empty, IAE is thrown.
+     * 
+     * @param address If contains other chars than usual address letters/symbol
+     * or if the string is empty, IAE is thrown.
+     * 
+     * @param zipcode If does not contain exactly 4 numbers, IAE is thrown.
+     * @param city If contains other chars than usual city letters/symbol
+     * or if the string is empty, IAE is thrown.
+     * 
+     * @param phone If does not contain exactly 8 numbers, IAE is thrown.
+     * 
+     * @param email If contains other chars than usual email address letters/symbol
+     * or if the string is empty, IAE is thrown.
+     * @throws IllegalArgumentException one or more of the arguments is illegal.
+     */
     public Customer(int id, String first_name, String last_name, String address, String zipcode, String city, String phone, String email) throws IllegalArgumentException {
         if (first_name == null || !first_name.matches("[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*")
                 || last_name == null || !last_name.matches("[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*")

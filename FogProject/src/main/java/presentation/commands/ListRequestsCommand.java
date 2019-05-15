@@ -19,15 +19,13 @@ import presentation.Command;
  */
 public class ListRequestsCommand extends Command {
 
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-
+            final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
             LinkedList<Request> requests = PRES_TO_LOGIC.getRequests("all");
             request.setAttribute("requests", requests);
-            
+
             if (request.getSession().getAttribute("user") == null) {
                 throw new EmptySessionException("Attempt at admin access in listRequests without admin on session");
             }

@@ -9,18 +9,17 @@ import java.sql.SQLException;
  */
 public class SQLConnectionException extends SQLException {
 
-
+    /**
+     *
+     */
     public SQLConnectionException() {
     }
-
     public SQLConnectionException(String string) {
         super(string);
     }
-
     public SQLConnectionException(String string, Throwable thrwbl) {
         super(string, thrwbl);
     }
-
     public SQLConnectionException(Throwable thrwbl) {
         super(thrwbl);
     }

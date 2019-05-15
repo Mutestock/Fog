@@ -33,8 +33,8 @@ public class SendInformationCommand extends Command {
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final PresentationToLogic pToL = new PresentationToLogicImpl();
         try {
+            final PresentationToLogic pToL = new PresentationToLogicImpl();
             Offer estimate = (Offer) request.getSession().getAttribute("estimate");
             String fname = request.getParameter("firstname");
             String lname = request.getParameter("lastname");

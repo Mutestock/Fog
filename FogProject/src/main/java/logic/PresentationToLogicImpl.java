@@ -12,7 +12,11 @@ import logic.partslist.*;
 
 public class PresentationToLogicImpl implements PresentationToLogic {
 
-    private static final LogicToData LOGIC_TO_DATA = new LogicToDataImpl();
+    private static LogicToData LOGIC_TO_DATA;
+
+    public PresentationToLogicImpl() throws DataAccessException {
+        LOGIC_TO_DATA = new LogicToDataImpl();
+    }
 
     @Override
     public void sendRequest(Request request) throws DataAccessException {
