@@ -1,11 +1,10 @@
-/*
- */
 package data.help_classes;
 
 import java.time.LocalDateTime;
 
 /**
- * @author Simon Asholt Norup
+ * Entity class of a request (not an HTTP request).
+ * Holds all nessescary information of an request.
  */
 public class Request {
 
@@ -16,6 +15,17 @@ public class Request {
     private Customer customer;
     private final boolean hasReceivedOffer;
 
+    
+    /**
+     * The constructor checks if the arguments is legal.
+     * If they are not, IllegalArgumentException is thrown.
+     * @param id unique integer value for each request.
+     * @param sent local date time of the time where offer was sent.
+     * @param comments a string that describes the request (personalized by the employee).
+     * @param carport a carport object.
+     * @param customer a customer object.
+     * @param hasReceivedOffer boolean if the offer has been recieved.
+     */
     public Request(int id, LocalDateTime sent, String comments, Carport carport, Customer customer, boolean hasReceivedOffer) {
         if (sent == null || carport == null || comments == null) {
             throw new IllegalArgumentException();
@@ -28,14 +38,32 @@ public class Request {
         this.hasReceivedOffer = hasReceivedOffer;
     }
 
+    
+    /**
+     * Constructor used when the offer has not been received.
+     * @param id unique integer value for each request.
+     * @param sent local date time of the time where offer was sent.
+     * @param comments a string that describes the request (personalized by the employee).
+     * @param carport a carport object.
+     * @param customer a customer object.     
+     */
     public Request(int id, LocalDateTime sent, String comments, Carport carport, Customer customer) {
         this(id, sent, comments, carport, customer, false);
     }
 
+    
+    /**
+     * Constructor used when the offer has not been received and theres no customer attached.
+     * @param id unique integer value for each request.
+     * @param sent local date time of the time where offer was sent.
+     * @param comments a string that describes the request (personalized by the employee).
+     * @param carport a carport object.   
+     */
     public Request(int id, LocalDateTime sent, String comments, Carport carport) {
         this(id, sent, comments, carport, null, false);
     }
 
+    
     public LocalDateTime getSent() {
         return sent;
     }
