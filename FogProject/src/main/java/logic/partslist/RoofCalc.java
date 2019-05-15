@@ -9,9 +9,7 @@ import java.util.LinkedList;
  * @author Henning
  */
 public class RoofCalc {
-
-    //Considered as constant values.
-    //Please find correct terminology
+    
     private static final int topBattenSlotAmount = 8;
     private static final int roofTileMatPacksAmount = 2;
     private static final double ridgeTileRatio = 34.7;

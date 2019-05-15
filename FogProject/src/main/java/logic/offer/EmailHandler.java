@@ -10,15 +10,31 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
 
+/**
+ *
+ * @author Henning
+ */
 public class EmailHandler {
 
+    /**
+     * Method which sends emails to a client via google's SMTP.
+     * Utilises the properties package and the Javax mail plugins to gain connection with an SMTP server.
+     * This method uses google's SMTP: smtp.gmail.com
+     * Because of this, the sender of the email can only be a gmail account.
+     * 
+     * Extracts information from the offer parameter and sends it to the email address specified from the client upon ordering.
+     * Username and password of the sender's gmail account is necessary.
+     * 
+     * @param offer
+     * @throws NoSuchProviderException
+     * @throws MessagingException
+     */
     public static void sendMail(Offer offer) throws NoSuchProviderException, MessagingException {
         Properties props = System.getProperties();
         props.put("mail.smtps.host", "smtp.gmail.com");
         props.put("mail.smtps.auth", "true");
         Session session = Session.getInstance(props, null);
         Message msg = new MimeMessage(session);
-        System.out.println("Navn: " + offer.getRequest().getCustomer().getFullName());
         msg.setFrom(new InternetAddress(offer.getRequest().getCustomer().getEmail()));
         msg.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(offer.getRequest().getCustomer().getEmail(), false));
@@ -43,10 +59,6 @@ public class EmailHandler {
                 = (SMTPTransport) session.getTransport("smtps");
         t.connect("smtp.gmail.com", EmailUtility.getEmailAddress(), EmailUtility.getPassword());
         t.sendMessage(msg, msg.getAllRecipients());
-        System.out.println("Response: " + t.getLastServerResponse());
         t.close();
     }
-
-    
-
 }
