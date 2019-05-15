@@ -28,12 +28,14 @@ public abstract class Command {
         ACTIONS.put("SendOffer", new SendOfferCommand());
         ACTIONS.put("PartsList", new RedirectCommand("PartsList"));
         ACTIONS.put("SendInformation", new SendInformationCommand());
-        ACTIONS.put("CarportDetails", new RedirectCommand("CarportDetails"));
+        ACTIONS.put("CarportDetails", new CarportDetailsCommand());
         ACTIONS.put("RequestDetails", new RequestDetailsCommand());
         ACTIONS.put("ListRequests", new ListRequestsCommand());
         ACTIONS.put("EmpLogin", new EmpLoginCommand());
         ACTIONS.put("LoginCheck", new LoginCheckCommand());
         ACTIONS.put("SessionExit", new RedirectCommand("SessionExit"));
+        ACTIONS.put("OptionControl", new OptionControlCommand());
+        ACTIONS.put("Crash", new RedirectCommand("Crash"));
     }
 
     public abstract void execute(HttpServletRequest request, HttpServletResponse response)

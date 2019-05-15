@@ -69,8 +69,7 @@
                         <%  }%>
                     </table>
                     <br>
-                    <form action="/FogProject/c/CarportDetails" method=POST>
-                        <input type="hidden" name="origin" value="employee"/>
+                    <form action="/FogProject/c/OptionControl" method=POST>
                         <button class="btn btn-primary" type="submit"> Opdater mulige specifikationer </button>
                     </form>
                     <br>

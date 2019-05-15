@@ -247,18 +247,21 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.execute();
             preparedStmt.close();
 
+            c.setAutoCommit(false);
             query
                     = "INSERT INTO AvailableOptions (`Type`, `Value`) "
                     + "VALUES (?, ?)";
             preparedStmt = c.prepareStatement(query);
 
             for (String option : options) {
-                preparedStmt.setString(1, option);
-                preparedStmt.setString(2, type);
+                preparedStmt.setString(1, type);
+                preparedStmt.setString(2, option);
                 preparedStmt.addBatch();
             }
             preparedStmt.executeBatch();
 
+            c.commit();
+            c.setAutoCommit(true);
             preparedStmt.close();
         } catch (SQLException ex) {
             throw new DataAccessException(ex.getMessage());

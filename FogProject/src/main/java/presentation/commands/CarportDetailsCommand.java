@@ -21,7 +21,7 @@ public class CarportDetailsCommand extends Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             PRES_TO_LOGIC = new PresentationToLogicImpl();
-            
+
             LinkedList<Integer> lengths = getAvailableIntegers("length");
             LinkedList<Integer> widths = getAvailableIntegers("width");
             LinkedList<Integer> roofSlopes = getAvailableIntegers("roofSlope");
@@ -37,12 +37,7 @@ public class CarportDetailsCommand extends Command {
             request.setAttribute("shedWidths", shedWidths);
             request.setAttribute("shedCoverings", PRES_TO_LOGIC.getAvailableOptions("shedCovering"));
 
-            String origin = request.getParameter("origin");
-            if (origin == null) {
-                request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
-            } else if (origin.equals("employee")){
-                request.getRequestDispatcher("/WEB-INF/CarportDetailsChange.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             request.setAttribute("errormessage", "DataAccess");
             request.getRequestDispatcher("Crash").forward(request, response);
