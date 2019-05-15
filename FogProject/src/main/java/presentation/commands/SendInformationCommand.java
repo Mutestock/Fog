@@ -26,10 +26,10 @@ public class SendInformationCommand extends Command {
      * Basic login functionality, checks the username and password. Prints out
      * errormessages if either username or password is wrong.
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request s
+     * @param response s
+     * @throws ServletException s
+     * @throws IOException s
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,32 +44,27 @@ public class SendInformationCommand extends Command {
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             String comments = request.getParameter("comments");
-            if (comments == null)
-            {
+            if (comments == null) {
                 comments = "";
             }
-            System.out.println(comments);
-            
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
-            
+
             Customer cust = new Customer(-1, fname, lname, address, zipcode, city, phone, email);
             System.out.println("Customer: " + cust);
             Carport carport = estimate.getRequest().getCarport();
             estimate.setRequest(new Request(-1, LocalDateTime.now(), comments, carport, cust));
-            
+
             pToL.sendRequest(estimate.getRequest());
 
         } catch (NumberFormatException x) {
             x.printStackTrace();
             request.getSession().setAttribute("portError", "notnull");
-            response.sendRedirect("CarportDetails");
+            request.getRequestDispatcher("CarportDetails").forward(request, response);
+            //response.sendRedirect("CarportDetails");
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
             request.getSession().setAttribute("custInf", "notnull");
-            response.sendRedirect("CarportDetails");
+            request.getRequestDispatcher("CarportDetails").forward(request, response);
+            //response.sendRedirect("CarportDetails");
         } catch (DataAccessException ex) {
             ex.printStackTrace();
         }

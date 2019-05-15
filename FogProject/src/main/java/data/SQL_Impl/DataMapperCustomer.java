@@ -46,7 +46,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
 
             preparedStmt.close();
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -111,7 +111,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -137,7 +137,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -163,7 +163,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
@@ -174,86 +174,16 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             Connection c = DBConnector.getConnection();
             String query
                     = "select `Customer_id` from `Customer` "
-                    + "where `Email` = " + customer.getEmail() + ";";
+                    + "where `Email` = ?;";
             preparedStmt = c.prepareStatement(query);
+            preparedStmt.setString(1, customer.getEmail());
+            
             ResultSet rs = preparedStmt.executeQuery();
             customerID = rs.getInt("Customer_id");
             preparedStmt.close();
             return customerID;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
-    }
-
-    // =======================================================
-    // ==== SHOULD BE CONVERTED TO JUST GETTING EVERYTHING?? ======
-    // ==================================================
-//    
-    public int readShedId(Shed shed) {
-        int shed_id = 0;
-        try {
-            PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
-            String query
-                    = "select `Shed_id` from `Shed` "
-                    + "where `Width` = " + shed.getWidth()
-                    + "and `Length` = " + shed.getLength()
-                    + "and `Cover` = " + shed.getWallCoverings() + ";";
-            preparedStmt = c.prepareStatement(query);
-            ResultSet rs = preparedStmt.executeQuery();
-            shed_id = rs.getInt("Shed_id");
-            preparedStmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return shed_id;
-    }
-
-    public int readRoofId(Roof roof) {
-        int roof_id = 0;
-        try {
-            PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
-//            String query
-//                    = "select `Roof_id` from `Roof` "
-//                    + "where `Type` = " + roof.getType()
-//                    + "and `Slope` = " + roof.getSlope() + ";";
-            String query = "select SCOPE_IDENTITY();";
-            preparedStmt = c.prepareStatement(query);
-            ResultSet rs = preparedStmt.executeQuery();
-            roof_id = rs.getInt("Roof_id");
-            preparedStmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return roof_id;
-    }
-
-    public int readCarportId(Carport carport) {
-
-        DataMapperCustomer daoC = new DataMapperCustomer();
-
-        int carport_id = 0;
-        try {
-            PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
-            String query
-                    = "select `Carport_id` from `Carport` "
-                    + "where `Width` = " + carport.getWidth()
-                    + "and `Length` = " + carport.getLength()
-                    + "and `Shed_id = " + daoC.readShedId(carport.getShed())
-                    + "and `Roof_id = " + daoC.readRoofId(carport.getRoof())
-                    + ";";
-            preparedStmt = c.prepareStatement(query);
-            ResultSet rs = preparedStmt.executeQuery();
-            carport_id = rs.getInt("Carport_id");
-            preparedStmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return carport_id;
     }
 }

@@ -34,11 +34,12 @@ public abstract class Command {
                 put("SendOffer", new SendOfferCommand());
                 put("PartsList", new RedirectCommand("PartsList"));
                 put("SendInformation", new SendInformationCommand());
-                put("CarportDetails", new CarportDetailsCommand());
+                put("CarportDetails", new RedirectCommand("CarportDetails"));
                 put("RequestDetails", new RequestDetailsCommand());
                 put("ListRequests", new ListRequestsCommand());
                 put("EmpLogin", new EmpLoginCommand());
                 put("LoginCheck", new LoginCheckCommand());
+                put("SessionExit", new RedirectCommand("SessionExit"));
             
             }
         };

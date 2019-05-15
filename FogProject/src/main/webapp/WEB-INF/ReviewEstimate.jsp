@@ -22,7 +22,7 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
             <form>
 
                 <%
@@ -31,21 +31,18 @@
                     Carport carport = r.getCarport();
                     Roof roof = carport.getRoof();
                     Shed shed = carport.getShed();
-                    Customer customer = r.getCustomer();
                 %>
                 <h1>Overblik</h1>
-                
+
                 <div  style="display: inline-block; float:right">
-                    <h4>Skitse ovenfra</h4>
+                    <h4>Skitse fra oven</h4>
                     <%
-                        SVGDrawerFromAbove SVGdrawer1 = new SVGDrawerFromAbove(carport);
-                        String above = SVGdrawer1.drawCarport();
+                        String above = (String) request.getAttribute("SVGabove");
                         out.print(above);
                     %>    
-                    <h4>Skitse sidefra</h4>
+                    <h4>Skitse fra siden</h4>
                     <%
-                        SVGDrawerFromSide SVGdrawer2 = new SVGDrawerFromSide();
-                        String side = SVGdrawer2.drawCarportFlatRoofSide(carport);
+                        String side = (String) request.getAttribute("SVGside");
                         out.print(side);
                     %>
                 </div>  
@@ -63,23 +60,23 @@
 
                 <% if (shed != null) {%>
                 <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, <br>Vægbeklædning af typen: <i><%=shed.getWallCoverings()%></i></h4>
-                <% }%>
+                    <% }%>
                 <br>
 
                 <h3>Personlige oplysninger:</h3>
-                <input placeholder="Fornavn" type="text" name="firstname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
-                <input placeholder="Efternavn" type="text" name="lastname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Fornavn" maxlength="50" type="text" name="firstname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Efternavn" maxlength="50" type="text" name="lastname" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
                 <br>
-                <input placeholder="Adresse" type="text" name="address" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]+\s\d+"><br>
-                <input placeholder="Postnummer" type="text" name="zipcode" required="required" pattern="\d{4}"><br>
-                <input placeholder="By" type="text" name="city" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
+                <input placeholder="Adresse" maxlength="100" type="text" name="address" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]+\s\d+"><br>
+                <input placeholder="Postnummer" maxlength="4" type="text" name="zipcode" required="required" pattern="\d{4}"><br>
+                <input placeholder="By" type="text" maxlength="50"  name="city" required="required" pattern="[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*"><br>
                 <br>
-                <input placeholder="Telefon" type="text" name="phone" required="required" pattern="\d{8}"><br>
-                <input placeholder="Email" type="email" name="email" required="required"><br>
+                <input placeholder="Telefon" maxlength="8" type="text" name="phone" required="required" pattern="\d{8}"><br>
+                <input placeholder="Email" maxlength="200" type="email" name="email" required="required"><br>
                 <br>
-                <textarea placeholder="Eventuelle kommentarer" name="comments" cols="40" rows="5"></textarea><br>
+                <textarea placeholder="Eventuelle kommentarer" maxlength="200" name="comments" cols="40" rows="5" style="resize: none;"></textarea><br>
                 <br>
-                
+
                 <%
                     DecimalFormat numberFormat = new DecimalFormat("#.00");
                     String num = numberFormat.format((offer.getPrice()));
@@ -91,7 +88,6 @@
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendInformation">Send forespørgsel</button>
                 <br><br>
                 <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/CarportDetails';">Tilbage</button>
-
             </form>
         </div>
     </body>

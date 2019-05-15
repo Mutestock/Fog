@@ -1,5 +1,6 @@
 package presentation.commands;
 
+import data.customExceptions.WrongCredentialsException;
 import data.help_classes.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,25 +15,22 @@ import presentation.Command;
  *
  * @author Lukas Bjørnvad
  */
-public class LoginCheckCommand extends Command{
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();  
+public class LoginCheckCommand extends Command {
+
+    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
         try {
             if (username != null && password != null) {
                 User user = PRES_TO_LOGIC.getUser(username);
-                
-                if (user == null) {
-                    request.setAttribute("errormessage", "<p style=\"color:red\">User doesn't exist.</p>");
-                    loadJSP(request, response);
-                } else if (!user.getPassword().equals(password)) {
-                    request.setAttribute("errormessage", "<p style=\"color:red\">Incorrect password</p>");
-                    loadJSP(request, response);
-                    
+
+                if (user == null || !user.getPassword().equals(password)) {
+                    throw new WrongCredentialsException("Wrong credentials");
                 } else {
                     HttpSession session = request.getSession();
                     session.removeAttribute("user");
@@ -42,13 +40,15 @@ public class LoginCheckCommand extends Command{
             } else {
                 loadJSP(request, response);
             }
+        } catch (WrongCredentialsException ex) {
+            ex.printStackTrace();
+            request.setAttribute("errormessage", "WrongCredentials");
+            loadJSP(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-        }    
+        }
     }
-
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
     }
- 
 }

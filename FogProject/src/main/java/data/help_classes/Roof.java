@@ -2,12 +2,6 @@
  */
 package data.help_classes;
 
-import data.customExceptions.DataAccessException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import logic.LogicToData;
-import logic.LogicToDataImpl;
-
 /**
  * @author Simon Asholt Norup
  */
@@ -43,9 +37,8 @@ public class Roof {
     }
 
     public int getRoofHeight(Carport carport) {
-        int result = 0;
-        double preCasted = 0.0;
-        preCasted = carport.getWidth() / 2;
+        int result;
+        double preCasted = carport.getWidth() / 2;
         double toDegrees = Math.tan(Math.toRadians((double) carport.getRoof().getSlope()));
         preCasted = preCasted * toDegrees;
         result = (int) Math.ceil(preCasted);

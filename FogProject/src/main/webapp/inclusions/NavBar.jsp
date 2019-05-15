@@ -21,6 +21,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/FogProject/c/CarportDetails">Custom Carporte</a></li>
                     <li><a href="/FogProject/c/EmpLogin">Se forespørgsler</a></li>
+                        <%
+                            if (request.getSession().getAttribute("user") != null) {
+                        %>
+                    <li><a href=/FogProject/c/SessionExit><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                        <% }%>  
                 </ul>
             </div>
         </nav>

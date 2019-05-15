@@ -21,7 +21,7 @@
         
         <div class="topbar">
             
-                <img src="../CSS/fog.png" alt="fog" class="logo">
+                <img src="../images/fog.png" alt="fog" class="logo">
                 
                 <nav>
                     <ul>
@@ -33,10 +33,10 @@
             </div>
         </header>
         
-        <img src="../CSS/fogCenter.jpg" alt="fogC" class="background">
+        <img src="../images/fogCenter.jpg" alt="fogC" class="background">
         
         <footer>
-            <h4>A webservice by Henning, Simon, Lukas & Emil</h4>
+            <h4>A webservice by Henning Wiberg, Simon Norup, Lukas Bjørnvad & Emil Svensmark</h4>
         </footer>
     </body>
 </html>
