@@ -18,7 +18,7 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
             <h1>Log ind som admin:</h1>
             <form method="POST" action="/FogProject/c/LoginCheck">
                 <input name="username" type="text" placeholder="Brugernavn">
@@ -26,8 +26,16 @@
                 <input type="submit" value="Log Ind">
             </form>
             <%
-                String errormessage = (String) request.getAttribute("errormessage");
-                if (errormessage == null || errormessage.isEmpty()) {
+                String error = (String) request.getAttribute("errormessage");
+                String errormessage = "";
+
+                if (error == null) {
+                    errormessage = "";
+                } else if (error.equals("WrongCredentials")) {
+                    errormessage = "<p style=\"color:red\">Det indtastede brugernavn eller password er forkert.</p>";
+                } else if (error.equals("EmptySession")) {
+                    errormessage = "<p style=\"color:red\">Vær venlig at logge ind.</p>";
+                } else {
                     errormessage = "";
                 }
                 out.println(errormessage);

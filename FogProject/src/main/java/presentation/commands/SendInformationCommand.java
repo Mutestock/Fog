@@ -23,18 +23,19 @@ import java.time.LocalDateTime;
 public class SendInformationCommand extends Command {
 
     /**
-     * Basic login functionality, checks the username and password. Prints out
-     * errormessages if either username or password is wrong.
+     * Generates a customer upon acceptance of the transaction from the
+     * customers side. This happens after the customer has reviewed the details
+     * of the transaction.
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final PresentationToLogic pToL = new PresentationToLogicImpl();
         try {
+            final PresentationToLogic pToL = new PresentationToLogicImpl();
             Offer estimate = (Offer) request.getSession().getAttribute("estimate");
             String fname = request.getParameter("firstname");
             String lname = request.getParameter("lastname");
@@ -44,32 +45,27 @@ public class SendInformationCommand extends Command {
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             String comments = request.getParameter("comments");
-            if (comments == null)
-            {
+            if (comments == null) {
                 comments = "";
             }
-            System.out.println(comments);
-            
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
-            System.out.println(fname);
-            
+
             Customer cust = new Customer(-1, fname, lname, address, zipcode, city, phone, email);
             System.out.println("Customer: " + cust);
             Carport carport = estimate.getRequest().getCarport();
             estimate.setRequest(new Request(-1, LocalDateTime.now(), comments, carport, cust));
-            
+
             pToL.sendRequest(estimate.getRequest());
 
         } catch (NumberFormatException x) {
             x.printStackTrace();
             request.getSession().setAttribute("portError", "notnull");
-            response.sendRedirect("CarportDetails");
+            request.getRequestDispatcher("CarportDetails").forward(request, response);
+            //response.sendRedirect("CarportDetails");
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
             request.getSession().setAttribute("custInf", "notnull");
-            response.sendRedirect("CarportDetails");
+            request.getRequestDispatcher("CarportDetails").forward(request, response);
+            //response.sendRedirect("CarportDetails");
         } catch (DataAccessException ex) {
             ex.printStackTrace();
         }
@@ -78,7 +74,7 @@ public class SendInformationCommand extends Command {
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/FogProject/index.jsp");
+        response.sendRedirect("/FogProject/c/ThankYou");
     }
 
 }

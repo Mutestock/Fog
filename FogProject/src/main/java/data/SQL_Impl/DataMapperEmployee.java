@@ -1,6 +1,8 @@
 package data.SQL_Impl;
+
 import data.DataMapperEmployeeInterface;
 import data.customExceptions.DataAccessException;
+import data.customExceptions.SQLConnectionException;
 import data.help_classes.Carport;
 import data.help_classes.Customer;
 import data.help_classes.Offer;
@@ -16,13 +18,37 @@ import java.util.LinkedList;
 
 public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
-    // reads ALL requests right now -- shall be edited and split into the different request readers in another user story, probably
+    private DBConnector dBC;
+
+    public DataMapperEmployee(boolean test) throws DataAccessException {
+        try {
+            if (test) {
+                dBC = new DBConnector(true);
+            } else {
+                dBC = new DBConnector();
+            }
+        } catch (SQLConnectionException ex) {
+            throw new DataAccessException();
+        }
+
+    }
+
+    public DataMapperEmployee() throws DataAccessException {
+        this(false);
+    }
+
+    /**
+     * Used to return a LinkedList with all request objects saved in database.
+     *
+     * @return a LinkedList object with all request objects found in database.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
-    public LinkedList<Request> readRequestsIncomplete() throws DataAccessException {
+    public LinkedList<Request> readAllRequests() throws DataAccessException {
         LinkedList<Request> requests = new LinkedList<>();
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "select Request.Request_id, Request.`Date`, Request.Comments, "
                     + "Offer.Offer_id, Customer.*, "
@@ -46,25 +72,17 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.close();
             return requests;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
-    @Override
-    public LinkedList<Request> readRequestsComplete() throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public LinkedList<Request> readRequestsUnread() throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public LinkedList<Request> readAllRequests() throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Reads specific request based on request id.
+     *
+     * @param id request id parameter.
+     * @return the specific request which matches the id.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public Request readRequest(int id) throws DataAccessException {
         try {
@@ -95,10 +113,18 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.close();
             return request;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
+    /**
+     * Returns a request object based on an SQL result set.
+     *
+     * @param rs result set from database.
+     * @return request object with values of the result set.
+     * @throws SQLException the exception that is thrown when SQL Server returns
+     * a warning or error.
+     */
     private Request getRequestFromResultSet(ResultSet rs) throws SQLException {
         Shed shed = null;
         int shedID = rs.getInt("Shed_id");
@@ -139,6 +165,12 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         return myReq;
     }
 
+    /**
+     * Inserts offer object values to database.
+     *
+     * @param offer object with offer information.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public void createOffer(Offer offer) throws DataAccessException {
         try {
@@ -159,14 +191,21 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
             preparedStmt.close();
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
+    /**
+     * Returns offer object based on a request id.
+     *
+     * @param requestID offer id which is an unique integer.
+     * @return offer object based on the id given as parameter.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public Offer readOffer(int requestID) throws DataAccessException {
         Request request = readRequest(requestID);
-        
+
         try {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();
@@ -190,7 +229,42 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
             preparedStmt.close();
             return offer;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void updateAvailableOptions(LinkedList<String> options, String type) throws DataAccessException {
+        try {
+            PreparedStatement preparedStmt;
+            Connection c = DBConnector.getConnection();
+
+            String query
+                    = "DELETE FROM AvailableOptions "
+                    + "WHERE `Type` = ?";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setString(1, type);
+            preparedStmt.execute();
+            preparedStmt.close();
+
+            c.setAutoCommit(false);
+            query
+                    = "INSERT INTO AvailableOptions (`Type`, `Value`) "
+                    + "VALUES (?, ?)";
+            preparedStmt = c.prepareStatement(query);
+
+            for (String option : options) {
+                preparedStmt.setString(1, type);
+                preparedStmt.setString(2, option);
+                preparedStmt.addBatch();
+            }
+            preparedStmt.executeBatch();
+
+            c.commit();
+            c.setAutoCommit(true);
+            preparedStmt.close();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.getMessage());
         }
     }
 

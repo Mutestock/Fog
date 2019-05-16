@@ -20,7 +20,7 @@
     </head>
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
-        <div style="padding: 20px;">
+        <div class="mainbody">
             <%
                 Request r = (Request) request.getSession().getAttribute("request");
                 Carport carport = r.getCarport();
@@ -40,7 +40,7 @@
                 <% } %>
             </h4>
             <% if (shed != null) {%>
-            <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, vægbeklædning af typen <%=shed.getWallCoverings()%></h4>
+            <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, <br>Vægbeklædning af typen <i><%=shed.getWallCoverings()%></i></h4>
             <% } %>
             <br>
 

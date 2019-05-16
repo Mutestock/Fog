@@ -6,12 +6,12 @@
 package presentation;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import presentation.Command;
 
 /**
  *
@@ -36,10 +36,9 @@ public class FrontController extends HttpServlet {
         try {
             Command command = Command.from(request);
             command.execute(request, response);
-        } catch (Exception e) {
-            request.setAttribute("error", "A serious bug occurred. Please contact the programmer.");
-            request.getRequestDispatcher("/WEB-INF/Crash.jsp").forward(request, response);
-            e.printStackTrace();
+        } catch (IOException | ServletException  | NullPointerException e ) {
+            request.getRequestDispatcher("Crash").forward(request, response);
+            System.out.println(e.getMessage());
         }
     }
 

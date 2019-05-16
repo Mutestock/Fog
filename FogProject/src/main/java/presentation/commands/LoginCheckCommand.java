@@ -1,5 +1,6 @@
 package presentation.commands;
 
+import data.customExceptions.WrongCredentialsException;
 import data.help_classes.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,25 +15,35 @@ import presentation.Command;
  *
  * @author Lukas Bjørnvad
  */
-public class LoginCheckCommand extends Command{
-    private static final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();  
+public class LoginCheckCommand extends Command {
+
+    /**
+     * Command for logging in as adminstrator. Checks whether the user is
+     * inserting the correct information in the username and password fields.
+     * Throws and exception and informs the user whenever this happens. On a
+     * successful login attempt, the user is stored on the session and the
+     * customer can proceed to the next admin pages.
+     * 
+     * Uses the FrontController.
+     *
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
         try {
+            final PresentationToLogic PRES_TO_LOGIC = new PresentationToLogicImpl();
             if (username != null && password != null) {
                 User user = PRES_TO_LOGIC.getUser(username);
-                
-                if (user == null) {
-                    request.setAttribute("errormessage", "<p style=\"color:red\">User doesn't exist.</p>");
-                    loadJSP(request, response);
-                } else if (!user.getPassword().equals(password)) {
-                    request.setAttribute("errormessage", "<p style=\"color:red\">Incorrect password</p>");
-                    loadJSP(request, response);
-                    
+
+                if (user == null || !user.getPassword().equals(password)) {
+                    throw new WrongCredentialsException("Wrong credentials");
                 } else {
                     HttpSession session = request.getSession();
                     session.removeAttribute("user");
@@ -42,13 +53,15 @@ public class LoginCheckCommand extends Command{
             } else {
                 loadJSP(request, response);
             }
+        } catch (WrongCredentialsException ex) {
+            request.setAttribute("errormessage", "WrongCredentials");
+            loadJSP(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-        }    
+        }
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
     }
- 
 }

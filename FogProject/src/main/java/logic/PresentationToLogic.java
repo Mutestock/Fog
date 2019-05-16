@@ -16,9 +16,11 @@ public interface PresentationToLogic {
     
     public Request getRequest(int id) throws DataAccessException;
     
-    // methods for getting available widths, lengths, roof types, etc, etc
+    public LinkedList<String> getAvailableOptions(String type) throws DataAccessException;
     
-    // method for creating and/or showing SVG file for carport sketch drawing
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException;
+    
+    public String getSVGDrawing(Carport carport, String angle);
     
     public PartsList getPartsList(Carport carport);
     

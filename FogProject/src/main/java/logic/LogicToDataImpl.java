@@ -11,15 +11,19 @@ import data.help_classes.Offer;
 import data.help_classes.Request;
 import data.help_classes.User;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import logic.LogicToData;
 
 public class LogicToDataImpl implements LogicToData {
 
-    DataMapperCustomerInterface customer_dao = new DataMapperCustomer();
-    DataMapperEmployeeInterface employee_dao = new DataMapperEmployee();
-    DataMapperUserInterface user_dao = new DataMapperUser();
+    DataMapperCustomerInterface customer_dao;
+    DataMapperEmployeeInterface employee_dao;
+    DataMapperUserInterface user_dao;
+
+    public LogicToDataImpl() throws DataAccessException {
+
+        customer_dao = new DataMapperCustomer();
+        employee_dao = new DataMapperEmployee();
+        user_dao = new DataMapperUser();
+    }
 
     @Override
     public void saveRequest(Request request) throws DataAccessException {
@@ -29,12 +33,8 @@ public class LogicToDataImpl implements LogicToData {
     @Override
     public LinkedList<Request> getRequests(String filter) throws DataAccessException {
         switch (filter) {
-            case "incomplete":
-                return employee_dao.readRequestsIncomplete();
-            case "complete":
-                return employee_dao.readRequestsComplete();
-            case "unread":
-                return employee_dao.readRequestsUnread();
+//            case "unread":
+//                return employee_dao.readRequestsUnread();
             default:
                 return employee_dao.readAllRequests();
         }
@@ -58,6 +58,16 @@ public class LogicToDataImpl implements LogicToData {
     @Override
     public User getUser(String username) throws DataAccessException {
         return user_dao.getUser(username);
+    }
+
+    @Override
+    public LinkedList<String> getAvailableOptions(String type) throws DataAccessException {
+        return customer_dao.readAvailableOptions(type);
+    }
+
+    @Override
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException {
+        employee_dao.updateAvailableOptions(options, type);
     }
 
 }

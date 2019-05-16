@@ -2,14 +2,41 @@ package data.SQL_Impl;
 
 import data.DataMapperCustomerInterface;
 import data.customExceptions.DataAccessException;
+import data.customExceptions.SQLConnectionException;
 import data.help_classes.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
+    private DBConnector dBC;
+
+    public DataMapperCustomer(boolean test) throws DataAccessException {
+        try {
+            if (test) {
+                dBC = new DBConnector(true);
+            } else {
+                dBC = new DBConnector();
+            }
+        } catch (SQLConnectionException ex) {
+            throw new DataAccessException();
+        }
+    }
+
+    public DataMapperCustomer() throws DataAccessException {
+        this(false);
+    }
+
+    /**
+     * Inserts request object values to database.
+     *
+     * @param request object (not http class object) with carport and customer
+     * information.
+     * @throws DataAccessException when access to database fails.
+     */
     @Override
     public void createRequest(Request request) throws DataAccessException {
 
@@ -26,11 +53,20 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         createRequest(request, carportID, customerID);
     }
 
+    /**
+     * Inserts request object values to database.
+     *
+     * @param request request object (not http class object) with carport and
+     * customer information.
+     * @param carportID used to save the carport information from the database.
+     * @param customerID used to save the customer information from the
+     * database.
+     * @throws DataAccessException when access to database fails.
+     */
     private void createRequest(Request request, int carportID, int customerID) throws DataAccessException {
-
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "insert into `Request` (`Carport_id`, `Customer_id`, `Date`, `Comments`) "
                     + "VALUES(?,?,?,?)" + ";";
@@ -46,14 +82,21 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
 
             preparedStmt.close();
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
+    /**
+     * Inserts customer object values to database.
+     *
+     * @param customer object with customer information.
+     * @return the customer id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createCustomer(Customer customer) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "insert into `Customer` (`FirstName`, `LastName`, `Address`, `Zipcode`,`City`,`Phone`,`Email`) "
                     + "VALUES(?,?,?,?,?,?,?)" + ";";
@@ -80,14 +123,23 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
+    /**
+     * Inserts carport object values to database.
+     *
+     * @param carport object with carport information.
+     * @param roofID used to get roof information from database.
+     * @param shedID used to get shed information from database.
+     * @return the carport id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createCarport(Carport carport, int roofID, int shedID) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "insert into `Carport` (`Width`, `Length`, `Shed_id`, `Roof_id`) "
                     + "VALUES(?,?,?,?)" + ";";
@@ -111,14 +163,21 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
+    /**
+     * Inserts roof object values to database.
+     *
+     * @param roof object with roof information.
+     * @return the roof id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createRoof(Roof roof) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "insert into `Roof` (`Type`, `Slope`) "
                     + "VALUES(?,?);";
@@ -137,14 +196,21 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
+    /**
+     * Inserts shed object values to database.
+     *
+     * @param shed object with roof information.
+     * @return the shed id as it has been added to the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int createShed(Shed shed) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "insert into `Shed` (`Cover`, `Width`,`Length`) "
                     + "VALUES(?,?,?)" + ";";
@@ -163,97 +229,57 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.close();
             return id;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
+    /**
+     * Gets the ID of a customer from the database based on a customer object.
+     *
+     * @param customer object with customer information.
+     * @return the customer id when the customer is found in the database.
+     * @throws DataAccessException when access to database fails.
+     */
     private int readCustomerID(Customer customer) throws DataAccessException {
         int customerID;
         try {
             PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
+            Connection c = dBC.getConnection();
             String query
                     = "select `Customer_id` from `Customer` "
-                    + "where `Email` = " + customer.getEmail() + ";";
+                    + "where `Email` = ?;";
             preparedStmt = c.prepareStatement(query);
+            preparedStmt.setString(1, customer.getEmail());
+
             ResultSet rs = preparedStmt.executeQuery();
             customerID = rs.getInt("Customer_id");
             preparedStmt.close();
             return customerID;
         } catch (SQLException ex) {
-            throw new DataAccessException(ex);
+            throw new DataAccessException(ex.getMessage());
         }
     }
 
-    // =======================================================
-    // ==== SHOULD BE CONVERTED TO JUST GETTING EVERYTHING?? ======
-    // ==================================================
-//    
-    public int readShedId(Shed shed) {
-        int shed_id = 0;
+    @Override
+    public LinkedList<String> readAvailableOptions(String type) throws DataAccessException {
+        LinkedList<String> result = new LinkedList<>();
         try {
             PreparedStatement preparedStmt;
             Connection c = DBConnector.getConnection();
             String query
-                    = "select `Shed_id` from `Shed` "
-                    + "where `Width` = " + shed.getWidth()
-                    + "and `Length` = " + shed.getLength()
-                    + "and `Cover` = " + shed.getWallCoverings() + ";";
+                    = "select `Value` from `AvailableOptions` "
+                    + "where `Type` = ?;";
             preparedStmt = c.prepareStatement(query);
+            preparedStmt.setString(1, type);
+            
             ResultSet rs = preparedStmt.executeQuery();
-            shed_id = rs.getInt("Shed_id");
+            while (rs.next()){
+                result.add(rs.getString("Value"));
+            }
             preparedStmt.close();
+            return result;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new DataAccessException(ex.getMessage());
         }
-
-        return shed_id;
-    }
-
-    public int readRoofId(Roof roof) {
-        int roof_id = 0;
-        try {
-            PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
-//            String query
-//                    = "select `Roof_id` from `Roof` "
-//                    + "where `Type` = " + roof.getType()
-//                    + "and `Slope` = " + roof.getSlope() + ";";
-            String query = "select SCOPE_IDENTITY();";
-            preparedStmt = c.prepareStatement(query);
-            ResultSet rs = preparedStmt.executeQuery();
-            roof_id = rs.getInt("Roof_id");
-            preparedStmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return roof_id;
-    }
-
-    public int readCarportId(Carport carport) {
-
-        DataMapperCustomer daoC = new DataMapperCustomer();
-
-        int carport_id = 0;
-        try {
-            PreparedStatement preparedStmt;
-            Connection c = DBConnector.getConnection();
-            String query
-                    = "select `Carport_id` from `Carport` "
-                    + "where `Width` = " + carport.getWidth()
-                    + "and `Length` = " + carport.getLength()
-                    + "and `Shed_id = " + daoC.readShedId(carport.getShed())
-                    + "and `Roof_id = " + daoC.readRoofId(carport.getRoof())
-                    + ";";
-            preparedStmt = c.prepareStatement(query);
-            ResultSet rs = preparedStmt.executeQuery();
-            carport_id = rs.getInt("Carport_id");
-            preparedStmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return carport_id;
     }
 }

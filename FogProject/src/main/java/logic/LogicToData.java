@@ -18,7 +18,9 @@ public interface LogicToData {
     
     public Request getRequest(int id) throws DataAccessException;
     
-    // methods for getting available widths, lengths, roof types, etc, etc
+    public LinkedList<String> getAvailableOptions(String type) throws DataAccessException;
+    
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException;
     
     public void saveOffer(Offer offer) throws DataAccessException;
     

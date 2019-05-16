@@ -3,8 +3,8 @@ package data.help_classes;
 import java.util.LinkedList;
 
 /**
- *
- * @author Simon Asholt Norup
+ * Entity class of a parts list.
+ * Holds all nessescary information of a parts list.
  */
 public class PartsList {
 
@@ -12,6 +12,14 @@ public class PartsList {
     private final LinkedList<Part> roofPackage;
     private final LinkedList<Part> fittingsAndScrews;
 
+    
+    /**
+     * The constructor checks if the arguments is legal.
+     * If they are not, IllegalArgumentException is thrown.
+     * @param woodPackage a linked list with the wooden parts of the carport.
+     * @param roofPackage a linked list with the roof parts of the carport.
+     * @param fittingsAndScrews  a linked list with all the fitting and screws of the carport.
+     */
     public PartsList(LinkedList<Part> woodPackage, LinkedList<Part> roofPackage, LinkedList<Part> fittingsAndScrews) {
         if (woodPackage == null || roofPackage == null || fittingsAndScrews == null) {
             throw new IllegalArgumentException();
