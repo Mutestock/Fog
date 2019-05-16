@@ -10,46 +10,46 @@ import java.util.LinkedList;
  */
 public class RoofCalc {
     
-    private static final int topBattenSlotAmount = 8;
-    private static final int roofTileMatPacksAmount = 2;
-    private static final double ridgeTileRatio = 34.7;
-    private static final double tileRatio = 939.27;
-    private static final double minimumPlateExtrusion = 5.0;
-    private static final double minimumPlateLengthOverlap = 20;
-    private static final double plateWidth = 109;
-    private static final double plateWaveLength = 4.5;
+    private static final int TOP_BATTEN_SLOT_AMOUNT = 8;
+    private static final int ROOF_TILE_MAT_PACKS_AMOUNT = 2;
+    private static final double RIDGE_TILE_RATIO = 34.7;
+    private static final double TILE_RATIO = 939.27;
+    private static final double MINIMUM_PLATE_EXTRUSION = 5.0;
+    private static final double MINIMUM_PLATE_LENGTH_OVERLAP = 20;
+    private static final double PLATE_WIDTH = 109;
+    private static final double PLATE_WAVE_LENGTH = 4.5;
 
-    private static final double priceStandardTile = 10;
-    private static final double priceRidgeTile = 50;
-    private static final double priceRidgeTileSlot = 40;
-    private static final double pricePlate600 = 100;
-    private static final double pricePlate360 = 75;
-    private static final double priceTopBatten = 50;
-    private static final double priceMatPack = 100;
+    private static final double PRICE_STANDARD_TILE = 10;
+    private static final double PRICE_RIDGE_TILE = 50;
+    private static final double PRICE_RIDGE_TILE_SLOT = 40;
+    private static final double PRICE_PLATE600 = 100;
+    private static final double PRICE_PLATE360 = 75;
+    private static final double PRICE_TOP_BATTEN = 50;
+    private static final double PRICE_MAT_PACK = 100;
 
-    private static final String descriptionTopBatten = "monteres på toppen af spæret (til toplægte)";
-    private static final String descriptionMatPack = "til montering af tagsten, alle ydersten + hver anden fastgøres";
-    private static final String descriptionStandardTile = "monteres på taglægter 6 rækker af 24 sten på hver side af taget";
-    private static final String descriptionRidgeTileSlot = "Til montering af rygsten";
-    private static final String descriptionRidgeTile = "monteres på toplægte med medfølgende beslag se tagstens vejledning";
-    private static final String descriptionPlate600 = "109 x 600. tagplader monteres på spær";
-    private static final String descriptionPlate360 = "109 x 360. tagplader monteres på spær";
+    private static final String DESCRIPTION_TOP_BATTEN = "monteres på toppen af spæret (til toplægte)";
+    private static final String DESCRIPTION_MAT_PACK = "til montering af tagsten, alle ydersten + hver anden fastgøres";
+    private static final String DESCRIPTION_STANDARD_TILE = "monteres på taglægter 6 rækker af 24 sten på hver side af taget";
+    private static final String DESCRIPTION_RIDGE_TILE_SLOT = "Til montering af rygsten";
+    private static final String DESCRIPTION_RIDGE_TILE = "monteres på toplægte med medfølgende beslag se tagstens vejledning";
+    private static final String DESCRIPTION_PLATE600 = "109 x 600. tagplader monteres på spær";
+    private static final String DESCRIPTION_PLATE360 = "109 x 360. tagplader monteres på spær";
 
-    private static final String nameTopBatten = "B & C Toplægte holder";
-    private static final String nameMatPack = "B & C tagstens bindere & nakkekroge";
-    private static final String nameStandardTile = "B & C Dobbelt -s sort";
-    private static final String nameRidgeTile = "B & C Rygsten sort";
-    private static final String nameRidgeTileSlot = "B & C rygstensbeslag";
-    private static final String namePlate600 = "Plastmo Ecolyte blåtonet";
-    private static final String namePlate360 = "Plastmo Ecolyte blåtonet";
+    private static final String NAME_TOP_BATTEN = "B & C Toplægte holder";
+    private static final String NAME_MAT_PACK = "B & C tagstens bindere & nakkekroge";
+    private static final String NAME_STANDARD_TILE = "B & C Dobbelt -s sort";
+    private static final String NAME_RIDGE_TILE = "B & C Rygsten sort";
+    private static final String NAME_RIDGE_TILE_SLOT = "B & C rygstensbeslag";
+    private static final String NAME_PLATE600 = "Plastmo Ecolyte blåtonet";
+    private static final String NAME_PLATE360 = "Plastmo Ecolyte blåtonet";
 
-    private static final String unitTopBatten = "stk";
-    private static final String unitMatPack = "pk";
-    private static final String unitStandardTile = "stk";
-    private static final String unitRidgeTile = "stk";
-    private static final String unitRidgeTileSlot = "stk";
-    private static final String unitPlate600 = "stk";
-    private static final String unitPlate360 = "stk";
+    private static final String UNIT_TOP_BATTEN = "stk";
+    private static final String UNIT_MAT_PACK = "pk";
+    private static final String UNIT_STANDARD_TILE = "stk";
+    private static final String UNIT_RIDGE_TILE = "stk";
+    private static final String UNIT_RIDGE_TILE_SLOT = "stk";
+    private static final String UNIT_PLATE600 = "stk";
+    private static final String UNIT_PLATE360 = "stk";
 
     /**
      *
@@ -102,8 +102,8 @@ public class RoofCalc {
             parts.add(calcTileCount(carport));
             parts.add(calcRidgeTile(carport));
             parts.add(calcRidgeTileSlot(carport));
-            Part topBattenSlotPart = new Part(nameTopBatten, topBattenSlotAmount, unitTopBatten, descriptionTopBatten, priceTopBatten);
-            Part roofTileMatPacksPart = new Part(nameMatPack, roofTileMatPacksAmount, unitMatPack, descriptionMatPack, priceMatPack);
+            Part topBattenSlotPart = new Part(NAME_TOP_BATTEN, TOP_BATTEN_SLOT_AMOUNT, UNIT_TOP_BATTEN, DESCRIPTION_TOP_BATTEN, PRICE_TOP_BATTEN);
+            Part roofTileMatPacksPart = new Part(NAME_MAT_PACK, ROOF_TILE_MAT_PACKS_AMOUNT, UNIT_MAT_PACK, DESCRIPTION_MAT_PACK, PRICE_MAT_PACK);
 
             parts.add(topBattenSlotPart);
             parts.add(roofTileMatPacksPart);
@@ -125,31 +125,31 @@ public class RoofCalc {
         double toDegrees = Math.cos(Math.toRadians((double) carport.getRoof().getSlope()));
         preCasted = preCasted / toDegrees;
         preCasted = preCasted * 2;
-        preCasted = preCasted * (double) carport.getLength() / tileRatio;
+        preCasted = preCasted * (double) carport.getLength() / TILE_RATIO;
         result = (int) Math.ceil(preCasted);
-        return new Part(nameStandardTile, result, unitStandardTile, descriptionStandardTile, priceStandardTile);
+        return new Part(NAME_STANDARD_TILE, result, UNIT_STANDARD_TILE, DESCRIPTION_STANDARD_TILE, PRICE_STANDARD_TILE);
     }
 
     private static Part calcRidgeTile(Carport carport) {
-        int result = (int) Math.ceil((carport.getLength() / ridgeTileRatio));
-        return new Part(nameRidgeTile, result, unitRidgeTile, descriptionRidgeTile, priceRidgeTile);
+        int result = (int) Math.ceil((carport.getLength() / RIDGE_TILE_RATIO));
+        return new Part(NAME_RIDGE_TILE, result, UNIT_RIDGE_TILE, DESCRIPTION_RIDGE_TILE, PRICE_RIDGE_TILE);
     }
 
     private static Part calcRidgeTileSlot(Carport carport) {
-        int result = (int) Math.ceil((carport.getLength() / ridgeTileRatio));
-        return new Part(nameRidgeTileSlot, result, unitRidgeTileSlot, descriptionRidgeTileSlot, priceRidgeTileSlot);
+        int result = (int) Math.ceil((carport.getLength() / RIDGE_TILE_RATIO));
+        return new Part(NAME_RIDGE_TILE_SLOT, result, UNIT_RIDGE_TILE_SLOT, DESCRIPTION_RIDGE_TILE_SLOT, PRICE_RIDGE_TILE_SLOT);
     }
 
     private static Part calcFlatRoofPlates600(Carport carport) {
-        int result = ((carport.getLength() + minimumPlateExtrusion) / (600 - minimumPlateLengthOverlap) >= 1)
-                ? (carport.getWidth() / (int) Math.ceil(plateWidth - (2 * plateWaveLength))) : 0;
-        return new Part(namePlate600, result, unitPlate600, descriptionPlate600, pricePlate600);
+        int result = ((carport.getLength() + MINIMUM_PLATE_EXTRUSION) / (600 - MINIMUM_PLATE_LENGTH_OVERLAP) >= 1)
+                ? (carport.getWidth() / (int) Math.ceil(PLATE_WIDTH - (2 * PLATE_WAVE_LENGTH))) : 0;
+        return new Part(NAME_PLATE600, result, UNIT_PLATE600, DESCRIPTION_PLATE600, PRICE_PLATE600);
     }
 
     private static Part calcFlatRoofPlates360(Carport carport) {
-        int calc = ((carport.getLength() + minimumPlateExtrusion) % (600 - minimumPlateLengthOverlap) != 0
-                && ((double) carport.getLength() / (360.0 - minimumPlateLengthOverlap) > 0))
-                ? (carport.getWidth() / (int) Math.ceil(plateWidth - (2 * plateWaveLength))) : 0;
-        return new Part(namePlate360, calc, unitPlate360, descriptionPlate360, pricePlate360);
+        int calc = ((carport.getLength() + MINIMUM_PLATE_EXTRUSION) % (600 - MINIMUM_PLATE_LENGTH_OVERLAP) != 0
+                && ((double) carport.getLength() / (360.0 - MINIMUM_PLATE_LENGTH_OVERLAP) > 0))
+                ? (carport.getWidth() / (int) Math.ceil(PLATE_WIDTH - (2 * PLATE_WAVE_LENGTH))) : 0;
+        return new Part(NAME_PLATE360, calc, UNIT_PLATE360, DESCRIPTION_PLATE360, PRICE_PLATE360);
     }
 }
