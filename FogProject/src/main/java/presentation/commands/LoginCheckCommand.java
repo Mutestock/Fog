@@ -17,6 +17,20 @@ import presentation.Command;
  */
 public class LoginCheckCommand extends Command {
 
+    /**
+     * Command for logging in as adminstrator. Checks whether the user is
+     * inserting the correct information in the username and password fields.
+     * Throws and exception and informs the user whenever this happens. On a
+     * successful login attempt, the user is stored on the session and the
+     * customer can proceed to the next admin pages.
+     * 
+     * Uses the FrontController.
+     *
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

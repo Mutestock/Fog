@@ -20,6 +20,22 @@ import presentation.Command;
  */
 public class ReviewEstimateCommand extends Command {
 
+    /**
+     * Command for creating a carport for the customer. Shows the dimensions and
+     * attributes of the carport for the customer to choose from. Class limits
+     * how the customer can choose from the different attributes, depending what
+     * the customer currently looks at. e.g. customer can't pick the "choose a
+     * carport" variable itself. Throws an error and informs the customer,
+     * whenever this happens. Whenever the customer is done estimating the
+     * carport attributes, the customer can then procede to review and send
+     * requests in the next .jsp: ReviewEstimate, which it dispatches to.
+     * Uses the FrontController.
+     *
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
