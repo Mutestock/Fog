@@ -32,9 +32,9 @@
                 if (error == null) {
                     errormessage = "";
                 } else if (error.equals("WrongCredentials")) {
-                    errormessage = "<p style=\"color:red\">Incorrect credentials</p>";
+                    errormessage = "<p style=\"color:red\">Det indtastede brugernavn eller password er forkert.</p>";
                 } else if (error.equals("EmptySession")) {
-                    errormessage = "<p style=\"color:red\">Please log in</p>";
+                    errormessage = "<p style=\"color:red\">Vær venlig at logge ind.</p>";
                 } else {
                     errormessage = "";
                 }

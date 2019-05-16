@@ -7,7 +7,7 @@ package data.customExceptions;
 public class EmptySessionException extends Exception{
 
     /**
-     * This method is used whenever the user attempts to enter a URL without the necessary information on the session.
+     * This exception is used whenever the user attempts to enter a URL without the necessary information on the session.
      * e.g. if the user tries to enter the partslist without having logged in / a user on the session.
      * Also caught on missing width/height/roof etc..
      * Generally checks for null values.

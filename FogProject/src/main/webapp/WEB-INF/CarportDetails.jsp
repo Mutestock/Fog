@@ -29,24 +29,6 @@
 
             <h1>Design din egen carport</h1>
             <h3>og få et godt tilbud!</h3> 
-
-            <%
-                String error = (String) request.getAttribute("errormessage");
-                String errormessage = "";
-                if (error != null) {
-                    switch (error) {
-                        case "IllegalArgumentException":
-                            errormessage = "Tjek venligst, at alle felterne for personlige oplysninger indeholder tilladte værdier.";
-                            break;
-                        case "DataAccessException":
-                            errormessage = "Der skete en alvorlig fejl i databasen. Kontakt venligst support.";
-                            break;
-                    }
-                }
-            %>
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display = 'none';"><%=errormessage%></span>
-            </div>
             
             <form method = POST>
 
@@ -209,7 +191,7 @@
                 if (errorK == null) {
                     errormessageK = "";
                 } else if (errorK.equals("InvalidInput")) {
-                    errormessageK = "<p style=\"color:red\">Vælg alle de nødvendige egenskaber</p>";
+                    errormessageK = "<p style=\"color:red\">Vælg venligst værdier i alle listerne herover.</p>";
                 } else {
                     errormessageK = "";
                 }

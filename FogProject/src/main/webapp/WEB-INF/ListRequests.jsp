@@ -83,9 +83,9 @@
                 if (error == null) {
                     errormessage = "";
                 } else if (error.equals("RequestNull")) {
-                    errormessage = "<p style=\"color:red\">Vælg forespørgsel</p>";
+                    errormessage = "<p style=\"color:red\">Vælg venligst en forespørgsel.</p>";
                 } else if (error.equals("WrongCredentials")) {
-                    errormessage = "<p style=\"color:red\">Incorrect credentials</p>";
+                    errormessage = "<p style=\"color:red\">De indtastede oplysninger er ikke valide.</p>";
                 } else {
                     errormessage = "";
                 }

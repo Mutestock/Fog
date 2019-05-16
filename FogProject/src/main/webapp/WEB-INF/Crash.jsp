@@ -25,6 +25,10 @@
                     String errormessage = (String) request.getAttribute("errormessage");
                     if (errormessage == null) {
                         errormessage = "Der opstod et alvorligt problem. Kontakt venligst support.";
+                    } else if (errormessage.equals("DataAccess")) {
+                        errormessage = "Der opstod et problem i databasen. Kontakt venligst support.";
+                    } else {
+                        errormessage = "Der opstod et alvorligt problem. Kontakt venligst support.";
                     }
                     out.print(errormessage);
                 %>

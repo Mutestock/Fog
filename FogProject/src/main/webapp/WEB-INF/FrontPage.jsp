@@ -36,7 +36,8 @@
         <img src="../images/fogCenter.jpg" alt="fogC" class="background">
         
         <footer>
-            <h4>A webservice by Henning Wiberg, Simon Norup, Lukas Bjørnvad & Emil Svensmark</h4>
+            <h4>En webservice til bestilling af carporte skabt af Henning Wiberg, Simon Norup, Lukas Bjørnvad & Emil Svensmark</h4>
+            <h4>29. maj 2019</h4>
         </footer>
     </body>
 </html>
