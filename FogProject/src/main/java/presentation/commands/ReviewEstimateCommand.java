@@ -20,6 +20,13 @@ import presentation.Command;
  */
 public class ReviewEstimateCommand extends Command {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
