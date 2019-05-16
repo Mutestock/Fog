@@ -23,8 +23,9 @@ import java.time.LocalDateTime;
 public class SendInformationCommand extends Command {
 
     /**
-     * Basic login functionality, checks the username and password. Prints out
-     * errormessages if either username or password is wrong.
+     * Generates a customer upon acceptance of the transaction from the
+     * customers side. This happens after the customer has reviewed the details
+     * of the transaction.
      *
      * @param request s
      * @param response s

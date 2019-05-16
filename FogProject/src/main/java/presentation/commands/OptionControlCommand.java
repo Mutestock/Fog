@@ -17,6 +17,20 @@ public class OptionControlCommand extends Command {
 
     private static PresentationToLogic PRES_TO_LOGIC;
 
+    /**
+     * Command class used by the adminstrator whenever they want to change the
+     * options available for the customer to choose from when ordering a
+     * carport. For example adding new length options, more wall material
+     * options, etc. Utilises the datamappers through a facade to update the
+     * values. It has functionality to do two things. It either changes type of
+     * values or saves the values.
+     * Uses the FrontController.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

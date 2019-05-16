@@ -19,6 +19,18 @@ import presentation.Command;
  */
 public class ListRequestsCommand extends Command {
 
+    /**
+     * Command class for optaining information for the ListRequests.jsp site. If
+     * there is no user on the session, then the user will be thrown back to the
+     * login screen The connected .jsp site then redirects to the details
+     * command via a button in a table for each entry. 
+     * Used by the FrontController.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

@@ -22,6 +22,19 @@ import presentation.Command;
  */
 public class RequestDetailsCommand extends Command {
 
+    /**
+     * Command for showing the details of request which the customer ordered. Generates all SVG images. 
+     * If there is no user on session, it will throw the user back to the adminpage with an error message.
+     * Uses a request parameter to display the selected information.
+     * Invalidates the session and reassigns the user on the session, so that the user won't have log in again.
+     * Uses the FrontController.
+     * 
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
