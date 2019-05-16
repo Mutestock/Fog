@@ -25,7 +25,6 @@ public class DataMapperCustomerTest {
     private Carport carport;
     private Request request;
     private Customer customer;
-    private Offer offer;
     public DataMapperCustomerTest() {
         this.time = LocalDateTime.now();
         this.roof = new Roof(-1,"plasttrapezplader",0);
@@ -33,7 +32,6 @@ public class DataMapperCustomerTest {
         this.carport = new Carport(-1,420,420,roof,shed);
         this.customer = new Customer(-1,"Lars","Larsen","Ostevej 21","4588","Byen","45781245","email@email.com");
         this.request = new Request(-1,time,"cheesedipper",carport,customer);
-        //this.offer = new Offer(-1, time, 9999, 1111, request);
     }
     
     @BeforeClass

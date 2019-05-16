@@ -5,11 +5,19 @@ import data.help_classes.Part;
 import java.util.LinkedList;
 
 /**
- *
+  * The class used to calclulate the amount of screws, fittings, and msc items, for a carport object.
  * @author Lukas Bjørnvad
+ * @version 1.0
  */
+
 public class FittingsAndScrewsCalc {
 
+    /**
+     * This initialises the different methods for calculating the smaller parts of the Bill of Materials (BoM).
+     * @param carport carport with length, width, shed or no shed, type of roof and height.
+     * @param boM the part list for the wood. Needed for the calculations with relation to screws and fittings.
+     * @return LinkedList with Parts 
+     */
     public static LinkedList<Part> calculateParts(Carport carport, LinkedList<Part> boM) {
         int width = carport.getWidth();
         int length = carport.getLength();
@@ -39,7 +47,7 @@ public class FittingsAndScrewsCalc {
             boMScrews.add(getScrewsFittingsAngle(boM, boMScrews)); // 
             boMScrews.add(getBoardBolts(boM, carport));
             boMScrews.add(getAngledSquarePiece(boMScrews));
-            boMScrews.add(getScrewsRoofLath(boM, carport)); // potentialt problem med taglægt siden den bruger toplægte og en anden bruger taglægte
+            boMScrews.add(getScrewsRoofLath(boM, carport)); 
 
             if (carport.getShed() != null) {
                 boMScrews.add(getDoorHandle()); // can't see a reason to give any parameters
@@ -52,17 +60,18 @@ public class FittingsAndScrewsCalc {
 
         return boMScrews;
     }
-
+    // Screws for the fastening of the roofing plates
+   // calculated based on the cm^2 of roof
     private static Part getRoofingScrews(int length, int width) {
         double screws = ((length / 100) * (width / 100)) * 12;
         int screwpacks = (int) Math.ceil(screws / 200);
         return new Part("plastmo bundskruer 200 stk.", screwpacks, "pk.", "Skruer til tagplader", 395);
     }
-
+    //konstant size and amount
     private static Part getPerforatedBand() {
         return new Part("hulbånd 1x20 mm. 10 mtr.", 2, "rulle", "Til vindkryds på spær", 209);
     }
-
+//  Fittings for fastening the poles to the roof
     private static Part getUniversalFittings(LinkedList<Part> boM, boolean right, Carport carport) {
         Part fittings = getPart("45x195mm. spærtræ ubh. spær", boM);
 //        if(carport.getShed() != null){
@@ -74,7 +83,7 @@ public class FittingsAndScrewsCalc {
             return new Part("universal 190 mm venstre", fittings.getAmount(), "stk", "Til montering af spær på rem", 25);
         }
     }
-
+//  Screws for attaching the beams at the ends and sides of the carport
     private static Part getScrewsBeams(LinkedList<Part> boM, Carport carport) {
         double amount = getPart("19x100mm. trykimp. Bræt Vandbræt Sider", boM).getAmount() + getPart("19x100mm. trykimp. Bræt Vandbræt Ender", boM).getAmount();
         if (carport.getShed() != null) {
@@ -86,7 +95,7 @@ public class FittingsAndScrewsCalc {
         int ramount = (int) Math.ceil(amount / 200);
         return new Part("4,5 x 60 mm. skruer 200 stk.", ramount, "pk", "Til montering af stern & vandbrædt", 199);
     }
-
+//  The screws for attaching the fittings
     private static Part getScrewsFittings(LinkedList<Part> boM, LinkedList<Part> boMScrews) {
         double amount = (getPart("universal 190 mm højre", boMScrews).getAmount() + getPart("universal 190 mm venstre", boMScrews).getAmount()) * 9;
         amount += (getPart("45x195mm. spærtræ ubh. spær", boM).getAmount() * 0.60) * 2;
@@ -95,7 +104,7 @@ public class FittingsAndScrewsCalc {
     }
 
 // Meget groft estimeret, skal nok kigge på den igen
-// algoritmen  mangler også at tage højde for en masse små ting
+//  calculate the bolts needed for fastening the poles
     private static Part getBoardBolts(LinkedList<Part> boM, Carport carport) {
         double amount;
         if (carport.getWidth() < 500) {
@@ -119,7 +128,7 @@ public class FittingsAndScrewsCalc {
         int ramount = (int) Math.round(amount);
         return new Part("bræddebolt 10 x 120 mm.", ramount,"stk", "Til montering af rem på stolper", 38.33);
     }
-
+    // square pieces for protecting the wood when attaching the Board Bolts
     private static Part getSquarePiece(LinkedList<Part> boM, Carport carport) {
         double amount;
         if (carport.getShed() == null) {
