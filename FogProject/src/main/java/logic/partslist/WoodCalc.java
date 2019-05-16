@@ -64,7 +64,7 @@ public class WoodCalc {
 
    
     
-    private static final int lengthBetweenPillars = 480;
+    private static final int LENGTH_BETWEEN_PILLARS = 480;
     //lengthBetweenPillars describes the longest allowed distance between each pillar.
     /**
      * Help method used to calculate some of the parts needed for the carport (wooden parts).
@@ -75,18 +75,18 @@ public class WoodCalc {
         int amount = 0;
 
         //The amount of pillars used for the carport based on length.
-        if ((carport.getLength() - (5+(carport.getLength()*0.2))) > lengthBetweenPillars) {
+        if ((carport.getLength() - (5+(carport.getLength()*0.2))) > LENGTH_BETWEEN_PILLARS) {
             amount += 6;
         } else {
             amount += 4;
         }
         //The amount of pillars used for the carport based on width.
-        if (carport.getWidth() > lengthBetweenPillars) {
+        if (carport.getWidth() > LENGTH_BETWEEN_PILLARS) {
             amount += 1;
         }
         //The amount of pillars used for the shed.
         if (carport.getShed() != null) {
-            if (carport.getShed().getWidth() > lengthBetweenPillars) {
+            if (carport.getShed().getWidth() > LENGTH_BETWEEN_PILLARS) {
                 amount += 5;
             } else {
                 amount += 3;
@@ -96,7 +96,7 @@ public class WoodCalc {
             if (carport.getShed().getWidth() < carport.getWidth()-60) {
                 amount += 3;
                 //4 if the carport is long enough
-                if (carport.getLength() - (5+(carport.getLength()*0.2)) > lengthBetweenPillars) {
+                if (carport.getLength() - (5+(carport.getLength()*0.2)) > LENGTH_BETWEEN_PILLARS) {
                     amount ++;
                 }
             }   
