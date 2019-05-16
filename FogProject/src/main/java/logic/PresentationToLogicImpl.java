@@ -79,4 +79,14 @@ public class PresentationToLogicImpl implements PresentationToLogic {
                 throw new AssertionError();
         }
     }
+
+    @Override
+    public LinkedList<String> getAvailableOptions(String type) throws DataAccessException {
+        return LOGIC_TO_DATA.getAvailableOptions(type);
+    }
+
+    @Override
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException {
+        LOGIC_TO_DATA.setAvailableOptions(options, type);
+    }
 }

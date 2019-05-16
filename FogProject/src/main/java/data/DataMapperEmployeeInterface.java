@@ -17,4 +17,6 @@ public interface DataMapperEmployeeInterface {
     public void createOffer(Offer offer) throws DataAccessException;
 
     public Offer readOffer(int requestID) throws DataAccessException;
+
+    public void updateAvailableOptions(LinkedList<String> options, String type) throws DataAccessException;
 }

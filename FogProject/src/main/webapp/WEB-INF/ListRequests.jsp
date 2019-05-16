@@ -69,6 +69,10 @@
                         <%  }%>
                     </table>
                     <br>
+                    <form action="/FogProject/c/OptionControl" method=POST>
+                        <button class="btn btn-primary" type="submit"> Opdater mulige specifikationer </button>
+                    </form>
+                    <br>
                     <button class="btn btn-primary" onclick="window.location.href = '/FogProject/c/FrontPage';">Tilbage</button>
                 </div>
             </div>

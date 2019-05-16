@@ -31,7 +31,7 @@ public class SendOfferCommand extends Command {
 
             request.getRequestDispatcher("/c/ListRequests").forward(request, response);
         } catch (DataAccessException ex) {
-            ex.getCause().printStackTrace();
+            request.setAttribute("errormessage", "DataAccess");
             request.getRequestDispatcher("Crash").forward(request, response);
         }
     }

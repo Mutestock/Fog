@@ -60,4 +60,14 @@ public class LogicToDataImpl implements LogicToData {
         return user_dao.getUser(username);
     }
 
+    @Override
+    public LinkedList<String> getAvailableOptions(String type) throws DataAccessException {
+        return customer_dao.readAvailableOptions(type);
+    }
+
+    @Override
+    public void setAvailableOptions(LinkedList<String> options, String type) throws DataAccessException {
+        employee_dao.updateAvailableOptions(options, type);
+    }
+
 }

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class DataMapperCustomer implements DataMapperCustomerInterface {
 
@@ -259,4 +260,26 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         }
     }
 
+    @Override
+    public LinkedList<String> readAvailableOptions(String type) throws DataAccessException {
+        LinkedList<String> result = new LinkedList<>();
+        try {
+            PreparedStatement preparedStmt;
+            Connection c = DBConnector.getConnection();
+            String query
+                    = "select `Value` from `AvailableOptions` "
+                    + "where `Type` = ?;";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setString(1, type);
+            
+            ResultSet rs = preparedStmt.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("Value"));
+            }
+            preparedStmt.close();
+            return result;
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.getMessage());
+        }
+    }
 }

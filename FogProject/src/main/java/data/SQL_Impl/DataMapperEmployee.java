@@ -18,29 +18,28 @@ import java.util.LinkedList;
 
 public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
-        private DBConnector dBC;
+    private DBConnector dBC;
 
-    public DataMapperEmployee(boolean test) throws DataAccessException{
-        try{
-            if(test){
+    public DataMapperEmployee(boolean test) throws DataAccessException {
+        try {
+            if (test) {
                 dBC = new DBConnector(true);
-            }else{
-                dBC = new DBConnector();  
+            } else {
+                dBC = new DBConnector();
             }
-        }catch(SQLConnectionException ex){
+        } catch (SQLConnectionException ex) {
             throw new DataAccessException();
         }
-        
+
     }
 
     public DataMapperEmployee() throws DataAccessException {
-      this(false);
+        this(false);
     }
 
-    
-    
     /**
      * Used to return a LinkedList with all request objects saved in database.
+     *
      * @return a LinkedList object with all request objects found in database.
      * @throws DataAccessException when access to database fails.
      */
@@ -77,9 +76,9 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         }
     }
 
-    
     /**
      * Reads specific request based on request id.
+     *
      * @param id request id parameter.
      * @return the specific request which matches the id.
      * @throws DataAccessException when access to database fails.
@@ -118,12 +117,13 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         }
     }
 
-    
     /**
      * Returns a request object based on an SQL result set.
+     *
      * @param rs result set from database.
      * @return request object with values of the result set.
-     * @throws SQLException the exception that is thrown when SQL Server returns a warning or error.
+     * @throws SQLException the exception that is thrown when SQL Server returns
+     * a warning or error.
      */
     private Request getRequestFromResultSet(ResultSet rs) throws SQLException {
         Shed shed = null;
@@ -165,9 +165,9 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         return myReq;
     }
 
-    
     /**
      * Inserts offer object values to database.
+     *
      * @param offer object with offer information.
      * @throws DataAccessException when access to database fails.
      */
@@ -195,9 +195,9 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         }
     }
 
-    
     /**
      * Returns offer object based on a request id.
+     *
      * @param requestID offer id which is an unique integer.
      * @return offer object based on the id given as parameter.
      * @throws DataAccessException when access to database fails.
@@ -228,6 +228,41 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
 
             preparedStmt.close();
             return offer;
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void updateAvailableOptions(LinkedList<String> options, String type) throws DataAccessException {
+        try {
+            PreparedStatement preparedStmt;
+            Connection c = DBConnector.getConnection();
+
+            String query
+                    = "DELETE FROM AvailableOptions "
+                    + "WHERE `Type` = ?";
+            preparedStmt = c.prepareStatement(query);
+            preparedStmt.setString(1, type);
+            preparedStmt.execute();
+            preparedStmt.close();
+
+            c.setAutoCommit(false);
+            query
+                    = "INSERT INTO AvailableOptions (`Type`, `Value`) "
+                    + "VALUES (?, ?)";
+            preparedStmt = c.prepareStatement(query);
+
+            for (String option : options) {
+                preparedStmt.setString(1, type);
+                preparedStmt.setString(2, option);
+                preparedStmt.addBatch();
+            }
+            preparedStmt.executeBatch();
+
+            c.commit();
+            c.setAutoCommit(true);
+            preparedStmt.close();
         } catch (SQLException ex) {
             throw new DataAccessException(ex.getMessage());
         }

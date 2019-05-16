@@ -4,6 +4,7 @@
     Author     : Lukas Bjørnvad
 --%>
 
+<%@page import="java.util.LinkedList"%>
 <%@page import="data.customExceptions.DataAccessException"%>
 <%@page contentType="text/html" pageEncoding="Windows-1252"%>
 <!DOCTYPE html>
@@ -124,136 +125,75 @@
             
                 <select id="carport_width" name="width" style="display: block" onchange="switchShed();">
                     <option selected disabled>Vælg bredde</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
-                    <option value="720">720 cm</option>
-                    <option value="750">750 cm</option>
+                    <% LinkedList<Integer> widths = (LinkedList<Integer>) request.getAttribute("widths");
+                        for (Integer width : widths) {
+                            out.print("<option value=\"" + width + "\">" + width + " cm</option>");
+                        }
+                    %>
                 </select>
 
                 <select id="carport_length" name="length" style="display: block" onchange="switchShed();">
                     <option selected disabled>Vælg længde</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
-                    <option value="720">720 cm</option>
-                    <option value="750">750 cm</option>
-                    <option value="780">780 cm</option>
+                    <% LinkedList<Integer> lengths = (LinkedList<Integer>) request.getAttribute("lengths");
+                        for (Integer length : lengths) {
+                            out.print("<option value=\"" + length + "\">" + length + " cm</option>");
+                        }
+                    %>
                 </select>
                 <br>
 
                 <select id="roof_slope" name="slope" style="display: none">
                     <option selected disabled>Vælg taghældning</option>
-                    <option value="15">15 grader</option>
-                    <option value="20">20 grader</option>
-                    <option value="25">25 grader</option>
-                    <option value="30">30 grader</option>
-                    <option value="35">35 grader</option>
-                    <option value="40">40 grader</option>
-                    <option value="45">45 grader</option>
+                    <% LinkedList<Integer> roofSlopes = (LinkedList<Integer>) request.getAttribute("roofSlopes");
+                        for (Integer slope : roofSlopes) {
+                            out.print("<option value=\"" + slope + "\">" + slope + " grader</option>");
+                        }
+                    %>
                 </select>
 
                 <select id="flat_roof_type" name="roof" style="display: block">
                     <option selected disabled>Vælg fladt tag</option>
-                    <option value="plasttrapezplader">Plasstrapezplader</option>
+                    <% LinkedList<String> roofsFlat = (LinkedList<String>) request.getAttribute("roofsFlat");
+                        for (String roof : roofsFlat) {
+                            out.print("<option value=\""+roof+"\">"+roof+"</option>");
+                        }
+                    %>
                 </select>
 
                 <select id="raised_roof_type" name="roof" style="display: none">
                     <option selected disabled>Vælg tag med rejsning</option>
-                    <option value="BetontagstenRød">Betontagsten - Rød</option>
-                    <option value="BetontagstenTeglrød">Betontagsten - Teglrød</option>
-                    <option value="BetontagstenBrun">Betontagsten - Brun</option>
-                    <option value="BetontagstenSort">Betontagsten - Sort</option>
-                    <option value="EternittagB6Grå">Eternittag B6 - Grå</option>
-                    <option value="EternittagB6Sort">Eternittag B6 - Sort</option>
-                    <option value="EternittagB6Mokkabrun)">Eternittag B6 - Mokka (brun)</option>
-                    <option value="EternittagB6Rødbrun">Eternittag B6 - Rødbrun</option>
-                    <option value="EternittagB6Teglrød">Eternittag B6 - Teglrød</option>
-                    <option value="EternittagB7Grå">Eternittag B7 - Grå</option>
-                    <option value="EternittagB7Sort">Eternittag B7 - Sort</option>
-                    <option value="EternittagB7Mokka(brun)">Eternittag B7 - Mokka (brun)</option>
-                    <option value="EternittagB7Rødbrun">Eternittag B7 - Rødbrun</option>
-                    <option value="EternittagB7Teglrød">Eternittag B7 - Teglrød</option>
-                    <option value="EternittagB7Rødflammet">Eternittag B7 - Rødflammet</option>
+                    <% LinkedList<String> roofsRaised = (LinkedList<String>) request.getAttribute("roofsRaised");
+                        for (String roof : roofsRaised) {
+                            out.print("<option value=\""+roof+"\">"+roof+"</option>");
+                        }
+                    %>
                 </select>
                 <br>
                 <select id="shed_width" name="shedwidth" style="display: none">
                     <option selected disabled>Vælg skurets bredde</option>
-                    <option value="210">210 cm</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
-                    <option value="720">720 cm</option>
+                    <% LinkedList<Integer> shedWidths = (LinkedList<Integer>) request.getAttribute("shedWidths");
+                        for (Integer width : shedWidths) {
+                            out.print("<option value=\"" + width + "\">" + width + " cm</option>");
+                        }
+                    %>
                 </select>
 
                 <select id="shed_length" name="shedlength" style="display: none">
                     <option selected disabled>Vælg skurets længde</option>
-                    <option value="150">150 cm</option>
-                    <option value="180">180 cm</option>
-                    <option value="210">210 cm</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
+                    <% LinkedList<Integer> shedLengths = (LinkedList<Integer>) request.getAttribute("shedLengths");
+                        for (Integer length : shedLengths) {
+                            out.print("<option value=\""+length+"\">"+length+" cm</option>");
+                        }
+                    %>
                 </select> 
 
                 <select id="shed_cover" name="walls" style="display: none">
                     <option selected disabled>Vælg skurets vægbeklædning</option>
-                    <option value="Trykimprægneret træ">Trykimprægneret træ</option>  
-                    <option value="Skumpaneler">Skumpaneler</option>
-                    <option value="Eternitplader">Eternitplader</option>
-                    <option value="Fibercement">Fibercement</option>
+                    <% LinkedList<String> covers = (LinkedList<String>) request.getAttribute("shedCoverings");
+                        for (String cover : covers) {
+                            out.print("<option value=\""+cover+"\">"+cover+"</option>");
+                        }
+                    %>
                 </select>
                 <br>
                 <br>
