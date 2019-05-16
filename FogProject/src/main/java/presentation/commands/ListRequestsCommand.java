@@ -20,16 +20,16 @@ import presentation.Command;
 public class ListRequestsCommand extends Command {
 
     /**
-     * Command class for optaining information for the ListRequests.jsp site. If
+     * Command class for obtaining information for the ListRequests.jsp site. If
      * there is no user on the session, then the user will be thrown back to the
      * login screen The connected .jsp site then redirects to the details
      * command via a button in a table for each entry. 
      * Used by the FrontController.
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

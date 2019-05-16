@@ -17,10 +17,10 @@ public class EmpLoginCommand extends Command {
      * a user wants to login as an adminstrator. If the username is incorrect, then the user will get an error message and will need to try again.
      * Used by Front Controller.
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     
     @Override

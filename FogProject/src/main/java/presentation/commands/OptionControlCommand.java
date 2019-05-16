@@ -26,12 +26,11 @@ public class OptionControlCommand extends Command {
      * values or saves the values.
      * Uses the FrontController.
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
-    @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             PRES_TO_LOGIC = new PresentationToLogicImpl();

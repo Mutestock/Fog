@@ -54,17 +54,11 @@ public class RoofCalc {
     /**
      *
      * Main calculator for roof part list generation. To understand parts refer
-     * to:
-     * {@link data.help_classes.Part#Part(String, int, int, String, String, double) Part Constructor}
+     * to part constructor.
      *
      * Refer to field constants to change the outcome. Utilises several methods
      * in order to function correctly:
      *
-     * {@link #calcTileCount(carport) calcTileCount}
-     * {@link #calcRidgeTile(carport) calcRidgeTile}
-     * {@link #calcRidgeTileSlot(carport) calcRidgeTileSlot}
-     * {@link #calcFlatRoofPlates600(carport) calcFlatRoofPlates600}
-     * {@link #calcFlatRoofPlates360(carport) calcFlatRoofPlates360}
      *
      * Additional parts without the need for calculation are included inside the
      * method. These are pre-defined and added whenever the user picks a roof:
@@ -92,8 +86,8 @@ public class RoofCalc {
      *
      * All these values can be changed in constant fields.
      * 
-     * @param carport
-     * @return LinkedList<part>
+     * @param carport The carport parameter
+     * @return LinkedList contains parts.
      */
     public static LinkedList<Part> calculateParts(Carport carport) {
         LinkedList<Part> parts = new LinkedList();
