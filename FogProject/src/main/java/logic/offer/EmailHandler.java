@@ -25,9 +25,9 @@ public class EmailHandler {
      * Extracts information from the offer parameter and sends it to the email address specified from the client upon ordering.
      * Username and password of the sender's gmail account is necessary.
      * 
-     * @param offer
-     * @throws NoSuchProviderException
-     * @throws MessagingException
+     * @param offer The offer parameters contains most of the information for the entire process.
+     * @throws NoSuchProviderException Looks for SMTP providers. E.g if the google SMTP didn't exist.
+     * @throws MessagingException The base class for all exceptions thrown by the Messaging classes 
      */
     public static void sendMail(Offer offer) throws NoSuchProviderException, MessagingException {
         Properties props = System.getProperties();

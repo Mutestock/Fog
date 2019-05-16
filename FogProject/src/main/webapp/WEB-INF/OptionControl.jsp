@@ -26,7 +26,7 @@
                 LinkedList<String> options = (LinkedList<String>) request.getAttribute("options");
             %>
             <br>
-            <form method = POST formaction="/FogProject/c/OptionControl">
+            <form method = POST action="/FogProject/c/OptionControl">
                 <select id="types" name="type" onchange="this.form.submit()">
                     <option 
                         <%if (type == null) {%> selected <%}%>

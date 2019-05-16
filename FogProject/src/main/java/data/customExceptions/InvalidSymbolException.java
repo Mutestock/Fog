@@ -7,7 +7,7 @@ package data.customExceptions;
 public class InvalidSymbolException extends IllegalArgumentException {
 
     /**
-     * This exception is used whenever the user tries to use symbols which aren't allowed e.g. %&/ in the name field. 
+     * This exception is used whenever the user tries to use symbols which aren't allowed in the name field. 
      * This is generally caught via regex. 
      */
     public InvalidSymbolException() {

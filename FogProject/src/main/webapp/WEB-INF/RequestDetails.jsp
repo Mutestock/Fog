@@ -94,10 +94,6 @@
                 <input name="shippingCosts" type="number" step="0.01" min="0" required="required" value="<%=offer.getShippingCosts()%>"> <p style="display: inline-block;">,- DKK</p>
                 <br><br>
                 <button class="btn btn-primary btn-lg" type="submit" formaction="/FogProject/c/SendOffer">Send det endelige tilbud</button>
-
-
-
-
             </form>
             <% }%>
             <br>

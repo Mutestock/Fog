@@ -23,13 +23,14 @@ import java.time.LocalDateTime;
 public class SendInformationCommand extends Command {
 
     /**
-     * Basic login functionality, checks the username and password. Prints out
-     * errormessages if either username or password is wrong.
+     * Generates a customer upon acceptance of the transaction from the
+     * customers side. This happens after the customer has reviewed the details
+     * of the transaction.
      *
-     * @param request s
-     * @param response s
-     * @throws ServletException s
-     * @throws IOException s
+     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
+     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

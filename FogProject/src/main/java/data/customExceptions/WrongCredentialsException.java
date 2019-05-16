@@ -7,7 +7,7 @@ package data.customExceptions;
 public class WrongCredentialsException extends Exception {
 
     /**
-     *  This method is used whenever the user attempts to log in without submitting the correct credentials.
+     *  This exception is used whenever the user attempts to log in without submitting the correct credentials.
      */
     public WrongCredentialsException() {
     }
