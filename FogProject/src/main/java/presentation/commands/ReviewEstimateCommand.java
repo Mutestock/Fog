@@ -6,8 +6,6 @@ import data.customExceptions.InvalidSymbolException;
 import data.help_classes.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,7 +69,7 @@ public class ReviewEstimateCommand extends Command {
                 nShed = new Shed(-1, slength, swidth, request.getParameter("walls"));
             }
             Carport carport = new Carport(-1, length, width, nRoof, nShed);
-
+            
             Request req = new Request(-1, LocalDateTime.now(), "", carport);
 
             String SVGdrawingAbove = pToL.getSVGDrawing(carport, "above");

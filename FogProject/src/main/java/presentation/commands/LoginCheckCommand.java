@@ -1,5 +1,6 @@
 package presentation.commands;
 
+import data.customExceptions.DataAccessException;
 import data.customExceptions.WrongCredentialsException;
 import data.help_classes.User;
 import java.io.IOException;
@@ -56,11 +57,11 @@ public class LoginCheckCommand extends Command {
         } catch (WrongCredentialsException ex) {
             request.setAttribute("errormessage", "WrongCredentials");
             loadJSP(request, response);
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             e.printStackTrace();
+            request.getRequestDispatcher("Crash").forward(request, response);
         }
     }
-
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/AdminLogin.jsp").forward(request, response);
     }
