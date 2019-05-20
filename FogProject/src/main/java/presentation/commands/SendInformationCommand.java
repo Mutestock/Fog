@@ -57,17 +57,16 @@ public class SendInformationCommand extends Command {
             pToL.sendRequest(estimate.getRequest());
 
         } catch (NumberFormatException x) {
-            x.printStackTrace();
-            request.getSession().setAttribute("portError", "notnull");
+            request.getSession().setAttribute("errormessage", "InvalidInput");
             request.getRequestDispatcher("CarportDetails").forward(request, response);
             //response.sendRedirect("CarportDetails");
         } catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-            request.getSession().setAttribute("custInf", "notnull");
+            request.getSession().setAttribute("errormessage", "InvalidInput");
             request.getRequestDispatcher("CarportDetails").forward(request, response);
             //response.sendRedirect("CarportDetails");
         } catch (DataAccessException ex) {
-            ex.printStackTrace();
+            request.getSession().setAttribute("errormessage", "DataAccess");
+            request.getRequestDispatcher("CarportDetails").forward(request, response);
         }
 
         loadJSP(request, response);
