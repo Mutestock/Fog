@@ -48,7 +48,7 @@ public class DataMapperEmployee implements DataMapperEmployeeInterface {
         LinkedList<Request> requests = new LinkedList<>();
         try {
             PreparedStatement preparedStmt;
-            Connection c = dBC.getConnection();
+            Connection c = DBConnector.getConnection();
             String query
                     = "select Request.Request_id, Request.`Date`, Request.Comments, "
                     + "Offer.Offer_id, Customer.*, "

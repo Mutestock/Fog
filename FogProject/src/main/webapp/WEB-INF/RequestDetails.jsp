@@ -45,7 +45,7 @@
                     out.print(side);
                 %>
             </div> 
-            
+
             <% String dateConv = (r.getSent().toString());
                 String received = dateConv.replace("T", " ");
             %>
@@ -63,8 +63,13 @@
             </h4>
             <% if (shed != null) {%>
             <h4><b>Med redskabsskur:</b> <%=shed.getLength()%>x<%=shed.getWidth()%>, <br>Vægbeklædning af typen <i><%=shed.getWallCoverings()%></i></h4>
-            <% }%>
+                <% }%>
 
+            <h3>Personlige informationer</h3>
+            <h4><b>Navn:</b> <%=customer.getFullName()%></h4>
+            <h4><b>Adresse:</b> <%=customer.getAddress()+", "+customer.getZipcode()+" "+customer.getCity()%></h4>
+            <h4><b>Telefon:</b> <%=customer.getPhone()%></h4>
+            <h4><b>Email:</b> <%=customer.getEmail()%></h4>
 
             <h3>Kommentarer:</h3>
             <textarea cols="50" rows="5" readonly style="resize: none;"><%=r.getComments()%></textarea>

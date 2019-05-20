@@ -39,7 +39,6 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
      */
     @Override
     public void createRequest(Request request) throws DataAccessException {
-
         Carport carport = request.getCarport();
         Shed shed = carport.getShed();
 
@@ -49,7 +48,12 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             shedID = createShed(shed);
         }
         int carportID = createCarport(carport, roofID, shedID);
-        int customerID = createCustomer(request.getCustomer());
+
+        int customerID = readCustomerID(request.getCustomer());
+        if (customerID == -1) {
+            customerID = createCustomer(request.getCustomer());
+        }
+
         createRequest(request, carportID, customerID);
     }
 
@@ -66,7 +70,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
     private void createRequest(Request request, int carportID, int customerID) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = dBC.getConnection();
+            Connection c = DBConnector.getConnection();
             String query
                     = "insert into `Request` (`Carport_id`, `Customer_id`, `Date`, `Comments`) "
                     + "VALUES(?,?,?,?)" + ";";
@@ -87,7 +91,8 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
     }
 
     /**
-     * Inserts customer object values to database.
+     * Inserts customer object values to database, unless one with same email
+     * exists, then simply return ID of already existing customer row.
      *
      * @param customer object with customer information.
      * @return the customer id as it has been added to the database.
@@ -96,7 +101,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
     private int createCustomer(Customer customer) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = dBC.getConnection();
+            Connection c = DBConnector.getConnection();
             String query
                     = "insert into `Customer` (`FirstName`, `LastName`, `Address`, `Zipcode`,`City`,`Phone`,`Email`) "
                     + "VALUES(?,?,?,?,?,?,?)" + ";";
@@ -113,11 +118,9 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.execute();
 
             ResultSet rs = preparedStmt.getGeneratedKeys();
-            int id;
+            int id = -1;
             if (rs.next()) {
                 id = rs.getInt(1);
-            } else {
-                id = readCustomerID(customer);
             }
 
             preparedStmt.close();
@@ -139,7 +142,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
     private int createCarport(Carport carport, int roofID, int shedID) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = dBC.getConnection();
+            Connection c = DBConnector.getConnection();
             String query
                     = "insert into `Carport` (`Width`, `Length`, `Shed_id`, `Roof_id`) "
                     + "VALUES(?,?,?,?)" + ";";
@@ -177,7 +180,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
     private int createRoof(Roof roof) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = dBC.getConnection();
+            Connection c = DBConnector.getConnection();
             String query
                     = "insert into `Roof` (`Type`, `Slope`) "
                     + "VALUES(?,?);";
@@ -210,7 +213,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
     private int createShed(Shed shed) throws DataAccessException {
         try {
             PreparedStatement preparedStmt;
-            Connection c = dBC.getConnection();
+            Connection c = DBConnector.getConnection();
             String query
                     = "insert into `Shed` (`Cover`, `Width`,`Length`) "
                     + "VALUES(?,?,?)" + ";";
@@ -244,7 +247,7 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
         int customerID;
         try {
             PreparedStatement preparedStmt;
-            Connection c = dBC.getConnection();
+            Connection c = DBConnector.getConnection();
             String query
                     = "select `Customer_id` from `Customer` "
                     + "where `Email` = ?;";
@@ -252,7 +255,11 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
             preparedStmt.setString(1, customer.getEmail());
 
             ResultSet rs = preparedStmt.executeQuery();
-            customerID = rs.getInt("Customer_id");
+            if (rs.next()) {
+                customerID = rs.getInt("Customer_id");
+            } else {
+                customerID = -1;
+            }
             preparedStmt.close();
             return customerID;
         } catch (SQLException ex) {
@@ -271,9 +278,9 @@ public class DataMapperCustomer implements DataMapperCustomerInterface {
                     + "where `Type` = ?;";
             preparedStmt = c.prepareStatement(query);
             preparedStmt.setString(1, type);
-            
+
             ResultSet rs = preparedStmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 result.add(rs.getString("Value"));
             }
             preparedStmt.close();
