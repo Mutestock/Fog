@@ -7,7 +7,7 @@
 ==============================
 //MINDRE OPGAVER
 
-- tilføj takke-JSP efter bestilling
+- 
 
 ==============================
 

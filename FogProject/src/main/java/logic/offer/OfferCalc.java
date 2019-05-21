@@ -74,7 +74,7 @@ public class OfferCalc {
      * @param zipcode zipcode of the customer.
      * @return location based on the given zipcode.
      */
-    private static Location getLocation(int zipcode) {
+    public static Location getLocation(int zipcode) {
         if (zipcode >= 0 && zipcode < 3700) {
             return Location.SJAELLAND;
         }
@@ -88,10 +88,6 @@ public class OfferCalc {
             return Location.JYLLAND;
         }
         throw new IllegalArgumentException();
-    }
-
-    private static enum Location {
-        SJAELLAND, FYN, JYLLAND
     }
 
 }
