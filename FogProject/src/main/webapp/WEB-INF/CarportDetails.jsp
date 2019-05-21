@@ -190,6 +190,8 @@
 
                 if (errorK == null) {
                     errormessageK = "";
+                } else if (errorK.equals("DataAccess")) {
+                    errormessageK = "<p style=\"color:red\">Der skete en alvorlig fejl i databasen. Kontakt venligst support.</p>";
                 } else if (errorK.equals("InvalidInput")) {
                     errormessageK = "<p style=\"color:red\">Vælg venligst værdier i alle listerne herover.</p>";
                 } else {

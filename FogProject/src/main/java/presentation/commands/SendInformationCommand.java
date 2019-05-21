@@ -69,6 +69,7 @@ public class SendInformationCommand extends Command {
             pToL.sendRequest(estimate.getRequest());
 
         } catch (NumberFormatException x) {
+<<<<<<< HEAD
             x.printStackTrace();
             request.getSession().setAttribute("portError", "notnull");
             logger.log(Level.SEVERE, x.toString(), x);
@@ -78,10 +79,22 @@ public class SendInformationCommand extends Command {
             ex.printStackTrace();
             request.getSession().setAttribute("custInf", "notnull");
             logger.log(Level.SEVERE, ex.toString(), ex);
+=======
+            request.getSession().setAttribute("errormessage", "InvalidInput");
+            request.getRequestDispatcher("CarportDetails").forward(request, response);
+            //response.sendRedirect("CarportDetails");
+        } catch (IllegalArgumentException ex) {
+            request.getSession().setAttribute("errormessage", "InvalidInput");
+>>>>>>> 20f03b19b5f66e95b650c0f65a153be9fe7c2bde
             request.getRequestDispatcher("CarportDetails").forward(request, response);
         } catch (DataAccessException ex) {
+<<<<<<< HEAD
             ex.printStackTrace();
             logger.log(Level.SEVERE, ex.toString(), ex);
+=======
+            request.getSession().setAttribute("errormessage", "DataAccess");
+            request.getRequestDispatcher("CarportDetails").forward(request, response);
+>>>>>>> 20f03b19b5f66e95b650c0f65a153be9fe7c2bde
         }
 
         loadJSP(request, response);

@@ -1,13 +1,16 @@
 package data.help_classes;
 
 import data.customExceptions.InvalidSymbolException;
+<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.LoggerSetup;
+=======
+import logic.offer.OfferCalc;
+>>>>>>> 20f03b19b5f66e95b650c0f65a153be9fe7c2bde
 
 /**
- * Entity class of a customer.
- * Holds all nessescary information of a customer.
+ * Entity class of a customer. Holds all nessescary information of a customer.
  */
 public class Customer {
 
@@ -20,28 +23,28 @@ public class Customer {
     private final String phone;
     private final String email;
 
-    
     /**
-     * The constructor checks if the arguments is legal.
-     * If they are not, IllegalArgumentException is thrown.
+     * The constructor checks if the arguments is legal. If they are not,
+     * IllegalArgumentException is thrown.
+     *
      * @param id unique integer value which each customer has.
      * @param first_name If contains other chars than usual name letters/symbol
      * or if the string is empty, IAE is thrown.
-     * 
+     *
      * @param last_name If contains other chars than usual name letters/symbol
      * or if the string is empty, IAE is thrown.
-     * 
+     *
      * @param address If contains other chars than usual address letters/symbol
      * or if the string is empty, IAE is thrown.
-     * 
+     *
      * @param zipcode If does not contain exactly 4 numbers, IAE is thrown.
-     * @param city If contains other chars than usual city letters/symbol
-     * or if the string is empty, IAE is thrown.
-     * 
+     * @param city If contains other chars than usual city letters/symbol or if
+     * the string is empty, IAE is thrown.
+     *
      * @param phone If does not contain exactly 8 numbers, IAE is thrown.
-     * 
-     * @param email If contains other chars than usual email address letters/symbol
-     * or if the string is empty, IAE is thrown.
+     *
+     * @param email If contains other chars than usual email address
+     * letters/symbol or if the string is empty, IAE is thrown.
      * @throws IllegalArgumentException one or more of the arguments is illegal.
      */
     public Customer(int id, String first_name, String last_name, String address, String zipcode, String city, String phone, String email) throws IllegalArgumentException {
@@ -55,6 +58,11 @@ public class Customer {
             Logger logger = LoggerSetup.logSetup();
             logger.log(Level.SEVERE, "help_classes.Customer: Invalid Symbol");
             throw new InvalidSymbolException("Invalid Symbol in Customer");
+        }
+        try {
+            OfferCalc.getLocation(Integer.parseInt(zipcode));
+        } catch (IllegalArgumentException e) {
+            throw new InvalidSymbolException("Can't deliver to given zipcode.");
         }
         this.id = id;
         this.first_name = first_name;
