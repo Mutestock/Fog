@@ -5,9 +5,12 @@ import data.help_classes.Offer;
 import data.help_classes.Request;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.LoggerSetup;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
 import presentation.Command;
@@ -18,15 +21,25 @@ import presentation.Command;
  */
 public class SendOfferCommand extends Command {
 
+    private static final Logger logger = LoggerSetup.logSetup();
+
     /**
-     * Command for sending the offer from the adminstrator to the customers designated email address, from the requestDetails page.
-     * Dispatches back to the ListRequest list, whenever the created offer object has been sent.
+     * Command for sending the offer from the adminstrator to the customers
+     * designated email address, from the requestDetails page. Dispatches back
+     * to the ListRequest list, whenever the created offer object has been sent.
      * Uses the FrontController.
-     * 
-     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
-     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     *
+     * @param request The servlet container creates an HttpServletRequest object
+     * and passes it as an argument to the servlet's service methods (doGet,
+     * doPost, etc).
+     * @param response The servlet container creates an HttpServletResponse
+     * object and passes it as an argument to the servlet's service methods
+     * (doGet, doPost, etc).
+     * @throws ServletException Defines a general exception a servlet can throw
+     * when it encounters difficulty.
+     * @throws IOException Signals that an I/O exception of some sort has
+     * occurred. This class is the general class of exceptions produced by
+     * failed or interrupted I/O operations.
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,6 +55,7 @@ public class SendOfferCommand extends Command {
             request.getRequestDispatcher("/c/ListRequests").forward(request, response);
         } catch (DataAccessException ex) {
             request.setAttribute("errormessage", "DataAccess");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("Crash").forward(request, response);
         }
     }

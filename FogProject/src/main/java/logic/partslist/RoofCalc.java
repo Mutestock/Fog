@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * @author Henning
  */
 public class RoofCalc {
-    
+
     private static final int TOP_BATTEN_SLOT_AMOUNT = 8;
     private static final int ROOF_TILE_MAT_PACKS_AMOUNT = 2;
     private static final double RIDGE_TILE_RATIO = 34.7;
@@ -85,20 +85,19 @@ public class RoofCalc {
      * needed will be higher than the given schematics.
      *
      * All these values can be changed in constant fields.
-     * 
+     *
      * @param carport The carport parameter
      * @return LinkedList contains parts.
      */
     public static LinkedList<Part> calculateParts(Carport carport) {
-        LinkedList<Part> parts = new LinkedList();
 
+        LinkedList<Part> parts = new LinkedList();
         if (carport.getRoof().getRaised() == true) {
             parts.add(calcTileCount(carport));
             parts.add(calcRidgeTile(carport));
             parts.add(calcRidgeTileSlot(carport));
             Part topBattenSlotPart = new Part(NAME_TOP_BATTEN, TOP_BATTEN_SLOT_AMOUNT, UNIT_TOP_BATTEN, DESCRIPTION_TOP_BATTEN, PRICE_TOP_BATTEN);
             Part roofTileMatPacksPart = new Part(NAME_MAT_PACK, ROOF_TILE_MAT_PACKS_AMOUNT, UNIT_MAT_PACK, DESCRIPTION_MAT_PACK, PRICE_MAT_PACK);
-
             parts.add(topBattenSlotPart);
             parts.add(roofTileMatPacksPart);
         } else if (calcFlatRoofPlates600(carport).getAmount() == 0) {
@@ -106,9 +105,7 @@ public class RoofCalc {
         } else {
             parts.add(calcFlatRoofPlates600(carport));
             parts.add(calcFlatRoofPlates360(carport));
-
         }
-
         return parts;
     }
 

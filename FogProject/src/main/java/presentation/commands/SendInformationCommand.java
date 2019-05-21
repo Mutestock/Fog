@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logic.LoggerSetup;
 
 /**
  *
@@ -22,15 +25,24 @@ import java.time.LocalDateTime;
  */
 public class SendInformationCommand extends Command {
 
+    private static final Logger logger = LoggerSetup.logSetup();
+
     /**
      * Generates a customer upon acceptance of the transaction from the
      * customers side. This happens after the customer has reviewed the details
      * of the transaction.
      *
-     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
-     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     * @param request The servlet container creates an HttpServletRequest object
+     * and passes it as an argument to the servlet's service methods (doGet,
+     * doPost, etc).
+     * @param response The servlet container creates an HttpServletResponse
+     * object and passes it as an argument to the servlet's service methods
+     * (doGet, doPost, etc).
+     * @throws ServletException Defines a general exception a servlet can throw
+     * when it encounters difficulty.
+     * @throws IOException Signals that an I/O exception of some sort has
+     * occurred. This class is the general class of exceptions produced by
+     * failed or interrupted I/O operations.
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,15 +71,17 @@ public class SendInformationCommand extends Command {
         } catch (NumberFormatException x) {
             x.printStackTrace();
             request.getSession().setAttribute("portError", "notnull");
+            logger.log(Level.SEVERE, x.toString(), x);
             request.getRequestDispatcher("CarportDetails").forward(request, response);
             //response.sendRedirect("CarportDetails");
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
             request.getSession().setAttribute("custInf", "notnull");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("CarportDetails").forward(request, response);
-            //response.sendRedirect("CarportDetails");
         } catch (DataAccessException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.toString(), ex);
         }
 
         loadJSP(request, response);
