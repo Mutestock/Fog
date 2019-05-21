@@ -31,7 +31,7 @@ public class LoggerSetup {
             ConsoleHandler ch = new ConsoleHandler();
             ch.setLevel(Level.SEVERE);
             logger.addHandler(ch);
-            FileHandler fh = new FileHandler("MyLogFile.log", true);
+            FileHandler fh = new FileHandler("log.log", true);
             SimpleFormatter sm = new SimpleFormatter();
             fh.setFormatter(sm);
             logger.addHandler(fh);
