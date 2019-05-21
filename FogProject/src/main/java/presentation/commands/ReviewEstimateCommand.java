@@ -21,8 +21,6 @@ import presentation.Command;
  */
 public class ReviewEstimateCommand extends Command {
 
-    private static final Logger logger = LoggerSetup.logSetup();
-
     /**
      * Command for creating a carport for the customer. Shows the dimensions and
      * attributes of the carport for the customer to choose from. Class limits
@@ -46,10 +44,9 @@ public class ReviewEstimateCommand extends Command {
      * occurred. This class is the general class of exceptions produced by
      * failed or interrupted I/O operations.
      */
-    @
-            Override
-
+    @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Logger logger = LoggerSetup.logSetup();
         try {
             String paramRoof = request.getParameter("roof");
             String isRaised = request.getParameter("isRaised");

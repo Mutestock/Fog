@@ -1,58 +1,54 @@
-May 20, 2019 8:03:09 PM logic.roof.TestRoof testPricesAtDefaultStandardTile
-FINE: testPricesAtDefault: Price calculation failure or change in default values. Check ratios 
-May 20, 2019 8:03:09 PM logic.roof.TestRoof testAmountAtDefaultStandardTile
-FINE: testAmountAtDefaultStandardTile: Algorithm failure or change in default values. Check ratios
-May 20, 2019 8:05:01 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 20, 2019 8:05:02 PM data.help_classes.Customer <init>
+May 21, 2019 12:56:18 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:22 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:22 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:22 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:22 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:23 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:23 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:23 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:23 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:29:23 AM data.help_classes.Customer <init>
+May 21, 2019 12:58:46 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol
-May 21, 2019 10:36:37 AM data.help_classes.Customer <init>
+May 21, 2019 1:01:03 PM data.help_classes.Customer <init>
 SEVERE: help_classes.Customer: Invalid Symbol

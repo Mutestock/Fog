@@ -17,23 +17,21 @@ import javax.xml.bind.annotation.XmlElementDecl;
  */
 public class LoggerSetup {
 
-//    private static FileHandler fh;
-//    private static SimpleFormatter sm;
     private static final Logger logger = Logger.getLogger(GLOBAL_LOGGER_NAME);
-//    private static ConsoleHandler ch;
+
 
     public static Logger logSetup() {
         try {
-            File logDir = new File("./logs/");
-            if (!(logDir.exists())) {
-                logDir.mkdir();
-            }
+//            File logDir = new File("./logs/");
+//            if (!(logDir.exists())) {
+//                logDir.mkdir();
+//            }
             LogManager.getLogManager().reset();
             logger.setLevel(Level.ALL);
             ConsoleHandler ch = new ConsoleHandler();
             ch.setLevel(Level.SEVERE);
             logger.addHandler(ch);
-            FileHandler fh = new FileHandler("logs/MyLogFile.log", true);
+            FileHandler fh = new FileHandler("MyLogFile.log", true);
             SimpleFormatter sm = new SimpleFormatter();
             fh.setFormatter(sm);
             logger.addHandler(fh);

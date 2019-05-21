@@ -1,13 +1,11 @@
 package data.help_classes;
 
 import data.customExceptions.InvalidSymbolException;
-<<<<<<< HEAD
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.LoggerSetup;
-=======
 import logic.offer.OfferCalc;
->>>>>>> 20f03b19b5f66e95b650c0f65a153be9fe7c2bde
 
 /**
  * Entity class of a customer. Holds all nessescary information of a customer.
@@ -22,6 +20,7 @@ public class Customer {
     private final String city;
     private final String phone;
     private final String email;
+    private static Logger logger = LoggerSetup.logSetup();
 
     /**
      * The constructor checks if the arguments is legal. If they are not,
@@ -55,13 +54,14 @@ public class Customer {
                 || city == null || !city.matches("[A-zÃ¦Ã¸Ã¥ÆØÅæøå]+[A-zÃ¦Ã¸Ã¥ÆØÅæøå ]*")
                 || phone == null || !phone.matches("\\d{8}")
                 || email == null || !email.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
-            Logger logger = LoggerSetup.logSetup();
+
             logger.log(Level.SEVERE, "help_classes.Customer: Invalid Symbol");
             throw new InvalidSymbolException("Invalid Symbol in Customer");
         }
         try {
             OfferCalc.getLocation(Integer.parseInt(zipcode));
         } catch (IllegalArgumentException e) {
+            logger.log(Level.SEVERE, "help_classes.Customer: Error in zipcodes");
             throw new InvalidSymbolException("Can't deliver to given zipcode.");
         }
         this.id = id;
