@@ -31,7 +31,7 @@ public abstract class Command {
         ACTIONS.put("CarportDetails", new CarportDetailsCommand());
         ACTIONS.put("RequestDetails", new RequestDetailsCommand());
         ACTIONS.put("ListRequests", new ListRequestsCommand());
-        ACTIONS.put("EmpLogin", new EmpLoginCommand());
+        ACTIONS.put("EmpLogin", new AdminLoginCommand());
         ACTIONS.put("LoginCheck", new LoginCheckCommand());
         ACTIONS.put("SessionExit", new RedirectCommand("SessionExit"));
         ACTIONS.put("ThankYou", new RedirectCommand("ThankYouOrder"));

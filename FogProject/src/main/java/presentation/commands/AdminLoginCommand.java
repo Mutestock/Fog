@@ -10,7 +10,7 @@ import presentation.Command;
  *
  * @author Lukas Bjørnvad
  */
-public class EmpLoginCommand extends Command {
+public class AdminLoginCommand extends Command {
 
     /**
      * Command class for redirecting to the "ListRequests".jsp. Necessary when
