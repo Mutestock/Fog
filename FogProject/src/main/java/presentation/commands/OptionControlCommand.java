@@ -3,9 +3,12 @@ package presentation.commands;
 import data.customExceptions.DataAccessException;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.LoggerSetup;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
 import presentation.Command;
@@ -16,6 +19,7 @@ import presentation.Command;
 public class OptionControlCommand extends Command {
 
     private static PresentationToLogic PRES_TO_LOGIC;
+    private static final Logger logger = LoggerSetup.logSetup();
 
     /**
      * Command class used by the adminstrator whenever they want to change the
@@ -23,15 +27,22 @@ public class OptionControlCommand extends Command {
      * carport. For example adding new length options, more wall material
      * options, etc. Utilises the datamappers through a facade to update the
      * values. It has functionality to do two things. It either changes type of
-     * values or saves the values.
-     * Uses the FrontController.
+     * values or saves the values. Uses the FrontController.
      *
-     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
-     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     * @param request The servlet container creates an HttpServletRequest object
+     * and passes it as an argument to the servlet's service methods (doGet,
+     * doPost, etc).
+     * @param response The servlet container creates an HttpServletResponse
+     * object and passes it as an argument to the servlet's service methods
+     * (doGet, doPost, etc).
+     * @throws ServletException Defines a general exception a servlet can throw
+     * when it encounters difficulty.
+     * @throws IOException Signals that an I/O exception of some sort has
+     * occurred. This class is the general class of exceptions produced by
+     * failed or interrupted I/O operations.
      */
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         try {
             PRES_TO_LOGIC = new PresentationToLogicImpl();
 
@@ -46,9 +57,11 @@ public class OptionControlCommand extends Command {
             request.getRequestDispatcher("/WEB-INF/OptionControl.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             request.setAttribute("errormessage", "DataAccess");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("Crash").forward(request, response);
         } catch (NumberFormatException ex) {
             request.setAttribute("errormessage", "NumberFormat");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("OptionControl").forward(request, response);
         }
     }

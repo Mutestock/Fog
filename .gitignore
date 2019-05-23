@@ -3,3 +3,5 @@
 /FogProject/src/main/java/data/SQL_Impl/DBConnector.java
 /FogProject/src/main/java/data/SQL_Impl/TestDBConnector.java
 /FogProject/src/main/java/logic/offer/EmailUtility.java
+/FogProject/log.log
+/FogProject/MyLogFile.log

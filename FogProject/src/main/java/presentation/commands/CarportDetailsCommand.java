@@ -3,9 +3,12 @@ package presentation.commands;
 import data.customExceptions.DataAccessException;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.LoggerSetup;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
 import presentation.Command;
@@ -16,6 +19,7 @@ import presentation.Command;
 public class CarportDetailsCommand extends Command {
 
     private static PresentationToLogic PRES_TO_LOGIC;
+    private static Logger logger = LoggerSetup.logSetup();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,9 +43,11 @@ public class CarportDetailsCommand extends Command {
 
             request.getRequestDispatcher("/WEB-INF/CarportDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {
+            logger.log(Level.SEVERE, "CarportDetailsCommand: DataAccessException", ex);
             request.setAttribute("errormessage", "DataAccess");
             request.getRequestDispatcher("Crash").forward(request, response);
         } catch (NumberFormatException ex) {
+            logger.log(Level.SEVERE, "CarportDetailsCommand: NumberFormatException", ex);
             request.setAttribute("errormessage", "NumberFormat");
             request.getRequestDispatcher("Crash").forward(request, response);
         }

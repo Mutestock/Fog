@@ -6,9 +6,12 @@ import data.customExceptions.InvalidSymbolException;
 import data.help_classes.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.LoggerSetup;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
 import presentation.Command;
@@ -26,16 +29,24 @@ public class ReviewEstimateCommand extends Command {
      * carport" variable itself. Throws an error and informs the customer,
      * whenever this happens. Whenever the customer is done estimating the
      * carport attributes, the customer can then procede to review and send
-     * requests in the next .jsp: ReviewEstimate, which it dispatches to.
-     * Uses the FrontController.
+     * requests in the next .jsp: ReviewEstimate, which it dispatches to. Uses
+     * the FrontController.
      *
-     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
-     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     * @param request The servlet container creates an HttpServletRequest object
+     * and passes it as an argument to the servlet's service methods (doGet,
+     * doPost, etc).
+     * @param response The servlet container creates an HttpServletResponse
+     * object and passes it as an argument to the servlet's service methods
+     * (doGet, doPost, etc).
+     * @throws ServletException Defines a general exception a servlet can throw
+     * when it encounters difficulty.
+     * @throws IOException Signals that an I/O exception of some sort has
+     * occurred. This class is the general class of exceptions produced by
+     * failed or interrupted I/O operations.
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Logger logger = LoggerSetup.logSetup();
         try {
             String paramRoof = request.getParameter("roof");
             String isRaised = request.getParameter("isRaised");
@@ -69,7 +80,7 @@ public class ReviewEstimateCommand extends Command {
                 nShed = new Shed(-1, slength, swidth, request.getParameter("walls"));
             }
             Carport carport = new Carport(-1, length, width, nRoof, nShed);
-            
+
             Request req = new Request(-1, LocalDateTime.now(), "", carport);
 
             String SVGdrawingAbove = pToL.getSVGDrawing(carport, "above");
@@ -84,13 +95,16 @@ public class ReviewEstimateCommand extends Command {
 
         } catch (InvalidSymbolException ex) {
             request.setAttribute("errormessage", "InvalidSymbol");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("CarportDetails").forward(request, response);
         } catch (DataAccessException ex) {
             request.setAttribute("errormessage", "DataAccess");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("CarportDetails").forward(request, response);
         } catch (InvalidInputException ex) {
             ex.printStackTrace();
             request.setAttribute("errormessage", "InvalidInput");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("CarportDetails").forward(request, response);
         }
     }

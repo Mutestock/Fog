@@ -8,9 +8,12 @@ import data.help_classes.PartsList;
 import data.help_classes.Request;
 import data.help_classes.User;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.LoggerSetup;
 import logic.PresentationToLogic;
 import logic.PresentationToLogicImpl;
 import presentation.Command;
@@ -20,17 +23,27 @@ import presentation.Command;
  */
 public class RequestDetailsCommand extends Command {
 
+    private static final Logger logger = LoggerSetup.logSetup();
+
     /**
-     * Command for showing the details of request which the customer ordered. Generates all SVG images. 
-     * If there is no user on session, it will throw the user back to the adminpage with an error message.
-     * Uses a request parameter to display the selected information.
-     * Invalidates the session and reassigns the user on the session, so that the user won't have log in again.
-     * Uses the FrontController.
-     * 
-     * @param request The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @param response The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc). 
-     * @throws ServletException Defines a general exception a servlet can throw when it encounters difficulty. 
-     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     * Command for showing the details of request which the customer ordered.
+     * Generates all SVG images. If there is no user on session, it will throw
+     * the user back to the adminpage with an error message. Uses a request
+     * parameter to display the selected information. Invalidates the session
+     * and reassigns the user on the session, so that the user won't have log in
+     * again. Uses the FrontController.
+     *
+     * @param request The servlet container creates an HttpServletRequest object
+     * and passes it as an argument to the servlet's service methods (doGet,
+     * doPost, etc).
+     * @param response The servlet container creates an HttpServletResponse
+     * object and passes it as an argument to the servlet's service methods
+     * (doGet, doPost, etc).
+     * @throws ServletException Defines a general exception a servlet can throw
+     * when it encounters difficulty.
+     * @throws IOException Signals that an I/O exception of some sort has
+     * occurred. This class is the general class of exceptions produced by
+     * failed or interrupted I/O operations.
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -76,13 +89,16 @@ public class RequestDetailsCommand extends Command {
             request.getRequestDispatcher("/WEB-INF/RequestDetails.jsp").forward(request, response);
         } catch (DataAccessException ex) {
             ex.getCause().printStackTrace();
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("Crash").forward(request, response);
         } catch (EmptySessionException ex) {
             ex.printStackTrace();
             request.setAttribute("errormessage", "EmptySession");
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.getRequestDispatcher("EmpLogin").forward(request, response);
         } catch (NoRequestOnSessionException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.toString(), ex);
             request.setAttribute("errormessage", "RequestNull");
             request.getRequestDispatcher("ListRequests").forward(request, response);
         }
