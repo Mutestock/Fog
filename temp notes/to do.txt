@@ -7,7 +7,7 @@
 ==============================
 //MINDRE OPGAVER
 
-- 
+- REGEX Customer capital E-Mail
 
 ==============================
 

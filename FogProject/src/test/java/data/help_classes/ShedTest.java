@@ -4,6 +4,7 @@ package data.help_classes;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,44 +14,71 @@ import org.junit.Test;
  * @author Simon Asholt Norup
  */
 public class ShedTest {
-    
+
+    private final Shed shed;
+
     public ShedTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        this.shed = new Shed(0, 350, 450, "Vanilla Twilight");
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testInitShed01() {
-        Shed failShed01 = new Shed(1, 0, 210, "Plastic");
+    /**
+     * Test of getID method of Shed class.
+     */
+    public void testGetID() {
+        assertEquals(0, shed.getId());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testInitShed02() {
-        Shed failShed02 = new Shed(1, 300, -200, "Plastic");
+
+    /**
+     * Test of getLength method of Shed class.
+     */
+    public void testGetLength() {
+        assertEquals(350, shed.getLength());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testInitShed03() {
-        Shed failShed03 = new Shed(1, 300, 210, "");
+
+    /**
+     * Test of getWidth method of Shed class.
+     */
+    public void testGetWidth() {
+        assertEquals(450, shed.getWidth());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testInitShed04() {
-        Shed failShed04 = new Shed(1, 300, 210, null);
+
+    /**
+     * Test of getWallCoverings method of Shed class.
+     */
+    public void testGetWallCoverings() {
+        assertEquals("Vanilla Twilight", shed.getWallCoverings());
     }
-    
+
+    /**
+     * Test of attempt at creating an invalid Shed object.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalShed1() {
+        Shed illegalShed = new Shed(1, 0, 210, "Plastic");
+    }
+
+    /**
+     * Test of attempt at creating an invalid Shed object.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalShed2() {
+        Shed illegalShed = new Shed(1, 300, -200, "Plastic");
+    }
+
+    /**
+     * Test of attempt at creating an invalid Shed object.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalShed3() {
+        Shed illegalShed = new Shed(1, 300, 210, "");
+    }
+
+    /**
+     * Test of attempt at creating an invalid Shed object.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalShed4() {
+        Shed illegalShed = new Shed(1, 300, 210, null);
+    }
+
 }

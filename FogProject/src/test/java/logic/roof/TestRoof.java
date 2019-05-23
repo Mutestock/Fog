@@ -2,27 +2,18 @@ package logic.roof;
 
 import data.help_classes.Carport;
 import data.help_classes.Part;
-import data.help_classes.PartsList;
 import data.help_classes.Roof;
 import data.help_classes.Shed;
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import logic.LoggerSetup;
-import logic.partslist.RoofCalc;
 import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
-import static org.mockito.Mockito.mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 

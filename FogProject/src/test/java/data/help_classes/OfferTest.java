@@ -5,6 +5,7 @@ package data.help_classes;
 import java.time.LocalDateTime;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,55 +15,81 @@ import org.junit.Test;
  * @author Simon Asholt Norup
  */
 public class OfferTest {
-    
-    private final Request request;
-    
-    public OfferTest() {
-        Roof roof = new Roof(1, "Plastic", 0);
-        Shed shed = new Shed(1, 190, 190, "Plastic");
-        Carport carport = new Carport(1, 500, 250, roof, shed);
-        Customer customer = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
-        request = new Request(1, LocalDateTime.now(), "Blblabla.", carport, customer);
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
+    private final Request request;
+    private final Roof roof;
+    private final Shed shed;
+    private final Carport carport;
+    private final Customer customer;
+    private final Offer offer;
+
+    public OfferTest() {
+        this.roof = new Roof(0, "Plastic", 0);
+        this.shed = new Shed(0, 190, 190, "Plastic");
+        this.carport = new Carport(0, 500, 250, roof, shed);
+        this.customer = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
+        this.request = new Request(1, LocalDateTime.now(), "Blblabla.", carport, customer);
+        this.offer = new Offer(0, LocalDateTime.now(), 1000.0, 200.0, request);
+    }
     /**
      * Test of getSent method, of class Offer.
      */
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetSent() {
-        Offer offer = new Offer(1, null, 1000.0, 200.0, request);
-    }
-
-    /**
-     * Test of getPrice method, of class Offer.
-     */
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetPrice() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalOffer() {
         Offer offer = new Offer(1, LocalDateTime.now(), -1.0, 200.0, request);
     }
 
     /**
-     * Test of getShipping_costs method, of class Offer.
+     * Test of getPrice method of Offer class
      */
-//    @Test (expected = IllegalArgumentException.class)
-//    public void testGetShippingCosts() {
-//        Offer offer = new Offer(1, LocalDateTime.now(), 2000.0, -1.0, request);
-//    }
+    @Test
+    public void testGetPrice() {
+        assertEquals(1000.0, offer.getPrice(), 0);
+    }
+
+     /**
+     * Test of getID method of Offer class.
+     */
     
+    @Test
+    public void testGetID() {
+        assertEquals(0, offer.getId());
+    }
+
+     /**
+     * Test of getShippingCosts method of Offer class
+     */
+    
+    @Test
+    public void testGetShippingCosts() {
+        assertEquals(200, offer.getShippingCosts(), 0);
+    }
+
+     /**
+     * Test of GetFirstName method of Customer class through Offer Object.
+     */
+    
+    
+    @Test
+    public void testGetCustFirstNameThroughOffer() {
+        assertEquals("Derpman", offer.getRequest().getCustomer().getFirstName());
+    }
+
+     /**
+     * Test of GetSlope method of Roof class through Offer.
+     */
+    
+    @Test
+    public void testGetRoofSlopeThroughOffer() {
+        assertEquals(0, offer.getRequest().getCarport().getRoof().getSlope());
+    }
+
+     /**
+     * Test of GetCarportWidth method of Carport class through Offer.
+     */
+    
+    @Test
+    public void testGetCarportWidthThroughOffer() {
+        assertEquals(250, offer.getRequest().getCarport().getWidth());
+    }
 }
