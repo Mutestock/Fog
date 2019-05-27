@@ -2,18 +2,36 @@ package data.SQL_Impl;
 
 import data.DataMapperUserInterface;
 import data.customExceptions.DataAccessException;
+import data.customExceptions.SQLConnectionException;
 import data.help_classes.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class DataMapperUser implements DataMapperUserInterface {
 
-    
+    private DBConnector dBC;
+
+    public DataMapperUser(boolean test) throws  DataAccessException{
+        try {
+            if (test) {
+                dBC = new DBConnector(true);
+            } else {
+                dBC = new DBConnector();
+            }
+        } catch (SQLConnectionException ex) {
+            throw new DataAccessException();
+        }
+    }
+
+    public DataMapperUser() throws DataAccessException {
+        this(false);
+    }
+
     /**
      * Inserts user object information to database.
+     *
      * @param user object with user information.
      * @throws DataAccessException when access to database fails.
      */
@@ -37,9 +55,9 @@ public class DataMapperUser implements DataMapperUserInterface {
         }
     }
 
-    
     /**
      * Return user object with user information based on username.
+     *
      * @param username object value from the user class.
      * @return user object based on username.
      * @throws DataAccessException when access to database fails.
@@ -86,8 +104,7 @@ public class DataMapperUser implements DataMapperUserInterface {
 
             preparedStmt.executeUpdate();
 
-           // preparedStmt.close();
-
+            // preparedStmt.close();
         } catch (SQLException ex) {
             throw new DataAccessException(ex.getMessage());
         }

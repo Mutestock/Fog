@@ -4,6 +4,7 @@ package data.help_classes;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,94 +15,70 @@ import static org.junit.Assert.*;
  * @author Simon Asholt Norup
  */
 public class CustomerTest {
-    
+
+    private final Customer cust;
+
     public CustomerTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+        this.cust = new Customer(0, "Cake", "Jake", "Wollabing 22", "2800", "derp", "39393939", "iheard@youlike.trucks");
     }
 
     /**
-     * Test of getName method, of class Customer.
+     * Test of getName method of Customer Class
      */
     @Test
-    public void testGetName01() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
-        String expected = instance.getFirstName() + " " + instance.getLastName();
-        assertEquals(expected, instance.getFullName());
+    public void testGetName() {
+        String actual = cust.getFirstName() + " " + cust.getLastName();
+        assertEquals("Cake Jake", actual);
     }
+
+     /**
+     * Test of attempt at creating an invalid Customer Object
+     */
     
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetName02() {
-        Customer instance = new Customer(1, "", "Haggleman", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
-    }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetName03() {
-        Customer instance = new Customer(1, "Derpface", null, "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.herb");
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalCustomerValues() {
+        Customer illegalCust = new Customer(0, "cake", "Jake", "No", "293", "derp", "3939393912", "Iheard.youlike.trucks");
+        illegalCust.getAddress();
     }
 
     /**
-     * Test of getAddress method, of class Customer.
+     * Test of getAddress method of Customer Class
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testGetAddress() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "SwerpStreet22", "2800", "San Simon", "12345678", "derp@snerp.herb");
+        assertEquals("Wollabing 22", cust.getAddress());
     }
 
     /**
-     * Test of getZipcode method, of class Customer.
+     * Test of getZipcode method of Customer Class
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testGetZipcode() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "A45h", "San Simon", "12345678", "derp@snerp.herb");
+        assertEquals("2800", cust.getZipcode());
     }
 
     /**
-     * Test of getCity method, of class Customer.
+     * Test of getCity method method of Customer Class
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testGetCity() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "1234", "12345678", "derp@snerp.herb");
+         assertEquals("derp", cust.getCity());
     }
 
     /**
-     * Test of getPhone method, of class Customer.
+     * Test of getPhone method of Customer Class
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testGetPhone() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "aaaf6666", "derp@snerp.herb");
+       assertEquals("39393939", cust.getPhone());
     }
 
     /**
-     * Test of getEmail method, of class Customer.
+     * Test of getEmail method of Customer Class
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testGetEmail01() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp @snerp.herb");
+        assertEquals("iheard@youlike.trucks", cust.getEmail());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetEmail02() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "@snerp.herb");
-    }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testGetEmail03() {
-        Customer instance = new Customer(1, "Derpman", "Haggleface", "Swerp Street 22", "2800", "San Simon", "12345678", "derp@snerp.");
-    }
-    
 }
