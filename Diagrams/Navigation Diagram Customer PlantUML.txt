@@ -1,0 +1,34 @@
+@startuml
+scale 1300 width
+
+note "From all pages except FrontPage.jsp you can return to the previous page, even if not shown.\n\nExceptions caught in a command will either return to the same page it came from, \nor if a serious issue it will redirect to Crash.jsp as shown below." as GeneralNote
+
+[*] --> Customer
+
+state Customer {
+  CarportDetails.jsp : Carport specifications can be chosen.
+  ReviewEstimate.jsp : Overview of carport, SVG drawings included, can be seen\npersonal information can be passed,\nand request can be sent. 
+  ThankYouOrder.jsp : Request is confirmed.
+
+  [*] --> FrontPage.jsp : index.jsp redirects\n through RedirectCommand
+  FrontPage.jsp --> CarportDetails.jsp : CarportDetailsCommand
+  CarportDetails.jsp --> ReviewEstimate.jsp : ReviewEstimateCommand
+  ReviewEstimate.jsp --> ThankYouOrder.jsp : SendInformationCommand
+  ThankYouOrder.jsp --> [*]
+
+  FrontPage.jsp --> AdminLogin.jsp : AdminLoginCommand
+  AdminLogin.jsp --> AdminLogin.jsp : failed login:\n AdminLoginCommand
+  AdminLogin.jsp --> Admin : successful login:\n LoginCheckCommand
+}
+
+state Admin {
+ note "See Admin navigation diagram\nfor functionality available to that role." as AdminNote
+}
+Admin --> [*]
+
+Customer --> Crash.jsp : from FrontController servlet\n through RedirectCommand\n when exception is caught
+Customer --> PageNotFound.jsp : RedirectCommand\n when trying to access invalid url
+Crash.jsp --> [*]
+PageNotFound.jsp --> [*]
+
+@enduml

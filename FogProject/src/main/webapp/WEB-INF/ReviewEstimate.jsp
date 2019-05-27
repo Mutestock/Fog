@@ -23,7 +23,7 @@
     <jsp:include page="/inclusions/NavBar.jsp" />
     <body>
         <div class="mainbody">
-            <form>
+            <form method=POST>
 
                 <%
                     Offer offer = (Offer) request.getSession().getAttribute("estimate");
