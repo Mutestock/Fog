@@ -35,8 +35,9 @@ state Admin {
   ListRequests.jsp --> OptionControl.jsp : OptionControlCommand
   OptionControl.jsp --> OptionControl.jsp : save options
   OptionControl.jsp --> [*]
+
+  ListRequests.jsp --> [*] : log out\nthrough RedirectCommand\nto SessionExit.jsp
 }
-ListRequests.jsp --> [*] : log out\nthrough RedirectCommand\nto SessionExit.jsp
 
 Customer --> Crash.jsp : from FrontController servlet\n through RedirectCommand\n when exception is caught
 Customer --> PageNotFound.jsp : RedirectCommand\n when trying to access invalid url

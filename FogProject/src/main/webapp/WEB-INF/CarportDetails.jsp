@@ -193,7 +193,7 @@
                 } else if (errorK.equals("DataAccess")) {
                     errormessageK = "<p style=\"color:red\">Der skete en alvorlig fejl i databasen. Kontakt venligst support.</p>";
                 } else if (errorK.equals("InvalidInput")) {
-                    errormessageK = "<p style=\"color:red\">Vælg venligst valide værdier i alle felterne. Vi kan ikke levere til postnumre mellem 3700 og 4000.</p>";
+                    errormessageK = "<p style=\"color:red\">Vælg venligst værdier i alle listerne herover.</p>";
                 } else {
                     errormessageK = "";
                 }

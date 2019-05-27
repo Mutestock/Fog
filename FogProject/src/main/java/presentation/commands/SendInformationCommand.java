@@ -75,19 +75,22 @@ public class SendInformationCommand extends Command {
 
         } catch (NumberFormatException x) {
             x.printStackTrace();
+            request.getSession().setAttribute("portError", "notnull");
             logger.log(Level.SEVERE, x.toString(), x);
-            request.setAttribute("errormessage", "InvalidInput");
             request.getRequestDispatcher("CarportDetails").forward(request, response);
+            //response.sendRedirect("CarportDetails");
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
+            request.getSession().setAttribute("custInf", "notnull");
             logger.log(Level.SEVERE, ex.toString(), ex);
-            request.setAttribute("errormessage", "InvalidInput");
+            request.getSession().setAttribute("errormessage", "InvalidInput");
             request.getRequestDispatcher("CarportDetails").forward(request, response);
+            //response.sendRedirect("CarportDetails");
 
         } catch (DataAccessException ex) {
             ex.printStackTrace();
             logger.log(Level.SEVERE, ex.toString(), ex);
-            request.setAttribute("errormessage", "DataAccess");
+            request.getSession().setAttribute("errormessage", "DataAccess");
             request.getRequestDispatcher("CarportDetails").forward(request, response);
         }
 
