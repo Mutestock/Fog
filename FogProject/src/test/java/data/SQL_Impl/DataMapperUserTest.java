@@ -36,22 +36,11 @@ public class DataMapperUserTest {
     public void tearDown() {
     }
 
-//    /**
-//     * Test of addUser method, of class DataMapperUser.
-//     */
-//    @Test
-//    public void testAddUser() throws Exception {
-//        System.out.println("addUser");
-//        User user = new User("this","");
-//        DataMapperUser instance = new DataMapperUser();
-//        instance.addUser(user);
-//        // TODO review the generated test code and remove the default call to fail.
-//    }
     /**
      * Test of getUser method, of class DataMapperUser.
      */
     @Test
-    public void testGetUser() throws Exception {
+    public void testCreateNGetUser() throws Exception {
         System.out.println("getUser");
         DataMapperUser instance = new DataMapperUser(true);
         instance.addUser(user);
