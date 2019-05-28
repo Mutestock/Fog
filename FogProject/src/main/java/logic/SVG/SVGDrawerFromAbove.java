@@ -21,23 +21,24 @@ public class SVGDrawerFromAbove {
      */
     public SVGDrawerFromAbove(Carport carport) {
         this.carport = carport;
+        // X and Y positions for upper left corner of drawing
         startX = 10;
         startY = 10;
 
-        yEaves = 30;
-        rightEaves = 15;
-        leftEaves = 15;
-        leftEavesToPole = carport.getLength() * 0.15;
-        widthWithoutEaves = carport.getWidth() - 2 * yEaves;
+        yEaves = 30; // distance from poles to edge of roof, for eaves along the length of the carport
+        rightEaves = 15; // distance from poles to edge of roof, for eaves on the backside of the carport
+        leftEaves = 15; // distance from pole-lines (along length) to edge of roof, for frontside of the carport (only relevant for carports with raised roof)
+        leftEavesToPole = carport.getLength() * 0.15; // distance from poles to edge of roof, for frontside of the carport
+        widthWithoutEaves = carport.getWidth() - 2 * yEaves; // the width of the carport without the eaves along the length
 
-        poleLineWidth = 5.5;
-        poleWidth = 15;
-        maxDistanceBetweenPoles = 480;
+        poleLineWidth = 5.5; // the width of the pole lines (not practically correct, but just the value deemed optimal in regards to the visuals of the sketch drawing itself)
+        poleWidth = 15; // the diameter of the poles themselves (not practically correct, same as above)
+        maxDistanceBetweenPoles = 480; // the max distance between poles along length, before a third pole is needed to support the roof
 
-        rBoardWidth = 2;
-        rBoardMaxDistance = 20;
-        battenWidth = 4;
-        battenMaxDistance = 30;
+        rBoardWidth = 2; // the width of the rafter boards (not practically correct, but can easily be changed to match the real width)
+        rBoardMaxDistance = 20; // the max distance between rafter boards
+        battenWidth = 4; // the width of the battens (not practically correct, but can easily be changed to match the real width)
+        battenMaxDistance = 30; // the max distance between battens
     }
 
     
