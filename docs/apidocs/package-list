@@ -1,0 +1,10 @@
+data
+data.SQL_Impl
+data.customExceptions
+data.help_classes
+logic
+logic.SVG
+logic.offer
+logic.partslist
+presentation
+presentation.commands
