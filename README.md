@@ -14,8 +14,7 @@ username = admin
 password = admin
 
 As part of the assignment a Javadoc must be provided for the program. It can be found in the project's github pages:
-
-...
+https://mutestock.github.io/Fog/
 
 An example of the deployed .war file can be accessed here:
 
