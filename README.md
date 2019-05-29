@@ -18,7 +18,7 @@ https://mutestock.github.io/Fog/
 
 An example of the deployed .war file can be accessed here:
 
-...
+http://165.227.148.141:8080/FogProject
 
 
 ### Guide
