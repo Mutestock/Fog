@@ -22,8 +22,7 @@ An example of the deployed .war file can be accessed here:
 ...
 
 
-###Guide
-
+### Guide
 
 You can host the website yourself by defining and locating the target .war folder, executing the program in your Java IDE and  deploying it onto your server. This is, however, very simplified and you should refer to other sites for more detailed information regarding deployment of .war files if you run into issues. 
 The following digital components are required in order to succesfully recreate it:
